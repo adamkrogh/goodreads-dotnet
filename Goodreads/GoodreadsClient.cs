@@ -4,30 +4,37 @@ using RestSharp;
 
 namespace Goodreads
 {
+    /// <summary>
+    /// The client API class for accessing the Goodreads API.
+    /// </summary>
     public class GoodreadsClient : IGoodreadsClient
     {
-        public static readonly string GoodreadsUrl = " https://www.goodreads.com/";
-        private readonly IConnection _connection;
+        private readonly string GoodreadsUrl = "https://www.goodreads.com/";
+        private readonly IConnection Connection;
 
-        public GoodreadsClient(string token)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
+        /// </summary>
+        /// <param name="key">Your Goodreads API key.</param>
+        public GoodreadsClient(string key)
         {
             var client = new RestClient(GoodreadsUrl)
             {
                 UserAgent = "goodreads-dotnet"
             };
-            //client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
-            client.AddDefaultParameter("key", token, ParameterType.QueryString);
+
+            // client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
+            client.AddDefaultParameter("key", key, ParameterType.QueryString);
             client.AddDefaultParameter("format", "xml", ParameterType.QueryString);
 
-            _connection = new Connection(client);
+            Connection = new Connection(client);
 
-            Authors = new AuthorsClient(_connection);
+            Authors = new AuthorsClient(Connection);
         }
 
-        #region IGoodreadsClient Members
-
+        /// <summary>
+        /// API Client for the Goodreads Authors endpoint.
+        /// </summary>
         public IAuthorsClient Authors { get; private set; }
-
-        #endregion
     }
 }

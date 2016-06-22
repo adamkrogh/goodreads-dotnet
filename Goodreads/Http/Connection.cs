@@ -1,13 +1,20 @@
-﻿using Goodreads.Extensions;
-using RestSharp;
-using RestSharp.Serializers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Goodreads.Extensions;
+using Goodreads.Models;
+using RestSharp;
 
 namespace Goodreads.Http
 {
+    /// <summary>
+    /// A common connection class to the Goodreads API.
+    /// </summary>
     public class Connection : IConnection
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connection"/> class.
+        /// </summary>
+        /// <param name="client">A RestSharp client to use for this connection.</param>
         public Connection(IRestClient client)
         {
             Client = client;
@@ -15,9 +22,21 @@ namespace Goodreads.Http
 
         #region IConnection Members
 
+        /// <summary>
+        /// The RestSharp client for this connection.
+        /// </summary>
         public IRestClient Client { get; private set; }
 
-        public async Task<IRestResponse> ExecuteRaw(string endpoint, IList<Parameter> parameters,
+        /// <summary>
+        /// Execute a raw request to the Goodreads API.
+        /// </summary>
+        /// <param name="endpoint">The path of the API endpoint.</param>
+        /// <param name="parameters">The RestSharp parameters to include in this request.</param>
+        /// <param name="method">The HTTP method of this request.</param>
+        /// <returns>An async task with the response from the request.</returns>
+        public async Task<IRestResponse> ExecuteRaw(
+            string endpoint,
+            IList<Parameter> parameters,
             Method method = Method.GET)
         {
             var request = BuildRequest(endpoint, parameters);
@@ -25,9 +44,23 @@ namespace Goodreads.Http
             return await Client.ExecuteTaskRaw(request).ConfigureAwait(false);
         }
 
-        public async Task<T> ExecuteRequest<T>(string endpoint, IList<Parameter> parameters,
-            object data = null, string expectedRoot = null, Method method = Method.GET)
-            where T : new()
+        /// <summary>
+        /// A common method for executing any request on the Goodreads API.
+        /// </summary>
+        /// <typeparam name="T">Generic type parameter of the data returned in the response.</typeparam>
+        /// <param name="endpoint">The path of the API endpoint.</param>
+        /// <param name="parameters">The RestSharp parameters to include in this request.</param>
+        /// <param name="data">The data to include in the body of the request.</param>
+        /// <param name="expectedRoot">The root XML node to start parsing from. Can by used to skip container elements if required.</param>
+        /// <param name="method">The HTTP method of this request.</param>
+        /// <returns>An async task with the response from the request.</returns>
+        public async Task<T> ExecuteRequest<T>(
+            string endpoint,
+            IList<Parameter> parameters,
+            object data = null,
+            string expectedRoot = null,
+            Method method = Method.GET)
+            where T : ApiResponse, new()
         {
             var request = BuildRequest(endpoint, parameters);
             request.RootElement = expectedRoot;
@@ -52,6 +85,7 @@ namespace Goodreads.Http
             {
                 return request;
             }
+
             foreach (var parameter in parameters)
             {
                 request.AddParameter(parameter);

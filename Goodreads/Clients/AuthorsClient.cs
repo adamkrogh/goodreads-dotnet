@@ -1,32 +1,41 @@
-﻿using Goodreads.Http;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Goodreads.Http;
 using Goodreads.Models.Response;
 using RestSharp;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Goodreads.Clients
 {
+    /// <summary>
+    /// The client class for the Author endpoint of the Goodreads API.
+    /// </summary>
     public class AuthorsClient : IAuthorsClient
     {
-        private readonly IConnection _connection;
+        private readonly IConnection Connection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthorsClient"/> class.
+        /// </summary>
+        /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public AuthorsClient(IConnection connection)
         {
-            _connection = connection;
+            Connection = connection;
         }
 
         #region IAuthorsClient Members
-        
+
         /// <summary>
-        /// Retrieve a single author
+        /// Get the author information for the given Id.
         /// </summary>
+        /// <param name="authorId">The Goodreads Id for the desired author.</param>
+        /// <returns>An async task returning the desired author information.</returns>
         public Task<Author> Get(int authorId)
         {
             var parameters = new List<Parameter>
             {
-                new Parameter { Name = "id", Value = authorId, Type = ParameterType.UrlSegment }
+                new Parameter { Name = "id", Value = authorId, Type = ParameterType.QueryString }
             };
-            return _connection.ExecuteRequest<Author>("author/list/{id}", parameters, null, "author");
+            return this.Connection.ExecuteRequest<Author>("author/show.xml", parameters, null, "author");
         }
 
         #endregion

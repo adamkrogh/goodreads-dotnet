@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Goodreads.Models;
 using RestSharp;
-using RestSharp.Deserializers;
 using RestSharp.Extensions;
 
 namespace Goodreads.Extensions
 {
-    public static class RestSharpExtensions
+    internal static class RestSharpExtensions
     {
         public static async Task<T> ExecuteTask<T>(this IRestClient client, IRestRequest request)
-            where T : new()
+            where T : ApiResponse, new()
         {
             var ret = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
             return ret.ThrowIfException().Deserialize<T>();
@@ -22,11 +23,26 @@ namespace Goodreads.Extensions
             return ret.ThrowIfException();
         }
 
+        public static T Deserialize<T>(this IRestResponse response)
+            where T : ApiResponse, new()
+        {
+            response.Request.OnBeforeDeserialization(response);
+
+            var document = XDocument.Parse(response.Content);
+            var root = document.Element("GoodreadsResponse");
+            var contentRoot = root.Element(response.Request.RootElement);
+            var responseObject = new T();
+            responseObject.Parse(contentRoot);
+
+            return responseObject;
+        }
+
         private static IRestResponse ThrowIfException(this IRestResponse response)
         {
             if (response.ErrorException != null)
             {
-                throw new ApplicationException("There was an an exception thrown during the request.",
+                throw new ApplicationException(
+                    "There was an an exception thrown during the request.",
                     response.ErrorException);
             }
 
@@ -37,21 +53,10 @@ namespace Goodreads.Extensions
 
             if ((int)response.StatusCode >= 400)
             {
-                //throw new ApiException(response.StatusCode);
+                // throw new ApiException(response.StatusCode);
             }
 
             return response;
-        }
-
-        public static T Deserialize<T>(this IRestResponse response)
-        {
-            response.Request.OnBeforeDeserialization(response);
-            var deserialize = new XmlDeserializer
-            {
-                RootElement = response.Request.RootElement,
-                DateFormat = response.Request.DateFormat
-            };
-            return deserialize.Deserialize<T>(response);
         }
     }
 }

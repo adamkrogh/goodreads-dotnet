@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients\AuthorsClient.cs" />
+    <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
+    <Compile Include="Clients\IBooksClient.cs" />
     <Compile Include="Extensions\RestSharpExtensions.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="GoodreadsClient.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Response\Author.cs" />
+    <Compile Include="Models\Response\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

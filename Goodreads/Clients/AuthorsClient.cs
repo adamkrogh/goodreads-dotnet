@@ -22,8 +22,6 @@ namespace Goodreads.Clients
             Connection = connection;
         }
 
-        #region IAuthorsClient Members
-
         /// <summary>
         /// Get the author information for the given Id.
         /// </summary>
@@ -37,7 +35,5 @@ namespace Goodreads.Clients
             };
             return this.Connection.ExecuteRequest<Author>("author/show.xml", parameters, null, "author");
         }
-
-        #endregion
     }
 }

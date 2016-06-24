@@ -122,6 +122,11 @@ namespace Goodreads.Models.Response
         /// </summary>
         public string Url { get; protected set; }
 
+        /// <summary>
+        /// The aggregate information for this work across all editions of the book.
+        /// </summary>
+        public Work Work { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -151,7 +156,7 @@ namespace Goodreads.Models.Response
             var publicationYear = element.ElementAsInt("publication_year");
             var publicationMonth = element.ElementAsInt("publication_month");
             var publicationDay = element.ElementAsInt("publication_day");
-            if(publicationYear != 0 && publicationMonth != 0 && publicationDay != 0)
+            if (publicationYear != 0 && publicationMonth != 0 && publicationDay != 0)
             {
                 PublicationDate = new DateTime(publicationYear, publicationMonth, publicationDay);
             }
@@ -167,6 +172,10 @@ namespace Goodreads.Models.Response
             RatingsCount = element.ElementAsInt("ratings_count");
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
+
+            // Initialize and parse out the work information
+            Work = new Work();
+            Work.Parse(element.Element("work"));
         }
     }
 }

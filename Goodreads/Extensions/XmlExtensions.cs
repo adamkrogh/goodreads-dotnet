@@ -19,6 +19,20 @@ namespace Goodreads.Extensions
             return intValue;
         }
 
+        public static int? ElementAsNullableInt(this XElement element, XName name)
+        {
+            var value = element.Element(name).Value;
+            var intValue = 0;
+            if (int.TryParse(value, out intValue))
+            {
+                return intValue;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static decimal ElementAsDecimal(this XElement element, XName name)
         {
             var value = element.Element(name).Value;

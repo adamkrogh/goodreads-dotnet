@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Xml.Linq;
+using Goodreads.Extensions;
 
 namespace Goodreads.Models.Response
 {
@@ -17,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Id for this book.
         /// </summary>
-        public string Id { get; protected set; }
+        public int Id { get; protected set; }
 
         /// <summary>
         /// The title of this book.
@@ -85,7 +83,7 @@ namespace Goodreads.Models.Response
         public string LanguageCode { get; protected set; }
 
         /// <summary>
-        /// Signifies if this is an EBook or now.
+        /// Signifies if this is an eBook or not.
         /// </summary>
         public bool IsEbook { get; protected set; }
 
@@ -124,9 +122,51 @@ namespace Goodreads.Models.Response
         /// </summary>
         public string Url { get; protected set; }
 
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Book: Id: {0}, Title: {1}",
+                    Id,
+                    Title);
+            }
+        }
+
         internal override void Parse(XElement element)
         {
-            // TODO: parse XML and populate Book model
+            Id = element.ElementAsInt("id");
+            Title = element.ElementAsString("title");
+            Isbn = element.ElementAsString("isbn");
+            Isbn13 = element.ElementAsString("isbn13");
+            Asin = element.ElementAsString("asin");
+            KindleAsin = element.ElementAsString("kindle_asin");
+            MarketplaceId = element.ElementAsString("marketplace_id");
+            CountryCode = element.ElementAsString("country_code");
+            ImageUrl = element.ElementAsString("image_url");
+            SmallImageUrl = element.ElementAsString("small_image_url");
+
+            // Merge the Goodreads publication fields into one date property
+            var publicationYear = element.ElementAsInt("publication_year");
+            var publicationMonth = element.ElementAsInt("publication_month");
+            var publicationDay = element.ElementAsInt("publication_day");
+            if(publicationYear != 0 && publicationMonth != 0 && publicationDay != 0)
+            {
+                PublicationDate = new DateTime(publicationYear, publicationMonth, publicationDay);
+            }
+
+            Publisher = element.ElementAsString("publisher");
+            LanguageCode = element.ElementAsString("language_code");
+            IsEbook = element.ElementAsBool("is_ebook");
+            Description = element.ElementAsString("description");
+            AverageRating = element.ElementAsDecimal("average_rating");
+            Pages = element.ElementAsInt("num_pages");
+            Format = element.ElementAsString("format");
+            EditionInformation = element.ElementAsString("edition_information");
+            RatingsCount = element.ElementAsInt("ratings_count");
+            TextReviewsCount = element.ElementAsInt("text_reviews_count");
+            Url = element.ElementAsString("url");
         }
     }
 }

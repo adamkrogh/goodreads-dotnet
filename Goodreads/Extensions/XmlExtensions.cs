@@ -19,6 +19,14 @@ namespace Goodreads.Extensions
             return intValue;
         }
 
+        public static decimal ElementAsDecimal(this XElement element, XName name)
+        {
+            var value = element.Element(name).Value;
+            var decimalValue = 0m;
+            decimal.TryParse(value, out decimalValue);
+            return decimalValue;
+        }
+
         public static DateTime? ElementAsDate(this XElement element, XName name)
         {
             var value = element.Element(name).Value;

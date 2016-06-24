@@ -23,18 +23,23 @@ namespace Goodreads
                 UserAgent = "goodreads-dotnet"
             };
 
-            // client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
             client.AddDefaultParameter("key", key, ParameterType.QueryString);
             client.AddDefaultParameter("format", "xml", ParameterType.QueryString);
 
             Connection = new Connection(client);
 
             Authors = new AuthorsClient(Connection);
+            Books = new BooksClient(Connection);
         }
 
         /// <summary>
         /// API Client for the Goodreads Authors endpoint.
         /// </summary>
         public IAuthorsClient Authors { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads Books endpoint.
+        /// </summary>
+        public IBooksClient Books { get; private set; }
     }
 }

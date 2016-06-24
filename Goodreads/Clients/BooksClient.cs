@@ -34,11 +34,10 @@ namespace Goodreads.Clients
         {
             var parameters = new List<Parameter>
             {
-                new Parameter { Name = "id", Value = isbn, Type = ParameterType.QueryString }
+                new Parameter { Name = "isbn", Value = isbn, Type = ParameterType.UrlSegment }
             };
 
-            // return this.Connection.ExecuteRequest<Author>("author/show.xml", parameters, null, "author");
-            return null;
+            return Connection.ExecuteRequest<Book>("book/isbn/{isbn}.xml", parameters, null, "book");
         }
     }
 }

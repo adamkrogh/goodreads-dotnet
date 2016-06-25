@@ -132,7 +132,13 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The list of authors that worked on this book.
         /// </summary>
-        public List<AuthorSummary> Authors { get; set; }
+        public List<AuthorSummary> Authors { get; protected set; }
+
+        /// <summary>
+        /// The most popular shelf names this book appears on. This is a
+        /// dictionary of shelf name -> count.
+        /// </summary>
+        public Dictionary<string, int> PopularShelves { get; protected set; }
 
         internal string DebuggerDisplay
         {
@@ -196,6 +202,27 @@ namespace Goodreads.Models.Response
                         var authorSummary = new AuthorSummary();
                         authorSummary.Parse(authorElement);
                         Authors.Add(authorSummary);
+                    }
+                }
+            }
+
+            var popularShelvesElement = element.Element("popular_shelves");
+            if (popularShelvesElement != null)
+            {
+                var shelfElements = popularShelvesElement.Descendants("shelf");
+                if (shelfElements != null && shelfElements.Count() > 0)
+                {
+                    PopularShelves = new Dictionary<string, int>();
+
+                    foreach (var shelfElement in shelfElements)
+                    {
+                        var shelfName = shelfElement.Attribute("name").Value;
+                        var shelfCountValue = shelfElement.Attribute("count").Value;
+
+                        int shelfCount = 0;
+                        int.TryParse(shelfCountValue, out shelfCount);
+
+                        PopularShelves.Add(shelfName, shelfCount);
                     }
                 }
             }

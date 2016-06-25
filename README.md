@@ -13,6 +13,11 @@ var client = new GoodreadsClient("api_key");
 var author = await client.Authors.Get(38550);
 ```
 
+```csharp
+// Retrieving a Book
+var book = await client.Books.GetByIsbn("0441172717");
+```
+
 # License
 
 The MIT License (MIT)

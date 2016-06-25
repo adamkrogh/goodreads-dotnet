@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 using Goodreads.Extensions;
 
@@ -127,6 +129,11 @@ namespace Goodreads.Models.Response
         /// </summary>
         public Work Work { get; protected set; }
 
+        /// <summary>
+        /// The list of authors that worked on this book.
+        /// </summary>
+        public List<AuthorSummary> Authors { get; set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -173,9 +180,25 @@ namespace Goodreads.Models.Response
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
 
-            // Initialize and parse out the work information
             Work = new Work();
             Work.Parse(element.Element("work"));
+
+            var authorsRoot = element.Element("authors");
+            if (authorsRoot != null)
+            {
+                var authorElements = authorsRoot.Descendants("author");
+                if (authorElements != null && authorElements.Count() > 0)
+                {
+                    Authors = new List<AuthorSummary>();
+
+                    foreach (var authorElement in authorElements)
+                    {
+                        var authorSummary = new AuthorSummary();
+                        authorSummary.Parse(authorElement);
+                        Authors.Add(authorSummary);
+                    }
+                }
+            }
         }
     }
 }

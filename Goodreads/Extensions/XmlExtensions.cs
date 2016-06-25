@@ -41,6 +41,20 @@ namespace Goodreads.Extensions
             return decimalValue;
         }
 
+        public static decimal? ElementAsNullableDecimal(this XElement element, XName name)
+        {
+            var value = element.Element(name).Value;
+            var decimalValue = 0m;
+            if (decimal.TryParse(value, out decimalValue))
+            {
+                return decimalValue;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static DateTime? ElementAsDate(this XElement element, XName name)
         {
             var value = element.Element(name).Value;

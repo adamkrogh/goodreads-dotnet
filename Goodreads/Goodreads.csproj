@@ -57,6 +57,7 @@
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Response\Author.cs" />
+    <Compile Include="Models\Response\AuthorSummary.cs" />
     <Compile Include="Models\Response\Book.cs" />
     <Compile Include="Models\Response\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

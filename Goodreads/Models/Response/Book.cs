@@ -153,6 +153,11 @@ namespace Goodreads.Models.Response
         /// </summary>
         public List<BookLink> BuyLinks { get; protected set; }
 
+        /// <summary>
+        /// Summary information about similar books to this one.
+        /// </summary>
+        public List<BookSummary> SimilarBooks { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -177,16 +182,7 @@ namespace Goodreads.Models.Response
             CountryCode = element.ElementAsString("country_code");
             ImageUrl = element.ElementAsString("image_url");
             SmallImageUrl = element.ElementAsString("small_image_url");
-
-            // Merge the Goodreads publication fields into one date property
-            var publicationYear = element.ElementAsInt("publication_year");
-            var publicationMonth = element.ElementAsInt("publication_month");
-            var publicationDay = element.ElementAsInt("publication_day");
-            if (publicationYear != 0 && publicationMonth != 0 && publicationDay != 0)
-            {
-                PublicationDate = new DateTime(publicationYear, publicationMonth, publicationDay);
-            }
-
+            PublicationDate = element.ElementAsGoodreadsDate("publication");
             Publisher = element.ElementAsString("publisher");
             LanguageCode = element.ElementAsString("language_code");
             IsEbook = element.ElementAsBool("is_ebook");
@@ -277,6 +273,24 @@ namespace Goodreads.Models.Response
                         buyLink.Parse(buyLinkElement);
                         buyLink.FixBookLink(Id);
                         BuyLinks.Add(buyLink);
+                    }
+                }
+            }
+
+            // Parse out the similar books
+            var similarBooksElement = element.Element("similar_books");
+            if (similarBooksElement != null)
+            {
+                var bookElements = element.Descendants("book");
+                if (bookElements != null && bookElements.Count() > 0)
+                {
+                    SimilarBooks = new List<BookSummary>();
+
+                    foreach (var bookElement in bookElements)
+                    {
+                        var bookSummary = new BookSummary();
+                        bookSummary.Parse(bookElement);
+                        SimilarBooks.Add(bookSummary);
                     }
                 }
             }

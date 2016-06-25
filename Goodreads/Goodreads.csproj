@@ -60,6 +60,7 @@
     <Compile Include="Models\Response\AuthorSummary.cs" />
     <Compile Include="Models\Response\Book.cs" />
     <Compile Include="Models\Response\BookLink.cs" />
+    <Compile Include="Models\Response\BookSummary.cs" />
     <Compile Include="Models\Response\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

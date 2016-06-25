@@ -140,6 +140,19 @@ namespace Goodreads.Models.Response
         /// </summary>
         public Dictionary<string, int> PopularShelves { get; protected set; }
 
+        /// <summary>
+        /// The list of book links tracked by Goodreads.
+        /// This is usually a list of libraries that the user can borrow the book from.
+        /// </summary>
+        public List<BookLink> BookLinks { get; protected set; }
+
+        /// <summary>
+        /// The list of buy links tracked by Goodreads.
+        /// This is usually a list of third-party sites that the
+        /// user can purchase the book from.
+        /// </summary>
+        public List<BookLink> BuyLinks { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -186,9 +199,11 @@ namespace Goodreads.Models.Response
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
 
+            // Initialize and parse the work information
             Work = new Work();
             Work.Parse(element.Element("work"));
 
+            // Parse out the authors of this book
             var authorsRoot = element.Element("authors");
             if (authorsRoot != null)
             {
@@ -206,6 +221,7 @@ namespace Goodreads.Models.Response
                 }
             }
 
+            // Parse out the popular shelves this book appears on
             var popularShelvesElement = element.Element("popular_shelves");
             if (popularShelvesElement != null)
             {
@@ -223,6 +239,44 @@ namespace Goodreads.Models.Response
                         int.TryParse(shelfCountValue, out shelfCount);
 
                         PopularShelves.Add(shelfName, shelfCount);
+                    }
+                }
+            }
+
+            // Parse out the book links
+            var bookLinksElement = element.Element("book_links");
+            if (bookLinksElement != null)
+            {
+                var bookLinkElements = bookLinksElement.Descendants("book_link");
+                if (bookLinkElements != null && bookLinkElements.Count() > 0)
+                {
+                    BookLinks = new List<BookLink>();
+
+                    foreach (var bookLinkElement in bookLinkElements)
+                    {
+                        var bookLink = new BookLink();
+                        bookLink.Parse(bookLinkElement);
+                        bookLink.FixBookLink(Id);
+                        BookLinks.Add(bookLink);
+                    }
+                }
+            }
+
+            // Parse out the buy links
+            var buyLinksElement = element.Element("buy_links");
+            if (buyLinksElement != null)
+            {
+                var buyLinkElements = buyLinksElement.Descendants("buy_link");
+                if (buyLinkElements != null && buyLinkElements.Count() > 0)
+                {
+                    BuyLinks = new List<BookLink>();
+
+                    foreach (var buyLinkElement in buyLinkElements)
+                    {
+                        var buyLink = new BookLink();
+                        buyLink.Parse(buyLinkElement);
+                        buyLink.FixBookLink(Id);
+                        BuyLinks.Add(buyLink);
                     }
                 }
             }

@@ -16,6 +16,9 @@ var book = await client.Books.GetByIsbn("0441172717");
 
 // Retrieve a paginated list of an author's books
 var books = await client.Books.GetListByAuthorId(38550, page: 2);
+
+// Retrieve a paginated list of a user's shelves
+var shelves = await client.Shelves.GetUserShelves(userId, page: 2);
 ```
 
 # License

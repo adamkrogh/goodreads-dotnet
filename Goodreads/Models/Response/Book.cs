@@ -158,6 +158,10 @@ namespace Goodreads.Models.Response
         /// </summary>
         public List<BookSummary> SimilarBooks { get; protected set; }
 
+        // TODO: parse series information once I get a better sense
+        // of what series are from the other API calls.
+        //// public List<Series> Series { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Goodreads.Exceptions;
 using Goodreads.Models;
 using RestSharp;
 using RestSharp.Extensions;
@@ -28,13 +30,26 @@ namespace Goodreads.Extensions
         {
             response.Request.OnBeforeDeserialization(response);
 
-            var document = XDocument.Parse(response.Content);
-            var root = document.Element("GoodreadsResponse");
-            var contentRoot = root.Element(response.Request.RootElement);
-            var responseObject = new T();
-            responseObject.Parse(contentRoot);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
 
-            return responseObject;
+            var document = XDocument.Parse(response.Content);
+            if (document == null ||
+                document.Root == null ||
+                document.Root.Name == "error")
+            {
+                return null;
+            }
+            else
+            {
+                var root = document.Element("GoodreadsResponse");
+                var contentRoot = root.Element(response.Request.RootElement);
+                var responseObject = new T();
+                responseObject.Parse(contentRoot);
+                return responseObject;
+            }
         }
 
         private static IRestResponse ThrowIfException(this IRestResponse response)
@@ -51,9 +66,9 @@ namespace Goodreads.Extensions
                 throw response.ResponseStatus.ToWebException();
             }
 
-            if ((int)response.StatusCode >= 400)
+            if ((int)response.StatusCode == 500)
             {
-                // throw new ApiException(response.StatusCode);
+                throw new ApiException(response.StatusCode, "An unknown error occurred with the Goodreads API.");
             }
 
             return response;

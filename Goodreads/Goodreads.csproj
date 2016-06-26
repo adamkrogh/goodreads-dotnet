@@ -49,6 +49,7 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
     <Compile Include="Clients\IBooksClient.cs" />
+    <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Extensions\RestSharpExtensions.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="GoodreadsClient.cs" />

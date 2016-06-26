@@ -100,34 +100,17 @@ namespace Goodreads.Models.Response
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");
             SmallImageUrl = element.ElementAsString("small_image_url");
-
-            var workElement = element.Element("work");
-            if (workElement != null)
-            {
-                WorkId = workElement.ElementAsNullableInt("id");
-            }
-
             Isbn = element.ElementAsString("isbn");
             Isbn13 = element.ElementAsString("isbn13");
             AverageRating = element.ElementAsNullableDecimal("average_rating");
             RatingsCount = element.ElementAsNullableInt("ratings_count");
             PublicationDate = element.ElementAsGoodreadsDate("publication");
+            Authors = element.ParseChildren<AuthorSummary>("authors", "author");
 
-            var authorsElement = element.Element("authors");
-            if (authorsElement != null)
+            var workElement = element.Element("work");
+            if (workElement != null)
             {
-                var authorElements = authorsElement.Descendants("author");
-                if (authorElements != null && authorElements.Count() > 0)
-                {
-                    Authors = new List<AuthorSummary>();
-
-                    foreach (var authorElement in authorElements)
-                    {
-                        var authorSummary = new AuthorSummary();
-                        authorSummary.Parse(authorElement);
-                        Authors.Add(authorSummary);
-                    }
-                }
+                WorkId = workElement.ElementAsNullableInt("id");
             }
         }
     }

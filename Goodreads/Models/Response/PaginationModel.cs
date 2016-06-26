@@ -12,6 +12,15 @@ namespace Goodreads.Models.Response
     public class PaginationModel : ApiResponse
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="PaginationModel"/> class.
+        /// </summary>
+        /// <param name="pageSize">The desired page size of the paginated list.</param>
+        public PaginationModel(int pageSize)
+        {
+            PageSize = pageSize;
+        }
+
+        /// <summary>
         /// The item the current page starts on.
         /// </summary>
         public int Start { get; protected set; }
@@ -29,15 +38,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The size of each page in the paginated list.
         /// </summary>
-        public int PageSize
-        {
-            get
-            {
-                // As far as I've seen, all pages are 30 items long in the
-                // Goodreads API. This might have to change in the future...
-                return 30;
-            }
-        }
+        public int PageSize { get; protected set; }
 
         /// <summary>
         /// The current page within the paginated list.

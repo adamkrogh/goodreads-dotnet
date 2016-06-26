@@ -49,6 +49,8 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
     <Compile Include="Clients\IBooksClient.cs" />
+    <Compile Include="Clients\IShelvesClient.cs" />
+    <Compile Include="Clients\ShelvesClient.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Extensions\RestSharpExtensions.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
@@ -57,6 +59,7 @@
     <Compile Include="Http\IConnection.cs" />
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\Response\Order.cs" />
     <Compile Include="Models\Response\PaginatedList.cs" />
     <Compile Include="Models\Response\PaginationModel.cs" />
     <Compile Include="Models\Response\Author.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Models\Response\Book.cs" />
     <Compile Include="Models\Response\BookLink.cs" />
     <Compile Include="Models\Response\BookSummary.cs" />
+    <Compile Include="Models\Response\UserShelf.cs" />
     <Compile Include="Models\Response\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

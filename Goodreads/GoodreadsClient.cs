@@ -30,6 +30,7 @@ namespace Goodreads
 
             Authors = new AuthorsClient(Connection);
             Books = new BooksClient(Connection);
+            Shelves = new ShelvesClient(Connection);
         }
 
         /// <summary>
@@ -41,5 +42,10 @@ namespace Goodreads
         /// API Client for the Goodreads Books endpoint.
         /// </summary>
         public IBooksClient Books { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads Shelves endpoint.
+        /// </summary>
+        public IShelvesClient Shelves { get; private set; }
     }
 }

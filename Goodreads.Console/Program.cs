@@ -23,6 +23,15 @@
                 Console.Out.WriteLine("Author with Id: {0} was not found.", authorId);
             }
 
+            var authorBooksTask = client.Books.GetListByAuthorId(authorId, page: 2);
+            Task.WaitAll(authorBooksTask);
+            var books = authorBooksTask.Result;
+
+            if (books != null)
+            {
+                Console.Out.WriteLine(books.Pagination.TotalItems + " books found");
+            }
+
             var isbn = "0441172717";
             var bookTask = client.Books.GetByIsbn(isbn);
             Task.WaitAll(bookTask);

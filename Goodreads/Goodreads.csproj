@@ -57,6 +57,8 @@
     <Compile Include="Http\IConnection.cs" />
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\Response\PaginatedList.cs" />
+    <Compile Include="Models\Response\PaginationModel.cs" />
     <Compile Include="Models\Response\Author.cs" />
     <Compile Include="Models\Response\AuthorSummary.cs" />
     <Compile Include="Models\Response\Book.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Goodreads.Http;
 using Goodreads.Models.Response;
@@ -38,6 +35,23 @@ namespace Goodreads.Clients
             };
 
             return Connection.ExecuteRequest<Book>("book/isbn/{isbn}.xml", parameters, null, "book");
+        }
+
+        /// <summary>
+        /// Gets a paginated list of books written by the given author.
+        /// </summary>
+        /// <param name="authorId">The Goodreads author id.</param>
+        /// <param name="page">The desired page from the paginated list of books.</param>
+        /// <returns>A paginated list of books written by the author.</returns>
+        public Task<PaginatedList<Book>> GetListByAuthorId(int authorId, int page)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "authorId", Value = authorId, Type = ParameterType.UrlSegment },
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
+            };
+
+            return Connection.ExecuteRequest<PaginatedList<Book>>("author/list/{authorId}", parameters, null, "author/books");
         }
     }
 }

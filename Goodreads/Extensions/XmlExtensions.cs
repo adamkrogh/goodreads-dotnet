@@ -187,5 +187,25 @@ namespace Goodreads.Extensions
 
             return null;
         }
+
+        public static List<T> ParseChildren<T>(this XElement element) where T : ApiResponse, new()
+        {
+            var childElements = element.Elements();
+            if (childElements != null && childElements.Count() > 0)
+            {
+                var children = new List<T>();
+
+                foreach (var childElement in childElements)
+                {
+                    var child = new T();
+                    child.Parse(childElement);
+                    children.Add(child);
+                }
+
+                return children;
+            }
+
+            return null;
+        }
     }
 }

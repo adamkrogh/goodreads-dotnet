@@ -199,8 +199,12 @@ namespace Goodreads.Models.Response
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
 
-            Work = new Work();
-            Work.Parse(element.Element("work"));
+            var workElement = element.Element("work");
+            if (workElement != null)
+            {
+                Work = new Work();
+                Work.Parse(element.Element("work"));
+            }
 
             Authors = element.ParseChildren<AuthorSummary>("authors", "author");
             SimilarBooks = element.ParseChildren<BookSummary>("similar_books", "book");
@@ -217,7 +221,7 @@ namespace Goodreads.Models.Response
                 BuyLinks.ForEach(x => x.FixBookLink(Id));
             }
 
-            PopularShelves = element.ParseChildren(
+            var shelves = element.ParseChildren(
                 "popular_shelves",
                 "shelf",
                 (shelfElement) =>
@@ -229,7 +233,12 @@ namespace Goodreads.Models.Response
                 int.TryParse(shelfCountValue, out shelfCount);
 
                 return new KeyValuePair<string, int>(shelfName, shelfCount);
-            }).ToDictionary(x => x.Key, x => x.Value);
+            });
+
+            if (shelves != null)
+            {
+                PopularShelves = shelves.ToDictionary(x => x.Key, x => x.Value);
+            }
         }
     }
 }

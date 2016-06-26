@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using Goodreads.Exceptions;
 using Goodreads.Models;
 using RestSharp;
@@ -45,7 +46,7 @@ namespace Goodreads.Extensions
             else
             {
                 var root = document.Element("GoodreadsResponse");
-                var contentRoot = root.Element(response.Request.RootElement);
+                var contentRoot = root.XPathSelectElement(response.Request.RootElement);
                 var responseObject = new T();
                 responseObject.Parse(contentRoot);
                 return responseObject;

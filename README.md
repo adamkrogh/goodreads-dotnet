@@ -5,17 +5,17 @@ A Goodreads .NET API Client Library.
 # Usage Examples
 
 ```csharp
+// Create an API client
 var client = new GoodreadsClient("api_key");
-```
 
-```csharp
-// Retrieving an Author
+// Retrieve an author
 var author = await client.Authors.Get(38550);
-```
 
-```csharp
-// Retrieving a Book
+// Retrieve a book
 var book = await client.Books.GetByIsbn("0441172717");
+
+// Retrieve a paginated list of an author's books
+var books = await client.Books.GetListByAuthorId(38550, page: 2);
 ```
 
 # License

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
+using Goodreads.Models;
 
 namespace Goodreads.Extensions
 {
@@ -147,6 +150,42 @@ namespace Goodreads.Extensions
             {
                 return false;
             }
+        }
+
+        public static List<T> ParseChildren<T>(this XElement element, XName parentName, XName childName) where T : ApiResponse, new()
+        {
+            return ParseChildren(
+                element,
+                parentName,
+                childName,
+                (childElement) =>
+            {
+                var child = new T();
+                child.Parse(childElement);
+                return child;
+            });
+        }
+
+        public static List<T> ParseChildren<T>(this XElement element, XName parentName, XName childName, Func<XElement, T> parseChild)
+        {
+            var parentElement = element.Element(parentName);
+            if (parentElement != null)
+            {
+                var childElements = parentElement.Descendants(childName);
+                if (childElements != null && childElements.Count() > 0)
+                {
+                    var children = new List<T>();
+
+                    foreach (var childElement in childElements)
+                    {
+                        children.Add(parseChild(childElement));
+                    }
+
+                    return children;
+                }
+            }
+
+            return null;
         }
     }
 }

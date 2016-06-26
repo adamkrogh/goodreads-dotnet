@@ -195,105 +195,37 @@ namespace Goodreads.Models.Response
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
 
-            // Initialize and parse the work information
             Work = new Work();
             Work.Parse(element.Element("work"));
 
-            // Parse out the authors of this book
-            var authorsRoot = element.Element("authors");
-            if (authorsRoot != null)
-            {
-                var authorElements = authorsRoot.Descendants("author");
-                if (authorElements != null && authorElements.Count() > 0)
-                {
-                    Authors = new List<AuthorSummary>();
+            Authors = element.ParseChildren<AuthorSummary>("authors", "author");
+            SimilarBooks = element.ParseChildren<BookSummary>("similar_books", "book");
 
-                    foreach (var authorElement in authorElements)
-                    {
-                        var authorSummary = new AuthorSummary();
-                        authorSummary.Parse(authorElement);
-                        Authors.Add(authorSummary);
-                    }
-                }
+            BookLinks = element.ParseChildren<BookLink>("book_links", "book_link");
+            if (BookLinks != null)
+            {
+                BookLinks.ForEach(x => x.FixBookLink(Id));
             }
 
-            // Parse out the popular shelves this book appears on
-            var popularShelvesElement = element.Element("popular_shelves");
-            if (popularShelvesElement != null)
+            BuyLinks = element.ParseChildren<BookLink>("buy_links", "buy_link");
+            if (BuyLinks != null)
             {
-                var shelfElements = popularShelvesElement.Descendants("shelf");
-                if (shelfElements != null && shelfElements.Count() > 0)
-                {
-                    PopularShelves = new Dictionary<string, int>();
-
-                    foreach (var shelfElement in shelfElements)
-                    {
-                        var shelfName = shelfElement.Attribute("name").Value;
-                        var shelfCountValue = shelfElement.Attribute("count").Value;
-
-                        int shelfCount = 0;
-                        int.TryParse(shelfCountValue, out shelfCount);
-
-                        PopularShelves.Add(shelfName, shelfCount);
-                    }
-                }
+                BuyLinks.ForEach(x => x.FixBookLink(Id));
             }
 
-            // Parse out the book links
-            var bookLinksElement = element.Element("book_links");
-            if (bookLinksElement != null)
+            PopularShelves = element.ParseChildren(
+                "popular_shelves",
+                "shelf",
+                (shelfElement) =>
             {
-                var bookLinkElements = bookLinksElement.Descendants("book_link");
-                if (bookLinkElements != null && bookLinkElements.Count() > 0)
-                {
-                    BookLinks = new List<BookLink>();
+                var shelfName = shelfElement.Attribute("name").Value;
+                var shelfCountValue = shelfElement.Attribute("count").Value;
 
-                    foreach (var bookLinkElement in bookLinkElements)
-                    {
-                        var bookLink = new BookLink();
-                        bookLink.Parse(bookLinkElement);
-                        bookLink.FixBookLink(Id);
-                        BookLinks.Add(bookLink);
-                    }
-                }
-            }
+                int shelfCount = 0;
+                int.TryParse(shelfCountValue, out shelfCount);
 
-            // Parse out the buy links
-            var buyLinksElement = element.Element("buy_links");
-            if (buyLinksElement != null)
-            {
-                var buyLinkElements = buyLinksElement.Descendants("buy_link");
-                if (buyLinkElements != null && buyLinkElements.Count() > 0)
-                {
-                    BuyLinks = new List<BookLink>();
-
-                    foreach (var buyLinkElement in buyLinkElements)
-                    {
-                        var buyLink = new BookLink();
-                        buyLink.Parse(buyLinkElement);
-                        buyLink.FixBookLink(Id);
-                        BuyLinks.Add(buyLink);
-                    }
-                }
-            }
-
-            // Parse out the similar books
-            var similarBooksElement = element.Element("similar_books");
-            if (similarBooksElement != null)
-            {
-                var bookElements = element.Descendants("book");
-                if (bookElements != null && bookElements.Count() > 0)
-                {
-                    SimilarBooks = new List<BookSummary>();
-
-                    foreach (var bookElement in bookElements)
-                    {
-                        var bookSummary = new BookSummary();
-                        bookSummary.Parse(bookElement);
-                        SimilarBooks.Add(bookSummary);
-                    }
-                }
-            }
+                return new KeyValuePair<string, int>(shelfName, shelfCount);
+            }).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

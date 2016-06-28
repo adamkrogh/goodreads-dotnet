@@ -1,6 +1,8 @@
 ﻿using Goodreads.Clients;
 using Goodreads.Http;
+using Goodreads.Models;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace Goodreads
 {
@@ -9,25 +11,52 @@ namespace Goodreads
     /// </summary>
     public class GoodreadsClient : IGoodreadsClient
     {
+        /// <summary>
+        /// A connection to the Goodreads API.
+        /// </summary>
+        public readonly IConnection Connection;
+
         private readonly string GoodreadsUrl = "https://www.goodreads.com/";
-        private readonly IConnection Connection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
+        /// This constructor doesn't used OAuth permissions and can be used for public methods.
         /// </summary>
-        /// <param name="key">Your Goodreads API key.</param>
-        public GoodreadsClient(string key)
+        /// <param name="apiKey">Your Goodreads API key.</param>
+        /// <param name="apiSecret">Your Goodreads API secret.</param>
+        public GoodreadsClient(string apiKey, string apiSecret) : this(apiKey, apiSecret, null, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
+        /// Use this constructor if you already have OAuth permissions for the user.
+        /// </summary>
+        /// <param name="apiKey">Your Goodreads API key.</param>
+        /// <param name="apiSecret">Your Goodreads API secret.</param>
+        /// <param name="accessToken">The user's OAuth access token.</param>
+        /// <param name="accessSecret">The user's OAuth access secret.</param>
+        public GoodreadsClient(string apiKey, string apiSecret, string accessToken, string accessSecret)
         {
             var client = new RestClient(GoodreadsUrl)
             {
                 UserAgent = "goodreads-dotnet"
             };
 
-            client.AddDefaultParameter("key", key, ParameterType.QueryString);
+            client.AddDefaultParameter("key", apiKey, ParameterType.QueryString);
             client.AddDefaultParameter("format", "xml", ParameterType.QueryString);
 
-            Connection = new Connection(client);
+            var apiCredentials = new ApiCredentials(client, apiKey, apiSecret, accessToken, accessSecret);
 
+            // Setup the OAuth authenticator if they have passed on the appropriate tokens
+            if (!string.IsNullOrWhiteSpace(accessToken) &&
+                !string.IsNullOrWhiteSpace(accessSecret))
+            {
+                client.Authenticator = OAuth1Authenticator.ForProtectedResource(
+                    apiKey, apiSecret, accessToken, accessSecret);
+            }
+
+            Connection = new Connection(client, apiCredentials);
             Authors = new AuthorsClient(Connection);
             Books = new BooksClient(Connection);
             Shelves = new ShelvesClient(Connection);

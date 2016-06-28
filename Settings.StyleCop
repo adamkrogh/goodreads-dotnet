@@ -2,6 +2,8 @@
   <GlobalSettings>
     <CollectionProperty Name="RecognizedWords">
       <Value>Goodreads</Value>
+      <Value>OAuth</Value>
+      <Value>Auth</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>
@@ -162,13 +164,15 @@
         </Rule>
       </Rules>
       <AnalyzerSettings>
-        <StringProperty Name="AdvancedNaming_ProtectedInstanceField">$(AaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_PrivateInstanceField">$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_ProtectedInstanceField">$(AaBb):$(A)$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_PrivateInstanceField">$(AaBb):$(A)$(AaBb)</StringProperty>
         <StringProperty Name="AdvancedNaming_ProtectedStaticField">$(AaBb)</StringProperty>
         <StringProperty Name="AdvancedNaming_PrivateStaticField">$(AaBb)</StringProperty>
         <StringProperty Name="AdvancedNaming_ProtectedConst">$(AA_BB)</StringProperty>
         <StringProperty Name="AdvancedNaming_PrivateConst">$(AA_BB)</StringProperty>
         <StringProperty Name="AdvancedNaming_InternalConst">$(AA_BB)</StringProperty>
+        <StringProperty Name="AdvancedNaming_PublicInstanceField">$(AaBb):$(A)$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_Property">$(AaBb):$(A)$(AaBb)</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
   </Analyzers>

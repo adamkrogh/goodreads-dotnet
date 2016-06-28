@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Goodreads.Extensions;
 using Goodreads.Models;
 using RestSharp;
+using RestSharp.Authenticators;
+using RestSharp.Extensions.MonoHttp;
 
 namespace Goodreads.Http
 {
@@ -15,9 +17,11 @@ namespace Goodreads.Http
         /// Initializes a new instance of the <see cref="Connection"/> class.
         /// </summary>
         /// <param name="client">A RestSharp client to use for this connection.</param>
-        public Connection(IRestClient client)
+        /// <param name="credentials">Credentials for use with the Goodreads API.</param>
+        public Connection(IRestClient client, ApiCredentials credentials)
         {
             Client = client;
+            Credentials = credentials;
         }
 
         #region IConnection Members
@@ -26,6 +30,11 @@ namespace Goodreads.Http
         /// The RestSharp client for this connection.
         /// </summary>
         public IRestClient Client { get; private set; }
+
+        /// <summary>
+        /// Credentials for the Goodreads API.
+        /// </summary>
+        public ApiCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Execute a raw request to the Goodreads API.

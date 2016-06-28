@@ -16,6 +16,11 @@ namespace Goodreads.Http
         IRestClient Client { get; }
 
         /// <summary>
+        /// Credentials for the Goodreads API.
+        /// </summary>
+        ApiCredentials Credentials { get; }
+
+        /// <summary>
         /// Execute a raw request to the Goodreads API.
         /// </summary>
         /// <param name="endpoint">The path of the API endpoint.</param>

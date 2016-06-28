@@ -56,6 +56,7 @@
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="GoodreadsClient.cs" />
     <Compile Include="Http\Connection.cs" />
+    <Compile Include="Http\IApiCredentials.cs" />
     <Compile Include="Http\IConnection.cs" />
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Models\Response\BookSummary.cs" />
     <Compile Include="Models\Response\UserShelf.cs" />
     <Compile Include="Models\Response\Work.cs" />
+    <Compile Include="Http\ApiCredentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

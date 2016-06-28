@@ -7,7 +7,7 @@
     {
         internal static void Main(string[] args)
         {
-            var client = new GoodreadsClient("epWZe3lcFrBCLt8VKoXtBg");
+            var client = new GoodreadsClient("epWZe3lcFrBCLt8VKoXtBg", "wUHnxrgwi7EbfjI01O9JD53ODRK1IOXHC903jkH4gAM");
 
             GetAuthor(client);
             GetBooksByAuthor(client);

@@ -1,6 +1,7 @@
 ﻿namespace Goodreads.Console
 {
     using System.Threading.Tasks;
+    using Models.Request;
     using Console = System.Console;
 
     internal class Program
@@ -13,6 +14,14 @@
             GetBooksByAuthor(client);
             GetBook(client);
             GetShelves(client);
+
+            var authClient = new GoodreadsClient(
+                "epWZe3lcFrBCLt8VKoXtBg",
+                "wUHnxrgwi7EbfjI01O9JD53ODRK1IOXHC903jkH4gAM",
+                "insert_oauth_token_here",
+                "insert_oauth_token_secret_here");
+
+            GetFriends(authClient);
 
             Console.ReadKey();
         }
@@ -74,6 +83,19 @@
             if (shelves != null)
             {
                 Console.Out.WriteLine(shelves.Pagination.TotalItems + " shelves found");
+            }
+        }
+
+        private static void GetFriends(GoodreadsClient client)
+        {
+            var userId = 7284465;
+            var friendsTask = client.Users.GetListOfFriends(userId, 1, SortFriendsList.FirstName);
+            Task.WaitAll(friendsTask);
+            var friends = friendsTask.Result;
+
+            if (friends != null)
+            {
+                Console.Out.WriteLine(friends.Pagination.TotalItems + " friends found");
             }
         }
     }

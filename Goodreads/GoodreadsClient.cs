@@ -1,6 +1,5 @@
 ﻿using Goodreads.Clients;
 using Goodreads.Http;
-using Goodreads.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -60,6 +59,7 @@ namespace Goodreads
             Authors = new AuthorsClient(Connection);
             Books = new BooksClient(Connection);
             Shelves = new ShelvesClient(Connection);
+            Users = new UsersClient(Connection);
         }
 
         /// <summary>
@@ -76,5 +76,10 @@ namespace Goodreads
         /// API Client for the Goodreads Shelves endpoint.
         /// </summary>
         public IShelvesClient Shelves { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads Users endpoint.
+        /// </summary>
+        public IUsersClient Users { get; private set; }
     }
 }

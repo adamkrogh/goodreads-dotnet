@@ -70,6 +70,11 @@ namespace Goodreads.Models.Response
                 return 100;
             }
 
+            if (element.Name == "friends")
+            {
+                return 30;
+            }
+
             return 0;
         }
     }

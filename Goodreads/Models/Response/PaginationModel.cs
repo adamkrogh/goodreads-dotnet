@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
+using Goodreads.Extensions;
 
 namespace Goodreads.Models.Response
 {
@@ -76,6 +77,15 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
+            // Search results have different pagination fields for some reason...
+            if (element.Name == "search")
+            {
+                Start = element.ElementAsInt("results-start");
+                End = element.ElementAsInt("results-end");
+                TotalItems = element.ElementAsInt("total-results");
+                return;
+            }
+
             var startAttribute = element.Attribute("start");
             var endAttribute = element.Attribute("end");
             var totalAttribute = element.Attribute("total");

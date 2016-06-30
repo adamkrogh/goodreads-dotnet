@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 
 namespace Goodreads.Clients
@@ -21,6 +22,15 @@ namespace Goodreads.Clients
         /// <param name="authorId">The Goodreads author id.</param>
         /// <param name="page">The desired page from the paginated list of books.</param>
         /// <returns>A paginated list of books written by the author.</returns>
-        Task<PaginatedList<Book>> GetListByAuthorId(int authorId, int page);
+        Task<PaginatedList<Book>> GetListByAuthorId(int authorId, int page = 1);
+
+        /// <summary>
+        /// Search Goodreads for books (returned as <see cref="Work"/> objects).
+        /// </summary>
+        /// <param name="searchTerm">The search term to search Goodreads with.</param>
+        /// <param name="page">The current page of the paginated list.</param>
+        /// <param name="searchField">The book fields to apply the search term against.</param>
+        /// <returns>A paginated list of <see cref="Work"/> object matching the given search criteria.</returns>
+        Task<PaginatedList<Work>> Search(string searchTerm, int page = 1, BookSearchField searchField = BookSearchField.All);
     }
 }

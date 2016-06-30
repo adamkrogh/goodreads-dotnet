@@ -31,7 +31,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
-        public Task<PaginatedList<UserShelf>> GetUserShelves(int userId, int page)
+        public Task<PaginatedList<UserShelf>> GetUserShelves(int userId, int page = 1)
         {
             var parameters = new List<Parameter>
             {

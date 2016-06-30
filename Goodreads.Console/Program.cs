@@ -14,6 +14,7 @@
             GetBooksByAuthor(client);
             GetBook(client);
             GetShelves(client);
+            SearchBooks(client);
 
             var authClient = new GoodreadsClient(
                 "epWZe3lcFrBCLt8VKoXtBg",
@@ -83,6 +84,19 @@
             if (shelves != null)
             {
                 Console.Out.WriteLine(shelves.Pagination.TotalItems + " shelves found");
+            }
+        }
+
+        private static void SearchBooks(GoodreadsClient client)
+        {
+            var searchTerm = "stormlight";
+            var searchTask = client.Books.Search(searchTerm, page: 1, searchField: BookSearchField.Title);
+            Task.WaitAll(searchTask);
+            var results = searchTask.Result;
+
+            if (results != null)
+            {
+                Console.Out.WriteLine(results.Pagination.TotalItems + " results found");
             }
         }
 

@@ -6,10 +6,15 @@ A Goodreads .NET API Client Library.
 
 ```csharp
 // Create an API client
-var client = new GoodreadsClient("api_key");
+var client = new GoodreadsClient("apiKey", "apiSecret");
+// Or
+var authClient = new GoodreadsClient("apiKey", "apiSecret", "oAuthToken", "oAuthTokenSecret");
 
 // Retrieve an author
 var author = await client.Authors.Get(38550);
+
+// Search for books
+var results = await client.Books.Search("The Lord of the Rings", page: 1, searchField: BookSearchField.Title);
 
 // Retrieve a book
 var book = await client.Books.GetByIsbn("0441172717");
@@ -19,6 +24,9 @@ var books = await client.Books.GetListByAuthorId(38550, page: 2);
 
 // Retrieve a paginated list of a user's shelves
 var shelves = await client.Shelves.GetUserShelves(userId, page: 2);
+
+// Retrieve a paginated list of a users's Goodreads friends
+var friends = await authClient.Users.GetListOfFriends(userId, page: 1, SortFriendsList.LastOnline);
 ```
 
 # Goodreads API Coverage
@@ -75,7 +83,7 @@ All the available Goodreads API methods are listed below. Check checked methods 
 - [ ] review.show — Get a review.
 - [ ] review.show_by_user_and_book — Get a user's review for a given book.
 - [ ] search.authors — Find an author by name.
-- [ ] search.books — Find books by title, author, or ISBN.
+- [x] search.books — Find books by title, author, or ISBN.
 - [ ] series.show — See a series.
 - [ ] series.list — See all series by an author.
 - [ ] series.work — See all series a work is in.
@@ -93,7 +101,7 @@ All the available Goodreads API methods are listed below. Check checked methods 
 - [ ] user.compare — Compare books with another member.
 - [ ] user.followers — Get a user's followers.
 - [ ] user.following — Get people a user is following.
-- [ ] user.friends — Get a user's friends.
+- [x] user.friends — Get a user's friends.
 - [ ] user_status.create — Update user status.
 - [ ] user_status.destroy — Delete user status.
 - [ ] user_status.show — Get a user status.

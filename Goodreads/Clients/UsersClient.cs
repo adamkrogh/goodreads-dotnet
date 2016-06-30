@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
@@ -35,9 +36,13 @@ namespace Goodreads.Clients
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "id", Value = userId, Type = ParameterType.QueryString },
-                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
-                //// TODO: implement the sort query parameter from the enum
-                //// new Parameter { Name = "sort", Value = sort, Type = ParameterType.QueryString }
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
+                new Parameter
+                {
+                    Name = EnumHelpers.QueryParameterKey<SortFriendsList>(),
+                    Value = EnumHelpers.QueryParameterValue(sort),
+                    Type = ParameterType.QueryString
+                }
             };
 
             return Connection.ExecuteRequest<PaginatedList<User>>("friend/user", parameters, null, "friends");

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 using Goodreads.Extensions;
 
@@ -41,15 +42,30 @@ namespace Goodreads.Models.Response
             Pagination = new PaginationModel(DeterminePageSize(element));
             Pagination.Parse(element);
 
-            List = element.ParseChildren<T>();
+            // Should have known search pagination would be different...
+            if (element.Name == "search")
+            {
+                var results = element.Descendants("results");
+                if (results != null && results.Count() == 1)
+                {
+                    List = results.First().ParseChildren<T>();
+                }
+            }
+            else
+            {
+                List = element.ParseChildren<T>();
+            }
         }
 
         /// <summary>
+        /// Determine the page size of the paginated list.
+        /// </summary>
+        /// <remarks>
         /// I wanted to add a PageSize to the paginated list so we can provide some extra properties.
         /// This resulted in some issues as Goodreads isn't consistent at all with page sizes.
         /// This method includes some heuristics for guessing the page size based on the XElement.
         /// I might have to remove PageSize in the future if this is unmaintainable...
-        /// </summary>
+        /// </remarks>
         /// <param name="element">The element to determine the page size for.</param>
         /// <returns>The page size for the given element.</returns>
         internal int DeterminePageSize(XElement element)
@@ -59,7 +75,6 @@ namespace Goodreads.Models.Response
                 return 0;
             }
 
-            // Most book lists are 30 books per page
             if (element.Name == "books")
             {
                 return 30;
@@ -73,6 +88,11 @@ namespace Goodreads.Models.Response
             if (element.Name == "friends")
             {
                 return 30;
+            }
+
+            if (element.Name == "search")
+            {
+                return 20;
             }
 
             return 0;

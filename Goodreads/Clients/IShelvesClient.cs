@@ -14,6 +14,6 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
-        Task<PaginatedList<UserShelf>> GetUserShelves(int userId, int page);
+        Task<PaginatedList<UserShelf>> GetUserShelves(int userId, int page = 1);
     }
 }

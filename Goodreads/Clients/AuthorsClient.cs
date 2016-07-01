@@ -27,13 +27,13 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>An async task returning the desired author information.</returns>
-        public Task<Author> Get(int authorId)
+        public Task<Author> GetByAuthorId(int authorId)
         {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "id", Value = authorId, Type = ParameterType.QueryString }
             };
-            return this.Connection.ExecuteRequest<Author>("author/show.xml", parameters, null, "author");
+            return Connection.ExecuteRequest<Author>("author/show.xml", parameters, null, "author");
         }
     }
 }

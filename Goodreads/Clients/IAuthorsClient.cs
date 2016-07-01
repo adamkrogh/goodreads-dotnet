@@ -13,6 +13,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>An async task returning the desired author information.</returns>
-        Task<Author> Get(int authorId);
+        Task<Author> GetByAuthorId(int authorId);
     }
 }

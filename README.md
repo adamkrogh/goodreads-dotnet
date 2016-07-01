@@ -12,7 +12,7 @@ var client = new GoodreadsClient("apiKey", "apiSecret");
 var authClient = new GoodreadsClient("apiKey", "apiSecret", "oAuthToken", "oAuthTokenSecret");
 
 // Retrieve an author
-var author = await client.Authors.Get(38550);
+var author = await client.Authors.GetByAuthorId(38550);
 
 // Search for books
 var results = await client.Books.Search("The Lord of the Rings", page: 1, searchField: BookSearchField.Title);
@@ -24,7 +24,7 @@ var book = await client.Books.GetByIsbn("0441172717");
 var books = await client.Books.GetListByAuthorId(38550, page: 2);
 
 // Retrieve a paginated list of a user's shelves
-var shelves = await client.Shelves.GetUserShelves(userId, page: 2);
+var shelves = await client.Shelves.GetListOfUserShelves(userId, page: 2);
 
 // Retrieve a paginated list of a users's Goodreads friends
 var friends = await authClient.Users.GetListOfFriends(userId, page: 1, SortFriendsList.LastOnline);

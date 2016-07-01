@@ -30,7 +30,7 @@
         private static void GetAuthor(GoodreadsClient client)
         {
             var authorId = 1624;
-            var authorTask = client.Authors.Get(authorId);
+            var authorTask = client.Authors.GetByAuthorId(authorId);
             Task.WaitAll(authorTask);
             var author = authorTask.Result;
 
@@ -77,7 +77,7 @@
         private static void GetShelves(GoodreadsClient client)
         {
             var userId = 2863914;
-            var shelfTask = client.Shelves.GetUserShelves(userId, page: 2);
+            var shelfTask = client.Shelves.GetListOfUserShelves(userId, page: 2);
             Task.WaitAll(shelfTask);
             var shelves = shelfTask.Result;
 

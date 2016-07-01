@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goodreads", "Goodreads\Goodreads.csproj", "{28231DD9-D297-4618-859B-CAA09AABEDB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goodreads.Console", "Goodreads.Console\Goodreads.Console.csproj", "{68B0CC19-44A2-46B5-A3D3-E0807771119D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goodreads.Tests", "Goodreads.Tests\Goodreads.Tests.csproj", "{101C501B-210B-455D-9961-7D18789FA43D}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{28231DD9-D297-4618-859B-CAA09AABEDB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28231DD9-D297-4618-859B-CAA09AABEDB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28231DD9-D297-4618-859B-CAA09AABEDB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68B0CC19-44A2-46B5-A3D3-E0807771119D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68B0CC19-44A2-46B5-A3D3-E0807771119D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68B0CC19-44A2-46B5-A3D3-E0807771119D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68B0CC19-44A2-46B5-A3D3-E0807771119D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{101C501B-210B-455D-9961-7D18789FA43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{101C501B-210B-455D-9961-7D18789FA43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101C501B-210B-455D-9961-7D18789FA43D}.Release|Any CPU.ActiveCfg = Release|Any CPU

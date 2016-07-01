@@ -7,7 +7,8 @@ A Goodreads .NET API Client Library.
 ```csharp
 // Create an API client
 var client = new GoodreadsClient("apiKey", "apiSecret");
-// Or
+
+// Create an authenticated API client
 var authClient = new GoodreadsClient("apiKey", "apiSecret", "oAuthToken", "oAuthTokenSecret");
 
 // Retrieve an author
@@ -35,7 +36,6 @@ All the available Goodreads API methods are listed below. Check checked methods 
 
 - [ ] auth.user — Get id of user who authorized OAuth.
 - [x] author.books — Paginate an author's books.
-  - client.Books.GetListByAuthorId
 - [x] author.show — Get info about an author by id.
 - [ ] author_following.create — Follow an author.
 - [ ] author_following.destroy — Unfollow an author.

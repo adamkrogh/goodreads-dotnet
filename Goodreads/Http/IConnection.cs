@@ -49,5 +49,13 @@ namespace Goodreads.Http
             string expectedRoot = null,
             Method method = Method.GET)
             where T : ApiResponse, new();
+
+        /// <summary>
+        /// Build a rest request to the given endpoint, using the given parameters.
+        /// </summary>
+        /// <param name="endpoint">The API endpoint.</param>
+        /// <param name="parameters">The parameters for this request.</param>
+        /// <returns>A RestRequest for this connection.</returns>
+        IRestRequest BuildRequest(string endpoint, IEnumerable<Parameter> parameters);
     }
 }

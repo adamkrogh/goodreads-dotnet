@@ -182,5 +182,31 @@ namespace Goodreads.Clients
 
             return null;
         }
+
+        /// <summary>
+        /// Get review statistics for a list of books by ISBN10 or ISBN13.
+        /// </summary>
+        /// <param name="isbns">A list of ISBN10 or ISBN13s to retrieve stats for.</param>
+        /// <returns>A list of review stats for the given ISBNs.</returns>
+        public async Task<List<ReviewStats>> GetReviewStatsForIsbns(List<string> isbns)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "isbns", Value = string.Join(",", isbns), Type = ParameterType.QueryString }
+            };
+
+            // This endpoint only supports JSON for some reason...
+            var request = Connection.BuildRequest("book/review_counts.json", parameters);
+            var response = await Connection.Client.ExecuteGetTaskAsync<ReviewStatsContainer>(request).ConfigureAwait(false);
+
+            if (response != null && response.Data != null)
+            {
+                return response.Data.Books;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

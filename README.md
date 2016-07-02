@@ -41,7 +41,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Auth **0%** (0 of 1)
 - Authors **100%** (2 of 2)
 - Author Following **0%** (0 of 3)
-- Books **50%** (3 of 6)
+- Books **67%** (4 of 6)
 - Comments **0%** (0 of 2)
 - Events **0%** (0 of 1)
 - Fanship **Deprecated**
@@ -66,7 +66,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **11%** (8 of 70)
+**Overall**: **13%** (9 of 70)
 
 #### Complete
 
@@ -76,6 +76,7 @@ The list of API methods this client library supports.
 - author.show — Get info about an author by id.
 - book.isbn_to_id — Get Goodreads book IDs given ISBNs.
 - book.id_to_work_id — Get Goodreads work IDs given Goodreads book IDs.
+- book.review_counts — Get review statistics given a list of ISBNs.
 - book.show_by_isbn — Get the reviews for a book given an ISBN.
 - search.books — Find books by title, author, or ISBN.
 - shelves.list — Get a user's shelves.
@@ -89,7 +90,6 @@ The list of API methods that will (hopefully) be supported soon.
 - author_following.create — Follow an author.
 - author_following.destroy — Unfollow an author.
 - author_following.show — Show author following information.
-- book.review_counts — Get review statistics given a list of ISBNs.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.
 - comment.create — Create a comment.

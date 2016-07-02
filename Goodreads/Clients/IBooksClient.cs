@@ -58,5 +58,12 @@ namespace Goodreads.Clients
         /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
         /// <returns>A list of work ids corresponding to the given book ids.</returns>
         Task<List<int?>> GetWorkIdsForBookIds(List<int> bookIds);
+
+        /// <summary>
+        /// Get review statistics for a list of books by ISBN10 or ISBN13.
+        /// </summary>
+        /// <param name="isbns">A list of ISBN10 or ISBN13s to retrieve stats for.</param>
+        /// <returns>A list of review stats for the given ISBNs.</returns>
+        Task<List<ReviewStats>> GetReviewStatsForIsbns(List<string> isbns);
     }
 }

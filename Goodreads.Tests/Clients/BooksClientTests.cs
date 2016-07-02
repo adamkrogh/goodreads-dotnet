@@ -195,5 +195,28 @@ namespace Goodreads.Tests
                 }
             }
         }
+
+        public class TheGetReviewStatsForIsbnsMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsStats()
+            {
+                var isbns = new List<string> { "0765326353", "9780765326362" };
+                var reviewStats = await BooksClient.GetReviewStatsForIsbns(isbns);
+
+                Assert.NotNull(reviewStats);
+                Assert.Equal(reviewStats.Count, isbns.Count);
+            }
+
+            [Fact]
+            public async Task OnlyReturnsStatsForFoundIsbns()
+            {
+                var isbns = new List<string> { "0765326353", "missing", "9780765326362" };
+                var reviewStats = await BooksClient.GetReviewStatsForIsbns(isbns);
+
+                Assert.NotNull(reviewStats);
+                Assert.Equal(reviewStats.Count, 2);
+            }
+        }
     }
 }

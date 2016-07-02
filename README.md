@@ -1,8 +1,9 @@
-# Goodreads .NET API Client Library
+Goodreads .NET API Client Library
+=============
 
 A Goodreads .NET API Client Library.
 
-# Usage Examples
+### Usage Examples
 
 ```csharp
 // Create an API client
@@ -30,12 +31,44 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 var friends = await authClient.Users.GetListOfFriends(userId, page: 1, sort: SortFriendsList.LastOnline);
 ```
 
-# Goodreads API Coverage
+### Goodreads API Coverage
 
 All the available [Goodreads API](https://www.goodreads.com/api/index) methods are listed below. 
 This list is kept updated so feel free to request or contribute if you have need of a specific method.
 
-## Complete
+#### Status
+
+- Auth **0%** (0 of 1)
+- Authors **100%** (2 of 2)
+- Author Following **0%** (0 of 3)
+- Books **50%** (3 of 6)
+- Comments **0%** (0 of 2)
+- Events **0%** (0 of 1)
+- Fanship **Deprecated**
+- Followers **0%** (0 of 2)
+- Friends **0%** (0 of 4)
+- Groups **0%** (0 of 5)
+- Lists **0%** (0 of 1)
+- Notifications **0%** (0 of 1)
+- Owned Books **0%** (0 of 5)
+- Quotes **0%** (0 of 1)
+- Ratings **0%** (0 of 2)
+- Read Statuses **0%** (0 of 1)
+- Recommendations **0%** (0 of 1)
+- Reviews **0%** (0 of 7)
+- Search **50%** (1 of 2)
+- Series **0%** (0 of 3)
+- Shelves **33%** (1 of 3)
+- Topics **0%** (0 of 4)
+- Updates **0%** (0 of 1)
+- User Shelves **0%** (0 of 2)
+- Users **20%** (1 of 5)
+- User Status **0%** (0 of 4)
+- Works **0%** (0 of 1)
+
+**Overall**: **11%** (8 of 70)
+
+#### Complete
 
 The list of API methods this client library supports.
 
@@ -48,7 +81,7 @@ The list of API methods this client library supports.
 - shelves.list — Get a user's shelves.
 - user.friends — Get a user's friends.
 
-## Todo
+#### Todo
 
 The list of API methods that will (hopefully) be supported soon.
 
@@ -114,14 +147,14 @@ The list of API methods that will (hopefully) be supported soon.
 - user_status.index — View user statuses.
 - work.editions — See all editions by work.
 
-## Not Implementing
+#### Not Implementing
 
 API methods that don't seem useful or are not worth the effort.
 
 - search.authors — Find an author by name.
   - This doesn't really seem that useful...
 
-## Deprecated
+#### Deprecated
 
 API methods that Goodreads has deprecated.
 
@@ -129,7 +162,7 @@ API methods that Goodreads has deprecated.
 - fanship.destroy — Stop being fan of an author. DEPRECATED.
 - fanship.show — Show fanship information. DEPRECATED.
 
-# License
+### License
 
 The MIT License (MIT)
 

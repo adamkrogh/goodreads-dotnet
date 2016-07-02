@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Goodreads.Helpers;
 using Goodreads.Http;
@@ -78,6 +80,63 @@ namespace Goodreads.Clients
             };
 
             return Connection.ExecuteRequest<PaginatedList<Work>>("search", parameters, null, "search");
+        }
+
+        /// <summary>
+        /// Gets a single Goodreads book id for the given ISBN10 or ISBN13.
+        /// </summary>
+        /// <param name="isbn">The ISBN number to fetch a book it for. Can be ISBN10 or ISBN13.</param>
+        /// <returns>A Goodreads book id if found, null otherwise.</returns>
+        public async Task<int?> GetBookIdForIsbn(string isbn)
+        {
+            var bookIds = await GetBookIdsForIsbns(new List<string> { isbn });
+            return bookIds == null ? null : bookIds.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Converts a list of ISBNs (ISBN10 or ISBN13) to Goodreads book ids.
+        /// The ordering and size of the list is kept consistent with missing
+        /// ISBNs substituted with null.
+        /// </summary>
+        /// <param name="isbns">The list of ISBNs to convert.</param>
+        /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
+        public async Task<List<int?>> GetBookIdsForIsbns(List<string> isbns)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "isbn", Value = string.Join(",", isbns), Type = ParameterType.QueryString }
+            };
+
+            // This endpoint doesn't actually return XML. But instead returns a comma delimited list of book ids.
+            // If an ISBN isn't found, an empty string is returned at that index.
+            var response = await Connection.ExecuteRaw("book/isbn_to_id", parameters).ConfigureAwait(false);
+            if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
+            {
+                var content = response.Content;
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var responseIds = content.Split(',');
+                    if (responseIds != null && responseIds.Count() > 0)
+                    {
+                        var bookIds = new List<int?>();
+                        foreach (var responseId in responseIds)
+                        {
+                            if (!string.IsNullOrEmpty(responseId))
+                            {
+                                bookIds.Add(int.Parse(responseId));
+                            }
+                            else
+                            {
+                                bookIds.Add(null);
+                            }
+                        }
+
+                        return bookIds;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

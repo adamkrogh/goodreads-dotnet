@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Goodreads.Clients;
 using Xunit;
@@ -37,7 +38,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetListByAuthorId : BooksClientsTests
+        public class TheGetListByAuthorIdMethod : BooksClientsTests
         {
             [Fact]
             public async Task ReturnsBooks()
@@ -96,6 +97,65 @@ namespace Goodreads.Tests
                 Assert.True(books.Pagination.TotalItems > 0);
                 Assert.True(books.Pagination.CurrentPage == 2);
                 Assert.True(books.Pagination.Start == 21);
+            }
+        }
+
+        public class TheGetBookIdForIsbnMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsABookId()
+            {
+                var isbn = "0765326353";
+                var bookId = await BooksClient.GetBookIdForIsbn(isbn);
+
+                Assert.NotNull(bookId);
+                Assert.Equal(bookId, 7235533);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                var isbn = "test";
+                var bookId = await BooksClient.GetBookIdForIsbn(isbn);
+
+                Assert.Null(bookId);
+            }
+        }
+
+        public class TheGetBookIdsForIsbnsMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsBookIds()
+            {
+                var isbns = new List<string> { "0765326353", "9780765326362" };
+                var ids = new List<int?> { 7235533, 17332218 };
+                var bookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+
+                Assert.NotNull(bookIds);
+                Assert.Equal(bookIds.Count, isbns.Count);
+                Assert.Equal(bookIds.Count, ids.Count);
+
+                for (var i = 0; i < bookIds.Count; i++)
+                {
+                    Assert.Equal(bookIds[i], ids[i]);
+                }
+            }
+
+            [Fact]
+            public async Task HandlesMissingIsbns()
+            {
+                var isbns = new List<string> { "0765326353", "missing", "9780765326362" };
+                var ids = new List<int?> { 7235533, null, 17332218 };
+                var bookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+
+                Assert.NotNull(bookIds);
+                Assert.Equal(bookIds.Count, isbns.Count);
+                Assert.Equal(bookIds.Count, ids.Count);
+
+                for (var i = 0; i < bookIds.Count; i++)
+                {
+                    Assert.Equal(bookIds[i], ids[i]);
+                }
             }
         }
     }

@@ -1,11 +1,29 @@
-﻿namespace Goodreads.Tests
+﻿using System;
+
+namespace Goodreads.Tests
 {
     public static class Helper
     {
         public static IGoodreadsClient GetClient()
         {
-            // TODO: Move API credentials out to environment variables, and reset them on my account...
-            return new GoodreadsClient("epWZe3lcFrBCLt8VKoXtBg", "wUHnxrgwi7EbfjI01O9JD53ODRK1IOXHC903jkH4gAM");
+            return new GoodreadsClient(
+                Environment.GetEnvironmentVariable("GOODREADS_APIKEY"),
+                Environment.GetEnvironmentVariable("GOODREADS_APISECRET"));
+        }
+
+        public static IGoodreadsClient GetAuthClient()
+        {
+            return new GoodreadsClient(
+                Environment.GetEnvironmentVariable("GOODREADS_APIKEY"),
+                Environment.GetEnvironmentVariable("GOODREADS_APISECRET"),
+                Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKEN"),
+                Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKENSECRET"));
+        }
+
+        public static int GetUserId()
+        {
+            var id = Environment.GetEnvironmentVariable("GOODREADS_USERID");
+            return string.IsNullOrWhiteSpace(id) ? 0 : int.Parse(id);
         }
     }
 }

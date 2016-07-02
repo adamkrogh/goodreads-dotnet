@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
@@ -133,6 +134,49 @@ namespace Goodreads.Clients
 
                         return bookIds;
                     }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts a list of Goodreads book ids to work ids.
+        /// The ordering and size of the list is kept consistent with missing
+        /// book ids substituted with null.
+        /// </summary>
+        /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
+        /// <returns>A list of work ids corresponding to the given book ids.</returns>
+        public async Task<List<int?>> GetWorkIdsForBookIds(List<int> bookIds)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "bookIds", Value = string.Join(",", bookIds), Type = ParameterType.UrlSegment }
+            };
+
+            // This response is simple enough that we just parse it here without creating another model
+            var response = await Connection.ExecuteRaw("book/id_to_work_id/{bookIds}", parameters).ConfigureAwait(false);
+            if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
+            {
+                var content = response.Content;
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var workIds = new List<int?>();
+                    var document = XDocument.Parse(content);
+                    var items = document.XPathSelectElements("GoodreadsResponse/work-ids/item");
+                    foreach (var item in items)
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.Value))
+                        {
+                            workIds.Add(int.Parse(item.Value));
+                        }
+                        else
+                        {
+                            workIds.Add(null);
+                        }
+                    }
+
+                    return workIds;
                 }
             }
 

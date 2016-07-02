@@ -42,6 +42,7 @@ The list of API methods this client library supports.
 - author.books — Paginate an author's books.
 - author.show — Get info about an author by id.
 - book.isbn_to_id — Get Goodreads book IDs given ISBNs.
+- book.id_to_work_id — Get Goodreads work IDs given Goodreads book IDs.
 - book.show_by_isbn — Get the reviews for a book given an ISBN.
 - search.books — Find books by title, author, or ISBN.
 - shelves.list — Get a user's shelves.
@@ -55,7 +56,6 @@ The list of API methods that will (hopefully) be supported soon.
 - author_following.create — Follow an author.
 - author_following.destroy — Unfollow an author.
 - author_following.show — Show author following information.
-- book.id_to_work_id — Get Goodreads work IDs given Goodreads book IDs.
 - book.review_counts — Get review statistics given a list of ISBNs.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.

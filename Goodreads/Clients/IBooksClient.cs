@@ -49,5 +49,14 @@ namespace Goodreads.Clients
         /// <param name="isbns">The list of ISBNs to convert.</param>
         /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
         Task<List<int?>> GetBookIdsForIsbns(List<string> isbns);
+
+        /// <summary>
+        /// Converts a list of Goodreads book ids to work ids.
+        /// The ordering and size of the list is kept consistent with missing
+        /// book ids substituted with null.
+        /// </summary>
+        /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
+        /// <returns>A list of work ids corresponding to the given book ids.</returns>
+        Task<List<int?>> GetWorkIdsForBookIds(List<int> bookIds);
     }
 }

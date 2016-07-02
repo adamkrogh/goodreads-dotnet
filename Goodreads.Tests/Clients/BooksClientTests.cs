@@ -128,16 +128,16 @@ namespace Goodreads.Tests
             public async Task ReturnsBookIds()
             {
                 var isbns = new List<string> { "0765326353", "9780765326362" };
-                var ids = new List<int?> { 7235533, 17332218 };
-                var bookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+                var expectedBookIds = new List<int?> { 7235533, 17332218 };
+                var actualBookIds = await BooksClient.GetBookIdsForIsbns(isbns);
 
-                Assert.NotNull(bookIds);
-                Assert.Equal(bookIds.Count, isbns.Count);
-                Assert.Equal(bookIds.Count, ids.Count);
+                Assert.NotNull(actualBookIds);
+                Assert.Equal(actualBookIds.Count, isbns.Count);
+                Assert.Equal(actualBookIds.Count, expectedBookIds.Count);
 
-                for (var i = 0; i < bookIds.Count; i++)
+                for (var i = 0; i < actualBookIds.Count; i++)
                 {
-                    Assert.Equal(bookIds[i], ids[i]);
+                    Assert.Equal(actualBookIds[i], expectedBookIds[i]);
                 }
             }
 
@@ -145,16 +145,53 @@ namespace Goodreads.Tests
             public async Task HandlesMissingIsbns()
             {
                 var isbns = new List<string> { "0765326353", "missing", "9780765326362" };
-                var ids = new List<int?> { 7235533, null, 17332218 };
-                var bookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+                var expectedBookIds = new List<int?> { 7235533, null, 17332218 };
+                var actualBookIds = await BooksClient.GetBookIdsForIsbns(isbns);
 
-                Assert.NotNull(bookIds);
-                Assert.Equal(bookIds.Count, isbns.Count);
-                Assert.Equal(bookIds.Count, ids.Count);
+                Assert.NotNull(actualBookIds);
+                Assert.Equal(actualBookIds.Count, isbns.Count);
+                Assert.Equal(actualBookIds.Count, expectedBookIds.Count);
 
-                for (var i = 0; i < bookIds.Count; i++)
+                for (var i = 0; i < actualBookIds.Count; i++)
                 {
-                    Assert.Equal(bookIds[i], ids[i]);
+                    Assert.Equal(actualBookIds[i], expectedBookIds[i]);
+                }
+            }
+        }
+
+        public class TheGetWorkIdsForBookIdsMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsWorkIds()
+            {
+                var bookIds = new List<int> { 7235533, 17332218 };
+                var expectedWorkIds = new List<int> { 8134945, 16482835 };
+                var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
+
+                Assert.NotNull(actualWorkIds);
+                Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
+                Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
+
+                for (var i = 0; i < actualWorkIds.Count; i++)
+                {
+                    Assert.Equal(actualWorkIds[i], expectedWorkIds[i]);
+                }
+            }
+
+            [Fact]
+            public async Task HandlesMissingBookIds()
+            {
+                var bookIds = new List<int> { 7235533, int.MaxValue, 17332218 };
+                var expectedWorkIds = new List<int?> { 8134945, null, 16482835 };
+                var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
+
+                Assert.NotNull(actualWorkIds);
+                Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
+                Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
+
+                for (var i = 0; i < actualWorkIds.Count; i++)
+                {
+                    Assert.Equal(actualWorkIds[i], expectedWorkIds[i]);
                 }
             }
         }

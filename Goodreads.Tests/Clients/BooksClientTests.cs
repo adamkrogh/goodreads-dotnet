@@ -38,6 +38,54 @@ namespace Goodreads.Tests
             }
         }
 
+        public class TheGetByBookIdMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsABook()
+            {
+                var bookId = 7235533;
+                var isbn = "0765326353";
+                var book = await BooksClient.GetByBookId(bookId);
+
+                Assert.NotNull(book);
+                Assert.Equal(book.Id, bookId);
+                Assert.Equal(book.Isbn, isbn);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                var book = await BooksClient.GetByBookId(int.MaxValue);
+
+                Assert.Null(book);
+            }
+        }
+
+        public class TheGetByTitleMethod : BooksClientsTests
+        {
+            [Fact]
+            public async Task ReturnsABook()
+            {
+                var title = "The Way of Kings";
+                var bookId = 7235533;
+                var isbn = "0765326353";
+                var book = await BooksClient.GetByTitle(title);
+
+                Assert.NotNull(book);
+                Assert.Equal(book.Id, bookId);
+                Assert.Equal(book.Isbn, isbn);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                // Hopefully no one will write a book with this title in the future...
+                var book = await BooksClient.GetByTitle("asasdasd123123123");
+
+                Assert.Null(book);
+            }
+        }
+
         public class TheGetListByAuthorIdMethod : BooksClientsTests
         {
             [Fact]

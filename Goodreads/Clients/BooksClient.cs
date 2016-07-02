@@ -43,6 +43,39 @@ namespace Goodreads.Clients
         }
 
         /// <summary>
+        /// Get book information by Goodreads book id.
+        /// </summary>
+        /// <param name="bookId">The Goodreads book id.</param>
+        /// <returns>Information about the Goodreads book, null if not found.</returns>
+        public Task<Book> GetByBookId(int bookId)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "bookId", Value = bookId, Type = ParameterType.UrlSegment }
+            };
+
+            return Connection.ExecuteRequest<Book>("book/show/{bookId}.xml", parameters, null, "book");
+        }
+
+        /// <summary>
+        /// Get book information by book title.
+        /// Include an author name for increased accuracy.
+        /// </summary>
+        /// <param name="title">The book title to find.</param>
+        /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
+        /// <returns>Information about the Goodreads book, null if not found.</returns>
+        public Task<Book> GetByTitle(string title, string author = null)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "title", Value = title, Type = ParameterType.QueryString },
+                new Parameter { Name = "author", Value = author, Type = ParameterType.QueryString }
+            };
+
+            return Connection.ExecuteRequest<Book>("book/title.xml", parameters, null, "book");
+        }
+
+        /// <summary>
         /// Gets a paginated list of books written by the given author.
         /// </summary>
         /// <param name="authorId">The Goodreads author id.</param>

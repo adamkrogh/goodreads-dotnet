@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.Xml.Linq;
 using RestSharp.Deserializers;
 
 namespace Goodreads.Models.Response
@@ -9,6 +11,7 @@ namespace Goodreads.Models.Response
     /// <remarks>
     /// This is one of the few Goodreads endpoints that return JSON for some reason.
     /// </remarks>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class ReviewStats : ApiResponse
     {
         /// <summary>
@@ -61,6 +64,18 @@ namespace Goodreads.Models.Response
         /// The average rating of this book.
         /// </summary>
         public decimal AverageRating { get; protected set; }
+
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "ReviewStats: BookId: {0}, AverageRating: {1}",
+                    BookId,
+                    AverageRating);
+            }
+        }
 
         internal override void Parse(XElement element)
         {

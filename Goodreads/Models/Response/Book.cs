@@ -135,6 +135,11 @@ namespace Goodreads.Models.Response
         public List<AuthorSummary> Authors { get; protected set; }
 
         /// <summary>
+        /// HTML and CSS for the Goodreads iFrame. Used to display the reviews for this book.
+        /// </summary>
+        public string ReviewsWidget { get; protected set; }
+
+        /// <summary>
         /// The most popular shelf names this book appears on. This is a
         /// dictionary of shelf name -> count.
         /// </summary>
@@ -198,6 +203,7 @@ namespace Goodreads.Models.Response
             RatingsCount = element.ElementAsInt("ratings_count");
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
             Url = element.ElementAsString("url");
+            ReviewsWidget = element.ElementAsString("reviews_widget");
 
             var workElement = element.Element("work");
             if (workElement != null)

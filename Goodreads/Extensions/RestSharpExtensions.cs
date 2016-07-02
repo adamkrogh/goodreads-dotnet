@@ -36,7 +36,17 @@ namespace Goodreads.Extensions
                 return null;
             }
 
-            var document = XDocument.Parse(response.Content);
+            XDocument document = null;
+
+            try
+            {
+                document = XDocument.Parse(response.Content);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
             if (document == null ||
                 document.Root == null ||
                 document.Root.Name == "error")

@@ -16,7 +16,7 @@ var authClient = new GoodreadsClient("apiKey", "apiSecret", "oAuthToken", "oAuth
 var author = await client.Authors.GetByAuthorId(38550);
 
 // Search for books
-var results = await client.Books.Search("The Lord of the Rings", page: 1, searchField: BookSearchField.Title);
+var results = await client.Books.Search("Dune", page: 1, searchField: BookSearchField.Title);
 
 // Retrieve a book by ISBN
 var book = await client.Books.GetByIsbn("0441172717");
@@ -25,7 +25,7 @@ var book = await client.Books.GetByIsbn("0441172717");
 var book = await client.Books.GetByBookId(7235533);
 
 // Retrieve a book by title
-var book = await client.Books.GetByTitle("The Lord of the Rings");
+var book = await client.Books.GetByTitle("Dune");
 
 // Retrieve a paginated list of an author's books
 var books = await client.Books.GetListByAuthorId(38550, page: 2);
@@ -65,7 +65,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Read Statuses **0%** (0 of 1)
 - Recommendations **0%** (0 of 1)
 - Reviews **0%** (0 of 7)
-- Search **50%** (1 of 2)
+- Search **100%** (2 of 2)
 - Series **0%** (0 of 3)
 - Shelves **33%** (1 of 3)
 - Topics **0%** (0 of 4)
@@ -75,7 +75,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **19%** (13 of 70)
+**Overall**: **20%** (14 of 70)
 
 #### Complete
 
@@ -90,6 +90,7 @@ The list of API methods this client library supports.
 - book.show_by_isbn — Get the reviews for a book given an ISBN.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.
+- search.authors — Find an author by name.
 - search.books — Find books by title, author, or ISBN.
 - shelves.list — Get a user's shelves.
 - user.friends — Get a user's friends.
@@ -155,13 +156,6 @@ The list of API methods that will (hopefully) be supported soon.
 - user_status.show — Get a user status.
 - user_status.index — View user statuses.
 - work.editions — See all editions by work.
-
-#### Not Implementing
-
-API methods that don't seem useful or are not worth the effort.
-
-- search.authors — Find an author by name.
-  - This doesn't really seem that useful...
 
 #### Deprecated
 

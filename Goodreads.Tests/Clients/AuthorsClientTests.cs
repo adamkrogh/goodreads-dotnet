@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Goodreads.Clients;
 using Xunit;
 
@@ -32,6 +33,29 @@ namespace Goodreads.Tests.Clients
                 var author = await AuthorsClient.GetByAuthorId(authorId);
 
                 Assert.Null(author);
+            }
+        }
+
+        public class TheGetAuthorIdByNameMethod : AuthorsClientTests
+        {
+            [Fact]
+            public async Task ReturnsAnAuthorId()
+            {
+                var authorName = "Brandon Sanderson";
+                var expectedAuthorId = 38550;
+                var actualAuthorId = await AuthorsClient.GetAuthorIdByName(authorName);
+
+                Assert.NotNull(actualAuthorId);
+                Assert.Equal(actualAuthorId, expectedAuthorId);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                var authorName = Guid.NewGuid().ToString();
+                var actualAuthorId = await AuthorsClient.GetAuthorIdByName(authorName);
+
+                Assert.Null(actualAuthorId);
             }
         }
     }

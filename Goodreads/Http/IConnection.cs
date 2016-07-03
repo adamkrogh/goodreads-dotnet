@@ -21,6 +21,11 @@ namespace Goodreads.Http
         ApiCredentials Credentials { get; }
 
         /// <summary>
+        /// Determines if the connection has been authenticated via OAuth, or not.
+        /// </summary>
+        bool IsAuthConnection { get; }
+
+        /// <summary>
         /// Execute a raw request to the Goodreads API.
         /// </summary>
         /// <param name="endpoint">The path of the API endpoint.</param>

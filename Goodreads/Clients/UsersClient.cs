@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
@@ -46,6 +48,41 @@ namespace Goodreads.Clients
             };
 
             return Connection.ExecuteRequest<PaginatedList<User>>("friend/user", parameters, null, "friends");
+        }
+
+        /// <summary>
+        /// Gets the Goodreads user id of the authenticated connection.
+        /// If the client isn't using OAuth, this returns null.
+        /// </summary>
+        /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
+        public async Task<int?> GetAuthenticatedUserId()
+        {
+            if (!Connection.IsAuthConnection)
+            {
+                return null;
+            }
+
+            // This response is simple enough that we just parse it here without creating another model
+            var response = await Connection.ExecuteRaw("api/auth_user", null).ConfigureAwait(false);
+            if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
+            {
+                var content = response.Content;
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var document = XDocument.Parse(content);
+                    var userElement = document.XPathSelectElement("GoodreadsResponse/user");
+                    if (userElement != null)
+                    {
+                        var attribute = userElement.Attribute("id");
+                        if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Value))
+                        {
+                            return int.Parse(attribute.Value);
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

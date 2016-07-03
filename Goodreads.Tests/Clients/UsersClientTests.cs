@@ -37,5 +37,26 @@ namespace Goodreads.Tests.Clients
                 Assert.Null(friends);
             }
         }
+
+        public class TheGetAuthenticatedUserIdMethod : UsersClientTests
+        {
+            [Fact]
+            public async Task ReturnsUserIdWhenAuthenticated()
+            {
+                var id = await UsersClient.GetAuthenticatedUserId();
+
+                Assert.NotNull(id);
+                Assert.Equal(id.Value, Helper.GetUserId());
+            }
+
+            [Fact]
+            public async Task ReturnsNullWhenNotAuthenticated()
+            {
+                var client = Helper.GetClient();
+                var id = await client.Users.GetAuthenticatedUserId();
+
+                Assert.Null(id);
+            }
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace Goodreads.Http
         {
             Client = client;
             Credentials = credentials;
+            IsAuthConnection = credentials != null &&
+                !string.IsNullOrWhiteSpace(credentials.OAuthToken) &&
+                !string.IsNullOrWhiteSpace(credentials.OAuthTokenSecret);
         }
 
         #region IConnection Members
@@ -35,6 +38,11 @@ namespace Goodreads.Http
         /// Credentials for the Goodreads API.
         /// </summary>
         public ApiCredentials Credentials { get; private set; }
+
+        /// <summary>
+        /// Determines if the connection has been authenticated via OAuth, or not.
+        /// </summary>
+        public bool IsAuthConnection { get; private set; }
 
         /// <summary>
         /// Execute a raw request to the Goodreads API.

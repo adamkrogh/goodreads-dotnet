@@ -17,5 +17,12 @@ namespace Goodreads.Clients
         /// <param name="sort">The sort order of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
         Task<PaginatedList<User>> GetListOfFriends(int userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName);
+
+        /// <summary>
+        /// Gets the Goodreads user id of the authenticated connection.
+        /// If the client isn't using OAuth, this returns null.
+        /// </summary>
+        /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
+        Task<int?> GetAuthenticatedUserId();
     }
 }

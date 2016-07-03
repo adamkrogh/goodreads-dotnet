@@ -1,6 +1,8 @@
 Goodreads .NET API Client Library
 =============
 
+[![Build status](https://ci.appveyor.com/api/projects/status/pwejbd5jusbs9qu2?svg=true)](https://ci.appveyor.com/project/adamkrogh/goodreads-dotnet)
+
 A Goodreads .NET API Client Library.
 
 ### Usage Examples

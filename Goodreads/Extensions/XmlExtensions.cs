@@ -99,6 +99,21 @@ namespace Goodreads.Extensions
             return null;
         }
 
+        public static DateTime? ElementAsMonthYear(this XElement element, XName name)
+        {
+            var dateElement = element.Element(name);
+            if (dateElement != null)
+            {
+                DateTime date;
+                if (DateTime.TryParseExact(dateElement.Value, "MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                {
+                    return date;
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Goodreads sometimes returns dates as three separate fields.
         /// This method parses out each one and returns a date object.
@@ -106,7 +121,7 @@ namespace Goodreads.Extensions
         /// <param name="element">The parent element of the date elements.</param>
         /// <param name="prefix">The common prefix for the three Goodreads date elements.</param>
         /// <returns>A date object after parsing the three Goodreads date fields.</returns>
-        public static DateTime? ElementAsGoodreadsDate(this XElement element, string prefix)
+        public static DateTime? ElementAsMultiDateField(this XElement element, string prefix)
         {
             var publicationYear = element.ElementAsNullableInt(prefix + "_year");
             var publicationMonth = element.ElementAsNullableInt(prefix + "_month");

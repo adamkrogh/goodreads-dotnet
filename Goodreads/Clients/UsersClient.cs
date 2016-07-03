@@ -27,13 +27,44 @@ namespace Goodreads.Clients
         }
 
         /// <summary>
+        /// Gets the public information for a Goodreads user.
+        /// </summary>
+        /// <param name="userId">The Goodreads user id of the user to fetch.</param>
+        /// <returns>Information about the desired user.</returns>
+        public Task<User> GetByUserId(int userId)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "id", Value = userId, Type = ParameterType.QueryString }
+            };
+
+            return Connection.ExecuteRequest<User>("user/show", parameters, null, "user");
+        }
+
+        /// <summary>
+        /// Gets the public information for a Goodreads user by username.
+        /// Note that usernames are optional in Goodreads.
+        /// </summary>
+        /// <param name="username">The Goodreads username of the user to fetch.</param>
+        /// <returns>Information about the desired user.</returns>
+        public Task<User> GetByUsername(string username)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "username", Value = username, Type = ParameterType.QueryString }
+            };
+
+            return Connection.ExecuteRequest<User>("user/show", parameters, null, "user");
+        }
+
+        /// <summary>
         /// Gets a paginated list of friends for the given Goodreads user id.
         /// </summary>
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="sort">The sort order of the paginated list.</param>
-        /// <returns>A paginated list of the user's friends.</returns>
-        public Task<PaginatedList<User>> GetListOfFriends(int userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName)
+        /// <returns>A paginated list of the user summary information for their friends.</returns>
+        public Task<PaginatedList<UserSummary>> GetListOfFriends(int userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName)
         {
             var parameters = new List<Parameter>
             {
@@ -47,7 +78,7 @@ namespace Goodreads.Clients
                 }
             };
 
-            return Connection.ExecuteRequest<PaginatedList<User>>("friend/user", parameters, null, "friends");
+            return Connection.ExecuteRequest<PaginatedList<UserSummary>>("friend/user", parameters, null, "friends");
         }
 
         /// <summary>

@@ -63,7 +63,7 @@ namespace Goodreads.Models.Response
             {
                 return string.Format(
                     CultureInfo.InvariantCulture,
-                    "AuthorSummary: Id: {0}, Name: {1}",
+                    "UserShelf: Id: {0}, Name: {1}",
                     Id,
                     Name);
             }

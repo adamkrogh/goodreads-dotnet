@@ -104,7 +104,7 @@ namespace Goodreads.Models.Response
             Isbn13 = element.ElementAsString("isbn13");
             AverageRating = element.ElementAsNullableDecimal("average_rating");
             RatingsCount = element.ElementAsNullableInt("ratings_count");
-            PublicationDate = element.ElementAsGoodreadsDate("publication");
+            PublicationDate = element.ElementAsMultiDateField("publication");
             Authors = element.ParseChildren<AuthorSummary>("authors", "author");
 
             var workElement = element.Element("work");

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Goodreads.Clients;
@@ -15,6 +16,47 @@ namespace Goodreads.Tests.Clients
         {
             UsersClient = Helper.GetAuthClient().Users;
             UserId = Helper.GetUserId();
+        }
+
+        public class TheGetByUserIdMethod : UsersClientTests
+        {
+            [Fact]
+            public async Task ReturnsAUser()
+            {
+                var user = await UsersClient.GetByUserId(UserId);
+
+                Assert.NotNull(user);
+                Assert.Equal(user.Id, UserId);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                var user = await UsersClient.GetByUserId(int.MaxValue);
+
+                Assert.Null(user);
+            }
+        }
+
+        public class TheGetByUsernameMethod : UsersClientTests
+        {
+            [Fact]
+            public async Task ReturnsAUser()
+            {
+                var username = "adamkrogh";
+                var user = await UsersClient.GetByUsername(username);
+
+                Assert.NotNull(user);
+                Assert.Equal(user.Username, username);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfNotFound()
+            {
+                var user = await UsersClient.GetByUsername(new Guid().ToString());
+
+                Assert.Null(user);
+            }
         }
 
         public class TheGetListOfFriendsMethod : UsersClientTests

@@ -69,6 +69,7 @@
     <Compile Include="Models\Request\SortFriendsList.cs" />
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
+    <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />
     <Compile Include="Models\Response\Order.cs" />
     <Compile Include="Models\Response\PaginatedList.cs" />

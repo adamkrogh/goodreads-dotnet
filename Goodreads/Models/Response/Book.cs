@@ -191,7 +191,7 @@ namespace Goodreads.Models.Response
             CountryCode = element.ElementAsString("country_code");
             ImageUrl = element.ElementAsString("image_url");
             SmallImageUrl = element.ElementAsString("small_image_url");
-            PublicationDate = element.ElementAsGoodreadsDate("publication");
+            PublicationDate = element.ElementAsMultiDateField("publication");
             Publisher = element.ElementAsString("publisher");
             LanguageCode = element.ElementAsString("language_code");
             IsEbook = element.ElementAsBool("is_ebook");

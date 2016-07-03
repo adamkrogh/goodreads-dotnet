@@ -33,6 +33,9 @@ var books = await client.Books.GetListByAuthorId(38550, page: 2);
 // Retrieve a paginated list of a user's shelves
 var shelves = await client.Shelves.GetListOfUserShelves(userId);
 
+// Retrieve user information
+var user = await client.Users.GetByUserId(7284465);
+
 // Retrieve a paginated list of a users's Goodreads friends
 var friends = await authClient.Users.GetListOfFriends(userId, page: 1, sort: SortFriendsList.LastOnline);
 ```
@@ -68,11 +71,11 @@ This list is kept updated so feel free to request or contribute if you have need
 - Topics **0%** (0 of 4)
 - Updates **0%** (0 of 1)
 - User Shelves **0%** (0 of 2)
-- Users **20%** (1 of 5)
+- Users **40%** (2 of 5)
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **17%** (12 of 70)
+**Overall**: **19%** (13 of 70)
 
 #### Complete
 
@@ -90,6 +93,7 @@ The list of API methods this client library supports.
 - search.books — Find books by title, author, or ISBN.
 - shelves.list — Get a user's shelves.
 - user.friends — Get a user's friends.
+- user.show — Get info about a member by id or username.
 
 #### Todo
 
@@ -143,7 +147,6 @@ The list of API methods that will (hopefully) be supported soon.
 - updates.friends — Get your friend updates.
 - user_shelves.create — Add book shelf.
 - user_shelves.update — Edit book shelf.
-- user.show — Get info about a member by id or username.
 - user.compare — Compare books with another member.
 - user.followers — Get a user's followers.
 - user.following — Get people a user is following.

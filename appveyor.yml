@@ -1,0 +1,17 @@
+configuration: Release
+version: 1.0.{build}
+environment:
+  GOODREADS_APIKEY:
+    secure: 0NIqWSt509JHFYU25eR/lHIImF0GoFBiqW0kIMAY/Ok=
+  GOODREADS_APISECRET:
+    secure: Dccs7sAFf/Votwkk+ifpzy0Or6NeW/8meO8N8DJMRAFWZ11A6yCKEQrP47mOZCTF
+  GOODREADS_OAUTHTOKEN:
+    secure: AgEHHY394ooSNRM5+CPczln+rVJDFrCHj33zKSkenGM=
+  GOODREADS_OAUTHTOKENSECRET:
+    secure: JD0WHbxrskKq3+BlRHMscaFh1HqBH7dHdl1yH0AXOykqXENJApKu6YER50y0rWyQ
+  GOODREADS_USERID:
+    secure: rMkahHgKnylKlqJuguh3SQ==
+before_build:
+  - cmd: nuget restore
+build:
+  verbosity: minimal

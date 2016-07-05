@@ -1,6 +1,7 @@
-configuration: Release
-version: 1.0.{build}
+version: 0.1.0.{build}
+
 environment:
+  packageVersion: 0.1.0
   GOODREADS_APIKEY:
     secure: 0NIqWSt509JHFYU25eR/lHIImF0GoFBiqW0kIMAY/Ok=
   GOODREADS_APISECRET:
@@ -11,7 +12,43 @@ environment:
     secure: JD0WHbxrskKq3+BlRHMscaFh1HqBH7dHdl1yH0AXOykqXENJApKu6YER50y0rWyQ
   GOODREADS_USERID:
     secure: rMkahHgKnylKlqJuguh3SQ==
+
+init:
+- ps: $env:buildVersion = "$env:packageVersion.$env:appveyor_build_number"
+- ps: $env:nugetVersion = "$env:packageVersion-beta-$env:appveyor_build_number"
+- ps: Update-AppveyorBuild -Version $env:buildVersion
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '$(buildVersion)'
+  assembly_file_version: '$(buildVersion)'
+  assembly_informational_version: '$(nugetVersion)'
+
+configuration: Release
+
+nuget:
+  account_feed: true
+  project_feed: true
+  disable_publish_on_pr: true
+
 before_build:
-  - cmd: nuget restore
+  - nuget restore
+
 build:
   verbosity: minimal
+
+after_build:
+- ps: nuget pack Goodreads.nuspec -version "$env:nugetVersion"
+
+artifacts:
+- path: 'Goodreads*.nupkg'
+  name: nuget-package
+
+deploy:
+- provider: NuGet
+  api_key:
+    secure: TE6pKtJkLHgyLRwPfNjKBsp2njuMhpzE426I7fzhYgG+aFzLsRNL8Mm/pR/qp0z4
+  artifact: nuget-package
+  on:
+    branch: master

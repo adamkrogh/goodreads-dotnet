@@ -39,10 +39,10 @@ build:
   verbosity: minimal
 
 after_build:
-- ps: nuget pack .\Goodreads\Goodreads.nuspec -version "$env:nugetVersion"
+- ps: nuget pack .\Goodreads\Goodreads.csproj -version "$env:nugetVersion"
 
 artifacts:
-- path: '.\Goodreads\Goodreads*.nupkg'
+- path: 'Goodreads*.nupkg'
   name: nuget-package
 
 deploy:

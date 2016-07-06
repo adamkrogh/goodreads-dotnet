@@ -4,7 +4,7 @@ configuration: Release
 platform: Any CPU
 
 init:
-- ps: $env:customnugetversion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_REPO_TAG_NAME".replace("v", "") } else { "$env:APPVEYOR_BUILD_VERSION".replace(".$env:APPVEYOR_BUILD_NUMBER", "-beta-$env:APPVEYOR_BUILD_NUMBER" }
+- ps: $env:customnugetversion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_REPO_TAG_NAME".replace("v", "") } else { "$env:APPVEYOR_BUILD_VERSION".replace(".$env:APPVEYOR_BUILD_NUMBER", "-beta-$env:APPVEYOR_BUILD_NUMBER") }
 - ps: Update-AppveyorBuild -Version $env:customnugetversion
 
 assembly_info:

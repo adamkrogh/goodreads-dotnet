@@ -1,31 +1,18 @@
 version: 0.1.0.{build}
-
-environment:
-  packageVersion: 0.1.0
-  GOODREADS_APIKEY:
-    secure: 0NIqWSt509JHFYU25eR/lHIImF0GoFBiqW0kIMAY/Ok=
-  GOODREADS_APISECRET:
-    secure: Dccs7sAFf/Votwkk+ifpzy0Or6NeW/8meO8N8DJMRAFWZ11A6yCKEQrP47mOZCTF
-  GOODREADS_OAUTHTOKEN:
-    secure: AgEHHY394ooSNRM5+CPczln+rVJDFrCHj33zKSkenGM=
-  GOODREADS_OAUTHTOKENSECRET:
-    secure: JD0WHbxrskKq3+BlRHMscaFh1HqBH7dHdl1yH0AXOykqXENJApKu6YER50y0rWyQ
-  GOODREADS_USERID:
-    secure: rMkahHgKnylKlqJuguh3SQ==
+os: Visual Studio 2015
+configuration: Release
+platform: Any CPU
 
 init:
-- ps: $env:buildVersion = "$env:packageVersion.$env:appveyor_build_number"
-- ps: $env:nugetVersion = "$env:packageVersion-beta-$env:appveyor_build_number"
-- ps: Update-AppveyorBuild -Version $env:buildVersion
+- ps: $env:customnugetversion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_BUILD_VERSION" } else { "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH" }
+- ps: Update-AppveyorBuild -Version $env:customnugetversion
 
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '$(buildVersion)'
-  assembly_file_version: '$(buildVersion)'
-  assembly_informational_version: '$(nugetVersion)'
-
-configuration: Release
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 
 nuget:
   account_feed: true
@@ -36,19 +23,14 @@ before_build:
   - nuget restore
 
 build:
+  publish_nuget: true
+  publish_nuget_symbols: true
   verbosity: minimal
-
-after_build:
-- ps: nuget pack .\Goodreads\Goodreads.csproj -version "$env:nugetVersion"
-
-artifacts:
-- path: 'Goodreads*.nupkg'
-  name: nuget-package
 
 deploy:
 - provider: NuGet
   api_key:
     secure: TE6pKtJkLHgyLRwPfNjKBsp2njuMhpzE426I7fzhYgG+aFzLsRNL8Mm/pR/qp0z4
-  artifact: nuget-package
   on:
     branch: master
+    appveyor_repo_tag: true

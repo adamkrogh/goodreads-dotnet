@@ -1,7 +1,7 @@
 Goodreads .NET API Client Library
 =============
 
-[![Build status](https://ci.appveyor.com/api/projects/status/pwejbd5jusbs9qu2?svg=true)](https://ci.appveyor.com/project/adamkrogh/goodreads-dotnet)
+[![AppVeyor](https://img.shields.io/appveyor/ci/adamkrogh/goodreads-dotnet.svg?maxAge=2592000)](https://ci.appveyor.com/project/adamkrogh/goodreads-dotnet) [![NuGet](https://img.shields.io/nuget/v/Goodreads.svg?maxAge=2592000)](https://www.nuget.org/packages/Goodreads)
 
 A Goodreads .NET API Client Library.
 

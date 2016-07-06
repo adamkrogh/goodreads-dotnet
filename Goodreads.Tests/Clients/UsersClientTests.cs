@@ -53,7 +53,8 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var user = await UsersClient.GetByUsername(Guid.NewGuid().ToString());
+                var username = Guid.NewGuid().ToString().Replace("-", string.Empty);
+                var user = await UsersClient.GetByUsername(username);
 
                 Assert.Null(user);
             }

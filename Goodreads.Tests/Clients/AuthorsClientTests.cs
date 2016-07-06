@@ -52,7 +52,7 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var authorName = Guid.NewGuid().ToString();
+                var authorName = Guid.NewGuid().ToString().Replace("-", string.Empty);
                 var actualAuthorId = await AuthorsClient.GetAuthorIdByName(authorName);
 
                 Assert.Null(actualAuthorId);

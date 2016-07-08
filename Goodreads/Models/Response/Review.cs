@@ -1,0 +1,138 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Xml.Linq;
+using Goodreads.Extensions;
+
+namespace Goodreads.Models.Response
+{
+    /// <summary>
+    /// This class models a Review as defined by the Goodreads API.
+    /// </summary>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    public class Review : ApiResponse
+    {
+        /// <summary>
+        /// The Goodreads review id.
+        /// </summary>
+        public int Id { get; protected set; }
+
+        /// <summary>
+        /// The summary information for the book this review is for.
+        /// </summary>
+        public BookSummary Book { get; protected set; }
+
+        /// <summary>
+        /// The rating the user gave the book in this review.
+        /// </summary>
+        public int Rating { get; protected set; }
+
+        /// <summary>
+        /// The number of votes this review received from other Goodreads users.
+        /// </summary>
+        public int Votes { get; protected set; }
+
+        /// <summary>
+        /// A flag determining if the review contains spoilers.
+        /// </summary>
+        public bool IsSpoiler { get; protected set; }
+
+        /// <summary>
+        /// The state of the spoilers for this review.
+        /// </summary>
+        public string SpoilersState { get; protected set; }
+
+        /// <summary>
+        /// The names of the shelves the user has added this book to.
+        /// </summary>
+        public List<string> Shelves { get; protected set; }
+
+        // TODO: determine what data this property contains...
+        // public string RecommendedFor { get; protected set; }
+
+        // TODO: determine what data this property contains...
+        // public string RecommendedBy { get; protected set; }
+
+        /// <summary>
+        /// The date the user started reading this book.
+        /// </summary>
+        public DateTime? DateStarted { get; protected set; }
+
+        /// <summary>
+        /// The date the user finished reading this book.
+        /// </summary>
+        public DateTime? DateRead { get; protected set; }
+
+        /// <summary>
+        /// The date the user added this book to their shelves.
+        /// </summary>
+        public DateTime? DateAdded { get; protected set; }
+
+        /// <summary>
+        /// The date the user last updated this book on their shelves.
+        /// </summary>
+        public DateTime? DateUpdated { get; protected set; }
+
+        /// <summary>
+        /// The number of times this book has been read.
+        /// </summary>
+        public int? ReadCount { get; protected set; }
+
+        /// <summary>
+        /// The main text of this review. May contain HTML.
+        /// </summary>
+        public string Body { get; protected set; }
+
+        /// <summary>
+        /// The number of comments on this review.
+        /// </summary>
+        public int CommentsCount { get; protected set; }
+
+        /// <summary>
+        /// The Goodreads URL of this review.
+        /// </summary>
+        public string Url { get; protected set; }
+
+        /// <summary>
+        /// The owned count of the book.
+        /// </summary>
+        public int Owned { get; protected set; }
+
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Review: Id: {0} Book.Title: {1}",
+                    Id,
+                    Book != null ? Book.Title : string.Empty);
+            }
+        }
+
+        internal override void Parse(XElement element)
+        {
+            Id = element.ElementAsInt("id");
+
+            var bookElement = element.Element("book");
+            if (bookElement != null)
+            {
+                Book = new BookSummary();
+                Book.Parse(bookElement);
+            }
+
+            Rating = element.ElementAsInt("rating");
+            Votes = element.ElementAsInt("votes");
+            IsSpoiler = element.ElementAsBool("spoiler_flag");
+            SpoilersState = element.ElementAsString("spoilers_state");
+
+            // TODO: parse more fields
+            ReadCount = element.ElementAsInt("read_count");
+            Body = element.ElementAsString("body");
+            CommentsCount = element.ElementAsInt("comments_count");
+            Url = element.ElementAsString("url");
+            Owned = element.ElementAsInt("owned");
+        }
+    }
+}

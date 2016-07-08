@@ -49,8 +49,10 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
     <Compile Include="Clients\IBooksClient.cs" />
+    <Compile Include="Clients\IReviewsClient.cs" />
     <Compile Include="Clients\IShelvesClient.cs" />
     <Compile Include="Clients\IUsersClient.cs" />
+    <Compile Include="Clients\ReviewsClient.cs" />
     <Compile Include="Clients\ShelvesClient.cs" />
     <Compile Include="Clients\UsersClient.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
@@ -66,7 +68,9 @@
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Request\BookSearchField.cs" />
+    <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
+    <Compile Include="Models\Response\Review.cs" />
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />

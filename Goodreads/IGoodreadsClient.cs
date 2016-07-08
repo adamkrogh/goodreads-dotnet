@@ -26,5 +26,10 @@ namespace Goodreads
         /// API Client for the Goodreads Users endpoint.
         /// </summary>
         IUsersClient Users { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads Reviews endpoint.
+        /// </summary>
+        IReviewsClient Reviews { get; }
     }
 }

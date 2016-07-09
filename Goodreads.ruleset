@@ -2,9 +2,9 @@
 <RuleSet Name="Goodreads" Description="A basic code analysis rule set for this project." ToolsVersion="14.0">
   <IncludeAll Action="Error" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">  
-	<Rule Id="CA1006" Action="None" />
-	<Rule Id="CA1020" Action="None" />
-	<Rule Id="CA1026" Action="None" />
+    <Rule Id="CA1006" Action="None" />
+    <Rule Id="CA1020" Action="None" />
+    <Rule Id="CA1026" Action="None" />
     <Rule Id="CA1054" Action="None" />
     <Rule Id="CA1055" Action="None" />
     <Rule Id="CA1056" Action="None" />
@@ -12,5 +12,6 @@
     <Rule Id="CA1806" Action="None" />
     <Rule Id="CA1811" Action="None" />
     <Rule Id="CA2210" Action="None" />
+    <Rule Id="CA2243" Action="None" />
   </Rules>
 </RuleSet>

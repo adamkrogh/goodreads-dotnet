@@ -1,4 +1,5 @@
-﻿using Goodreads.Clients;
+﻿using System;
+using Goodreads.Clients;
 using Goodreads.Http;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -10,12 +11,9 @@ namespace Goodreads
     /// </summary>
     public class GoodreadsClient : IGoodreadsClient
     {
-        /// <summary>
-        /// A connection to the Goodreads API.
-        /// </summary>
-        public readonly IConnection Connection;
-
         private readonly string GoodreadsUrl = "https://www.goodreads.com/";
+
+        private IConnection Connection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
@@ -37,7 +35,7 @@ namespace Goodreads
         /// <param name="accessSecret">The user's OAuth access secret.</param>
         public GoodreadsClient(string apiKey, string apiSecret, string accessToken, string accessSecret)
         {
-            var client = new RestClient(GoodreadsUrl)
+            var client = new RestClient(new Uri(GoodreadsUrl))
             {
                 UserAgent = "goodreads-dotnet"
             };

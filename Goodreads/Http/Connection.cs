@@ -22,9 +22,9 @@ namespace Goodreads.Http
         {
             Client = client;
             Credentials = credentials;
-            IsAuthConnection = credentials != null &&
-                !string.IsNullOrWhiteSpace(credentials.OAuthToken) &&
-                !string.IsNullOrWhiteSpace(credentials.OAuthTokenSecret);
+            IsAuthenticated = credentials != null &&
+                !string.IsNullOrWhiteSpace(credentials.OauthToken) &&
+                !string.IsNullOrWhiteSpace(credentials.OauthTokenSecret);
         }
 
         #region IConnection Members
@@ -42,7 +42,7 @@ namespace Goodreads.Http
         /// <summary>
         /// Determines if the connection has been authenticated via OAuth, or not.
         /// </summary>
-        public bool IsAuthConnection { get; private set; }
+        public bool IsAuthenticated { get; private set; }
 
         /// <summary>
         /// Execute a raw request to the Goodreads API.

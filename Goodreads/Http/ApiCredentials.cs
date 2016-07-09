@@ -27,15 +27,15 @@ namespace Goodreads.Http
         /// <param name="client">A RestClient connection to the Goodreads API.</param>
         /// <param name="apiKey">A Goodreads API key.</param>
         /// <param name="apiSecret">A Goodreads API secret.</param>
-        /// <param name="oAuthToken">A user's OAuth token.</param>
-        /// <param name="oAuthTokenSecret">A user's OAuth token secret.</param>
-        public ApiCredentials(IRestClient client, string apiKey, string apiSecret, string oAuthToken, string oAuthTokenSecret)
+        /// <param name="oauthToken">A user's OAuth token.</param>
+        /// <param name="oauthTokenSecret">A user's OAuth token secret.</param>
+        public ApiCredentials(IRestClient client, string apiKey, string apiSecret, string oauthToken, string oauthTokenSecret)
         {
             Client = client;
             ApiKey = apiKey;
             ApiSecret = apiSecret;
-            OAuthToken = oAuthToken;
-            OAuthTokenSecret = oAuthTokenSecret;
+            OauthToken = oauthToken;
+            OauthTokenSecret = oauthTokenSecret;
         }
 
         /// <summary>
@@ -51,12 +51,12 @@ namespace Goodreads.Http
         /// <summary>
         /// The user's OAuth token.
         /// </summary>
-        public string OAuthToken { get; protected set; }
+        public string OauthToken { get; protected set; }
 
         /// <summary>
         /// The user's OAuth token secret.
         /// </summary>
-        public string OAuthTokenSecret { get; protected set; }
+        public string OauthTokenSecret { get; protected set; }
 
         /// <summary>
         /// The user's Goodreads Id.
@@ -84,19 +84,19 @@ namespace Goodreads.Http
         /// <returns>A URL to authorize an OAuth request token.</returns>
         public string BuildAuthorizeUrl(string callbackUrl = null)
         {
-            return BuildAuthorizeUrl(OAuthToken, callbackUrl);
+            return BuildAuthorizeUrl(OauthToken, callbackUrl);
         }
 
         /// <summary>
         /// Build an OAuth authorization URL with the given OAuth token and callback URL.
         /// </summary>
-        /// <param name="oAuthToken">The OAuth request token to authorize.</param>
+        /// <param name="oauthToken">The OAuth request token to authorize.</param>
         /// <param name="callbackUrl">The URL Goodreads will redirect back to.</param>
         /// <returns>A URL to authorize an OAuth request token.</returns>
-        public string BuildAuthorizeUrl(string oAuthToken, string callbackUrl)
+        public string BuildAuthorizeUrl(string oauthToken, string callbackUrl)
         {
             var request = new RestRequest("oauth/authorize");
-            request.AddParameter("oauth_token", oAuthToken);
+            request.AddParameter("oauth_token", oauthToken);
 
             if (!string.IsNullOrEmpty(callbackUrl))
             {
@@ -135,8 +135,8 @@ namespace Goodreads.Http
             var oAuthToken = queryString["oauth_token"];
             var oAuthTokenSecret = queryString["oauth_token_secret"];
 
-            OAuthToken = oAuthToken;
-            OAuthTokenSecret = oAuthTokenSecret;
+            OauthToken = oAuthToken;
+            OauthTokenSecret = oAuthTokenSecret;
 
             return this;
         }
@@ -147,7 +147,7 @@ namespace Goodreads.Http
         /// <returns>A set of API credentials with request tokens populated.</returns>
         public ApiCredentials GetAccessToken()
         {
-            return GetAccessToken(ApiKey, ApiSecret, OAuthToken, OAuthTokenSecret);
+            return GetAccessToken(ApiKey, ApiSecret, OauthToken, OauthTokenSecret);
         }
 
         /// <summary>
@@ -155,12 +155,12 @@ namespace Goodreads.Http
         /// </summary>
         /// <param name="apiKey">A Goodreads API key.</param>
         /// <param name="apiSecret">A Goodreads API secret.</param>
-        /// <param name="oAuthRequestToken">An OAuth request token that has been authorized.</param>
-        /// <param name="oAuthRequestTokenSecret">An OAuth request token secret that has been authorized.</param>
+        /// <param name="oauthRequestToken">An OAuth request token that has been authorized.</param>
+        /// <param name="oauthRequestTokenSecret">An OAuth request token secret that has been authorized.</param>
         /// <returns>A set of API credentials with request tokens populated.</returns>
-        public ApiCredentials GetAccessToken(string apiKey, string apiSecret, string oAuthRequestToken, string oAuthRequestTokenSecret)
+        public ApiCredentials GetAccessToken(string apiKey, string apiSecret, string oauthRequestToken, string oauthRequestTokenSecret)
         {
-            Client.Authenticator = OAuth1Authenticator.ForAccessToken(apiKey, apiSecret, oAuthRequestToken, oAuthRequestTokenSecret);
+            Client.Authenticator = OAuth1Authenticator.ForAccessToken(apiKey, apiSecret, oauthRequestToken, oauthRequestTokenSecret);
 
             var request = new RestRequest("oauth/access_token", Method.POST);
             var response = Client.Execute(request);
@@ -169,8 +169,8 @@ namespace Goodreads.Http
             var oAuthToken = queryString["oauth_token"];
             var oAuthTokenSecret = queryString["oauth_token_secret"];
 
-            OAuthToken = oAuthToken;
-            OAuthTokenSecret = oAuthTokenSecret;
+            OauthToken = oAuthToken;
+            OauthTokenSecret = oAuthTokenSecret;
 
             return this;
         }

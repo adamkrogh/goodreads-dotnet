@@ -18,7 +18,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The list of objects for the current page.
         /// </summary>
-        public List<T> List { get; protected set; }
+        public IReadOnlyList<T> List { get; protected set; }
 
         /// <summary>
         /// Pagination information about the list and current page.
@@ -37,26 +37,6 @@ namespace Goodreads.Models.Response
             }
         }
 
-        internal override void Parse(XElement element)
-        {
-            Pagination = new PaginationModel(DeterminePageSize(element));
-            Pagination.Parse(element);
-
-            // Should have known search pagination would be different...
-            if (element.Name == "search")
-            {
-                var results = element.Descendants("results");
-                if (results != null && results.Count() == 1)
-                {
-                    List = results.First().ParseChildren<T>();
-                }
-            }
-            else
-            {
-                List = element.ParseChildren<T>();
-            }
-        }
-
         /// <summary>
         /// Determine the page size of the paginated list.
         /// </summary>
@@ -68,7 +48,7 @@ namespace Goodreads.Models.Response
         /// </remarks>
         /// <param name="element">The element to determine the page size for.</param>
         /// <returns>The page size for the given element.</returns>
-        internal int DeterminePageSize(XElement element)
+        internal static int DeterminePageSize(XElement element)
         {
             if (element == null)
             {
@@ -95,7 +75,33 @@ namespace Goodreads.Models.Response
                 return 20;
             }
 
+            // TODO: this is wrong, reviews page size is dynamic...
+            if (element.Name == "reviews")
+            {
+                return 20;
+            }
+
             return 0;
+        }
+
+        internal override void Parse(XElement element)
+        {
+            Pagination = new PaginationModel(DeterminePageSize(element));
+            Pagination.Parse(element);
+
+            // Should have known search pagination would be different...
+            if (element.Name == "search")
+            {
+                var results = element.Descendants("results");
+                if (results != null && results.Count() == 1)
+                {
+                    List = results.First().ParseChildren<T>();
+                }
+            }
+            else
+            {
+                List = element.ParseChildren<T>();
+            }
         }
     }
 }

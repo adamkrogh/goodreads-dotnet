@@ -134,7 +134,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">The list of ISBNs to convert.</param>
         /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
-        public async Task<List<int?>> GetBookIdsForIsbns(List<string> isbns)
+        public async Task<IReadOnlyList<int?>> GetBookIdsForIsbns(IReadOnlyList<string> isbns)
         {
             var parameters = new List<Parameter>
             {
@@ -180,7 +180,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
         /// <returns>A list of work ids corresponding to the given book ids.</returns>
-        public async Task<List<int?>> GetWorkIdsForBookIds(List<int> bookIds)
+        public async Task<IReadOnlyList<int?>> GetWorkIdsForBookIds(IReadOnlyList<int> bookIds)
         {
             var parameters = new List<Parameter>
             {
@@ -221,7 +221,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">A list of ISBN10 or ISBN13s to retrieve stats for.</param>
         /// <returns>A list of review stats for the given ISBNs.</returns>
-        public async Task<List<ReviewStats>> GetReviewStatsForIsbns(List<string> isbns)
+        public async Task<IReadOnlyList<ReviewStats>> GetReviewStatsForIsbns(IReadOnlyList<string> isbns)
         {
             var parameters = new List<Parameter>
             {

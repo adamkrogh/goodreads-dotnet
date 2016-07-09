@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Goodreads.Exceptions;
@@ -42,7 +43,7 @@ namespace Goodreads.Extensions
             {
                 document = XDocument.Parse(response.Content);
             }
-            catch (Exception)
+            catch (XmlException)
             {
                 return null;
             }
@@ -67,7 +68,7 @@ namespace Goodreads.Extensions
         {
             if (response.ErrorException != null)
             {
-                throw new ApplicationException(
+                throw new ApiException(
                     "There was an an exception thrown during the request.",
                     response.ErrorException);
             }

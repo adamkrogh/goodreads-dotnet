@@ -95,7 +95,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The list of favorite authors the user has added on Goodreads.
         /// </summary>
-        public List<AuthorSummary> FavoriteAuthors { get; protected set; }
+        public IReadOnlyList<AuthorSummary> FavoriteAuthors { get; protected set; }
 
         /// <summary>
         /// The RSS url for the user's updates.
@@ -125,13 +125,13 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The shelves the user has organized their books into.
         /// </summary>
-        public List<UserShelf> Shelves { get; protected set; }
+        public IReadOnlyList<UserShelf> Shelves { get; protected set; }
 
         // TODO: parse out updates once I determine a structure for them.
-        ////public List<Update> Updates { get; protected set; }
+        ////public IReadOnlyList<Update> Updates { get; protected set; }
 
         // TODO: parse out user statuses.
-        ////public List<UserStatus> Statuses { get; protected set; }
+        ////public IReadOnlyList<UserStatus> Statuses { get; protected set; }
 
         /// <summary>
         /// Determines if the user's profile is private or not.

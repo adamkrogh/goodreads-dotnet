@@ -30,13 +30,13 @@ namespace Goodreads.Extensions
             if (intElement != null)
             {
                 var intValue = 0;
-                int.TryParse(intElement.Value, out intValue);
-                return intValue;
+                if (int.TryParse(intElement.Value, out intValue))
+                {
+                    return intValue;
+                }
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
 
         public static int? ElementAsNullableInt(this XElement element, XName name)
@@ -60,13 +60,13 @@ namespace Goodreads.Extensions
             if (decimalElement != null)
             {
                 var decimalValue = 0m;
-                decimal.TryParse(decimalElement.Value, out decimalValue);
-                return decimalValue;
+                if (decimal.TryParse(decimalElement.Value, out decimalValue))
+                {
+                    return decimalValue;
+                }
             }
-            else
-            {
-                return 0m;
-            }
+
+            return 0m;
         }
 
         public static decimal? ElementAsNullableDecimal(this XElement element, XName name)
@@ -158,13 +158,13 @@ namespace Goodreads.Extensions
             if (boolElement != null)
             {
                 var boolValue = false;
-                bool.TryParse(boolElement.Value, out boolValue);
-                return boolValue;
+                if (bool.TryParse(boolElement.Value, out boolValue))
+                {
+                    return boolValue;
+                }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public static List<T> ParseChildren<T>(this XElement element, XName parentName, XName childName) where T : ApiResponse, new()

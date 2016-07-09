@@ -38,6 +38,10 @@ namespace Goodreads.Clients
         /// If the client isn't using OAuth, this returns null.
         /// </summary>
         /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Method makes a network request.")]
         Task<int?> GetAuthenticatedUserId();
     }
 }

@@ -88,7 +88,7 @@ namespace Goodreads.Clients
         /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
         public async Task<int?> GetAuthenticatedUserId()
         {
-            if (!Connection.IsAuthConnection)
+            if (!Connection.IsAuthenticated)
             {
                 return null;
             }

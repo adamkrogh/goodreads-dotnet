@@ -46,7 +46,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The names of the shelves the user has added this book to.
         /// </summary>
-        public List<string> Shelves { get; protected set; }
+        public IReadOnlyList<string> Shelves { get; protected set; }
 
         // TODO: determine what data this property contains...
         // public string RecommendedFor { get; protected set; }

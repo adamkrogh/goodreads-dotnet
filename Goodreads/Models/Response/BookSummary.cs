@@ -78,7 +78,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// Summary information about the authors of this book.
         /// </summary>
-        public List<AuthorSummary> Authors { get; protected set; }
+        public IReadOnlyList<AuthorSummary> Authors { get; protected set; }
 
         internal string DebuggerDisplay
         {

@@ -76,7 +76,7 @@ namespace Goodreads.Models.Response
         /// The distribution of all the ratings for this work.
         /// A dictionary of star rating -> number of ratings.
         /// </summary>
-        public Dictionary<int, int> RatingDistribution { get; protected set; }
+        public IReadOnlyDictionary<int, int> RatingDistribution { get; protected set; }
 
         internal string DebuggerDisplay
         {
@@ -114,13 +114,13 @@ namespace Goodreads.Models.Response
             MediaType = element.ElementAsString("media_type");
 
             // Parse out the rating distribution
-            var ratingDistribution = element.ElementAsString("rating_dist");
-            if (ratingDistribution != null)
+            var ratingDistributionElement = element.ElementAsString("rating_dist");
+            if (ratingDistributionElement != null)
             {
-                var parts = ratingDistribution.Split('|');
+                var parts = ratingDistributionElement.Split('|');
                 if (parts != null && parts.Length > 0)
                 {
-                    RatingDistribution = new Dictionary<int, int>();
+                    var ratingDistribution = new Dictionary<int, int>();
 
                     var ratings = parts.Select(x => x.Split(':'))
                                        .Where(x => x[0] != "total")
@@ -132,8 +132,10 @@ namespace Goodreads.Models.Response
                         int.TryParse(rating[0], out star);
                         int.TryParse(rating[1], out count);
 
-                        RatingDistribution.Add(star, count);
+                        ratingDistribution.Add(star, count);
                     }
+
+                    RatingDistribution = ratingDistribution;
                 }
             }
         }

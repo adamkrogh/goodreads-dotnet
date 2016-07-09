@@ -132,7 +132,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The list of authors that worked on this book.
         /// </summary>
-        public List<AuthorSummary> Authors { get; protected set; }
+        public IReadOnlyList<AuthorSummary> Authors { get; protected set; }
 
         /// <summary>
         /// HTML and CSS for the Goodreads iFrame. Used to display the reviews for this book.
@@ -143,25 +143,25 @@ namespace Goodreads.Models.Response
         /// The most popular shelf names this book appears on. This is a
         /// dictionary of shelf name -> count.
         /// </summary>
-        public Dictionary<string, int> PopularShelves { get; protected set; }
+        public IReadOnlyDictionary<string, int> PopularShelves { get; protected set; }
 
         /// <summary>
         /// The list of book links tracked by Goodreads.
         /// This is usually a list of libraries that the user can borrow the book from.
         /// </summary>
-        public List<BookLink> BookLinks { get; protected set; }
+        public IReadOnlyList<BookLink> BookLinks { get; protected set; }
 
         /// <summary>
         /// The list of buy links tracked by Goodreads.
         /// This is usually a list of third-party sites that the
         /// user can purchase the book from.
         /// </summary>
-        public List<BookLink> BuyLinks { get; protected set; }
+        public IReadOnlyList<BookLink> BuyLinks { get; protected set; }
 
         /// <summary>
         /// Summary information about similar books to this one.
         /// </summary>
-        public List<BookSummary> SimilarBooks { get; protected set; }
+        public IReadOnlyList<BookSummary> SimilarBooks { get; protected set; }
 
         // TODO: parse series information once I get a better sense
         // of what series are from the other API calls.
@@ -215,16 +215,18 @@ namespace Goodreads.Models.Response
             Authors = element.ParseChildren<AuthorSummary>("authors", "author");
             SimilarBooks = element.ParseChildren<BookSummary>("similar_books", "book");
 
-            BookLinks = element.ParseChildren<BookLink>("book_links", "book_link");
-            if (BookLinks != null)
+            var bookLinks = element.ParseChildren<BookLink>("book_links", "book_link");
+            if (bookLinks != null)
             {
-                BookLinks.ForEach(x => x.FixBookLink(Id));
+                bookLinks.ForEach(x => x.FixBookLink(Id));
+                BookLinks = bookLinks;
             }
 
-            BuyLinks = element.ParseChildren<BookLink>("buy_links", "buy_link");
-            if (BuyLinks != null)
+            var buyLinks = element.ParseChildren<BookLink>("buy_links", "buy_link");
+            if (buyLinks != null)
             {
-                BuyLinks.ForEach(x => x.FixBookLink(Id));
+                buyLinks.ForEach(x => x.FixBookLink(Id));
+                BuyLinks = buyLinks;
             }
 
             var shelves = element.ParseChildren(
@@ -237,7 +239,6 @@ namespace Goodreads.Models.Response
 
                 int shelfCount = 0;
                 int.TryParse(shelfCountValue, out shelfCount);
-
                 return new KeyValuePair<string, int>(shelfName, shelfCount);
             });
 

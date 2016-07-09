@@ -23,7 +23,7 @@ namespace Goodreads.Http
         /// <summary>
         /// Determines if the connection has been authenticated via OAuth, or not.
         /// </summary>
-        bool IsAuthConnection { get; }
+        bool IsAuthenticated { get; }
 
         /// <summary>
         /// Execute a raw request to the Goodreads API.

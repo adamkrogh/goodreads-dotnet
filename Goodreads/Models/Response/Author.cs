@@ -97,7 +97,7 @@ namespace Goodreads.Models.Response
         public bool IsGoodreadsAuthor { get; protected set; }
 
         /// <summary>
-        /// If <paramref name="IsGoodreadsAuthor"/> is true, this property is set to the author's Goodreads user Id.
+        /// If <see cref="IsGoodreadsAuthor"/> is true, this property is set to the author's Goodreads user Id.
         /// </summary>
         public int? GoodreadsUserId { get; protected set; }
 

@@ -127,7 +127,13 @@ namespace Goodreads.Models.Response
             IsSpoiler = element.ElementAsBool("spoiler_flag");
             SpoilersState = element.ElementAsString("spoilers_state");
 
-            // TODO: parse more fields
+            // TODO: parse shelves
+            ////Shelves = element.ParseChildren<Shelf>("shelves", "shelf");
+
+            DateStarted = element.ElementAsDateTime("started_at");
+            DateRead = element.ElementAsDateTime("read_at");
+            DateAdded = element.ElementAsDateTime("date_added");
+            DateUpdated = element.ElementAsDateTime("date_updated");
             ReadCount = element.ElementAsInt("read_count");
             Body = element.ElementAsString("body");
             CommentsCount = element.ElementAsInt("comments_count");

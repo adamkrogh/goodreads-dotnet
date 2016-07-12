@@ -43,7 +43,10 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task ReturnsSortedList()
             {
-                var reviews = await ReviewsClient.GetListByUser(ReviewsUserId, sort: SortReviewsList.AverageRating, order: Order.Descending);
+                var reviews = await ReviewsClient.GetListByUser(
+                    ReviewsUserId,
+                    sort: SortReviewsList.AverageRating,
+                    order: Order.Descending);
 
                 Assert.NotNull(reviews);
 

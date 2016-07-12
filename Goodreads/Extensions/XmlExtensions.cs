@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Goodreads.Models;
 
@@ -93,6 +94,32 @@ namespace Goodreads.Extensions
                 if (DateTime.TryParseExact(dateElement.Value, "yyyy/MM/dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 {
                     return date;
+                }
+            }
+
+            return null;
+        }
+
+        public static DateTime? ElementAsDateTime(this XElement element, XName name)
+        {
+            var dateElement = element.Element(name);
+            if (dateElement != null)
+            {
+                var value = dateElement.Value;
+
+                // The Goodreads date includes the timezone as -hhmm whereas C# wants it to be -hh:mm
+                // This regex corrects the format and hopefully doesn't mess anything else up...
+                var validDateFormat = Regex.Replace(value, @"(.*) ([+-]\d{2})(\d{2}) (.*)", "$1 $2:$3 $4");
+
+                DateTime localDate;
+                if (DateTime.TryParseExact(
+                    validDateFormat,
+                    "ddd MMM dd HH:mm:ss zzz yyyy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out localDate))
+                {
+                    return localDate.ToUniversalTime();
                 }
             }
 

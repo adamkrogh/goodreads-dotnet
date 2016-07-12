@@ -37,56 +37,9 @@ namespace Goodreads.Models.Response
             }
         }
 
-        /// <summary>
-        /// Determine the page size of the paginated list.
-        /// </summary>
-        /// <remarks>
-        /// I wanted to add a PageSize to the paginated list so we can provide some extra properties.
-        /// This resulted in some issues as Goodreads isn't consistent at all with page sizes.
-        /// This method includes some heuristics for guessing the page size based on the XElement.
-        /// I might have to remove PageSize in the future if this is unmaintainable...
-        /// </remarks>
-        /// <param name="element">The element to determine the page size for.</param>
-        /// <returns>The page size for the given element.</returns>
-        internal static int DeterminePageSize(XElement element)
-        {
-            if (element == null)
-            {
-                return 0;
-            }
-
-            if (element.Name == "books")
-            {
-                return 30;
-            }
-
-            if (element.Name == "shelves")
-            {
-                return 100;
-            }
-
-            if (element.Name == "friends")
-            {
-                return 30;
-            }
-
-            if (element.Name == "search")
-            {
-                return 20;
-            }
-
-            // TODO: this is wrong, reviews page size is dynamic...
-            if (element.Name == "reviews")
-            {
-                return 20;
-            }
-
-            return 0;
-        }
-
         internal override void Parse(XElement element)
         {
-            Pagination = new PaginationModel(DeterminePageSize(element));
+            Pagination = new PaginationModel();
             Pagination.Parse(element);
 
             // Should have known search pagination would be different...

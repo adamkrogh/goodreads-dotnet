@@ -44,15 +44,19 @@ namespace Goodreads.Models.Response
         public string SpoilersState { get; protected set; }
 
         /// <summary>
-        /// The names of the shelves the user has added this book to.
+        /// The shelves the user has added this review to.
         /// </summary>
-        public IReadOnlyList<string> Shelves { get; protected set; }
+        public IReadOnlyList<ReviewShelf> Shelves { get; protected set; }
 
-        // TODO: determine what data this property contains...
-        // public string RecommendedFor { get; protected set; }
+        /// <summary>
+        /// Who the user would recommend reading this book.
+        /// </summary>
+        public string RecommendedFor { get; protected set; }
 
-        // TODO: determine what data this property contains...
-        // public string RecommendedBy { get; protected set; }
+        /// <summary>
+        /// Who recommended the user to read this book.
+        /// </summary>
+        public string RecommendedBy { get; protected set; }
 
         /// <summary>
         /// The date the user started reading this book.
@@ -126,10 +130,9 @@ namespace Goodreads.Models.Response
             Votes = element.ElementAsInt("votes");
             IsSpoiler = element.ElementAsBool("spoiler_flag");
             SpoilersState = element.ElementAsString("spoilers_state");
-
-            // TODO: parse shelves
-            ////Shelves = element.ParseChildren<Shelf>("shelves", "shelf");
-
+            Shelves = element.ParseChildren<ReviewShelf>("shelves", "shelf");
+            RecommendedFor = element.ElementAsString("recommended_for");
+            RecommendedBy = element.ElementAsString("recommended_by");
             DateStarted = element.ElementAsDateTime("started_at");
             DateRead = element.ElementAsDateTime("read_at");
             DateAdded = element.ElementAsDateTime("date_added");

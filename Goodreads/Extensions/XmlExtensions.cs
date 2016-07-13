@@ -249,5 +249,65 @@ namespace Goodreads.Extensions
 
             return null;
         }
+
+        public static string AttributeAsString(this XElement element, XName attributeName)
+        {
+            var stringAttribute = element.Attribute(attributeName);
+            if (stringAttribute != null)
+            {
+                var value = stringAttribute.Value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    return value;
+                }
+            }
+
+            return null;
+        }
+
+        public static int AttributeAsInt(this XElement element, XName attributeName)
+        {
+            var intAttribute = element.Attribute(attributeName);
+            if (intAttribute != null)
+            {
+                var intValue = 0;
+                if (int.TryParse(intAttribute.Value, out intValue))
+                {
+                    return intValue;
+                }
+            }
+
+            return 0;
+        }
+
+        public static int? AttributeAsNullableInt(this XElement element, XName attributeName)
+        {
+            var intAttribute = element.Attribute(attributeName);
+            if (intAttribute != null)
+            {
+                var intValue = 0;
+                if (int.TryParse(intAttribute.Value, out intValue))
+                {
+                    return intValue;
+                }
+            }
+
+            return null;
+        }
+
+        public static bool AttributeAsBool(this XElement element, XName attributeName)
+        {
+            var boolAttribute = element.Attribute(attributeName);
+            if (boolAttribute != null)
+            {
+                var boolValue = false;
+                if (bool.TryParse(boolAttribute.Value, out boolValue))
+                {
+                    return boolValue;
+                }
+            }
+
+            return false;
+        }
     }
 }

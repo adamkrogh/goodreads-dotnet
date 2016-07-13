@@ -76,6 +76,7 @@
     <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
     <Compile Include="Models\Response\Review.cs" />
+    <Compile Include="Models\Response\ReviewShelf.cs" />
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />

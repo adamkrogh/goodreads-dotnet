@@ -19,25 +19,38 @@ namespace Goodreads.Tests.Clients
             ReviewsUserId = 7284465;
         }
 
+        public class TheGetByIdMethod : ReviewsClientTests
+        {
+            [Fact]
+            public async Task ReturnsAReview()
+            {
+                var expectedId = 1690356266;
+                var review = await ReviewsClient.GetById(expectedId);
+
+                Assert.NotNull(review);
+                Assert.Equal(review.Id, expectedId);
+            }
+        }
+
         public class TheGetListByUserMethod : ReviewsClientTests
         {
             [Fact]
-            public async Task ReturnsBooks()
+            public async Task ReturnsReviews()
             {
-                var books = await ReviewsClient.GetListByUser(ReviewsUserId);
+                var reviews = await ReviewsClient.GetListByUser(ReviewsUserId);
 
-                Assert.NotNull(books);
+                Assert.NotNull(reviews);
             }
 
             [Fact]
             public async Task ReturnsCorrectPageSize()
             {
                 var expectedPageSize = 42;
-                var books = await ReviewsClient.GetListByUser(ReviewsUserId, pageSize: expectedPageSize);
+                var reviews = await ReviewsClient.GetListByUser(ReviewsUserId, pageSize: expectedPageSize);
 
-                Assert.NotNull(books);
-                Assert.Equal(books.Pagination.End, expectedPageSize);
-                Assert.Equal(books.List.Count, expectedPageSize);
+                Assert.NotNull(reviews);
+                Assert.Equal(reviews.Pagination.End, expectedPageSize);
+                Assert.Equal(reviews.List.Count, expectedPageSize);
             }
 
             [Fact]

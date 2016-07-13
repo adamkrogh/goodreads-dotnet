@@ -75,6 +75,9 @@
     <Compile Include="Models\Request\BookSearchField.cs" />
     <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
+    <Compile Include="Models\Response\Comment.cs" />
+    <Compile Include="Models\Response\ReadStatus.cs" />
+    <Compile Include="Models\Response\ReviewDetails.cs" />
     <Compile Include="Models\Response\Review.cs" />
     <Compile Include="Models\Response\ReviewShelf.cs" />
     <Compile Include="Models\Response\ReviewStats.cs" />

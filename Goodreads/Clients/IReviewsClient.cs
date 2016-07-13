@@ -10,9 +10,18 @@ namespace Goodreads.Clients
     public interface IReviewsClient
     {
         /// <summary>
+        /// Get a review by a Goodreads review id with paginated comments.
+        /// </summary>
+        /// <param name="reviewId">The id of the review.</param>
+        /// <param name="commentsPage">The page of comments to fetch.</param>
+        /// <returns>A review with the matching id.</returns>
+        Task<ReviewDetails> GetById(int reviewId, int commentsPage = 1);
+
+        /// <summary>
         /// Get a list of book reviews on a user's account. Several optional parameters
         /// allow for custom sorting and searching for this list.
         /// Users with private profiles only allow friends to list their books (via OAuth).
+        /// Note: this endpoint doesn't include review comments.
         /// </summary>
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="shelfName">The name of the shelf to list reviews from.</param>

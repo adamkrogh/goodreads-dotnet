@@ -18,6 +18,17 @@ namespace Goodreads.Clients
         Task<ReviewDetails> GetById(int reviewId, int commentsPage = 1);
 
         /// <summary>
+        /// Get a review for a user and book, and optionally find the review
+        /// if it occurs on another edition of the book.
+        /// </summary>
+        /// <param name="userId">The user id that made the review.</param>
+        /// <param name="bookId">The book id that the review is for.</param>
+        /// <param name="findReviewOnDifferentEdition">If the review was not found on the
+        /// given book id, search all editions of the book for the review.</param>
+        /// <returns>A review that matches the given parameters.</returns>
+        Task<ReviewDetails> GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition = false);
+
+        /// <summary>
         /// Get a list of book reviews on a user's account. Several optional parameters
         /// allow for custom sorting and searching for this list.
         /// Users with private profiles only allow friends to list their books (via OAuth).

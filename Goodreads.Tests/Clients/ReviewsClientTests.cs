@@ -32,6 +32,39 @@ namespace Goodreads.Tests.Clients
             }
         }
 
+        public class TheGetByUserIdAndBookIdMethod : ReviewsClientTests
+        {
+            [Fact]
+            public async Task ReturnsAReview()
+            {
+                var expectedBookId = 7235533;
+                var review = await ReviewsClient.GetByUserIdAndBookId(UserId, expectedBookId);
+
+                Assert.NotNull(review);
+                Assert.NotNull(review.Book);
+                Assert.NotNull(review.User);
+                Assert.Equal(review.User.Id, UserId);
+                Assert.Equal(review.Book.Id, expectedBookId);
+            }
+
+            [Fact]
+            public async Task ReturnsAReviewOnADifferentEdition()
+            {
+                var expectedBookId = 7235533;
+                var differentEditionBookId = 10063939;
+                var review = await ReviewsClient.GetByUserIdAndBookId(
+                    UserId,
+                    differentEditionBookId,
+                    findReviewOnDifferentEdition: true);
+
+                Assert.NotNull(review);
+                Assert.NotNull(review.Book);
+                Assert.NotNull(review.User);
+                Assert.Equal(review.User.Id, UserId);
+                Assert.Equal(review.Book.Id, expectedBookId);
+            }
+        }
+
         public class TheGetListByUserMethod : ReviewsClientTests
         {
             [Fact]

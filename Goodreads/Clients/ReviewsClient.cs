@@ -43,6 +43,27 @@ namespace Goodreads.Clients
         }
 
         /// <summary>
+        /// Get a review for a user and book, and optionally find the review
+        /// if it occurs on another edition of the book.
+        /// </summary>
+        /// <param name="userId">The user id that made the review.</param>
+        /// <param name="bookId">The book id that the review is for.</param>
+        /// <param name="findReviewOnDifferentEdition">If the review was not found on the
+        /// given book id, search all editions of the book for the review.</param>
+        /// <returns>A review that matches the given parameters.</returns>
+        public Task<ReviewDetails> GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition = false)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "user_id", Value = userId, Type = ParameterType.QueryString },
+                new Parameter { Name = "book_id", Value = bookId, Type = ParameterType.QueryString },
+                new Parameter { Name = "include_review_on_work", Value = findReviewOnDifferentEdition, Type = ParameterType.QueryString }
+            };
+
+            return Connection.ExecuteRequest<ReviewDetails>("review/show_by_user_and_book", parameters, null, "review");
+        }
+
+        /// <summary>
         /// Get a list of book reviews on a user's account. Several optional parameters
         /// allow for custom sorting and searching for this list.
         /// Users with private profiles only allow friends to list their books (via OAuth).

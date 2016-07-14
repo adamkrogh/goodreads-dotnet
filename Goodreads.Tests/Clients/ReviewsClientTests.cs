@@ -112,5 +112,17 @@ namespace Goodreads.Tests.Clients
                 }
             }
         }
+
+        public class TheGetRecentReviewsForAllMembersMethod : ReviewsClientTests
+        {
+            [Fact]
+            public async Task ReturnsReviews()
+            {
+                var reviews = await ReviewsClient.GetRecentReviewsForAllMembers();
+
+                Assert.NotNull(reviews);
+                Assert.True(reviews.Count > 0);
+            }
+        }
     }
 }

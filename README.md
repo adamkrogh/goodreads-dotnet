@@ -106,7 +106,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Ratings **0%** (0 of 2)
 - Read Statuses **0%** (0 of 1)
 - Recommendations **0%** (0 of 1)
-- Reviews **43%** (3 of 7)
+- Reviews **57%** (4 of 7)
 - Search **100%** (2 of 2)
 - Series **0%** (0 of 3)
 - Shelves **33%** (1 of 3)
@@ -117,7 +117,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **24%** (17 of 70)
+**Overall**: **26%** (18 of 70)
 
 ### Complete
 
@@ -133,6 +133,7 @@ The list of API methods this client library supports.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.
 - reviews.list — Get the books on a members shelf.
+- review.recent_reviews — Recent reviews from all members.
 - review.show — Get a review.
 - review.show_by_user_and_book — Get a user's review for a given book.
 - search.authors — Find an author by name.
@@ -177,7 +178,6 @@ The list of API methods that will (hopefully) be supported soon.
 - review.create — Add review.
 - review.edit — Edit a review.
 - review.destroy — Delete a book review.
-- review.recent_reviews — Recent reviews from all members..
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.

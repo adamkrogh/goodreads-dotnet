@@ -129,5 +129,22 @@ namespace Goodreads.Clients
 
             return Connection.ExecuteRequest<PaginatedList<Review>>("review/list", parameters, null, "reviews");
         }
+
+        /// <summary>
+        /// Get the most recent reviews that have been posted to Goodreads, for all users.
+        /// </summary>
+        /// <returns>The latest reviews that have been posted to Goodreads.</returns>
+        public async Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers()
+        {
+            var reviews = await Connection.ExecuteRequest<PaginatedList<Review>>("review/recent_reviews", null, null, "reviews");
+            if (reviews != null)
+            {
+                return reviews.List;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

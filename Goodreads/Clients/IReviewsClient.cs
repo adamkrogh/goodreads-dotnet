@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 
@@ -50,5 +51,15 @@ namespace Goodreads.Clients
             Order? order = null,
             int? page = null,
             int? pageSize = null);
+
+        /// <summary>
+        /// Get the most recent reviews that have been posted to Goodreads, for all users.
+        /// </summary>
+        /// <returns>The latest reviews that have been posted to Goodreads.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Method makes a network request.")]
+        Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers();
     }
 }

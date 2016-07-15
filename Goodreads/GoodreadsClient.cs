@@ -13,8 +13,6 @@ namespace Goodreads
     {
         private readonly string GoodreadsUrl = "https://www.goodreads.com/";
 
-        private IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
         /// This constructor doesn't used OAuth permissions and can be used for public methods.
@@ -60,6 +58,11 @@ namespace Goodreads
             Users = new UsersClient(Connection);
             Reviews = new ReviewsClient(Connection);
         }
+
+        /// <summary>
+        /// The connection to the Goodreads API.
+        /// </summary>
+        public IConnection Connection { get; private set; }
 
         /// <summary>
         /// API Client for the Goodreads Authors endpoint.

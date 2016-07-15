@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
@@ -61,5 +62,28 @@ namespace Goodreads.Clients
             "CA1024:UsePropertiesWhereAppropriate",
             Justification = "Method makes a network request.")]
         Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers();
+
+        /// <summary>
+        /// Create a review for the authenticated user on the given book with some optional information.
+        /// </summary>
+        /// <param name="bookId">The book to create the review on.</param>
+        /// <param name="reviewText">The body text of the review.</param>
+        /// <param name="rating">The star rating the user gave the review. From 0 (no rating) to 5 (highest rating).</param>
+        /// <param name="dateRead">The date the user read the book on.</param>
+        /// <param name="shelfName">The shelf name to add the review to.</param>
+        /// <returns>If successful, returns the id of the created review, null otherwise.</returns>
+        Task<int?> Create(
+            int bookId,
+            string reviewText = null,
+            int? rating = null,
+            DateTime? dateRead = null,
+            string shelfName = null);
+
+        /// <summary>
+        /// Delete the review with the given id.
+        /// </summary>
+        /// <param name="reviewId">The id of the review to delete.</param>
+        /// <returns>True if the delete succeeded, false otherwise.</returns>
+        Task<bool> Delete(int reviewId);
     }
 }

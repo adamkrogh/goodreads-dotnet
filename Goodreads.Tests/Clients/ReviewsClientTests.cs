@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Goodreads.Clients;
+using Goodreads.Exceptions;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 using Xunit;
@@ -122,6 +124,27 @@ namespace Goodreads.Tests.Clients
 
                 Assert.NotNull(reviews);
                 Assert.True(reviews.Count > 0);
+            }
+        }
+
+        public class TheCreateAndDeleteMethods : ReviewsClientTests
+        {
+            [Fact(Skip = "Deleting isn't working yet...")]
+            public async Task CreateAndDeleteAReview()
+            {
+                var reviewId = await ReviewsClient.Create(10790277);
+                Assert.NotNull(reviewId);
+
+                var result = await ReviewsClient.Delete(reviewId.Value);
+                Assert.True(result);
+            }
+
+            [Fact]
+            public async Task ReturnsNullIfCannotCreate()
+            {
+                var reviewId = await ReviewsClient.Create(int.MaxValue);
+
+                Assert.Null(reviewId);
             }
         }
     }

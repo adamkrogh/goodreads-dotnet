@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Goodreads.Exceptions;
+using Goodreads.Extensions;
 using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
@@ -145,6 +149,102 @@ namespace Goodreads.Clients
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Create a review for the authenticated user on the given book with some optional information.
+        /// </summary>
+        /// <param name="bookId">The book to create the review on.</param>
+        /// <param name="reviewText">The body text of the review.</param>
+        /// <param name="rating">The star rating the user gave the review. From 0 (no rating) to 5 (highest rating).</param>
+        /// <param name="dateRead">The date the user read the book on.</param>
+        /// <param name="shelfName">The shelf name to add the review to.</param>
+        /// <returns>If successful, returns the id of the created review, null otherwise.</returns>
+        public async Task<int?> Create(
+            int bookId,
+            string reviewText = null,
+            int? rating = null,
+            DateTime? dateRead = null,
+            string shelfName = null)
+        {
+            if (!Connection.IsAuthenticated)
+            {
+                throw new ApiException("User authentication (using OAuth) is required to create a review.");
+            }
+
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "book_id", Value = bookId, Type = ParameterType.GetOrPost }
+            };
+
+            if (!string.IsNullOrWhiteSpace(reviewText))
+            {
+                parameters.Add(new Parameter { Name = "review[review]", Value = reviewText, Type = ParameterType.RequestBody });
+            }
+
+            if (rating.HasValue)
+            {
+                parameters.Add(new Parameter { Name = "review[rating]", Value = rating.Value, Type = ParameterType.RequestBody });
+            }
+
+            if (dateRead.HasValue)
+            {
+                parameters.Add(new Parameter
+                {
+                    Name = "review[read_at]",
+                    Value = dateRead.Value.Date.ToString("yyyy-MM-dd"),
+                    Type = ParameterType.RequestBody
+                });
+            }
+
+            if (!string.IsNullOrWhiteSpace(shelfName))
+            {
+                parameters.Add(new Parameter { Name = "shelf", Value = reviewText, Type = ParameterType.RequestBody });
+            }
+
+            var response = await Connection.ExecuteRaw("review.xml", parameters, Method.POST);
+            if (response != null && response.StatusCode == HttpStatusCode.Created)
+            {
+                try
+                {
+                    var document = XDocument.Parse(response.Content);
+                    if (document != null)
+                    {
+                        var reviewElement = document.Element("review");
+                        if (reviewElement != null)
+                        {
+                            return reviewElement.ElementAsNullableInt("id");
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Delete the review with the given id.
+        /// </summary>
+        /// <param name="reviewId">The id of the review to delete.</param>
+        /// <returns>True if the delete succeeded, false otherwise.</returns>
+        public async Task<bool> Delete(int reviewId)
+        {
+            if (!Connection.IsAuthenticated)
+            {
+                throw new ApiException("User authentication (using OAuth) is required to create a review.");
+            }
+
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "id", Value = reviewId, Type = ParameterType.QueryString }
+            };
+
+            var response = await Connection.ExecuteRaw("review/destroy", parameters, Method.DELETE);
+
+            return true;
         }
     }
 }

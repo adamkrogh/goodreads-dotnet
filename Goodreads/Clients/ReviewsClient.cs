@@ -179,12 +179,12 @@ namespace Goodreads.Clients
 
             if (!string.IsNullOrWhiteSpace(reviewText))
             {
-                parameters.Add(new Parameter { Name = "review[review]", Value = reviewText, Type = ParameterType.RequestBody });
+                parameters.Add(new Parameter { Name = "review[review]", Value = reviewText, Type = ParameterType.GetOrPost });
             }
 
             if (rating.HasValue)
             {
-                parameters.Add(new Parameter { Name = "review[rating]", Value = rating.Value, Type = ParameterType.RequestBody });
+                parameters.Add(new Parameter { Name = "review[rating]", Value = rating.Value, Type = ParameterType.GetOrPost });
             }
 
             if (dateRead.HasValue)
@@ -193,13 +193,13 @@ namespace Goodreads.Clients
                 {
                     Name = "review[read_at]",
                     Value = dateRead.Value.Date.ToString("yyyy-MM-dd"),
-                    Type = ParameterType.RequestBody
+                    Type = ParameterType.GetOrPost
                 });
             }
 
             if (!string.IsNullOrWhiteSpace(shelfName))
             {
-                parameters.Add(new Parameter { Name = "shelf", Value = reviewText, Type = ParameterType.RequestBody });
+                parameters.Add(new Parameter { Name = "shelf", Value = shelfName, Type = ParameterType.GetOrPost });
             }
 
             var response = await Connection.ExecuteRaw("review.xml", parameters, Method.POST);

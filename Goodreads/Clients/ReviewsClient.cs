@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -192,7 +193,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter
                 {
                     Name = "review[read_at]",
-                    Value = dateRead.Value.Date.ToString("yyyy-MM-dd"),
+                    Value = dateRead.Value.Date.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture),
                     Type = ParameterType.GetOrPost
                 });
             }
@@ -223,6 +224,62 @@ namespace Goodreads.Clients
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Edit a review with the given id.
+        /// </summary>
+        /// <param name="reviewId">The Goodreads review id of the review to edit.</param>
+        /// <param name="reviewText">The body text of the review. Pass an empty string to clear the review text completely.</param>
+        /// <param name="rating">The star rating the user gave the review. Pass a rating of 0 to remove a rating completely.</param>
+        /// <param name="dateRead">The date the user read the book on.</param>
+        /// <param name="shelfName">The shelf name to add the review to.</param>
+        /// <returns>True if the edit succeeded, false otherwise.</returns>
+        public async Task<bool> Edit(
+            int reviewId,
+            string reviewText = null,
+            int? rating = null,
+            DateTime? dateRead = null,
+            string shelfName = null)
+        {
+            if (!Connection.IsAuthenticated)
+            {
+                throw new ApiException("User authentication (using OAuth) is required to edit a review.");
+            }
+
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "id", Value = reviewId, Type = ParameterType.UrlSegment }
+            };
+
+            if (reviewText != null)
+            {
+                parameters.Add(new Parameter { Name = "review[review]", Value = reviewText, Type = ParameterType.GetOrPost });
+            }
+
+            if (rating.HasValue)
+            {
+                parameters.Add(new Parameter { Name = "review[rating]", Value = rating.Value, Type = ParameterType.GetOrPost });
+            }
+
+            if (dateRead.HasValue)
+            {
+                parameters.Add(new Parameter
+                {
+                    Name = "review[read_at]",
+                    Value = dateRead.Value.Date.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture),
+                    Type = ParameterType.GetOrPost
+                });
+            }
+
+            if (!string.IsNullOrWhiteSpace(shelfName))
+            {
+                parameters.Add(new Parameter { Name = "shelf", Value = shelfName, Type = ParameterType.GetOrPost });
+            }
+
+            var response = await Connection.ExecuteRaw("review/{id}.xml", parameters, Method.POST);
+
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Goodreads.Clients;
-using Goodreads.Exceptions;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 using Xunit;
@@ -129,7 +129,7 @@ namespace Goodreads.Tests.Clients
 
         public class TheCreateAndDeleteMethods : ReviewsClientTests
         {
-            [Fact(Skip = "Possible issue with Goodreads review/destory endpoint")]
+            [Fact(Skip = "Possible issue with Goodreads review/destroy endpoint")]
             public async Task CreateAndDeleteAReview()
             {
                 var reviewId = await ReviewsClient.Create(10790277);
@@ -145,6 +145,64 @@ namespace Goodreads.Tests.Clients
                 var reviewId = await ReviewsClient.Create(int.MaxValue);
 
                 Assert.Null(reviewId);
+            }
+        }
+
+        public class TheEditMethod : ReviewsClientTests
+        {
+            private readonly int EditReviewId = 1700227480;
+
+            [Fact]
+            public async Task EditRatingSucceeds()
+            {
+                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var ratingBeforeEdit = reviewBeforeEdit.Rating;
+                var expectedNewRating = ratingBeforeEdit == 5 ? 4 : 5;
+                var result = await ReviewsClient.Edit(EditReviewId, rating: expectedNewRating);
+
+                Assert.True(result);
+
+                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var actualRatingAfterEdit = reviewAfterEdit.Rating;
+
+                Assert.Equal(expectedNewRating, actualRatingAfterEdit);
+            }
+
+            [Fact]
+            public async Task EditReviewTextSucceeds()
+            {
+                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var textBeforeEdit = reviewBeforeEdit.Body.Trim();
+                var match = Regex.Match(textBeforeEdit, @".*(\d+)");
+                var testNumber = int.Parse(match.Groups[1].Value);
+                var expectedNewText = textBeforeEdit.Replace(testNumber.ToString(), (testNumber + 1).ToString());
+
+                var result = await ReviewsClient.Edit(EditReviewId, reviewText: expectedNewText);
+
+                Assert.True(result);
+
+                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var actualNewText = reviewAfterEdit.Body.Trim();
+
+                Assert.Equal(expectedNewText, actualNewText);
+            }
+
+            [Fact]
+            public async Task EditReadDateSucceeds()
+            {
+                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var dateBeforeEdit = reviewBeforeEdit.DateRead;
+                var expectedNewDate = dateBeforeEdit.Value.Date == DateTime.Today ? DateTime.Today.AddDays(-1) : DateTime.Today;
+
+                var result = await ReviewsClient.Edit(EditReviewId, dateRead: expectedNewDate);
+
+                Assert.True(result);
+
+                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var actualNewDate = reviewAfterEdit.DateRead;
+
+                Assert.NotNull(actualNewDate);
+                Assert.Equal(expectedNewDate.Date, actualNewDate.Value.Date);
             }
         }
     }

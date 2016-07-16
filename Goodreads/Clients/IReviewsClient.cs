@@ -78,5 +78,21 @@ namespace Goodreads.Clients
             int? rating = null,
             DateTime? dateRead = null,
             string shelfName = null);
+
+        /// <summary>
+        /// Edit a review with the given id.
+        /// </summary>
+        /// <param name="reviewId">The Goodreads review id of the review to edit.</param>
+        /// <param name="reviewText">The body text of the review.</param>
+        /// <param name="rating">The star rating the user gave the review. From 0 (no rating) to 5 (highest rating).</param>
+        /// <param name="dateRead">The date the user read the book on.</param>
+        /// <param name="shelfName">The shelf name to add the review to.</param>
+        /// <returns>True if the edit succeeded, false otherwise.</returns>
+        Task<bool> Edit(
+            int reviewId,
+            string reviewText = null,
+            int? rating = null,
+            DateTime? dateRead = null,
+            string shelfName = null);
     }
 }

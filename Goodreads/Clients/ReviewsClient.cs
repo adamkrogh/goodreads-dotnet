@@ -230,19 +230,21 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="reviewId">The id of the review to delete.</param>
         /// <returns>True if the delete succeeded, false otherwise.</returns>
+        /// <remarks>TODO: Goodreads returns strange errors for this endpoint and never works.
+        /// I'll have to file a bug with them or post to their help forum...</remarks>
         public async Task<bool> Delete(int reviewId)
         {
             if (!Connection.IsAuthenticated)
             {
-                throw new ApiException("User authentication (using OAuth) is required to create a review.");
+                throw new ApiException("User authentication (using OAuth) is required to delete a review.");
             }
 
             var parameters = new List<Parameter>
             {
-                new Parameter { Name = "id", Value = reviewId, Type = ParameterType.QueryString }
+                new Parameter { Name = "id", Value = reviewId, Type = ParameterType.UrlSegment }
             };
 
-            var response = await Connection.ExecuteRaw("review/destroy", parameters, Method.DELETE);
+            var response = await Connection.ExecuteRaw("review/destroy/{id}", parameters, Method.DELETE);
 
             return true;
         }

@@ -78,12 +78,5 @@ namespace Goodreads.Clients
             int? rating = null,
             DateTime? dateRead = null,
             string shelfName = null);
-
-        /// <summary>
-        /// Delete the review with the given id.
-        /// </summary>
-        /// <param name="reviewId">The id of the review to delete.</param>
-        /// <returns>True if the delete succeeded, false otherwise.</returns>
-        Task<bool> Delete(int reviewId);
     }
 }

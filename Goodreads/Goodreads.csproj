@@ -56,9 +56,11 @@
     <Compile Include="Clients\IBooksClient.cs" />
     <Compile Include="Clients\IReviewsClient.cs" />
     <Compile Include="Clients\IShelvesClient.cs" />
+    <Compile Include="Clients\ISeriesClient.cs" />
     <Compile Include="Clients\IUsersClient.cs" />
     <Compile Include="Clients\ReviewsClient.cs" />
     <Compile Include="Clients\ShelvesClient.cs" />
+    <Compile Include="Clients\SeriesClient.cs" />
     <Compile Include="Clients\UsersClient.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Models\Response\ReviewShelf.cs" />
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
+    <Compile Include="Models\Response\Series.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />
     <Compile Include="Models\Response\Order.cs" />

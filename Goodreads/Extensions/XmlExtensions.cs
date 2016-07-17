@@ -10,7 +10,7 @@ namespace Goodreads.Extensions
 {
     internal static class XmlExtensions
     {
-        public static string ElementAsString(this XElement element, XName name)
+        public static string ElementAsString(this XElement element, XName name, bool trim = false)
         {
             var stringElement = element.Element(name);
             if (stringElement != null)
@@ -18,7 +18,7 @@ namespace Goodreads.Extensions
                 var value = stringElement.Value;
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    return value;
+                    return trim ? value.Trim() : value;
                 }
             }
 

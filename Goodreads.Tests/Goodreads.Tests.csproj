@@ -70,6 +70,7 @@
     <Compile Include="Clients\BooksClientTests.cs" />
     <Compile Include="Clients\ReviewsClientTests.cs" />
     <Compile Include="Clients\ShelvesClientTests.cs" />
+    <Compile Include="Clients\SeriesClientTests.cs" />
     <Compile Include="Clients\UsersClientTests.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

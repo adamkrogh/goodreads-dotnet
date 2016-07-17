@@ -73,5 +73,50 @@ namespace Goodreads.Clients
 
             return null;
         }
+
+        /// <summary>
+        /// Get all the series that the given work is in.
+        /// </summary>
+        /// <param name="authorId">The work id to fetch the list of series for.</param>
+        /// <returns>A list of series that this work appears in.</returns>
+        public async Task<IReadOnlyList<Series>> GetListByWorkId(int workId)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "id", Value = workId, Type = ParameterType.UrlSegment }
+            };
+
+            try
+            {
+                var response = await Connection.ExecuteRaw("series/work/{id}", parameters);
+                if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
+                {
+                    var content = response.Content;
+                    if (!string.IsNullOrWhiteSpace(content))
+                    {
+                        var document = XDocument.Parse(content);
+                        var series = document.XPathSelectElements("GoodreadsResponse/series_works/series_work/series");
+                        if (series != null && series.Count() > 0)
+                        {
+                            var seriesModels = new List<Series>();
+                            foreach (var seriesElement in series)
+                            {
+                                var seriesModel = new Series();
+                                seriesModel.Parse(seriesElement);
+                                seriesModels.Add(seriesModel);
+                            }
+
+                            return seriesModels;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Just ignore the error and return null...
+            }
+
+            return null;
+        }
     }
 }

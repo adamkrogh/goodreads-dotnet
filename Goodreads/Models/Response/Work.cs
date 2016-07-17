@@ -29,8 +29,20 @@ namespace Goodreads.Models.Response
 
         /// <summary>
         /// The Goodreads Book Id that is considered the best version of this work.
+        /// Might not be populated. See the <see cref="BestBook"/> property for details, if provided.
         /// </summary>
-        public int BestBookId { get; protected set; }
+        public int? BestBookId { get; protected set; }
+
+        /// <summary>
+        /// The details for the best book of this work. Only populated
+        /// if Goodreads provides it as part of the response.
+        /// </summary>
+        public BestBook BestBook { get; protected set; }
+
+        /// <summary>
+        /// If included in a list, this defines this work's position.
+        /// </summary>
+        public string UserPosition { get; protected set; }
 
         /// <summary>
         /// The number of reviews of this work.
@@ -93,8 +105,16 @@ namespace Goodreads.Models.Response
         internal override void Parse(XElement element)
         {
             Id = element.ElementAsInt("id");
+
+            var bestBookElement = element.Element("best_book");
+            if (bestBookElement != null)
+            {
+                BestBook = new BestBook();
+                BestBook.Parse(bestBookElement);
+            }
+
+            BestBookId = element.ElementAsNullableInt("best_book_id");
             BooksCount = element.ElementAsInt("books_count");
-            BestBookId = element.ElementAsInt("best_book_id");
             ReviewsCount = element.ElementAsInt("reviews_count");
             RatingsSum = element.ElementAsInt("ratings_sum");
             RatingsCount = element.ElementAsInt("ratings_count");
@@ -138,6 +158,11 @@ namespace Goodreads.Models.Response
                     RatingDistribution = ratingDistribution;
                 }
             }
+        }
+
+        internal void SetUserPosition(string userPosition)
+        {
+            UserPosition = userPosition;
         }
     }
 }

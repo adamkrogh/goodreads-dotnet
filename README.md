@@ -56,6 +56,19 @@ var book = await client.Books.GetByTitle("Dune");
 var books = await client.Books.GetListByAuthorId(38550, page: 2);
 ```
 
+### Series
+
+```csharp
+// Get detailed information about a series, including all the works that appear in it
+var seriesInfo = await client.Series.GetById(seriesId);
+
+// Get all the series an author has written
+var series = await client.Series.GetListByAuthorId(authorId);
+
+// Get all the series that a work appears in
+var series = await client.Series.GetListByWorkId(workId);
+```
+
 ### Reviews
 
 ```csharp
@@ -67,6 +80,12 @@ var review = await client.Reviews.GetByUserIdAndBookId(userId, bookId);
 
 // Get a list of a user's highest rated book reviews
 var list = await client.Reviews.GetListByUser(id, sort: SortReviewsList.AverageRating, order: Order.Descending);
+
+// Create a review
+var reviewId = await client.Reviews.Create(bookId, reviewText: "Awesome book!", rating: 5);
+
+// Edit a review
+var success = await client.Reviews.Edit(reviewId, rating: 4);
 ```
 
 ### Users
@@ -108,7 +127,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Recommendations **0%** (0 of 1)
 - Reviews **86%** (6 of 7)
 - Search **100%** (2 of 2)
-- Series **0%** (0 of 3)
+- Series **100%** (3 of 3)
 - Shelves **33%** (1 of 3)
 - Topics **0%** (0 of 4)
 - Updates **0%** (0 of 1)
@@ -117,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **29%** (20 of 70)
+**Overall**: **33%** (23 of 70)
 
 ### Complete
 
@@ -132,6 +151,9 @@ The list of API methods this client library supports.
 - book.show_by_isbn — Get the reviews for a book given an ISBN.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.
+- series.show — See a series.
+- series.list — See all series by an author.
+- series.work — See all series a work is in.
 - review.create — Add review.
 - review.edit — Edit a review.
 - reviews.list — Get the books on a members shelf.
@@ -178,9 +200,6 @@ The list of API methods that will (hopefully) be supported soon.
 - read_statuses.show — Get a user's read status.
 - recommendations.show — Get a recommendation from a user to another user.
 - review.destroy — Delete a book review.
-- series.show — See a series.
-- series.list — See all series by an author.
-- series.work — See all series a work is in.
 - shelves.add_to_shelf — Add a book to a shelf.
 - shelves.add_books_to_shelves — Add books to many shelves.
 - topic.create — Create a new topic via OAuth.

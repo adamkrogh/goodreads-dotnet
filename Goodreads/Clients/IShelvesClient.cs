@@ -15,5 +15,14 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
         Task<PaginatedList<UserShelf>> GetListOfUserShelves(int userId, int page = 1);
+
+        /// <summary>
+        /// Add a book to a shelf. This method can also be used to remove from shelf.
+        /// </summary>
+        /// <param name="shelf">Name of the shelf.</param>
+        /// <param name="bookId">Id of the book to add to the shelf.</param>
+        /// <param name="action">This null unless you're removing from a shelf. If removing, set this to 'remove'.</param>
+        /// <returns>True if the add or remove succeeded, false otherwise.</returns>
+        Task<bool> AddBookToShelf(string shelf, int bookId, string action = null);
     }
 }

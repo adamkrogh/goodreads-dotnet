@@ -121,7 +121,8 @@ namespace Goodreads.Extensions
                         {
                             var status = element.ElementAsString("status");
                             var message = element.ElementAsString("error");
-                            error = string.Join(" ", status, message);
+                            if (!string.IsNullOrEmpty(message))
+                                error = string.Join(" ", status, message);
                         }
                     }
                     else

@@ -10,7 +10,7 @@ namespace Goodreads.Tests.Clients
 
         public ShelvesClientTests()
         {
-            ShelvesClient = Helper.GetClient().Shelves;
+            ShelvesClient = Helper.GetAuthClient().Shelves;
         }
 
         public class TheGetListOfUserShelvesMethod : ShelvesClientTests
@@ -33,6 +33,41 @@ namespace Goodreads.Tests.Clients
                 var shelves = await ShelvesClient.GetListOfUserShelves(userId);
 
                 Assert.Null(shelves);
+            }
+        }
+
+        public class TheAddBookToShelfMethod : ShelvesClientTests
+        {
+            [Fact]
+            public async Task AddBookToShelf()
+            {
+                var shelf = "to-read";
+                var bookId = 7235533;
+                var result = await ShelvesClient.AddBookToShelf(shelf, bookId);
+
+                Assert.True(result);                
+            }
+
+            [Fact]
+            public async Task RemoveBookFromShelf()
+            {
+                var shelf = "to-read";
+                var bookId = 7235533;
+                await ShelvesClient.AddBookToShelf(shelf, bookId);
+
+                var result = await ShelvesClient.AddBookToShelf(shelf, bookId, "remove");
+
+                Assert.True(result);
+            }
+
+            [Fact]
+            public async Task RemoveNotExistingBookFromShelf()
+            {
+                var shelf = "read";
+                var bookId = 1;
+                var result = await ShelvesClient.AddBookToShelf(shelf, bookId, "remove");
+
+                Assert.False(result);
             }
         }
     }

@@ -194,7 +194,10 @@ namespace Goodreads.Tests.Clients
             {
                 var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
                 var dateBeforeEdit = reviewBeforeEdit.DateRead;
-                var expectedNewDate = dateBeforeEdit.Value.Date >= DateTime.UtcNow.Date ? DateTime.UtcNow.Date.AddDays(-7) : DateTime.UtcNow.Date;
+                var expectedNewDate =
+                    dateBeforeEdit.Value.Date >= DateTime.UtcNow.Date
+                    ? DateTime.UtcNow.Date.AddDays(-7)
+                    : DateTime.UtcNow.Date;
 
                 var result = await ReviewsClient.Edit(EditReviewId, dateRead: expectedNewDate);
 

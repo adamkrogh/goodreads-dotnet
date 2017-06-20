@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Goodreads.Http;
 using Goodreads.Models.Response;
 using RestSharp;
-using System.Net;
 
 namespace Goodreads.Clients
 {
@@ -25,7 +22,7 @@ namespace Goodreads.Clients
         {
             Connection = connection;
         }
-                
+
         /// <summary>
         /// Gets a paginated list of shelves for the given Goodreads user id.
         /// </summary>
@@ -62,6 +59,25 @@ namespace Goodreads.Clients
             var response = await Connection.ExecuteRaw("shelf/add_to_shelf", parameters, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created;
+        }
+
+        /// <summary>
+        /// Add a list of books to many current user's shelves.
+        /// </summary>
+        /// <param name="shelves">List of shelf names.</param>
+        /// <param name="bookIds">List of book ids.</param>
+        /// <returns>True if the add succeeded, false otherwise.</returns>
+        public async Task<bool> AddBooksToShelves(string[] shelves, int[] bookIds)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "shelves", Value = string.Join(",", shelves), Type = ParameterType.QueryString },
+                new Parameter { Name = "bookids", Value = string.Join(",", bookIds), Type = ParameterType.QueryString }
+            };
+
+            var response = await Connection.ExecuteRaw("shelf/add_books_to_shelves", parameters, Method.POST).ConfigureAwait(false);
+
+            return response.StatusCode == HttpStatusCode.OK;
         }
     }
 }

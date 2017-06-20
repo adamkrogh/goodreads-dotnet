@@ -45,7 +45,7 @@ namespace Goodreads.Tests.Clients
                 var bookId = 7235533;
                 var result = await ShelvesClient.AddBookToShelf(shelf, bookId);
 
-                Assert.True(result);                
+                Assert.True(result);
             }
 
             [Fact]
@@ -68,6 +68,19 @@ namespace Goodreads.Tests.Clients
                 var result = await ShelvesClient.AddBookToShelf(shelf, bookId, "remove");
 
                 Assert.False(result);
+            }
+        }
+
+        public class TheAddBooksToShelvesMethod : ShelvesClientTests
+        {
+            [Fact]
+            public async Task AddBooksToShelves()
+            {
+                var shelves = new[] { "to-read", "leo" };
+                var bookIds = new[] { 15823480, 656 };
+                var result = await ShelvesClient.AddBooksToShelves(shelves, bookIds);
+
+                Assert.True(result);
             }
         }
     }

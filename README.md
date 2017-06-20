@@ -128,7 +128,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Reviews **86%** (6 of 7)
 - Search **100%** (2 of 2)
 - Series **100%** (3 of 3)
-- Shelves **66%** (2 of 3)
+- Shelves **100%** (3 of 3)
 - Topics **0%** (0 of 4)
 - Updates **0%** (0 of 1)
 - User Shelves **0%** (0 of 2)
@@ -164,6 +164,7 @@ The list of API methods this client library supports.
 - search.books — Find books by title, author, or ISBN.
 - shelves.list — Get a user's shelves.
 - shelves.add_to_shelf — Add a book to a shelf.
+- shelves.add_books_to_shelves — Add books to many shelves.
 - user.friends — Get a user's friends.
 - user.show — Get info about a member by id or username.
 
@@ -201,7 +202,6 @@ The list of API methods that will (hopefully) be supported soon.
 - read_statuses.show — Get a user's read status.
 - recommendations.show — Get a recommendation from a user to another user.
 - review.destroy — Delete a book review.
-- shelves.add_books_to_shelves — Add books to many shelves.
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.
 - topic.show — Get info about a topic by id.

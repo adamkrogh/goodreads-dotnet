@@ -24,5 +24,13 @@ namespace Goodreads.Clients
         /// <param name="action">This null unless you're removing from a shelf. If removing, set this to 'remove'.</param>
         /// <returns>True if the add or remove succeeded, false otherwise.</returns>
         Task<bool> AddBookToShelf(string shelf, int bookId, string action = null);
+
+        /// <summary>
+        /// Add a list of books to many current user's shelves.
+        /// </summary>
+        /// <param name="shelves">List of shelf names.</param>
+        /// <param name="bookIds">List of book ids.</param>
+        /// <returns>True if the add succeeded, false otherwise.</returns>
+        Task<bool> AddBooksToShelves(string[] shelves, int[] bookIds);
     }
 }

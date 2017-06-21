@@ -110,7 +110,7 @@ This list is kept updated so feel free to request or contribute if you have need
 
 - Auth **100%** (1 of 1)
 - Authors **100%** (2 of 2)
-- Author Following **0%** (0 of 3)
+- Author Following **66%** (2 of 3)
 - Books **100%** (6 of 6)
 - Comments **0%** (0 of 2)
 - Events **0%** (0 of 1)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **33%** (23 of 70)
+**Overall**: **38%** (27 of 70)
 
 ### Complete
 
@@ -145,6 +145,8 @@ The list of API methods this client library supports.
 - auth.user — Get id of user who authorized OAuth.
 - author.books — Paginate an author's books.
 - author.show — Get info about an author by id.
+- author_following.create — Follow an author.
+- author_following.destroy — Unfollow an author.
 - book.isbn_to_id — Get Goodreads book IDs given ISBNs.
 - book.id_to_work_id — Get Goodreads work IDs given Goodreads book IDs.
 - book.review_counts — Get review statistics given a list of ISBNs.
@@ -172,8 +174,6 @@ The list of API methods this client library supports.
 
 The list of API methods that will (hopefully) be supported soon.
 
-- author_following.create — Follow an author.
-- author_following.destroy — Unfollow an author.
 - author_following.show — Show author following information.
 - comment.create — Create a comment.
 - comment.list — List comments on a subject.

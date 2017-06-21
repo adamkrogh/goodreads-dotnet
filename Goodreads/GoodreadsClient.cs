@@ -58,6 +58,7 @@ namespace Goodreads
             Users = new UsersClient(Connection);
             Reviews = new ReviewsClient(Connection);
             Series = new SeriesClient(Connection);
+            AuthorsFollowing = new AuthorsFollowingClient(Connection);
         }
 
         /// <summary>
@@ -94,5 +95,10 @@ namespace Goodreads
         /// API Client for the Goodreads Series endpoint.
         /// </summary>
         public ISeriesClient Series { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads Author_following endpoint.
+        /// </summary>
+        public IAuthorsFollowingClient AuthorsFollowing { get; private set; }
     }
 }

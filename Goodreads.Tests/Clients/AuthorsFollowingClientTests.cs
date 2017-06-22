@@ -18,7 +18,7 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task FollowAnAuthor()
             {
-                var authorId = 38551;
+                var authorId = 3173264;
                 var authorFollowing = await AuthorsFollowingClient.Follow(authorId);
 
                 await AuthorsFollowingClient.Unfollow(authorFollowing.Id); // cleanup following
@@ -33,10 +33,10 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task UnfollowAnAuthor()
             {
-                var authorId = 38551;
+                var authorId = 1077326;
                 var authorFollowing = await AuthorsFollowingClient.Follow(authorId); // arrange following
 
-                var result = await AuthorsFollowingClient.Unfollow(authorFollowing.Id);
+                var result = await AuthorsFollowingClient.Unfollow(authorFollowing.Id); // cleanup following
 
                 Assert.True(result);
             }
@@ -47,7 +47,7 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task Show()
             {
-                var authorId = 38551;
+                var authorId = 4470846;
                 var followInfo = await AuthorsFollowingClient.Follow(authorId); // arrange following
 
                 var responseInfo = await AuthorsFollowingClient.Show(followInfo.Id);

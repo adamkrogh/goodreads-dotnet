@@ -121,6 +121,15 @@ namespace Goodreads.Extensions
                 {
                     return localDate.ToUniversalTime();
                 }
+                else if (DateTime.TryParseExact(
+                    validDateFormat,
+                    "yyyy-MM-ddTHH:mm:sszzz",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out localDate))
+                {
+                    return localDate.ToUniversalTime();
+                }
             }
 
             return null;

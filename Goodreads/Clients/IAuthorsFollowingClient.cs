@@ -21,5 +21,12 @@ namespace Goodreads.Clients
         /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>
         Task<bool> Unfollow(int authorFollowingId);
+
+        /// <summary>
+        /// Show author following information.
+        /// </summary>
+        /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
+        /// <returns>A Goodreads author following model.</returns>
+        Task<AuthorFollowing> Show(int authorFollowingId);
     }
 }

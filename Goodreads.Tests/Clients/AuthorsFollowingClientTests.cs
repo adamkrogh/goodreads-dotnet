@@ -41,5 +41,31 @@ namespace Goodreads.Tests.Clients
                 Assert.True(result);
             }
         }
+
+        public class TheShowMethod : AuthorsFollowingClientTests
+        {
+            [Fact]
+            public async Task Show()
+            {
+                var authorId = 38551;
+                var followInfo = await AuthorsFollowingClient.Follow(authorId); // arrange following
+
+                var responseInfo = await AuthorsFollowingClient.Show(followInfo.Id);
+
+                await AuthorsFollowingClient.Unfollow(followInfo.Id); // cleanup following
+
+                Assert.NotNull(responseInfo);
+                Assert.Equal(followInfo.Id, responseInfo.Id);
+                Assert.Equal(followInfo.Author.Id, responseInfo.Author.Id);
+                Assert.Equal(followInfo.User.Id, responseInfo.User.Id);
+            }
+
+            [Fact]
+            public async Task ShowNotExistingInfo()
+            {
+                var responseInfo = await AuthorsFollowingClient.Show(51523178);
+                Assert.Null(responseInfo);
+            }
+        }
     }
 }

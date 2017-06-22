@@ -55,5 +55,18 @@ namespace Goodreads.Clients
 
             return response.StatusCode == HttpStatusCode.NoContent;
         }
+
+        /// <summary>
+        /// Show author following information.
+        /// </summary>
+        /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
+        /// <returns>A Goodreads author following model.</returns>
+        public async Task<AuthorFollowing> Show(int authorFollowingId)
+        {
+            var endpoint = string.Format("author_followings/{0}", authorFollowingId);
+
+            return await Connection.ExecuteRequest<AuthorFollowing>(endpoint, null, null, "author_following", Method.GET)
+                .ConfigureAwait(false);
+        }
     }
 }

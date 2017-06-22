@@ -18,7 +18,7 @@ namespace Goodreads.Tests.Clients
             [Fact]
             public async Task FollowAnAuthor()
             {
-                var authorId = 38550;
+                var authorId = 38551;
                 var authorFollowing = await AuthorsFollowingClient.Follow(authorId);
 
                 await AuthorsFollowingClient.Unfollow(authorFollowing.Id); // cleanup following

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Goodreads.Clients;
 using Xunit;
 
-namespace Goodreads.Tests.Clients
+namespace Goodreads.Tests
 {
     public class UsersClientTests
     {

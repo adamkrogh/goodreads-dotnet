@@ -2,7 +2,7 @@
 using Goodreads.Clients;
 using Xunit;
 
-namespace Goodreads.Tests.Clients
+namespace Goodreads.Tests
 {
     public class ShelvesClientTests
     {

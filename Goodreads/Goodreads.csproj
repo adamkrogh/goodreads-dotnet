@@ -53,6 +53,8 @@
     <Compile Include="Clients\AuthorsClient.cs" />
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
+    <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\IEventsClient.cs" />
     <Compile Include="Clients\IAuthorsFollowingClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
     <Compile Include="Clients\IBooksClient.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Models\Request\BookSearchField.cs" />
     <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
+    <Compile Include="Models\Response\GoodreadsEvent.cs" />
     <Compile Include="Models\Response\AuthorFollowing.cs" />
     <Compile Include="Models\Response\BestBook.cs" />
     <Compile Include="Models\Response\Comment.cs" />

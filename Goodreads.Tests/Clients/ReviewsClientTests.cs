@@ -6,7 +6,7 @@ using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 using Xunit;
 
-namespace Goodreads.Tests.Clients
+namespace Goodreads.Tests
 {
     public class ReviewsClientTests
     {

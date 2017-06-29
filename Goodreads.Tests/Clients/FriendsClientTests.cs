@@ -15,7 +15,7 @@ namespace Goodreads.Tests
         public class TheAddFriendMethod : FriendsClientTests
         {
             [Fact(Skip = "Impossible to test because I can't remove friend using the Goodreads API. So I can't clean up a test suite.")]
-            public void AddFriend()
+            public void AddFriendMethod()
             {
             }
         }

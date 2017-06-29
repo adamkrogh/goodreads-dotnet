@@ -56,5 +56,10 @@ namespace Goodreads
         /// API Client for the Goodreads user friends endpoint.
         /// </summary>
         IFriendsClient Friends { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads notifications endpoint.
+        /// </summary>
+        INotificationsClient Notifications { get; }
     }
 }

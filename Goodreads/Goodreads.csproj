@@ -55,6 +55,8 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\INotificationsClient.cs" />
+    <Compile Include="Clients\NotificationsClient.cs" />
     <Compile Include="Clients\FriendsClient.cs" />
     <Compile Include="Clients\IFriendsClient.cs" />
     <Compile Include="Clients\IFollowersClient.cs" />
@@ -85,6 +87,9 @@
     <Compile Include="Models\Request\BookSearchField.cs" />
     <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
+    <Compile Include="Models\Response\Actor.cs" />
+    <Compile Include="Models\Response\FriendGroupResource.cs" />
+    <Compile Include="Models\Response\AuthorFollowingGroupResource.cs" />
     <Compile Include="Models\Response\GoodreadsEvent.cs" />
     <Compile Include="Models\Response\AuthorFollowing.cs" />
     <Compile Include="Models\Response\BestBook.cs" />
@@ -96,6 +101,7 @@
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
     <Compile Include="Models\Response\Series.cs" />
+    <Compile Include="Models\Response\Notification.cs" />
     <Compile Include="Models\Response\UserFollowing.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />

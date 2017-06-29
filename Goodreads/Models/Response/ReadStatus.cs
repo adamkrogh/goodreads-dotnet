@@ -37,6 +37,21 @@ namespace Goodreads.Models.Response
         /// </summary>
         public int CommentsCount { get; set; }
 
+        /// <summary>
+        /// THe old status of this update.
+        /// </summary>
+        public string OldStatus { get; set; }
+
+        /// <summary>
+        /// The user id who made update.
+        /// </summary>
+        public int? UserId { get; set; }
+
+        /// <summary>
+        ///  The review id.
+        /// </summary>
+        public int? ReviewId { get; set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -55,6 +70,9 @@ namespace Goodreads.Models.Response
             UpdatedAt = element.ElementAsDateTime("updated_at");
             RatingsCount = element.ElementAsInt("ratings_count");
             CommentsCount = element.ElementAsInt("comments_count");
+            OldStatus = element.ElementAsString("old_status");
+            UserId = element.ElementAsNullableInt("user_id");
+            ReviewId = element.ElementAsNullableInt("review_id");
         }
     }
 }

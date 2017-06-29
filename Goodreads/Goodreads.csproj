@@ -51,9 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients\AuthorsClient.cs" />
+    <Compile Include="Clients\FollowersClient.cs" />
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\IFollowersClient.cs" />
     <Compile Include="Clients\IEventsClient.cs" />
     <Compile Include="Clients\IAuthorsFollowingClient.cs" />
     <Compile Include="Clients\IAuthorsClient.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Models\Response\ReviewStats.cs" />
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
     <Compile Include="Models\Response\Series.cs" />
+    <Compile Include="Models\Response\UserFollowing.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />
     <Compile Include="Models\Response\Order.cs" />

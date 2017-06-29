@@ -57,7 +57,7 @@ namespace Goodreads.Models.Response
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "AuthorFollowingId: Id: {0}", Id);
+                return string.Format(CultureInfo.InvariantCulture, "AuthorFollowingId: {0}", Id);
             }
         }
 

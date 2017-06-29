@@ -46,5 +46,10 @@ namespace Goodreads
         /// API Client for the Goodreads Events endpoint.
         /// </summary>
         IEventsClient Events { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads user followers endpoint.
+        /// </summary>
+        IFollowersClient Followers { get; }
     }
 }

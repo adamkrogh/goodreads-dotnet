@@ -115,7 +115,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Comments **0%** (0 of 2)
 - Events **100%** (1 of 1)
 - Fanship **Deprecated**
-- Followers **0%** (0 of 2)
+- Followers **100%** (2 of 2)
 - Friends **0%** (0 of 4)
 - Groups **0%** (0 of 5)
 - Lists **0%** (0 of 1)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **41%** (29 of 70)
+**Overall**: **44%** (31 of 70)
 
 ### Complete
 
@@ -155,6 +155,8 @@ The list of API methods this client library supports.
 - book.show — Get the reviews for a book given a Goodreads book id.
 - book.title — Get the reviews for a book given a title string.
 - events.list — Events in your area.
+- followers.create — Follow a user.
+- followers.destroy — Unfollow a user.
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.
@@ -178,8 +180,6 @@ The list of API methods that will (hopefully) be supported soon.
 
 - comment.create — Create a comment.
 - comment.list — List comments on a subject.
-- followers.create — Follow a user.
-- followers.destroy — Unfollow a user.
 - friend.confirm_recommendation — Confirm or decline a friend recommendation.
 - friend.confirm_request — Confirm or decline a friend request.
 - friend.requests — Get friend requests.

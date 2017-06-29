@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 using Goodreads.Http;
@@ -50,7 +51,7 @@ namespace Goodreads.Clients
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>
         public async Task<bool> Unfollow(int authorFollowingId)
         {
-            var endpoint = string.Format("author_followings/{0}", authorFollowingId);
+            var endpoint = string.Format(CultureInfo.InvariantCulture, "author_followings/{0}", authorFollowingId);
             var response = await Connection.ExecuteRaw(endpoint, null, Method.DELETE).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.NoContent;
@@ -63,7 +64,7 @@ namespace Goodreads.Clients
         /// <returns>A Goodreads author following model.</returns>
         public async Task<AuthorFollowing> Show(int authorFollowingId)
         {
-            var endpoint = string.Format("author_followings/{0}", authorFollowingId);
+            var endpoint = string.Format(CultureInfo.InvariantCulture, "author_followings/{0}", authorFollowingId);
 
             return await Connection.ExecuteRequest<AuthorFollowing>(endpoint, null, null, "author_following", Method.GET)
                 .ConfigureAwait(false);

@@ -50,7 +50,7 @@ namespace Goodreads.Extensions
                 }
                 else
                 {
-                    var root = document.Element("GoodreadsResponse");
+                    var root = document.Element("GoodreadsResponse") ?? (XNode)document;
                     var contentRoot = root.XPathSelectElement(response.Request.RootElement);
                     var responseObject = new T();
                     responseObject.Parse(contentRoot);

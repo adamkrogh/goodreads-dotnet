@@ -24,7 +24,7 @@ namespace Goodreads.Clients
         }
 
         /// <summary>
-        /// Follow a user.
+        /// Follow an user.
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>A Goodreads user following model.</returns>
@@ -35,7 +35,7 @@ namespace Goodreads.Clients
         }
 
         /// <summary>
-        /// Unfollow a user.
+        /// Unfollow an user.
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>

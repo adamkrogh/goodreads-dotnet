@@ -9,14 +9,14 @@ namespace Goodreads.Clients
     public interface IFollowersClient
     {
         /// <summary>
-        /// Follow a user.
+        /// Follow an user.
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>A Goodreads user following model.</returns>
         Task<UserFollowing> Follow(int userId);
 
         /// <summary>
-        /// Unfollow a user.
+        /// Unfollow an user.
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>

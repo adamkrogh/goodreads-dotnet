@@ -116,7 +116,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Events **100%** (1 of 1)
 - Fanship **Deprecated**
 - Followers **100%** (2 of 2)
-- Friends **0%** (0 of 4)
+- Friends **25%** (1 of 4)
 - Groups **0%** (0 of 5)
 - Lists **0%** (0 of 1)
 - Notifications **0%** (0 of 1)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **44%** (31 of 70)
+**Overall**: **46%** (32 of 70)
 
 ### Complete
 
@@ -157,6 +157,7 @@ The list of API methods this client library supports.
 - events.list — Events in your area.
 - followers.create — Follow a user.
 - followers.destroy — Unfollow a user.
+- friends.create — Add a friend.
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.
@@ -183,7 +184,6 @@ The list of API methods that will (hopefully) be supported soon.
 - friend.confirm_recommendation — Confirm or decline a friend recommendation.
 - friend.confirm_request — Confirm or decline a friend request.
 - friend.requests — Get friend requests.
-- friends.create — Add a friend.
 - group.join — Join a group.
 - group.list — List groups for a given user.
 - group.members — Return members of a particular group.

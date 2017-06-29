@@ -20,7 +20,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task FollowUser()
             {
-                var userId = 686222;
+                var userId = 690273;
                 var userFollowing = await FollowersClient.Follow(userId);
 
                 await FollowersClient.Unfollow(userId); // cleanup following
@@ -36,7 +36,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task UnfollowUser()
             {
-                var userId = 686222;
+                var userId = 700809;
                 await FollowersClient.Follow(userId); // arrange following
 
                 var result = await FollowersClient.Unfollow(userId); // cleanup following

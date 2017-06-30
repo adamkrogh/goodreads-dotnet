@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Goodreads.Models.Response;
 
 namespace Goodreads.Clients
 {
@@ -13,5 +14,13 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
         Task<bool> AddFriend(int userId);
+
+        /// <summary>
+        /// Get the current user's friend requests.
+        /// </summary>
+        /// /// <param name="page">The desired page from the paginated list of friend requests.</param>
+        /// <returns>A paginated list of friend requests.</returns>
+        /// <returns></returns>
+        Task<PaginatedList<FriendRequest>> GetFriendRequests(int page = 1);
     }
 }

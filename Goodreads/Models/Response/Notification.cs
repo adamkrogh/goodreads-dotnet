@@ -73,6 +73,11 @@ namespace Goodreads.Models.Response
         /// </summary>
         public AuthorFollowingGroupResource AuthorFollowing { get; protected set; }
 
+        /// <summary>
+        /// The recommendation group resource.
+        /// </summary>
+        public RecommendationGroupResource Recommendation { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -128,6 +133,13 @@ namespace Goodreads.Models.Response
             {
                 AuthorFollowing = new AuthorFollowingGroupResource();
                 AuthorFollowing.Parse(authorFollowing);
+            }
+
+            var recommendation = groupResource.Element("recommendation");
+            if (recommendation != null)
+            {
+                Recommendation = new RecommendationGroupResource();
+                Recommendation.Parse(recommendation);
             }
         }
     }

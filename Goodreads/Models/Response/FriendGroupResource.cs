@@ -8,7 +8,7 @@ namespace Goodreads.Models.Response
 {
     /// <summary>
     /// This class models areas of the API where Goodreads returns
-    /// information about an Author following group resource.
+    /// information about a friend group resource.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class FriendGroupResource : ApiResponse

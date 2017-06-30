@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using Goodreads.Http;
+using Goodreads.Models.Response;
 using RestSharp;
 
 namespace Goodreads.Clients
@@ -37,6 +38,26 @@ namespace Goodreads.Clients
             var response = await Connection.ExecuteRaw("friend/add_as_friend", parameters, Method.POST);
 
             return response.StatusCode == HttpStatusCode.Created;
+        }
+
+        /// <summary>
+        /// Get the current user's friend requests.
+        /// </summary>
+        /// /// <param name="page">The desired page from the paginated list of friend requests.</param>
+        /// <returns>A paginated list of friend requests.</returns>
+        public async Task<PaginatedList<FriendRequest>> GetFriendRequests(int page = 1)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
+            };
+
+            return await Connection.ExecuteRequest<PaginatedList<FriendRequest>>(
+                "friend/requests",
+                parameters,
+                null,
+                "friend_requests",
+                Method.GET);
         }
     }
 }

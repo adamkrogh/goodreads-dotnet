@@ -56,7 +56,7 @@ namespace Goodreads.Clients
                 "friend/requests",
                 parameters,
                 null,
-                "friend_requests",
+                "requests/friend_requests",
                 Method.GET);
         }
     }

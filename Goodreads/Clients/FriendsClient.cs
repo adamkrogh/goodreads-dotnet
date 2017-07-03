@@ -59,5 +59,24 @@ namespace Goodreads.Clients
                 "requests/friend_requests",
                 Method.GET);
         }
+
+        /// <summary>
+        /// Confirm or decline a friend request.
+        /// </summary>
+        /// <param name="friendRequestId">The friend request id.</param>
+        /// <param name="response">The user response.</param>
+        /// <returns>True if confirmation succeeded, otherwise - false.</returns>
+        public async Task<bool> ConfirmRequest(int friendRequestId, bool response)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "id", Value = friendRequestId, Type = ParameterType.QueryString },
+                new Parameter { Name = "response", Value = response ? "Y" : "N", Type = ParameterType.QueryString }
+            };
+
+            var result = await Connection.ExecuteRaw("friend/confirm_request", parameters, Method.POST);
+
+            return result.StatusCode == HttpStatusCode.NoContent;
+        }
     }
 }

@@ -22,5 +22,13 @@ namespace Goodreads.Clients
         /// <returns>A paginated list of friend requests.</returns>
         /// <returns></returns>
         Task<PaginatedList<FriendRequest>> GetFriendRequests(int page = 1);
+
+        /// <summary>
+        /// Confirm or decline a friend request.
+        /// </summary>
+        /// <param name="friendRequestId">The friend request id.</param>
+        /// <param name="response">The user response.</param>
+        /// <returns>True if confirmation succeeded, otherwise - false.</returns>
+        Task<bool> ConfirmRequest(int friendRequestId, bool response);
     }
 }

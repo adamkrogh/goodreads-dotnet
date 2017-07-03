@@ -31,5 +31,13 @@ namespace Goodreads.Tests
                 Assert.NotNull(requests);
             }
         }
+
+        public class TheConfirmFriendRequestMethod : FriendsClientTests
+        {
+            [Fact(Skip = "Impossible to test because I can't create friend request from another user.")]
+            public void ConfirmFriendRequestMethod()
+            {
+            }
+        }
     }
 }

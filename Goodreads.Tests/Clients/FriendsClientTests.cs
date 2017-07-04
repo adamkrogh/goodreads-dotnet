@@ -39,5 +39,13 @@ namespace Goodreads.Tests
             {
             }
         }
+
+        public class TheConfirmFriendRecommendationMethod : FriendsClientTests
+        {
+            [Fact(Skip = "Impossible to test because I can't create friend recommendation from another user.")]
+            public void ConfirmRecommendationMethod()
+            {
+            }
+        }
     }
 }

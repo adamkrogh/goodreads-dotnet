@@ -30,19 +30,5 @@ namespace Goodreads.Clients
         /// <param name="response">The user response.</param>
         /// <returns>True if confirmation succeeded, otherwise - false.</returns>
         Task<bool> ConfirmRequest(int friendRequestId, bool response);
-
-        /// <summary>
-        /// Confirm or decline a friend recommendation.
-        /// </summary>
-        /// <param name="recommendationId">The friend recommendation id.</param>
-        /// <param name="response">The user response.</param>
-        /// <returns>True if confirmation succeeded, otherwise - false.</returns>
-        /// <remarks>
-        /// ATTENTION! Seems that Goodreads endpoint is not working as describe in an official documentation.
-        /// Moreover I think method is not working at all.
-        /// There is not ability to approve recommendation in web version. An user need to add a book to his shelf instead.
-        /// Also I can't ignore recommendation using the Goodreads API.
-        /// </remarks>
-        Task<bool> ConfirmRecommendation(int recommendationId, bool response);
     }
 }

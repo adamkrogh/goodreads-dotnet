@@ -63,6 +63,7 @@ namespace Goodreads
             Followers = new FollowersClient(Connection);
             Friends = new FriendsClient(Connection);
             Notifications = new NotificationsClient(Connection);
+            Groups = new GroupClient(Connection);
         }
 
         /// <summary>
@@ -124,5 +125,10 @@ namespace Goodreads
         /// API Client for the Goodreads notifications endpoint.
         /// </summary>
         public INotificationsClient Notifications { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads group endpoint.
+        /// </summary>
+        public IGroupClient Groups { get; private set; }
     }
 }

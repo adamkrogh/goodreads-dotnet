@@ -117,7 +117,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Fanship **Deprecated**
 - Followers **100%** (2 of 2)
 - Friends **100%** (4 of 4)
-- Groups **0%** (0 of 5)
+- Groups **20%** (1 of 5)
 - Lists **0%** (0 of 1)
 - Notifications **100%** (1 of 1)
 - Owned Books **0%** (0 of 5)
@@ -125,7 +125,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Ratings **0%** (0 of 2)
 - Read Statuses **0%** (0 of 1)
 - Recommendations **0%** (0 of 1)
-- Reviews **86%** (6 of 7)
+- Reviews **100%** (7 of 7)
 - Search **100%** (2 of 2)
 - Series **100%** (3 of 3)
 - Shelves **100%** (3 of 3)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **51%** (36 of 70)
+**Overall**: **54%** (38 of 70)
 
 ### Complete
 
@@ -157,10 +157,10 @@ The list of API methods this client library supports.
 - events.list — Events in your area.
 - followers.create — Follow a user.
 - followers.destroy — Unfollow a user.
-- friend.confirm_recommendation — Confirm or decline a friend recommendation.
 - friend.confirm_request — Confirm or decline a friend request.
 - friends.create — Add a friend.
 - friend.requests — Get friend requests.
+- group.join — Join a group.
 - notifications — See the current user's notifications.
 - series.show — See a series.
 - series.list — See all series by an author.
@@ -185,7 +185,6 @@ The list of API methods that will (hopefully) be supported soon.
 
 - comment.create — Create a comment.
 - comment.list — List comments on a subject.
-- group.join — Join a group.
 - group.list — List groups for a given user.
 - group.members — Return members of a particular group.
 - group.search — Find a group.
@@ -201,7 +200,6 @@ The list of API methods that will (hopefully) be supported soon.
 - rating.destroy — Unlike a resource.
 - read_statuses.show — Get a user's read status.
 - recommendations.show — Get a recommendation from a user to another user.
-- review.destroy — Delete a book review.
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.
 - topic.show — Get info about a topic by id.
@@ -225,6 +223,14 @@ API methods that Goodreads has deprecated.
 - fanship.create — Become fan of an author. DEPRECATED.
 - fanship.destroy — Stop being fan of an author. DEPRECATED.
 - fanship.show — Show fanship information. DEPRECATED.
+
+### Bugs
+
+API methods that Goodreads has bugs.
+
+- friend.confirm_recommendation — Confirm or decline a friend recommendation. THERE IS A BUG IN THE GOODREADS API.
+- review.destroy — Delete a book review. THERE IS A BUG IN THE GOODREADS API.
+
 
 ## License
 

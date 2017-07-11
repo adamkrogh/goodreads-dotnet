@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Goodreads.Helpers;
 using Goodreads.Http;
+using Goodreads.Models.Request;
+using Goodreads.Models.Response;
 using RestSharp;
 
 namespace Goodreads.Clients
@@ -37,6 +40,33 @@ namespace Goodreads.Clients
             var response = await Connection.ExecuteRaw("group/join", parameters, Method.POST);
 
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Get a list of groups the user specified.
+        /// </summary>
+        /// <param name="userId">The Goodreads Id for the desired user.</param>
+        /// <param name="sort">The property to sort the groups on.</param>
+        /// <returns>A paginated list of groups for the user.</returns>
+        public async Task<PaginatedList<GroupSummary>> GetListByUser(int userId, SortGroupList? sort = null)
+        {
+            var endpoint = $"group/list/{userId}";
+
+            var parameters = new List<Parameter>();
+
+            if (sort.HasValue)
+            {
+                var parameter = new Parameter
+                {
+                    Name = EnumHelpers.QueryParameterKey<SortGroupList>(),
+                    Value = EnumHelpers.QueryParameterValue(sort.Value),
+                    Type = ParameterType.QueryString
+                };
+
+                parameters.Add(parameter);
+            }
+
+            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list", Method.GET);
         }
     }
 }

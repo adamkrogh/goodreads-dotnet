@@ -86,11 +86,13 @@
     <Compile Include="Http\QueryParameterKeyAttribute.cs" />
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\Request\SortGroupList.cs" />
     <Compile Include="Models\Request\BookSearchField.cs" />
     <Compile Include="Models\Request\SortReviewsList.cs" />
     <Compile Include="Models\Request\SortFriendsList.cs" />
     <Compile Include="Models\Response\Actor.cs" />
     <Compile Include="Models\Response\FriendRequest.cs" />
+    <Compile Include="Models\Response\GroupSummary.cs" />
     <Compile Include="Models\Response\RecommendationGroupResource.cs" />
     <Compile Include="Models\Response\FriendGroupResource.cs" />
     <Compile Include="Models\Response\AuthorFollowingGroupResource.cs" />

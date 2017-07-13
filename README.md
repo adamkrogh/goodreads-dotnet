@@ -187,6 +187,7 @@ The list of API methods this client library supports.
 The list of API methods that will (hopefully) be supported soon.
 
 - comment.create — Create a comment.
+- comment.list — List comments on a subject.
 - group.members — Return members of a particular group.
 - list.book — Get the listopia lists for a given book.
 - owned_books.create — Add to books owned.

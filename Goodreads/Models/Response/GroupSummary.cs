@@ -39,6 +39,11 @@ namespace Goodreads.Models.Response
         public string ImageUrl { get; protected set; }
 
         /// <summary>
+        /// The group image, small size.
+        /// </summary>
+        public string SmallImageUrl { get; protected set; }
+
+        /// <summary>
         /// The group link.
         /// </summary>
         public string Link { get; protected set; }
@@ -65,6 +70,7 @@ namespace Goodreads.Models.Response
             Id = element.ElementAsInt("id");
             Title = element.ElementAsString("title");
             ImageUrl = element.ElementAsString("image_url");
+            SmallImageUrl = element.ElementAsString("small_image_url");
             Access = element.ElementAsString("access");
             Link = element.ElementAsString("link");
             LastActivity = element.ElementAsDateTime("last_activity_at");

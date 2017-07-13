@@ -23,5 +23,13 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the groups on.</param>
         /// <returns>A paginated list of groups for the user.</returns>
         Task<PaginatedList<GroupSummary>> GetListByUser(int userId, SortGroupList? sort = null);
+
+        /// <summary>
+        /// Search group by specified titles and descriptions.
+        /// </summary>
+        /// <param name="search">A search string criteria.</param>
+        /// <param name="page">A page number.</param>
+        /// <returns>A paginated list of groups for the user.</returns>
+        Task<PaginatedList<GroupSummary>> GetGroups(string search, int page = 1);
     }
 }

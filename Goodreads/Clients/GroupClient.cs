@@ -68,5 +68,22 @@ namespace Goodreads.Clients
 
             return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list", Method.GET);
         }
+
+        /// <summary>
+        /// Search group by specified titles and descriptions.
+        /// </summary>
+        /// <param name="search">A search string criteria.</param>
+        /// <param name="page">A page number.</param>
+        /// <returns>A paginated list of groups for the user.</returns>
+        public async Task<PaginatedList<GroupSummary>> GetGroups(string search, int page = 1)
+        {
+            var parameters = new List<Parameter>()
+            {
+                new Parameter { Name = "q", Value = search, Type = ParameterType.QueryString },
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
+            };
+
+            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>("group/search", parameters, null, "groups/list");
+        }
     }
 }

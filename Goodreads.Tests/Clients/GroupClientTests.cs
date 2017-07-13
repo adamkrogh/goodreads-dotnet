@@ -31,5 +31,18 @@ namespace Goodreads.Tests
                 Assert.NotNull(list);
             }
         }
+
+        public class TheGetGroupsMethod : GroupClientTests
+        {
+            [Fact]
+            public async Task GetGroups()
+            {
+                var groups = await GroupClient.GetGroups("English");
+
+                Assert.NotNull(groups);
+                Assert.NotNull(groups.List);
+                Assert.NotEmpty(groups.List);
+            }
+        }
     }
 }

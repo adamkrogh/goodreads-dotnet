@@ -209,7 +209,7 @@ namespace Goodreads.Models.Response
             if (workElement != null)
             {
                 Work = new Work();
-                Work.Parse(element.Element("work"));
+                Work.Parse(workElement);
             }
 
             Authors = element.ParseChildren<AuthorSummary>("authors", "author");

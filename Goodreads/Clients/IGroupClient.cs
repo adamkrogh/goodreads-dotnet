@@ -31,5 +31,14 @@ namespace Goodreads.Clients
         /// <param name="page">A page number.</param>
         /// <returns>A paginated list of groups for the user.</returns>
         Task<PaginatedList<GroupSummary>> GetGroups(string search, int page = 1);
+
+        /// <summary>
+        /// Get info about a group by specified id.
+        /// </summary>
+        /// <param name="groupId">The Goodreads Group id.</param>
+        /// <param name="sort">The property to sort the group info on.</param>
+        /// <param name="order">The property to order the group info on.</param>
+        /// <returns>The Goodreads Group model.</returns>
+        Task<Group> GetInfo(int groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null);
     }
 }

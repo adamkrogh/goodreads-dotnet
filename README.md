@@ -117,7 +117,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Fanship **Deprecated**
 - Followers **100%** (2 of 2)
 - Friends **100%** (4 of 4)
-- Groups **40%** (2 of 5)
+- Groups **80%** (4 of 5)
 - Lists **0%** (0 of 1)
 - Notifications **100%** (1 of 1)
 - Owned Books **0%** (0 of 5)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **56%** (39 of 70)
+**Overall**: **59%** (41 of 70)
 
 ### Complete
 
@@ -162,6 +162,8 @@ The list of API methods this client library supports.
 - friend.requests — Get friend requests.
 - group.join — Join a group.
 - group.list — List groups for a given user.
+- group.search — Find a group.
+- group.show — Get info about a group by id.
 - notifications — See the current user's notifications.
 - series.show — See a series.
 - series.list — See all series by an author.
@@ -185,10 +187,7 @@ The list of API methods this client library supports.
 The list of API methods that will (hopefully) be supported soon.
 
 - comment.create — Create a comment.
-- comment.list — List comments on a subject.
 - group.members — Return members of a particular group.
-- group.search — Find a group.
-- group.show — Get info about a group by id.
 - list.book — Get the listopia lists for a given book.
 - owned_books.create — Add to books owned.
 - owned_books.list — List books owned by a user.

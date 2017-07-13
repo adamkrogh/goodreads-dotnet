@@ -3,28 +3,28 @@
 namespace Goodreads.Models.Request
 {
     /// <summary>
-    /// The options for sorting the Goodreads group list.
+    /// The options for sorting the Goodreads group info.
     /// </summary>
     [QueryParameterKey("sort")]
-    public enum SortGroupList
+    public enum SortGroupInfo
     {
         /// <summary>
-        /// Sort by my activity.
+        /// Sort by comments count.
         /// </summary>
-        [QueryParameterValue("my_activity")]
-        MyActivity,
+        [QueryParameterValue("comments_count'")]
+        CommentsCount,
 
         /// <summary>
-        /// Sort by members.
+        /// Sort by updated date.
         /// </summary>
-        [QueryParameterValue("members")]
-        Members,
+        [QueryParameterValue("updated_at")]
+        UpdatedAt,
 
         /// <summary>
-        /// Sort by the last activity.
+        /// Sort by views.
         /// </summary>
-        [QueryParameterValue("last_activity")]
-        LastActivity,
+        [QueryParameterValue("views")]
+        Views,
 
         /// <summary>
         /// Sort by title.

@@ -85,5 +85,43 @@ namespace Goodreads.Clients
 
             return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>("group/search", parameters, null, "groups/list");
         }
+
+        /// <summary>
+        /// Get info about a group by specified id.
+        /// </summary>
+        /// <param name="groupId">The Goodreads Group id.</param>
+        /// <param name="sort">The property to sort the group info on.</param>
+        /// <param name="order">The property to order the group info on.</param>
+        /// <returns>The Goodreads Group model.</returns>
+        public async Task<Group> GetInfo(int groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null)
+        {
+            var endpoint = $"group/show/{groupId}";
+
+            var parameters = new List<Parameter>();
+
+            if (sort.HasValue)
+            {
+                var parameter = new Parameter
+                {
+                    Name = EnumHelpers.QueryParameterKey<SortGroupInfo>(),
+                    Value = EnumHelpers.QueryParameterValue(sort.Value),
+                    Type = ParameterType.QueryString
+                };
+                parameters.Add(parameter);
+            }
+
+            if (order.HasValue)
+            {
+                var parameter = new Parameter
+                {
+                    Name = EnumHelpers.QueryParameterKey<OrderGroupInfo>(),
+                    Value = EnumHelpers.QueryParameterValue(order.Value),
+                    Type = ParameterType.QueryString
+                };
+                parameters.Add(parameter);
+            }
+
+            return await Connection.ExecuteRequest<Group>(endpoint, parameters, null, "group");
+        }
     }
 }

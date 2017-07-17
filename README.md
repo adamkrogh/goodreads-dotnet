@@ -121,7 +121,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Lists **0%** (0 of 1)
 - Notifications **100%** (1 of 1)
 - Owned Books **0%** (0 of 5)
-- Quotes **0%** (0 of 1)
+- Quotes **100%** (1 of 1)
 - Ratings **0%** (0 of 2)
 - Read Statuses **0%** (0 of 1)
 - Recommendations **0%** (0 of 1)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **60%** (42 of 70)
+**Overall**: **61%** (43 of 70)
 
 ### Complete
 
@@ -166,6 +166,7 @@ The list of API methods this client library supports.
 - group.search — Find a group.
 - group.show — Get info about a group by id.
 - notifications — See the current user's notifications.
+- quotes.create — Add a quote.
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.
@@ -195,7 +196,6 @@ The list of API methods that will (hopefully) be supported soon.
 - owned_books.show — Show an owned book.
 - owned_books.update — Update an owned book.
 - owned_books.destroy — Delete an owned book.
-- quotes.create — Add a quote.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.
 - read_statuses.show — Get a user's read status.

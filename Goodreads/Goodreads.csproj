@@ -70,6 +70,8 @@
     <Compile Include="Clients\IShelvesClient.cs" />
     <Compile Include="Clients\ISeriesClient.cs" />
     <Compile Include="Clients\IUsersClient.cs" />
+    <Compile Include="Clients\IQuotesClient.cs" />
+    <Compile Include="Clients\QuotesClient.cs" />
     <Compile Include="Clients\ReviewsClient.cs" />
     <Compile Include="Clients\ShelvesClient.cs" />
     <Compile Include="Clients\SeriesClient.cs" />

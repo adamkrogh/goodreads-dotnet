@@ -150,7 +150,7 @@ namespace Goodreads.Clients
                 }
             };
 
-            if (names != null)
+            if (names?.Length > 0)
             {
                 parameters.Add(new Parameter { Name = "q", Value = string.Join(" ", names), Type = ParameterType.QueryString });
             }

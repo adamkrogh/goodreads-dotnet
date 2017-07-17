@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Xml.Linq;
 using Goodreads.Extensions;
 
@@ -44,6 +45,16 @@ namespace Goodreads.Models.Response
         /// </summary>
         public int CommentsCount { get; protected set; }
 
+        /// <summary>
+        /// The date when a group user was created.
+        /// </summary>
+        public DateTime? CreatedAt { get; protected set; }
+
+        /// <summary>
+        /// The date when a group user received moderation access.
+        /// </summary>
+        public DateTime? ModeratorAt { get; protected set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -62,6 +73,8 @@ namespace Goodreads.Models.Response
         {
             CommentsCount = element.ElementAsInt("comments_count");
             Title = element.ElementAsString("title");
+            CreatedAt = element.ElementAsDateTime("created_at");
+            ModeratorAt = element.ElementAsDateTime("moderator_at");
 
             var user = element.Element("user");
 

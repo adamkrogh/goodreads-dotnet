@@ -57,5 +57,18 @@ namespace Goodreads.Tests
                 Assert.Equal(group.Id, id);
             }
         }
+
+        public class TheGetMemberMethod : GroupClientTests
+        {
+            [Fact]
+            public async Task GetMember()
+            {
+                const int id = 99123;
+                var members = await GroupClient.GetMembers(id);
+
+                Assert.NotNull(members);
+                Assert.NotEmpty(members.List);
+            }
+        }
     }
 }

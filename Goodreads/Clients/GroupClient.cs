@@ -123,5 +123,39 @@ namespace Goodreads.Clients
 
             return await Connection.ExecuteRequest<Group>(endpoint, parameters, null, "group");
         }
+
+        /// <summary>
+        /// Get list of members of the specified group.
+        /// </summary>
+        /// <param name="groupId">The Goodreads Group id.</param>
+        /// <param name="names">List of names to search.</param>
+        /// <param name="page">A page number.</param>
+        /// <param name="sort">The property to sort the group member on.</param>
+        /// <returns>A paginated list of groups members.</returns>
+        public async Task<PaginatedList<GroupUser>> GetMembers(
+            int groupId,
+            string[] names = null,
+            int page = 1,
+            SortGroupMember sort = SortGroupMember.FristName)
+        {
+            var endpoint = $"group/members/{groupId}";
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
+                new Parameter
+                {
+                    Name = EnumHelpers.QueryParameterKey<SortGroupMember>(),
+                    Value = EnumHelpers.QueryParameterValue(sort),
+                    Type = ParameterType.QueryString
+                }
+            };
+
+            if (names != null)
+            {
+                parameters.Add(new Parameter { Name = "q", Value = string.Join(" ", names), Type = ParameterType.QueryString });
+            }
+
+            return await Connection.ExecuteRequest<PaginatedList<GroupUser>>(endpoint, parameters, null, "group_users");
+        }
     }
 }

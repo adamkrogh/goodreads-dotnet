@@ -87,6 +87,7 @@
     <Compile Include="IGoodreadsClient.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Request\OrderGroupInfo.cs" />
+    <Compile Include="Models\Request\SortGroupMember.cs" />
     <Compile Include="Models\Request\SortGroupInfo.cs" />
     <Compile Include="Models\Request\SortGroupList.cs" />
     <Compile Include="Models\Request\BookSearchField.cs" />

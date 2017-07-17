@@ -32,5 +32,26 @@ namespace Goodreads.Clients
         /// <param name="bookIds">List of book ids.</param>
         /// <returns>True if the add succeeded, false otherwise.</returns>
         Task<bool> AddBooksToShelves(string[] shelves, int[] bookIds);
+
+        /// <summary>
+        /// Add a user book shelf.
+        /// </summary>
+        /// <param name="shelf">Name of the user shelf.</param>
+        /// <param name="exclusive">Determine whether shelf is exclusive.</param>
+        /// <param name="sortable">Determine whether shelf is sortable.</param>
+        /// <param name="featured">Determine whether shelf is featured.</param>
+        /// <returns>The created user shelf.</returns>
+        Task<UserShelf> AddShelf(string shelf, bool exclusive = false, bool sortable = false, bool featured = false);
+
+        /// <summary>
+        /// Edit a user book shelf.
+        /// </summary>
+        /// /// <param name="shelfId">Id of the user shelf.</param>
+        /// <param name="shelf">Name of the shelf.</param>
+        /// <param name="exclusive">Determine whether shelf is exclusive.</param>
+        /// <param name="sortable">Determine whether shelf is sortable.</param>
+        /// <param name="featured">Determine whether shelf is featured.</param>
+        /// <returns>True if the edit succeeded, false otherwise.</returns>
+        Task<bool> EditShelf(int shelfId, string shelf, bool exclusive = false, bool sortable = false, bool featured = false);
     }
 }

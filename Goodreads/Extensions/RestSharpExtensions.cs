@@ -133,13 +133,14 @@ namespace Goodreads.Extensions
                         var element = document.XPathSelectElement("GoodreadsResponse/error");
                         if (element != null)
                         {
-                            // There are three total error messages
+                            // There are four total error messages
+                            var plain = element.Value;
                             var genericMessage = element.ElementAsString("generic");
                             var detailMessage = element.ElementAsString("detail");
                             var friendlyMessage = element.ElementAsString("friendly");
 
                             // Use the best message that exists...
-                            error = friendlyMessage ?? detailMessage ?? genericMessage;
+                            error = friendlyMessage ?? detailMessage ?? genericMessage ?? plain;
                         }
                     }
                 }

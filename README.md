@@ -131,12 +131,12 @@ This list is kept updated so feel free to request or contribute if you have need
 - Shelves **100%** (3 of 3)
 - Topics **0%** (0 of 4)
 - Updates **0%** (0 of 1)
-- User Shelves **0%** (0 of 2)
+- User Shelves **100%** (2 of 2)
 - Users **40%** (2 of 5)
 - User Status **0%** (0 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **61%** (43 of 70)
+**Overall**: **64%** (45 of 70)
 
 ### Complete
 
@@ -182,6 +182,8 @@ The list of API methods this client library supports.
 - shelves.add_to_shelf — Add a book to a shelf.
 - shelves.add_books_to_shelves — Add books to many shelves.
 - user.friends — Get a user's friends.
+- user_shelves.create — Add book shelf.
+- user_shelves.update — Edit book shelf.
 - user.show — Get info about a member by id or username.
 
 ### Todo
@@ -205,8 +207,6 @@ The list of API methods that will (hopefully) be supported soon.
 - topic.show — Get info about a topic by id.
 - topic.unread_group — Get a list of topics with unread comments.
 - updates.friends — Get your friend updates.
-- user_shelves.create — Add book shelf.
-- user_shelves.update — Edit book shelf.
 - user.compare — Compare books with another member.
 - user.followers — Get a user's followers.
 - user.following — Get people a user is following.

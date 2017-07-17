@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
 using Goodreads.Extensions;
@@ -55,7 +56,27 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// Determines if this user shelf is used in recommendations.
         /// </summary>
-        public bool IsRecommendedFor { get; set; }
+        public bool IsRecommendedFor { get; protected set; }
+
+        /// <summary>
+        /// Determines if this user shelf is sticky.
+        /// </summary>
+        public bool Sticky { get; protected set; }
+
+        /// <summary>
+        /// Determines if this user shelf is editable.
+        /// </summary>
+        public bool IsEditable { get; protected set; }
+
+        /// <summary>
+        /// The shelf created date.
+        /// </summary>
+        public DateTime? CreatedAt { get; protected set; }
+
+        /// <summary>
+        /// The shelf updated date.
+        /// </summary>
+        public DateTime? UpdatedAt { get; protected set; }
 
         internal string DebuggerDisplay
         {
@@ -79,6 +100,10 @@ namespace Goodreads.Models.Response
             IsExclusive = element.ElementAsBool("exclusive_flag");
             IsFeatured = element.ElementAsBool("featured");
             IsRecommendedFor = element.ElementAsBool("recommended_for");
+            Sticky = element.ElementAsBool("sticky");
+            IsEditable = element.ElementAsBool("editable_flag");
+            CreatedAt = element.ElementAsDateTime("created_at");
+            UpdatedAt = element.ElementAsDateTime("updated_at");
 
             var orderElement = element.Element("order");
             if (orderElement != null)

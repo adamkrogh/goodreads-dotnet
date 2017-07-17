@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Goodreads.Clients;
+using Goodreads.Exceptions;
 using Xunit;
 
 namespace Goodreads.Tests
@@ -81,6 +82,21 @@ namespace Goodreads.Tests
                 var result = await ShelvesClient.AddBooksToShelves(shelves, bookIds);
 
                 Assert.True(result);
+            }
+        }
+
+        public class TheAddUserShelfMethod : ShelvesClientTests
+        {
+            [Fact(Skip = "Impossible to test because I can't remove shelf using the Goodreads API. So I can't clean up a test suite.")]
+            public void AddShelf()
+            {
+            }
+
+            [Fact]
+            public void AddExistingShelf()
+            {
+                const string name = "to-read";
+                Assert.ThrowsAsync<ApiException>(() => ShelvesClient.AddShelf(name));
             }
         }
     }

@@ -79,5 +79,98 @@ namespace Goodreads.Clients
 
             return response.StatusCode == HttpStatusCode.OK;
         }
+
+        /// <summary>
+        /// Add a user book shelf.
+        /// </summary>
+        /// <param name="shelf">Name of the user shelf.</param>
+        /// <param name="exclusive">Determine whether shelf is exclusive.</param>
+        /// <param name="sortable">Determine whether shelf is sortable.</param>
+        /// <param name="featured">Determine whether shelf is featured.</param>
+        /// <returns>The created user shelf.</returns>
+        public async Task<UserShelf> AddShelf(string shelf, bool exclusive = false, bool sortable = false, bool featured = false)
+        {
+            var parameters = new List<Parameter>
+            {
+                new Parameter
+                {
+                    Name = "user_shelf[name]",
+                    Value = shelf,
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[exclusive_flag]",
+                    Value = exclusive ? "true" : "false",
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[sortable_flag]",
+                    Value = sortable ? "true" : "false",
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[featured]",
+                    Value = featured ? "true" : "false",
+                    Type = ParameterType.QueryString
+                }
+            };
+
+            return await Connection.ExecuteRequest<UserShelf>(
+                "user_shelves",
+                parameters,
+                null,
+                "user_shelf",
+                Method.POST)
+                .ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Edit a user book shelf.
+        /// </summary>
+        /// /// <param name="shelfId">Id of the user shelf.</param>
+        /// <param name="shelf">Name of the shelf.</param>
+        /// <param name="exclusive">Determine whether shelf is exclusive.</param>
+        /// <param name="sortable">Determine whether shelf is sortable.</param>
+        /// <param name="featured">Determine whether shelf is featured.</param>
+        /// <returns>True if the edit succeeded, false otherwise.</returns>
+        public async Task<bool> EditShelf(int shelfId, string shelf, bool exclusive = false, bool sortable = false, bool featured = false)
+        {
+            var endpoint = $"user_shelves/{shelfId}";
+
+            var parameters = new List<Parameter>
+            {
+                new Parameter
+                {
+                    Name = "user_shelf[name]",
+                    Value = shelf,
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[exclusive_flag]",
+                    Value = exclusive ? "true" : "false",
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[sortable_flag]",
+                    Value = sortable ? "true" : "false",
+                    Type = ParameterType.QueryString
+                },
+                new Parameter
+                {
+                    Name = "user_shelf[featured]",
+                    Value = featured ? "true" : "false",
+                    Type = ParameterType.QueryString
+                }
+            };
+
+            var response = await Connection.ExecuteRaw(endpoint, parameters, Method.PUT).ConfigureAwait(false);
+
+            return response.StatusCode == HttpStatusCode.OK;
+        }
     }
 }

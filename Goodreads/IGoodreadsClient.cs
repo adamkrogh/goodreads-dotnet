@@ -71,5 +71,10 @@ namespace Goodreads
         /// API Client for the Goodreads quotes endpoint.
         /// </summary>
         IQuotesClient Quotes { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads user statuses endpoint.
+        /// </summary>
+        IUserStatusesClient UserStatuses { get; }
     }
 }

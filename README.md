@@ -133,10 +133,10 @@ This list is kept updated so feel free to request or contribute if you have need
 - Updates **0%** (0 of 1)
 - User Shelves **100%** (2 of 2)
 - Users **40%** (2 of 5)
-- User Status **0%** (0 of 4)
+- User Status **25%** (1 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **64%** (45 of 70)
+**Overall**: **66%** (46 of 70)
 
 ### Complete
 
@@ -185,6 +185,7 @@ The list of API methods this client library supports.
 - user_shelves.create — Add book shelf.
 - user_shelves.update — Edit book shelf.
 - user.show — Get info about a member by id or username.
+- user_status.index — View user statuses.
 
 ### Todo
 
@@ -213,7 +214,6 @@ The list of API methods that will (hopefully) be supported soon.
 - user_status.create — Update user status.
 - user_status.destroy — Delete user status.
 - user_status.show — Get a user status.
-- user_status.index — View user statuses.
 - work.editions — See all editions by work.
 
 ### Deprecated

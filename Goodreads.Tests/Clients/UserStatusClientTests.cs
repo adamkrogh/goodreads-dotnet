@@ -24,5 +24,20 @@ namespace Goodreads.Tests
                 Assert.NotEmpty(statuses);
             }
         }
+
+        public class TheGetUserStatusMethod : UserStatusClientTests
+        {
+            [Fact]
+            public async Task GetUserStatus()
+            {
+                const int id = 138141943;
+                var status = await UserStatuses.GetUserStatus(id);
+
+                Assert.NotNull(status);
+                Assert.Equal(status.Id, id);
+                Assert.NotNull(status.User);
+                Assert.NotNull(status.Book);
+            }
+        }
     }
 }

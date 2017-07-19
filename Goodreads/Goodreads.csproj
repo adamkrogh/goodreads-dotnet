@@ -58,6 +58,7 @@
     <Compile Include="Clients\IGroupClient.cs" />
     <Compile Include="Clients\GroupClient.cs" />
     <Compile Include="Clients\INotificationsClient.cs" />
+    <Compile Include="Models\Response\UserStatus.cs" />
     <Compile Include="Clients\UserStatusesClient.cs" />
     <Compile Include="Clients\IUserStatusesClient.cs" />
     <Compile Include="Clients\NotificationsClient.cs" />
@@ -120,7 +121,7 @@
     <Compile Include="Models\Response\Series.cs" />
     <Compile Include="Models\Response\Notification.cs" />
     <Compile Include="Models\Response\UserFollowing.cs" />
-    <Compile Include="Models\Response\UserStatus.cs" />
+    <Compile Include="Models\Response\UserStatusSummary.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />
     <Compile Include="Models\Response\Order.cs" />

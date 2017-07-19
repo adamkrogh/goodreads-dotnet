@@ -18,6 +18,13 @@ namespace Goodreads.Clients
             "Microsoft.Design",
             "CA1024:UsePropertiesWhereAppropriate",
             Justification = "Method makes a network request.")]
-        Task<IReadOnlyList<UserStatus>> GetRecentUsersStatuses();
+        Task<IReadOnlyList<UserStatusSummary>> GetRecentUsersStatuses();
+
+        /// <summary>
+        /// Get information about a user status update.
+        /// </summary>
+        /// <param name="userStatusId">The user status id.</param>
+        /// <returns>User status info.</returns>
+        Task<UserStatus> GetUserStatus(int userStatusId);
     }
 }

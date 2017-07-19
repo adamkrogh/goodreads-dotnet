@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Xml.Linq;
 using Goodreads.Extensions;
 
@@ -50,6 +51,18 @@ namespace Goodreads.Models.Response
         /// Determine whether actor has profile image.
         /// </summary>
         public bool HasImage { get; protected set; }
+
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Id: {0}, Name: {1}",
+                    Id,
+                    Name);
+            }
+        }
 
         internal override void Parse(XElement element)
         {

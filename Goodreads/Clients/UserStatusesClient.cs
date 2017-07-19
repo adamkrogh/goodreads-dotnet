@@ -26,15 +26,26 @@ namespace Goodreads.Clients
         /// Get most recent user statuses on the site.
         /// </summary>
         /// <returns>A list of the user statuses.</returns>
-        public async Task<IReadOnlyList<UserStatus>> GetRecentUsersStatuses()
+        public async Task<IReadOnlyList<UserStatusSummary>> GetRecentUsersStatuses()
         {
-            var result = await Connection.ExecuteRequest<PaginatedList<UserStatus>>(
+            var result = await Connection.ExecuteRequest<PaginatedList<UserStatusSummary>>(
                 "user_status/index",
                 new List<Parameter>(),
                 null,
                 "updates");
 
-            return result?.List ?? new List<UserStatus>();
+            return result?.List ?? new List<UserStatusSummary>();
+        }
+
+        /// <summary>
+        /// Get information about a user status update.
+        /// </summary>
+        /// <param name="userStatusId">The user status id.</param>
+        /// <returns>User status info.</returns>
+        public async Task<UserStatus> GetUserStatus(int userStatusId)
+        {
+            var endpoint = $"user_status/show/{userStatusId}";
+           return await Connection.ExecuteRequest<UserStatus>(endpoint, new List<Parameter>(), null, "user_status");
         }
     }
 }

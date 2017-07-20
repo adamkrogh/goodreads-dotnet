@@ -54,7 +54,7 @@ namespace Goodreads.Models.Response
             ActionText = element.ElementAsString("action_text");
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");
-            Id = ParseId();
+            Id = element.ElementAsNullableInt("id") ?? ParseId();
 
             var actor = element.Element("actor");
             if (actor != null)

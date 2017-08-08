@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\Goodreads.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -54,6 +54,8 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\RecommendationsClient.cs" />
+    <Compile Include="Clients\IRecommendationsClient.cs" />
     <Compile Include="Clients\IGroupClient.cs" />
     <Compile Include="Clients\GroupClient.cs" />
     <Compile Include="Clients\INotificationsClient.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Models\Request\UpdateFilter.cs" />
     <Compile Include="Models\Request\UpdateType.cs" />
     <Compile Include="Models\Response\Action.cs" />
+    <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\Update.cs" />
     <Compile Include="Models\Response\UserStatus.cs" />
     <Compile Include="Clients\UserStatusesClient.cs" />

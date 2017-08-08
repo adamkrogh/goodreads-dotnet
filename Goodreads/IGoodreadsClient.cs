@@ -81,5 +81,10 @@ namespace Goodreads
         /// API Client for the Goodreads updates endpoint.
         /// </summary>
         IUpdatesClient Updates { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads recommendations endpoint.
+        /// </summary>
+        IRecommendationsClient Recommendations { get; }
     }
 }

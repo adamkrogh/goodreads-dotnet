@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Goodreads" Description="A basic code analysis rule set for this project." ToolsVersion="14.0">
+<RuleSet Name="Goodreads" Description="A basic code analysis rule set for this project." ToolsVersion="15.0">
   <IncludeAll Action="Error" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1006" Action="None" />
@@ -15,6 +15,7 @@
     <Rule Id="CA2243" Action="None" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1005" Action="None" />
     <Rule Id="SA1101" Action="None" />
     <Rule Id="SA1124" Action="None" />
     <Rule Id="SA1127" Action="None" />

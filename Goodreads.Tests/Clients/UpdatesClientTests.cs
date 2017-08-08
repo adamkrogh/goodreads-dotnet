@@ -1,6 +1,6 @@
-﻿using Goodreads.Clients;
+﻿using System.Threading.Tasks;
+using Goodreads.Clients;
 using Goodreads.Models.Request;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Goodreads.Tests

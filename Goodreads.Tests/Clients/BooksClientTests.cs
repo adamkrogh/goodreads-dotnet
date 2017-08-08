@@ -6,16 +6,16 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class BooksClientsTests
+    public class BooksClientTests
     {
         private readonly IBooksClient BooksClient;
 
-        public BooksClientsTests()
+        public BooksClientTests()
         {
             BooksClient = Helper.GetClient().Books;
         }
 
-        public class TheGetByIsbnMethod : BooksClientsTests
+        public class TheGetByIsbnMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsABook()
@@ -38,7 +38,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetByBookIdMethod : BooksClientsTests
+        public class TheGetByBookIdMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsABook()
@@ -61,7 +61,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetByTitleMethod : BooksClientsTests
+        public class TheGetByTitleMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsABook()
@@ -86,7 +86,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetListByAuthorIdMethod : BooksClientsTests
+        public class TheGetListByAuthorIdMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsBooks()
@@ -122,7 +122,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheSearchMethod : BooksClientsTests
+        public class TheSearchMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsResults()
@@ -146,7 +146,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetBookIdForIsbnMethod : BooksClientsTests
+        public class TheGetBookIdForIsbnMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsABookId()
@@ -168,7 +168,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetBookIdsForIsbnsMethod : BooksClientsTests
+        public class TheGetBookIdsForIsbnsMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsBookIds()
@@ -205,7 +205,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetWorkIdsForBookIdsMethod : BooksClientsTests
+        public class TheGetWorkIdsForBookIdsMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsWorkIds()
@@ -242,7 +242,7 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetReviewStatsForIsbnsMethod : BooksClientsTests
+        public class TheGetReviewStatsForIsbnsMethod : BooksClientTests
         {
             [Fact]
             public async Task ReturnsStats()

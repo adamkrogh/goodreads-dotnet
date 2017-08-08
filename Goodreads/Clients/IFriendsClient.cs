@@ -20,7 +20,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// /// <param name="page">The desired page from the paginated list of friend requests.</param>
         /// <returns>A paginated list of friend requests.</returns>
-        /// <returns></returns>
         Task<PaginatedList<FriendRequest>> GetFriendRequests(int page = 1);
 
         /// <summary>

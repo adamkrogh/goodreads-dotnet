@@ -66,6 +66,7 @@ namespace Goodreads
             Groups = new GroupClient(Connection);
             Quotes = new QuotesClient(Connection);
             UserStatuses = new UserStatusesClient(Connection);
+            Updates = new UpdatesClient(Connection);
         }
 
         /// <summary>
@@ -142,5 +143,10 @@ namespace Goodreads
         /// API Client for the Goodreads user statuses endpoint.
         /// </summary>
         public IUserStatusesClient UserStatuses { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads updates endpoint.
+        /// </summary>
+        public IUpdatesClient Updates { get; private set; }
     }
 }

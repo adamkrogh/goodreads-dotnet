@@ -58,6 +58,12 @@
     <Compile Include="Clients\IGroupClient.cs" />
     <Compile Include="Clients\GroupClient.cs" />
     <Compile Include="Clients\INotificationsClient.cs" />
+    <Compile Include="Clients\IUpdatesClient.cs" />
+    <Compile Include="Clients\UpdatesClient.cs" />
+    <Compile Include="Models\Request\UpdateFilter.cs" />
+    <Compile Include="Models\Request\UpdateType.cs" />
+    <Compile Include="Models\Response\Action.cs" />
+    <Compile Include="Models\Response\Update.cs" />
     <Compile Include="Models\Response\UserStatus.cs" />
     <Compile Include="Clients\UserStatusesClient.cs" />
     <Compile Include="Clients\IUserStatusesClient.cs" />

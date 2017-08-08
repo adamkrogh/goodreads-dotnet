@@ -52,6 +52,11 @@ namespace Goodreads.Models.Response
         /// </summary>
         public int? ReviewId { get; set; }
 
+        /// <summary>
+        /// The review.
+        /// </summary>
+        public Review Review { get; private set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -73,6 +78,13 @@ namespace Goodreads.Models.Response
             OldStatus = element.ElementAsString("old_status");
             UserId = element.ElementAsNullableInt("user_id");
             ReviewId = element.ElementAsNullableInt("review_id");
+
+            var review = element.Element("review");
+            if (review != null)
+            {
+                Review = new Review();
+                Review.Parse(review);
+            }
         }
     }
 }

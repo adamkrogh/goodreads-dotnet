@@ -81,7 +81,7 @@ namespace Goodreads.Clients
 
             var paginated = await Connection.ExecuteRequest<PaginatedList<Update>>(endpoint, parameters, null, "updates");
 
-            return paginated?.List;
+            return paginated?.List ?? new List<Update>();
         }
     }
 }

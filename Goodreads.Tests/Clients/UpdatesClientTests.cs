@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Xunit;
-using Goodreads.Clients;
+﻿using Goodreads.Clients;
 using Goodreads.Models.Request;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Goodreads.Tests
 {
@@ -21,7 +21,6 @@ namespace Goodreads.Tests
             {
                 var updates = await UpdatesClient.GetFriendsUpdates(UpdateType.Reviews);
                 Assert.NotNull(updates);
-                Assert.NotEmpty(updates);
             }
         }
     }

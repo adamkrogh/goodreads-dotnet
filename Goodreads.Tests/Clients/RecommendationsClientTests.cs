@@ -19,9 +19,9 @@ namespace Goodreads.Tests
             public async Task GetRecommendations()
             {
                 const int id = 26826409;
-                var recommendation = await RecommendationsClient.GetRecommendation(26826409);
+                var recommendation = await RecommendationsClient.GetRecommendation(id);
                 Assert.NotNull(recommendation);
-                Assert.Equal(id, recommendation.Id);
+                Assert.Equal(recommendation.Id, id);
             }
         }
     }

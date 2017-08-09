@@ -38,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\Goodreads.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,6 +68,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Clients\ReadStatusesClientTests.cs" />
     <Compile Include="Clients\RecommendationsClientTests.cs" />
     <Compile Include="Clients\UpdatesClientTests.cs" />
     <Compile Include="Clients\UserStatusClientTests.cs" />

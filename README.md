@@ -123,20 +123,20 @@ This list is kept updated so feel free to request or contribute if you have need
 - Owned Books **0%** (0 of 5)
 - Quotes **100%** (1 of 1)
 - Ratings **0%** (0 of 2)
-- Read Statuses **0%** (0 of 1)
-- Recommendations **1%** (1 of 1)
+- Read Statuses **100%** (1 of 1)
+- Recommendations **100%** (1 of 1)
 - Reviews **100%** (7 of 7)
 - Search **100%** (2 of 2)
 - Series **100%** (3 of 3)
 - Shelves **100%** (3 of 3)
 - Topics **0%** (0 of 4)
-- Updates **1%** (1 of 1)
+- Updates **100%** (1 of 1)
 - User Shelves **100%** (2 of 2)
 - Users **40%** (2 of 5)
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **73%** (51 of 70)
+**Overall**: **74%** (52 of 70)
 
 ### Complete
 
@@ -170,6 +170,7 @@ The list of API methods this client library supports.
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.
+- read_statuses.show — Get a user's read status.
 - recommendations.show — Get a recommendation from a user to another user.
 - review.create — Add review.
 - review.edit — Edit a review.
@@ -206,7 +207,6 @@ The list of API methods that will (hopefully) be supported soon.
 - owned_books.destroy — Delete an owned book.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.
-- read_statuses.show — Get a user's read status.
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.
 - topic.show — Get info about a topic by id.

@@ -68,6 +68,7 @@ namespace Goodreads
             UserStatuses = new UserStatusesClient(Connection);
             Updates = new UpdatesClient(Connection);
             Recommendations = new RecommendationsClient(Connection);
+            ReadStatuses = new ReadStatusesClient(Connection);
         }
 
         /// <summary>
@@ -154,5 +155,10 @@ namespace Goodreads
         /// API Client for the Goodreads recommendations endpoint.
         /// </summary>
         public IRecommendationsClient Recommendations { get; private set; }
+
+        /// <summary>
+        /// API Client for the Goodreads read status endpoint.
+        /// </summary>
+        public ReadStatusesClient ReadStatuses { get; private set; }
     }
 }

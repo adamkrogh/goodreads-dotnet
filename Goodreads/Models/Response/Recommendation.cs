@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
 using Goodreads.Extensions;
-using System;
 
 namespace Goodreads.Models.Response
 {
@@ -91,7 +91,6 @@ namespace Goodreads.Models.Response
                 ToUser = new Actor();
                 ToUser.Parse(toUser);
             }
-
 
             var comments = element.Element("comments");
             if (comments != null)

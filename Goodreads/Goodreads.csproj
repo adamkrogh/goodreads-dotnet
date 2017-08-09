@@ -54,6 +54,9 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\IReadStatusesClient.cs" />
+    <Compile Include="Clients\ReadStatus.cs" />
+    <Compile Include="Clients\ReadStatusesClient.cs" />
     <Compile Include="Clients\RecommendationsClient.cs" />
     <Compile Include="Clients\IRecommendationsClient.cs" />
     <Compile Include="Clients\IGroupClient.cs" />

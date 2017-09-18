@@ -115,5 +115,17 @@ namespace Goodreads.Clients
 
             return null;
         }
+
+        /// <summary>
+        /// Get an people the given user is following.
+        /// </summary>
+        /// <param name="userId">The Goodreads user id.</param>
+        /// <returns>People the given user is following.</returns>
+        public async Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId)
+        {
+            var endpoint = $"user/{userId}/following";
+
+            return await Connection.ExecuteRequest<PaginatedList<UserFollowing>>(endpoint, new List<Parameter>(), null, "following");
+        }
     }
 }

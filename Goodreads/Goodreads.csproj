@@ -69,6 +69,9 @@
     <Compile Include="Models\Response\Action.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\Update.cs" />
+    <Compile Include="Models\Response\UserFollowing.cs" />
+    <Compile Include="Models\Response\UserFollowingStatus.cs" />
+    <Compile Include="Models\Response\UserFollowingSummary.cs" />
     <Compile Include="Models\Response\UserStatus.cs" />
     <Compile Include="Clients\UserStatusesClient.cs" />
     <Compile Include="Clients\IUserStatusesClient.cs" />
@@ -131,7 +134,6 @@
     <Compile Include="Models\Response\ReviewStatsContainer.cs" />
     <Compile Include="Models\Response\Series.cs" />
     <Compile Include="Models\Response\Notification.cs" />
-    <Compile Include="Models\Response\UserFollowing.cs" />
     <Compile Include="Models\Response\UserStatusSummary.cs" />
     <Compile Include="Models\Response\UserSummary.cs" />
     <Compile Include="Models\Response\User.cs" />

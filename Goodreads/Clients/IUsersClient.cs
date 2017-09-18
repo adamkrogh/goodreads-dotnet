@@ -43,5 +43,12 @@ namespace Goodreads.Clients
             "CA1024:UsePropertiesWhereAppropriate",
             Justification = "Method makes a network request.")]
         Task<int?> GetAuthenticatedUserId();
+
+        /// <summary>
+        /// Get an people the given user is following.
+        /// </summary>
+        /// <param name="userId">The Goodreads user id.</param>
+        /// <returns>People the given user is following.</returns>
+        Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId);
     }
 }

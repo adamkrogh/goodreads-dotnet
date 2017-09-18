@@ -28,10 +28,10 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>A Goodreads user following model.</returns>
-        public Task<UserFollowing> Follow(int userId)
+        public Task<UserFollowingSummary> Follow(int userId)
         {
             var endpoint = string.Format(CultureInfo.InvariantCulture, "user/{0}/followers", userId);
-            return Connection.ExecuteRequest<UserFollowing>(endpoint, null, null, "user-following", Method.POST);
+            return Connection.ExecuteRequest<UserFollowingSummary>(endpoint, null, null, "user-following", Method.POST);
         }
 
         /// <summary>

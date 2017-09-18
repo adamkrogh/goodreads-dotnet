@@ -11,42 +11,78 @@ namespace Goodreads.Models.Response
     /// information about an User following.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserFollowing : ApiResponse
+    public sealed class UserFollowing : ApiResponse
     {
-        /// <summary>
-        /// The Goodreads User_following Id.
-        /// </summary>
-        public int Id { get; protected set; }
-
         /// <summary>
         /// The following user id.
         /// </summary>
-        public int UserId { get; protected set; }
+        public int UserId { get; private set; }
 
         /// <summary>
-        /// The user id who follows user.
+        /// The following user name.
         /// </summary>
-        public int FollowerId { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
-        /// The user following created date.
+        /// The following user link.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public string Link { get; private set; }
+
+        /// <summary>
+        /// The profile image for the following user, regular size.
+        /// </summary>
+        public string ImageUrl { get; private set; }
+
+        /// <summary>
+        /// The profile image for the following user, small size.
+        /// </summary>
+        public string SmallImageUrl { get; private set; }
+
+        /// <summary>
+        /// The following user friends count.
+        /// </summary>
+        public int FriendsCount { get; private set; }
+
+        /// <summary>
+        /// The following user reviews count.
+        /// </summary>
+        public int ReviewsCount { get; private set; }
+
+        /// <summary>
+        /// Is the following user a mutual friend.
+        /// </summary>
+        public bool IsMutualFriend { get; private set; }
+
+        /// <summary>
+        /// The following status.
+        /// </summary>
+        public UserFollowingStatus UserStatus { get; private set; }
 
         internal string DebuggerDisplay
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "UserId: {0}. FollowerId: {1}", UserId, FollowerId);
+                return string.Format(CultureInfo.InvariantCulture, "User: {0}. Name: {1}", UserId, Name);
             }
         }
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            UserId = element.ElementAsInt("user-id");
-            FollowerId = element.ElementAsInt("follower-id");
-            CreatedDateTime = element.ElementAsDateTime("created-at");
+            UserId = element.ElementAsInt("id");
+            Name = element.ElementAsString("name");
+            Link = element.ElementAsString("link");
+            ImageUrl = element.ElementAsString("image_url");
+            SmallImageUrl = element.ElementAsString("small_image_url");
+            FriendsCount = element.ElementAsInt("friends_count");
+            ReviewsCount = element.ElementAsInt("reviews_count");
+            IsMutualFriend = element.ElementAsBool("is_mutual_friend");
+
+            var status = element.Element("user_status");
+            if (status != null)
+            {
+                UserStatus = new UserFollowingStatus();
+                UserStatus.Parse(status);
+            }
         }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Models\Response\Action.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\Update.cs" />
+    <Compile Include="Models\Response\UserFollowers.cs" />
     <Compile Include="Models\Response\UserFollowing.cs" />
     <Compile Include="Models\Response\UserFollowingStatus.cs" />
     <Compile Include="Models\Response\UserFollowingSummary.cs" />

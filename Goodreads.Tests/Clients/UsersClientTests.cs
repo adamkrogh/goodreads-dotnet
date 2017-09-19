@@ -112,5 +112,18 @@ namespace Goodreads.Tests
                 Assert.NotEmpty(followings.List);
             }
         }
+
+        public class TheGetUsersFollowersMethod : UsersClientTests
+        {
+            [Fact]
+            public async Task ReturnUsersFollowers()
+            {
+                const int userId = 68628513;
+                var followings = await UsersClient.GetUsersFollowers(userId);
+
+                Assert.NotNull(followings);
+                Assert.NotEmpty(followings.List);
+            }
+        }
     }
 }

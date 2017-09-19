@@ -120,12 +120,38 @@ namespace Goodreads.Clients
         /// Get an people the given user is following.
         /// </summary>
         /// <param name="userId">The Goodreads user id.</param>
+        /// <param name="page">The current page of the paginated list.</param>
         /// <returns>People the given user is following.</returns>
-        public async Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId)
+        public async Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId, int page = 1)
         {
             var endpoint = $"user/{userId}/following";
 
-            return await Connection.ExecuteRequest<PaginatedList<UserFollowing>>(endpoint, new List<Parameter>(), null, "following");
+            var parameters = new List<Parameter>()
+            {
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
+            };
+
+            return await Connection.ExecuteRequest<PaginatedList<UserFollowing>>(endpoint, parameters, null, "following");
+        }
+
+        /// <summary>
+        /// Get given user's followers.
+        /// </summary>
+        /// <param name="userId">The Goodreads user id.</param>
+        /// <param name="page">The current page of the paginated list.</param>
+        /// <returns>The specified user's followers.</returns>
+        public async Task<PaginatedList<UserFollowers>> GetUsersFollowers(int userId, int page = 1)
+        {
+            var endpoint = $"user/{userId}/followers";
+
+            var parameters = new List<Parameter>()
+            {
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
+            };
+
+            var q = await Connection.ExecuteRaw(endpoint, parameters);
+
+            return await Connection.ExecuteRequest<PaginatedList<UserFollowers>>(endpoint, parameters, null, "followers");
         }
     }
 }

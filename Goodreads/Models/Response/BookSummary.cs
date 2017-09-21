@@ -80,6 +80,41 @@ namespace Goodreads.Models.Response
         /// </summary>
         public IReadOnlyList<AuthorSummary> Authors { get; protected set; }
 
+        /// <summary>
+        /// The edition information about book.
+        /// </summary>
+        public string EditionInformation { get; private set; }
+
+        /// <summary>
+        /// The book format.
+        /// </summary>
+        public string Format { get; private set; }
+
+        /// <summary>
+        /// The book description.
+        /// </summary>
+        public string Description { get; private set; }
+
+        /// <summary>
+        /// Number of pages.
+        /// </summary>
+        public int NumberOfPages { get; private set; }
+
+        /// <summary>
+        /// The book publisher.
+        /// </summary>
+        public string Publisher { get; private set; }
+
+        /// <summary>
+        /// The image url, large size.
+        /// </summary>
+        public string LargeImageUrl { get; private set; }
+
+        /// <summary>
+        /// A count of text reviews for this book.
+        /// </summary>
+        public int TextReviewsCount { get; private set; }
+
         internal string DebuggerDisplay
         {
             get
@@ -112,6 +147,14 @@ namespace Goodreads.Models.Response
             {
                 WorkId = workElement.ElementAsNullableInt("id");
             }
+
+            EditionInformation = element.ElementAsString("edition_information");
+            Format = element.ElementAsString("format");
+            Description = element.ElementAsString("description");
+            NumberOfPages = element.ElementAsInt("num_pages");
+            Publisher = element.ElementAsString("publisher");
+            LargeImageUrl = element.ElementAsString("large_image_url");
+            TextReviewsCount = element.ElementAsInt("text_reviews_count");
         }
     }
 }

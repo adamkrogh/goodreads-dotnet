@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **77%** (54 of 70)
+**Overall**: **79%** (55 of 70)
 
 ### Complete
 
@@ -167,6 +167,7 @@ The list of API methods this client library supports.
 - group.show — Get info about a group by id.
 - notifications — See the current user's notifications.
 - quotes.create — Add a quote.
+- owned_books.list — List books owned by a user.
 - series.show — See a series.
 - series.list — See all series by an author.
 - series.work — See all series a work is in.
@@ -203,7 +204,6 @@ The list of API methods that will (hopefully) be supported soon.
 - comment.list — List comments on a subject.
 - list.book — Get the listopia lists for a given book.
 - owned_books.create — Add to books owned.
-- owned_books.list — List books owned by a user.
 - owned_books.show — Show an owned book.
 - owned_books.update — Update an owned book.
 - owned_books.destroy — Delete an owned book.

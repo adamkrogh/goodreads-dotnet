@@ -8,6 +8,7 @@
     <Rule Id="CA1054" Action="None" />
     <Rule Id="CA1055" Action="None" />
     <Rule Id="CA1056" Action="None" />
+    <Rule Id="CA1506" Action="None" />
     <Rule Id="CA1702" Action="None" />
     <Rule Id="CA1806" Action="None" />
     <Rule Id="CA1811" Action="None" />

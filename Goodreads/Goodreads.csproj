@@ -54,7 +54,9 @@
     <Compile Include="Clients\BooksClient.cs" />
     <Compile Include="Clients\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\EventsClient.cs" />
+    <Compile Include="Clients\IOwnedBookClient.cs" />
     <Compile Include="Clients\IReadStatusesClient.cs" />
+    <Compile Include="Clients\OwnedBookClient.cs" />
     <Compile Include="Clients\ReadStatus.cs" />
     <Compile Include="Clients\ReadStatusesClient.cs" />
     <Compile Include="Clients\RecommendationsClient.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Models\Request\UpdateFilter.cs" />
     <Compile Include="Models\Request\UpdateType.cs" />
     <Compile Include="Models\Response\Action.cs" />
+    <Compile Include="Models\Response\OwnedBook.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\Update.cs" />
     <Compile Include="Models\Response\UserFollowers.cs" />

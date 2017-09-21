@@ -69,96 +69,102 @@ namespace Goodreads
             Updates = new UpdatesClient(Connection);
             Recommendations = new RecommendationsClient(Connection);
             ReadStatuses = new ReadStatusesClient(Connection);
+            OwnedBooks = new OwnedBookClient(Connection);
         }
 
         /// <summary>
         /// The connection to the Goodreads API.
         /// </summary>
-        public IConnection Connection { get; private set; }
+        public IConnection Connection { get; }
 
         /// <summary>
         /// API Client for the Goodreads Authors endpoint.
         /// </summary>
-        public IAuthorsClient Authors { get; private set; }
+        public IAuthorsClient Authors { get; }
 
         /// <summary>
         /// API Client for the Goodreads Books endpoint.
         /// </summary>
-        public IBooksClient Books { get; private set; }
+        public IBooksClient Books { get; }
 
         /// <summary>
         /// API Client for the Goodreads Shelves endpoint.
         /// </summary>
-        public IShelvesClient Shelves { get; private set; }
+        public IShelvesClient Shelves { get; }
 
         /// <summary>
         /// API Client for the Goodreads Users endpoint.
         /// </summary>
-        public IUsersClient Users { get; private set; }
+        public IUsersClient Users { get; }
 
         /// <summary>
         /// API Client for the Goodreads Reviews endpoint.
         /// </summary>
-        public IReviewsClient Reviews { get; private set; }
+        public IReviewsClient Reviews { get; }
 
         /// <summary>
         /// API Client for the Goodreads Series endpoint.
         /// </summary>
-        public ISeriesClient Series { get; private set; }
+        public ISeriesClient Series { get; }
 
         /// <summary>
         /// API Client for the Goodreads Author_following endpoint.
         /// </summary>
-        public IAuthorsFollowingClient AuthorsFollowing { get; private set; }
+        public IAuthorsFollowingClient AuthorsFollowing { get; }
 
         /// <summary>
         /// API Client for the Goodreads Events endpoint.
         /// </summary>
-        public IEventsClient Events { get; private set; }
+        public IEventsClient Events { get; }
 
         /// <summary>
         /// API Client for the Goodreads user followers endpoint.
         /// </summary>
-        public IFollowersClient Followers { get; private set; }
+        public IFollowersClient Followers { get; }
 
         /// <summary>
         /// API Client for the Goodreads user friends endpoint.
         /// </summary>
-        public IFriendsClient Friends { get; private set; }
+        public IFriendsClient Friends { get; }
 
         /// <summary>
         /// API Client for the Goodreads notifications endpoint.
         /// </summary>
-        public INotificationsClient Notifications { get; private set; }
+        public INotificationsClient Notifications { get; }
 
         /// <summary>
         /// API Client for the Goodreads group endpoint.
         /// </summary>
-        public IGroupClient Groups { get; private set; }
+        public IGroupClient Groups { get; }
 
         /// <summary>
         /// API Client for the Goodreads group endpoint.
         /// </summary>
-        public IQuotesClient Quotes { get; private set; }
+        public IQuotesClient Quotes { get; }
 
         /// <summary>
         /// API Client for the Goodreads user statuses endpoint.
         /// </summary>
-        public IUserStatusesClient UserStatuses { get; private set; }
+        public IUserStatusesClient UserStatuses { get; }
 
         /// <summary>
         /// API Client for the Goodreads updates endpoint.
         /// </summary>
-        public IUpdatesClient Updates { get; private set; }
+        public IUpdatesClient Updates { get; }
 
         /// <summary>
         /// API Client for the Goodreads recommendations endpoint.
         /// </summary>
-        public IRecommendationsClient Recommendations { get; private set; }
+        public IRecommendationsClient Recommendations { get; }
 
         /// <summary>
         /// API Client for the Goodreads read status endpoint.
         /// </summary>
-        public ReadStatusesClient ReadStatuses { get; private set; }
+        public IReadStatusesClient ReadStatuses { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads owned books endpoint.
+        /// </summary>
+        public IOwnedBookClient OwnedBooks { get; }
     }
 }

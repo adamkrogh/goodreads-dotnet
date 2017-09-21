@@ -68,6 +68,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Clients\OwnedBooksClientTests.cs" />
     <Compile Include="Clients\ReadStatusesClientTests.cs" />
     <Compile Include="Clients\RecommendationsClientTests.cs" />
     <Compile Include="Clients\UpdatesClientTests.cs" />

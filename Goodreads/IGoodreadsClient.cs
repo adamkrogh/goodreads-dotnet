@@ -90,6 +90,11 @@ namespace Goodreads
         /// <summary>
         /// API Client for the Goodreads read status endpoint.
         /// </summary>
-        ReadStatusesClient ReadStatuses { get; }
+        IReadStatusesClient ReadStatuses { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads owned books endpoint.
+        /// </summary>
+        IOwnedBookClient OwnedBooks { get; }
     }
 }

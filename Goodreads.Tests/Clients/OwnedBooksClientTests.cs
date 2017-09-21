@@ -25,5 +25,18 @@ namespace Goodreads.Tests
                 Assert.NotEmpty(books.List);
             }
         }
+
+        public class TheGetOwnedBooksInfo : OwnedBooksClientTests
+        {
+            [Fact]
+            public async Task TheGetOwnedBookInfo()
+            {
+                const int ownedBookId = 48510472;
+                var book = await OwnedBookClient.GetOwnedBookInfo(ownedBookId);
+
+                Assert.NotNull(book);
+                Assert.Equal(ownedBookId, book.Id);
+            }
+        }
     }
 }

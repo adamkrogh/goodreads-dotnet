@@ -31,5 +31,17 @@ namespace Goodreads.Clients
 
             return await Connection.ExecuteRequest<PaginatedList<OwnedBook>>(endpoint, parameters, null, "owned_books");
         }
+
+        /// <summary>
+        /// Get an owned book, including the current owner's user id.
+        /// </summary>
+        /// <param name="ownedBookId">A desire owned book id.</param>
+        /// <returns>An owned book information.</returns>
+        public async Task<OwnedBook> GetOwnedBookInfo(int ownedBookId)
+        {
+            var endpoint = $"owned_books/show/{ownedBookId}";
+
+            return await Connection.ExecuteRequest<OwnedBook>(endpoint, new List<Parameter>(), null, "owned_book/owned_book");
+        }
     }
 }

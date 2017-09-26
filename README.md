@@ -120,7 +120,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Groups **100%** (5 of 5)
 - Lists **0%** (0 of 1)
 - Notifications **100%** (1 of 1)
-- Owned Books **40%** (2 of 5)
+- Owned Books **80%** (4 of 5)
 - Quotes **100%** (1 of 1)
 - Ratings **0%** (0 of 2)
 - Read Statuses **100%** (1 of 1)
@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **80%** (56 of 70)
+**Overall**: **83%** (58 of 70)
 
 ### Complete
 
@@ -167,6 +167,8 @@ The list of API methods this client library supports.
 - group.show — Get info about a group by id.
 - notifications — See the current user's notifications.
 - quotes.create — Add a quote.
+- owned_books.create — Add to books owned.
+- owned_books.destroy — Delete an owned book.
 - owned_books.list — List books owned by a user.
 - owned_books.show — Show an owned book.
 - series.show — See a series.
@@ -204,9 +206,7 @@ The list of API methods that will (hopefully) be supported soon.
 - comment.create — Create a comment.
 - comment.list — List comments on a subject.
 - list.book — Get the listopia lists for a given book.
-- owned_books.create — Add to books owned.
 - owned_books.update — Update an owned book.
-- owned_books.destroy — Delete an owned book.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.
 - topic.create — Create a new topic via OAuth.

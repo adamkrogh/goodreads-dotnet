@@ -69,6 +69,7 @@
     <Compile Include="Models\Request\UpdateFilter.cs" />
     <Compile Include="Models\Request\UpdateType.cs" />
     <Compile Include="Models\Response\Action.cs" />
+    <Compile Include="Models\Response\OwnedBookSummary.cs" />
     <Compile Include="Models\Response\OwnedBook.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\Update.cs" />

@@ -136,7 +136,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **83%** (58 of 70)
+**Overall**: **84%** (59 of 70)
 
 ### Complete
 
@@ -206,7 +206,6 @@ The list of API methods that will (hopefully) be supported soon.
 - comment.create — Create a comment.
 - comment.list — List comments on a subject.
 - list.book — Get the listopia lists for a given book.
-- owned_books.update — Update an owned book.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.
 - topic.create — Create a new topic via OAuth.
@@ -229,8 +228,8 @@ API methods that Goodreads has deprecated.
 API methods that Goodreads has bugs.
 
 - friend.confirm_recommendation — Confirm or decline a friend recommendation. THERE IS A BUG IN THE GOODREADS API.
+- owned_books.update — Update an owned book. THERE IS A BUG IN THE GOODREADS API.
 - review.destroy — Delete a book review. THERE IS A BUG IN THE GOODREADS API.
-
 
 ## License
 

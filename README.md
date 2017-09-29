@@ -120,7 +120,7 @@ This list is kept updated so feel free to request or contribute if you have need
 - Groups **100%** (5 of 5)
 - Lists **0%** (0 of 1)
 - Notifications **100%** (1 of 1)
-- Owned Books **80%** (4 of 5)
+- Owned Books **100%** (5 of 5)
 - Quotes **100%** (1 of 1)
 - Ratings **0%** (0 of 2)
 - Read Statuses **100%** (1 of 1)
@@ -132,11 +132,11 @@ This list is kept updated so feel free to request or contribute if you have need
 - Topics **0%** (0 of 4)
 - Updates **100%** (1 of 1)
 - User Shelves **100%** (2 of 2)
-- Users **80%** (4 of 5)
+- Users **100%** (5 of 5)
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **84%** (59 of 70)
+**Overall**: **86%** (60 of 70)
 
 ### Complete
 
@@ -188,6 +188,7 @@ The list of API methods this client library supports.
 - shelves.add_to_shelf — Add a book to a shelf.
 - shelves.add_books_to_shelves — Add books to many shelves.
 - updates.friends — Get your friend updates.
+- user.compare — Compare books with another member.
 - user.friends — Get a user's friends.
 - user_shelves.create — Add book shelf.
 - user_shelves.update — Edit book shelf.
@@ -212,7 +213,6 @@ The list of API methods that will (hopefully) be supported soon.
 - topic.group_folder — Get list of topics in a group's folder.
 - topic.show — Get info about a topic by id.
 - topic.unread_group — Get a list of topics with unread comments.
-- user.compare — Compare books with another member.
 - work.editions — See all editions by work.
 
 ### Deprecated

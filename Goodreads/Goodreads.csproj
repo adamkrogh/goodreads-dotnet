@@ -69,9 +69,13 @@
     <Compile Include="Models\Request\UpdateFilter.cs" />
     <Compile Include="Models\Request\UpdateType.cs" />
     <Compile Include="Models\Response\Action.cs" />
+    <Compile Include="Models\Response\CompareBook.cs" />
+    <Compile Include="Models\Response\CompareBookReview.cs" />
+    <Compile Include="Models\Response\CompareBooksResult.cs" />
     <Compile Include="Models\Response\OwnedBookSummary.cs" />
     <Compile Include="Models\Response\OwnedBook.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
+    <Compile Include="Models\Response\ShortReview.cs" />
     <Compile Include="Models\Response\Update.cs" />
     <Compile Include="Models\Response\UserFollowers.cs" />
     <Compile Include="Models\Response\UserFollowing.cs" />

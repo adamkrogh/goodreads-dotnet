@@ -59,5 +59,12 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>The specified user's followers.</returns>
         Task<PaginatedList<UserFollowers>> GetUsersFollowers(int userId, int page = 1);
+
+        /// <summary>
+        /// Get stats comparing your books to another member's.
+        /// </summary>
+        /// <param name="userId">A desired user if to ompare.</param>
+        /// <returns>A compare books result.</returns>
+        Task<CompareBooksResult> CompareUserBooks(int userId);
     }
 }

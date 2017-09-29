@@ -149,9 +149,18 @@ namespace Goodreads.Clients
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
             };
 
-            var q = await Connection.ExecuteRaw(endpoint, parameters);
-
             return await Connection.ExecuteRequest<PaginatedList<UserFollowers>>(endpoint, parameters, null, "followers");
+        }
+
+        /// <summary>
+        /// Get stats comparing your books to another member's.
+        /// </summary>
+        /// <param name="userId">A desired user if to ompare.</param>
+        /// <returns>A compare books result.</returns>
+        public async Task<CompareBooksResult> CompareUserBooks(int userId)
+        {
+            var endpoint = $"user/compare/{userId}";
+            return await Connection.ExecuteRequest<CompareBooksResult>(endpoint, new List<Parameter>(), null, "compare");
         }
     }
 }

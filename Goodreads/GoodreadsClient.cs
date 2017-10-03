@@ -70,6 +70,7 @@ namespace Goodreads
             Recommendations = new RecommendationsClient(Connection);
             ReadStatuses = new ReadStatusesClient(Connection);
             OwnedBooks = new OwnedBookClient(Connection);
+            Comments = new CommentClient(Connection);
         }
 
         /// <summary>
@@ -166,5 +167,10 @@ namespace Goodreads
         /// API Client for the Goodreads owned books endpoint.
         /// </summary>
         public IOwnedBookClient OwnedBooks { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads comments endpoint.
+        /// </summary>
+        public ICommentClient Comments { get; }
     }
 }

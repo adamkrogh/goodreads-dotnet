@@ -96,5 +96,10 @@ namespace Goodreads
         /// API Client for the Goodreads owned books endpoint.
         /// </summary>
         IOwnedBookClient OwnedBooks { get; }
+
+        /// <summary>
+        /// API Client for the Goodreads comments endpoint.
+        /// </summary>
+        ICommentClient Comments { get; }
     }
 }

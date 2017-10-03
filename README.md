@@ -103,16 +103,13 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 
 ## Goodreads API Coverage
 
-All the available [Goodreads API](https://www.goodreads.com/api/index) methods are listed below. 
-This list is kept updated so feel free to request or contribute if you have need of a specific method.
-
 ### Status
 
 - Auth **100%** (1 of 1)
 - Authors **100%** (2 of 2)
 - Author Following **100%** (3 of 3)
 - Books **100%** (6 of 6)
-- Comments **0%** (0 of 2)
+- Comments **50%** (1 of 2)
 - Events **100%** (1 of 1)
 - Fanship **Deprecated**
 - Followers **100%** (2 of 2)
@@ -136,75 +133,13 @@ This list is kept updated so feel free to request or contribute if you have need
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **86%** (60 of 70)
+**Overall**: **87%** (61 of 70)
 
-### Complete
-
-The list of API methods this client library supports.
-
-- auth.user — Get id of user who authorized OAuth.
-- author.books — Paginate an author's books.
-- author.show — Get info about an author by id.
-- author_following.create — Follow an author.
-- author_following.destroy — Unfollow an author.
-- author_following.show — Show author following information.
-- book.isbn_to_id — Get Goodreads book IDs given ISBNs.
-- book.id_to_work_id — Get Goodreads work IDs given Goodreads book IDs.
-- book.review_counts — Get review statistics given a list of ISBNs.
-- book.show_by_isbn — Get the reviews for a book given an ISBN.
-- book.show — Get the reviews for a book given a Goodreads book id.
-- book.title — Get the reviews for a book given a title string.
-- events.list — Events in your area.
-- followers.create — Follow a user.
-- followers.destroy — Unfollow a user.
-- friend.confirm_request — Confirm or decline a friend request.
-- friends.create — Add a friend.
-- friend.requests — Get friend requests.
-- group.join — Join a group.
-- group.list — List groups for a given user.
-- group.members — Return members of a particular group.
-- group.search — Find a group.
-- group.show — Get info about a group by id.
-- notifications — See the current user's notifications.
-- quotes.create — Add a quote.
-- owned_books.create — Add to books owned.
-- owned_books.destroy — Delete an owned book.
-- owned_books.list — List books owned by a user.
-- owned_books.show — Show an owned book.
-- series.show — See a series.
-- series.list — See all series by an author.
-- series.work — See all series a work is in.
-- read_statuses.show — Get a user's read status.
-- recommendations.show — Get a recommendation from a user to another user.
-- review.create — Add review.
-- review.edit — Edit a review.
-- reviews.list — Get the books on a members shelf.
-- review.recent_reviews — Recent reviews from all members.
-- review.show — Get a review.
-- review.show_by_user_and_book — Get a user's review for a given book.
-- search.authors — Find an author by name.
-- search.books — Find books by title, author, or ISBN.
-- shelves.list — Get a user's shelves.
-- shelves.add_to_shelf — Add a book to a shelf.
-- shelves.add_books_to_shelves — Add books to many shelves.
-- updates.friends — Get your friend updates.
-- user.compare — Compare books with another member.
-- user.friends — Get a user's friends.
-- user_shelves.create — Add book shelf.
-- user_shelves.update — Edit book shelf.
-- user.followers — Get a user's followers.
-- user.following — Get people a user is following.
-- user.show — Get info about a member by id or username.
-- user_status.create — Update user status.
-- user_status.destroy — Delete user status.
-- user_status.index — View user statuses.
-- user_status.show — Get a user status.
 
 ### Todo
 
 The list of API methods that will (hopefully) be supported soon.
 
-- comment.create — Create a comment.
 - comment.list — List comments on a subject.
 - list.book — Get the listopia lists for a given book.
 - rating.create — Like a resource.

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
+using Goodreads.Models.Response;
 using RestSharp;
 
 namespace Goodreads.Clients
@@ -42,6 +43,29 @@ namespace Goodreads.Clients
             var result = await Connection.ExecuteRaw(endpoint, parameters, Method.POST);
 
             return result.StatusCode == HttpStatusCode.Created;
+        }
+
+        /// <summary>
+        /// Get lists comments.
+        /// </summary>
+        /// <param name="resourceId">Id of resource given as resourceType param.</param>
+        /// <param name="type">A resource type.</param>
+        /// <param name="page">The desired page from the paginated list of friend requests.</param>
+        /// <returns>List of comments.</returns>
+        public async Task<PaginatedList<Comment>> GetAll(int resourceId, ResourceType type, int page = 1)
+        {
+            var endpoint = @"comment";
+
+            var parameters = new List<Parameter>
+            {
+                new Parameter { Name = "type", Value = EnumHelpers.QueryParameterValue(type), Type = ParameterType.QueryString },
+                new Parameter { Name = "id", Value = resourceId, Type = ParameterType.QueryString },
+                new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
+            };
+
+            var result = await Connection.ExecuteRaw(endpoint, parameters);
+
+            return await Connection.ExecuteRequest<PaginatedList<Comment>>(endpoint, parameters, null, "comments");
         }
     }
 }

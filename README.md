@@ -109,7 +109,7 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 - Authors **100%** (2 of 2)
 - Author Following **100%** (3 of 3)
 - Books **100%** (6 of 6)
-- Comments **50%** (1 of 2)
+- Comments **100%** (2 of 2)
 - Events **100%** (1 of 1)
 - Fanship **Deprecated**
 - Followers **100%** (2 of 2)
@@ -140,7 +140,6 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 
 The list of API methods that will (hopefully) be supported soon.
 
-- comment.list — List comments on a subject.
 - list.book — Get the listopia lists for a given book.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.

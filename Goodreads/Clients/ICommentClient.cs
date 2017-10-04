@@ -1,5 +1,5 @@
-﻿using Goodreads.Models.Request;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Goodreads.Models.Request;
 
 namespace Goodreads.Clients
 {

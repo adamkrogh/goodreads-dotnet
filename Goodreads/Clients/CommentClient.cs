@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
+using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
 using RestSharp;
-using System.Net;
-using Goodreads.Helpers;
 
 namespace Goodreads.Clients
 {

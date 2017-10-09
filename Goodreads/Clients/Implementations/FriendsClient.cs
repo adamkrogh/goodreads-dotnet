@@ -10,17 +10,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for user friends endpoint.
     /// </summary>
-    internal sealed class FriendsClient : IFriendsClient
+    internal sealed class FriendsClient : EndpointClient, IFriendsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FriendsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public FriendsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
-        public async Task<bool> AddFriend(int userId)
+        async Task<bool> IFriendsClient.AddFriend(int userId)
         {
             var parameters = new List<Parameter>
             {
@@ -45,7 +43,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// /// <param name="page">The desired page from the paginated list of friend requests.</param>
         /// <returns>A paginated list of friend requests.</returns>
-        public async Task<PaginatedList<FriendRequest>> GetFriendRequests(int page = 1)
+        async Task<PaginatedList<FriendRequest>> IFriendsClient.GetFriendRequests(int page)
         {
             var parameters = new List<Parameter>
             {
@@ -66,7 +64,7 @@ namespace Goodreads.Clients
         /// <param name="friendRequestId">The friend request id.</param>
         /// <param name="response">The user response.</param>
         /// <returns>True if confirmation succeeded, otherwise - false.</returns>
-        public async Task<bool> ConfirmRequest(int friendRequestId, bool response)
+        async Task<bool> IFriendsClient.ConfirmRequest(int friendRequestId, bool response)
         {
             var parameters = new List<Parameter>
             {
@@ -75,31 +73,6 @@ namespace Goodreads.Clients
             };
 
             var result = await Connection.ExecuteRaw("friend/confirm_request", parameters, Method.POST);
-
-            return result.StatusCode == HttpStatusCode.NoContent;
-        }
-
-        /// <summary>
-        /// Confirm or decline a friend recommendation.
-        /// </summary>
-        /// <param name="recommendationId">The friend recommendation id.</param>
-        /// <param name="response">The user response.</param>
-        /// <returns>True if confirmation succeeded, otherwise - false.</returns>
-        /// <remarks>
-        /// ATTENTION! Seems that Goodreads endpoint is not working as describe in an official documentation.
-        /// Moreover I think method is not working at all.
-        /// There is not ability to approve recommendation in web version. An user need to add a book to his shelf instead.
-        /// Also I can't ignore recommendation using the Goodreads API.
-        /// </remarks>
-        public async Task<bool> ConfirmRecommendation(int recommendationId, bool response)
-        {
-            var parameters = new List<Parameter>
-            {
-                new Parameter { Name = "id", Value = recommendationId, Type = ParameterType.QueryString },
-                new Parameter { Name = "response", Value = response ? "Y" : "N", Type = ParameterType.QueryString }
-            };
-
-            var result = await Connection.ExecuteRaw("friend/confirm_recommendation", parameters, Method.POST);
 
             return result.StatusCode == HttpStatusCode.NoContent;
         }

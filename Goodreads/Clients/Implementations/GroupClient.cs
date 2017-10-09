@@ -12,17 +12,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Group endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class GroupClient : IGroupClient
+    internal sealed class GroupClient : EndpointClient, IGroupClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public GroupClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -30,7 +28,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="groupId">The Goodreads Id for the desired group.</param>
         /// <returns>True if joining succeeded, false otherwise.</returns>
-        public async Task<bool> Join(int groupId)
+        async Task<bool> IGroupClient.Join(int groupId)
         {
             var parameters = new List<Parameter>
             {
@@ -48,7 +46,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <param name="sort">The property to sort the groups on.</param>
         /// <returns>A paginated list of groups for the user.</returns>
-        public async Task<PaginatedList<GroupSummary>> GetListByUser(int userId, SortGroupList? sort = null)
+        async Task<PaginatedList<GroupSummary>> IGroupClient.GetListByUser(int userId, SortGroupList? sort)
         {
             var endpoint = $"group/list/{userId}";
 
@@ -75,7 +73,7 @@ namespace Goodreads.Clients
         /// <param name="search">A search string criteria.</param>
         /// <param name="page">A page number.</param>
         /// <returns>A paginated list of groups for the user.</returns>
-        public async Task<PaginatedList<GroupSummary>> GetGroups(string search, int page = 1)
+        async Task<PaginatedList<GroupSummary>> IGroupClient.GetGroups(string search, int page)
         {
             var parameters = new List<Parameter>()
             {
@@ -93,7 +91,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the group info on.</param>
         /// <param name="order">The property to order the group info on.</param>
         /// <returns>The Goodreads Group model.</returns>
-        public async Task<Group> GetInfo(int groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null)
+        async Task<Group> IGroupClient.GetInfo(int groupId, SortGroupInfo? sort, OrderGroupInfo? order)
         {
             var endpoint = $"group/show/{groupId}";
 
@@ -132,11 +130,11 @@ namespace Goodreads.Clients
         /// <param name="page">A page number.</param>
         /// <param name="sort">The property to sort the group member on.</param>
         /// <returns>A paginated list of groups members.</returns>
-        public async Task<PaginatedList<GroupUser>> GetMembers(
+        async Task<PaginatedList<GroupUser>> IGroupClient.GetMembers(
             int groupId,
-            string[] names = null,
-            int page = 1,
-            SortGroupMember sort = SortGroupMember.FristName)
+            string[] names,
+            int page,
+            SortGroupMember sort)
         {
             var endpoint = $"group/members/{groupId}";
             var parameters = new List<Parameter>

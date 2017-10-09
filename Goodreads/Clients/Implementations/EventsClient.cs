@@ -9,17 +9,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for events endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class EventsClient : IEventsClient
+    internal sealed class EventsClient : EndpointClient, IEventsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EventsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public EventsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -31,11 +29,11 @@ namespace Goodreads.Clients
         /// <param name="countryCode">2 characters country code.</param>
         /// <param name="postalCode">A postal code.</param>
         /// <returns>A list of the Goodreads events, null if not found.</returns>
-        public async Task<IReadOnlyList<GoodreadsEvent>> GetEvents(
-            float? latitude = null,
-            float? longitude = null,
-            string countryCode = null,
-            int? postalCode = null)
+        async Task<IReadOnlyList<GoodreadsEvent>> IEventsClient.GetEvents(
+            float? latitude,
+            float? longitude,
+            string countryCode,
+            int? postalCode)
         {
             var parameters = new List<Parameter>();
 

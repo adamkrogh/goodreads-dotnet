@@ -11,17 +11,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Update endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class UpdatesClient : IUpdatesClient
+    internal sealed class UpdatesClient : EndpointClient, IUpdatesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdatesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public UpdatesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -32,10 +30,10 @@ namespace Goodreads.Clients
         /// <param name="maxUpdates">A maximum amount of updates.</param>
         /// <returns>Readonly friends update list.</returns>
         /// <remarks>Get the same data you see on your homepage.</remarks>
-        public async Task<IReadOnlyList<Update>> GetFriendsUpdates(
-            UpdateType? type = null,
-            UpdateFilter? filter = null,
-            int? maxUpdates = null)
+        async Task<IReadOnlyList<Update>> IUpdatesClient.GetFriendsUpdates(
+            UpdateType? type,
+            UpdateFilter? filter,
+            int? maxUpdates)
         {
             var endpoint = @"updates/friends";
 

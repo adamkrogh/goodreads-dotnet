@@ -17,17 +17,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Review endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class ReviewsClient : IReviewsClient
+    internal sealed class ReviewsClient : EndpointClient, IReviewsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReviewsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public ReviewsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace Goodreads.Clients
         /// <param name="reviewId">The id of the review.</param>
         /// <param name="commentsPage">The page of comments to fetch.</param>
         /// <returns>A review with the matching id.</returns>
-        public Task<ReviewDetails> GetById(int reviewId, int commentsPage = 1)
+        Task<ReviewDetails> IReviewsClient.GetById(int reviewId, int commentsPage)
         {
             var parameters = new List<Parameter>
             {
@@ -56,7 +54,7 @@ namespace Goodreads.Clients
         /// <param name="findReviewOnDifferentEdition">If the review was not found on the
         /// given book id, search all editions of the book for the review.</param>
         /// <returns>A review that matches the given parameters.</returns>
-        public Task<ReviewDetails> GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition = false)
+        Task<ReviewDetails> IReviewsClient.GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition)
         {
             var parameters = new List<Parameter>
             {
@@ -82,14 +80,14 @@ namespace Goodreads.Clients
         /// <param name="page">The page of the reviews list to return.</param>
         /// <param name="pageSize">The number of reviews to return per page (from 1 to 200).</param>
         /// <returns>A paginated list of reviews for the user.</returns>
-        public Task<PaginatedList<Review>> GetListByUser(
+        Task<PaginatedList<Review>> IReviewsClient.GetListByUser(
             int userId,
-            string shelfName = null,
-            SortReviewsList? sort = null,
-            string searchQuery = null,
-            Order? order = null,
-            int? page = null,
-            int? pageSize = null)
+            string shelfName,
+            SortReviewsList? sort,
+            string searchQuery,
+            Order? order,
+            int? page,
+            int? pageSize)
         {
             var parameters = new List<Parameter>
             {
@@ -139,7 +137,7 @@ namespace Goodreads.Clients
         /// Get the most recent reviews that have been posted to Goodreads, for all users.
         /// </summary>
         /// <returns>The latest reviews that have been posted to Goodreads.</returns>
-        public async Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers()
+        async Task<IReadOnlyList<Review>> IReviewsClient.GetRecentReviewsForAllMembers()
         {
             var reviews = await Connection.ExecuteRequest<PaginatedList<Review>>("review/recent_reviews", null, null, "reviews");
             if (reviews != null)
@@ -161,12 +159,12 @@ namespace Goodreads.Clients
         /// <param name="dateRead">The date the user read the book on.</param>
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>If successful, returns the id of the created review, null otherwise.</returns>
-        public async Task<int?> Create(
+        async Task<int?> IReviewsClient.Create(
             int bookId,
-            string reviewText = null,
-            int? rating = null,
-            DateTime? dateRead = null,
-            string shelfName = null)
+            string reviewText,
+            int? rating,
+            DateTime? dateRead,
+            string shelfName)
         {
             if (!Connection.IsAuthenticated)
             {
@@ -235,12 +233,12 @@ namespace Goodreads.Clients
         /// <param name="dateRead">The date the user read the book on.</param>
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
-        public async Task<bool> Edit(
+        async Task<bool> IReviewsClient.Edit(
             int reviewId,
-            string reviewText = null,
-            int? rating = null,
-            DateTime? dateRead = null,
-            string shelfName = null)
+            string reviewText,
+            int? rating,
+            DateTime? dateRead,
+            string shelfName)
         {
             if (!Connection.IsAuthenticated)
             {
@@ -280,30 +278,6 @@ namespace Goodreads.Clients
             var response = await Connection.ExecuteRaw("review/{id}.xml", parameters, Method.POST);
 
             return response.StatusCode == HttpStatusCode.OK;
-        }
-
-        /// <summary>
-        /// Delete the review with the given id.
-        /// </summary>
-        /// <param name="reviewId">The id of the review to delete.</param>
-        /// <returns>True if the delete succeeded, false otherwise.</returns>
-        /// <remarks>TODO: Goodreads returns strange errors for this endpoint and never works.
-        /// I'll have to file a bug with them or post to their help forum...</remarks>
-        public async Task<bool> Delete(int reviewId)
-        {
-            if (!Connection.IsAuthenticated)
-            {
-                throw new ApiException("User authentication (using OAuth) is required to delete a review.");
-            }
-
-            var parameters = new List<Parameter>
-            {
-                new Parameter { Name = "id", Value = reviewId, Type = ParameterType.UrlSegment }
-            };
-
-            var response = await Connection.ExecuteRaw("review/destroy/{id}", parameters, Method.DELETE);
-
-            return true;
         }
     }
 }

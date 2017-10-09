@@ -9,17 +9,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for the recommendation endpoint.
     /// </summary>
-    internal sealed class RecommendationsClient : IRecommendationsClient
+    internal sealed class RecommendationsClient : EndpointClient, IRecommendationsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RecommendationsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public RecommendationsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire recommendation unique identifier.</param>
         /// <returns>A full information about desire recommendation.</returns>
-        public async Task<Recommendation> GetRecommendation(int id)
+        async Task<Recommendation> IRecommendationsClient.GetRecommendation(int id)
         {
             var endpoint = $"recommendations/{id}";
             var parameters = new List<Parameter>();

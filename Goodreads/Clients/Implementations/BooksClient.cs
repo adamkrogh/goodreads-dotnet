@@ -14,17 +14,14 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Book endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class BooksClient : IBooksClient
+    internal sealed class BooksClient : EndpointClient, IBooksClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BooksClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
-        public BooksClient(IConnection connection)
+        public BooksClient(IConnection connection) : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbn">The ISBN of the desired book.</param>
         /// <returns>An async task returning the desired book information.</returns>
-        public Task<Book> GetByIsbn(string isbn)
+        Task<Book> IBooksClient.GetByIsbn(string isbn)
         {
             var parameters = new List<Parameter>
             {
@@ -47,7 +44,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookId">The Goodreads book id.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        public Task<Book> GetByBookId(int bookId)
+        Task<Book> IBooksClient.GetByBookId(int bookId)
         {
             var parameters = new List<Parameter>
             {
@@ -64,7 +61,7 @@ namespace Goodreads.Clients
         /// <param name="title">The book title to find.</param>
         /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        public Task<Book> GetByTitle(string title, string author = null)
+        Task<Book> IBooksClient.GetByTitle(string title, string author)
         {
             var parameters = new List<Parameter>
             {
@@ -81,7 +78,7 @@ namespace Goodreads.Clients
         /// <param name="authorId">The Goodreads author id.</param>
         /// <param name="page">The desired page from the paginated list of books.</param>
         /// <returns>A paginated list of books written by the author.</returns>
-        public Task<PaginatedList<Book>> GetListByAuthorId(int authorId, int page = 1)
+        Task<PaginatedList<Book>> IBooksClient.GetListByAuthorId(int authorId, int page)
         {
             var parameters = new List<Parameter>
             {
@@ -99,7 +96,7 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="searchField">The book fields to apply the search term against.</param>
         /// <returns>A paginated list of <see cref="Work"/> object matching the given search criteria.</returns>
-        public Task<PaginatedList<Work>> Search(string searchTerm, int page = 1, BookSearchField searchField = BookSearchField.All)
+        Task<PaginatedList<Work>> IBooksClient.Search(string searchTerm, int page, BookSearchField searchField)
         {
             var parameters = new List<Parameter>
             {
@@ -121,9 +118,9 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbn">The ISBN number to fetch a book it for. Can be ISBN10 or ISBN13.</param>
         /// <returns>A Goodreads book id if found, null otherwise.</returns>
-        public async Task<int?> GetBookIdForIsbn(string isbn)
+        async Task<int?> IBooksClient.GetBookIdForIsbn(string isbn)
         {
-            var bookIds = await GetBookIdsForIsbns(new List<string> { isbn });
+            var bookIds = await (this as IBooksClient).GetBookIdsForIsbns(new List<string> { isbn });
             return bookIds == null ? null : bookIds.FirstOrDefault();
         }
 
@@ -134,7 +131,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">The list of ISBNs to convert.</param>
         /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
-        public async Task<IReadOnlyList<int?>> GetBookIdsForIsbns(IReadOnlyList<string> isbns)
+        async Task<IReadOnlyList<int?>> IBooksClient.GetBookIdsForIsbns(IReadOnlyList<string> isbns)
         {
             var parameters = new List<Parameter>
             {
@@ -180,7 +177,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
         /// <returns>A list of work ids corresponding to the given book ids.</returns>
-        public async Task<IReadOnlyList<int?>> GetWorkIdsForBookIds(IReadOnlyList<int> bookIds)
+        async Task<IReadOnlyList<int?>> IBooksClient.GetWorkIdsForBookIds(IReadOnlyList<int> bookIds)
         {
             var parameters = new List<Parameter>
             {
@@ -221,7 +218,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">A list of ISBN10 or ISBN13s to retrieve stats for.</param>
         /// <returns>A list of review stats for the given ISBNs.</returns>
-        public async Task<IReadOnlyList<ReviewStats>> GetReviewStatsForIsbns(IReadOnlyList<string> isbns)
+        async Task<IReadOnlyList<ReviewStats>> IBooksClient.GetReviewStatsForIsbns(IReadOnlyList<string> isbns)
         {
             var parameters = new List<Parameter>
             {

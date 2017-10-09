@@ -10,17 +10,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Shelf endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class ShelvesClient : IShelvesClient
+    internal sealed class ShelvesClient : EndpointClient, IShelvesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ShelvesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public ShelvesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
-        public Task<PaginatedList<UserShelf>> GetListOfUserShelves(int userId, int page = 1)
+        Task<PaginatedList<UserShelf>> IShelvesClient.GetListOfUserShelves(int userId, int page)
         {
             var parameters = new List<Parameter>
             {
@@ -47,7 +45,7 @@ namespace Goodreads.Clients
         /// <param name="bookId">Id of the book to add to the shelf.</param>
         /// <param name="action">This null unless you're removing from a shelf. If removing, set this to 'remove'.</param>
         /// <returns>True if the add or remove succeeded, false otherwise.</returns>
-        public async Task<bool> AddBookToShelf(string shelf, int bookId, string action = null)
+        async Task<bool> IShelvesClient.AddBookToShelf(string shelf, int bookId, string action)
         {
             var parameters = new List<Parameter>
             {
@@ -67,7 +65,7 @@ namespace Goodreads.Clients
         /// <param name="shelves">List of shelf names.</param>
         /// <param name="bookIds">List of book ids.</param>
         /// <returns>True if the add succeeded, false otherwise.</returns>
-        public async Task<bool> AddBooksToShelves(string[] shelves, int[] bookIds)
+        async Task<bool> IShelvesClient.AddBooksToShelves(string[] shelves, int[] bookIds)
         {
             var parameters = new List<Parameter>
             {
@@ -88,7 +86,7 @@ namespace Goodreads.Clients
         /// <param name="sortable">Determine whether shelf is sortable.</param>
         /// <param name="featured">Determine whether shelf is featured.</param>
         /// <returns>The created user shelf.</returns>
-        public async Task<UserShelf> AddShelf(string shelf, bool exclusive = false, bool sortable = false, bool featured = false)
+        async Task<UserShelf> IShelvesClient.AddShelf(string shelf, bool exclusive, bool sortable, bool featured)
         {
             var parameters = new List<Parameter>
             {
@@ -136,7 +134,7 @@ namespace Goodreads.Clients
         /// <param name="sortable">Determine whether shelf is sortable.</param>
         /// <param name="featured">Determine whether shelf is featured.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
-        public async Task<bool> EditShelf(int shelfId, string shelf, bool exclusive = false, bool sortable = false, bool featured = false)
+        async Task<bool> IShelvesClient.EditShelf(int shelfId, string shelf, bool exclusive, bool sortable, bool featured)
         {
             var endpoint = $"user_shelves/{shelfId}";
 

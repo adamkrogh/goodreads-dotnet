@@ -9,17 +9,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for notification endpoint.
     /// </summary>
-    internal sealed class NotificationsClient : INotificationsClient
+    internal sealed class NotificationsClient : EndpointClient, INotificationsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public NotificationsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -27,7 +25,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="page">The desired page from the paginated list of notifications.</param>
         /// <returns>A paginated list of notifications.</returns>
-        public Task<PaginatedList<Notification>> GetNotifications(int page = 1)
+        Task<PaginatedList<Notification>> INotificationsClient.GetNotifications(int page)
         {
             var parameters = new List<Parameter>
             {

@@ -21,7 +21,7 @@ namespace Goodreads.Clients
             Connection = connection;
         }
 
-        public async Task<PaginatedList<OwnedBook>> GetOwnedBooks(int userId, int page = 1)
+        async Task<PaginatedList<OwnedBook>> IOwnedBookClient.GetOwnedBooks(int userId, int page)
         {
             var endpoint = @"owned_books/user";
 
@@ -39,7 +39,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="ownedBookId">A desire owned book id.</param>
         /// <returns>An owned book information.</returns>
-        public async Task<OwnedBook> GetOwnedBookInfo(int ownedBookId)
+        async Task<OwnedBook> IOwnedBookClient.GetOwnedBookInfo(int ownedBookId)
         {
             var endpoint = $"owned_books/show/{ownedBookId}";
 
@@ -56,13 +56,13 @@ namespace Goodreads.Clients
         /// <param name="purchaseLocation">A location where this book was purchased.</param>
         /// <param name="bcid">BookCrossing id (BCID).</param>
         /// <returns>>An owned book object.</returns>
-        public async Task<OwnedBookSummary> AddOwnedBook(
+        async Task<OwnedBookSummary> IOwnedBookClient.AddOwnedBook(
             int bookId,
-            int code = 10,
-            string description = null,
-            DateTime? purchaseDate = null,
-            string purchaseLocation = null,
-            int? bcid = null)
+            int code,
+            string description,
+            DateTime? purchaseDate,
+            string purchaseLocation,
+            int? bcid)
         {
             var endpoint = @"owned_books";
 
@@ -100,7 +100,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="ownedBookId">Id of the owned book.</param>
         /// <returns>True if deleting successed, otherwise false.</returns>
-        public async Task<bool> DeleteOwnedBook(int ownedBookId)
+        async Task<bool> IOwnedBookClient.DeleteOwnedBook(int ownedBookId)
         {
             var endpoint = $"owned_books/destroy/{ownedBookId}";
             var response = await Connection.ExecuteRaw(endpoint, new List<Parameter>(), Method.POST);

@@ -13,17 +13,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Users endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class UsersClient : IUsersClient
+    internal sealed class UsersClient : EndpointClient, IUsersClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public UsersClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads user id of the user to fetch.</param>
         /// <returns>Information about the desired user.</returns>
-        public Task<User> GetByUserId(int userId)
+        Task<User> IUsersClient.GetByUserId(int userId)
         {
             var parameters = new List<Parameter>
             {
@@ -47,7 +45,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="username">The Goodreads username of the user to fetch.</param>
         /// <returns>Information about the desired user.</returns>
-        public Task<User> GetByUsername(string username)
+        Task<User> IUsersClient.GetByUsername(string username)
         {
             var parameters = new List<Parameter>
             {
@@ -64,7 +62,7 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="sort">The sort order of the paginated list.</param>
         /// <returns>A paginated list of the user summary information for their friends.</returns>
-        public Task<PaginatedList<UserSummary>> GetListOfFriends(int userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName)
+        Task<PaginatedList<UserSummary>> IUsersClient.GetListOfFriends(int userId, int page, SortFriendsList sort)
         {
             var parameters = new List<Parameter>
             {
@@ -86,7 +84,7 @@ namespace Goodreads.Clients
         /// If the client isn't using OAuth, this returns null.
         /// </summary>
         /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
-        public async Task<int?> GetAuthenticatedUserId()
+        async Task<int?> IUsersClient.GetAuthenticatedUserId()
         {
             if (!Connection.IsAuthenticated)
             {
@@ -122,7 +120,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>People the given user is following.</returns>
-        public async Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId, int page = 1)
+        async Task<PaginatedList<UserFollowing>> IUsersClient.GetUserFollowing(int userId, int page)
         {
             var endpoint = $"user/{userId}/following";
 
@@ -140,7 +138,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>The specified user's followers.</returns>
-        public async Task<PaginatedList<UserFollowers>> GetUsersFollowers(int userId, int page = 1)
+        async Task<PaginatedList<UserFollowers>> IUsersClient.GetUsersFollowers(int userId, int page)
         {
             var endpoint = $"user/{userId}/followers";
 
@@ -157,7 +155,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">A desired user if to ompare.</param>
         /// <returns>A compare books result.</returns>
-        public async Task<CompareBooksResult> CompareUserBooks(int userId)
+        async Task<CompareBooksResult> IUsersClient.CompareUserBooks(int userId)
         {
             var endpoint = $"user/compare/{userId}";
             return await Connection.ExecuteRequest<CompareBooksResult>(endpoint, new List<Parameter>(), null, "compare");

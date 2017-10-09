@@ -9,17 +9,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for the read statuses endpoint.
     /// </summary>
-    internal sealed class ReadStatusesClient : IReadStatusesClient
+    internal sealed class ReadStatusesClient : EndpointClient, IReadStatusesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReadStatusesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public ReadStatusesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -27,7 +25,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire read status unique identifier.</param>
         /// <returns>A full information about desire read status.</returns>
-        public async Task<ReadStatus> GetReadStatus(int id)
+        async Task<ReadStatus> IReadStatusesClient.GetReadStatus(int id)
         {
             var endpoint = $"read_statuses/{id}";
             var parameters = new List<Parameter>();

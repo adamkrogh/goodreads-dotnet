@@ -10,24 +10,22 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the user statuses endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class UserStatusesClient : IUserStatusesClient
+    internal sealed class UserStatusesClient : EndpointClient, IUserStatusesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatusesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public UserStatusesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
         /// Get most recent user statuses on the site.
         /// </summary>
         /// <returns>A list of the user statuses.</returns>
-        public async Task<IReadOnlyList<UserStatusSummary>> GetRecentUsersStatuses()
+        async Task<IReadOnlyList<UserStatusSummary>> IUserStatusesClient.GetRecentUsersStatuses()
         {
             var result = await Connection.ExecuteRequest<PaginatedList<UserStatusSummary>>(
                 "user_status/index",
@@ -43,7 +41,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userStatusId">The user status id.</param>
         /// <returns>User status info.</returns>
-        public async Task<UserStatus> GetUserStatus(int userStatusId)
+        async Task<UserStatus> IUserStatusesClient.GetUserStatus(int userStatusId)
         {
             var endpoint = $"user_status/show/{userStatusId}";
            return await Connection.ExecuteRequest<UserStatus>(endpoint, new List<Parameter>(), null, "user_status");
@@ -57,7 +55,7 @@ namespace Goodreads.Clients
         /// <param name="percent">Percent complete.</param>
         /// <param name="comment">The status update comment.</param>
         /// <returns>The new user status model.</returns>
-        public async Task<int> Create(int bookId, int? page = null, int? percent = null, string comment = null)
+        async Task<int> IUserStatusesClient.Create(int bookId, int? page, int? percent, string comment)
         {
             var parameters = new List<Parameter>
             {
@@ -89,7 +87,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userStatusId">The specified user status id.</param>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        public async Task<bool> Delete(int userStatusId)
+        async Task<bool> IUserStatusesClient.Delete(int userStatusId)
         {
             var endpoint = $"user_status/destroy/{userStatusId}";
             var response = await Connection.ExecuteRaw(endpoint, new List<Parameter>(), Method.POST);

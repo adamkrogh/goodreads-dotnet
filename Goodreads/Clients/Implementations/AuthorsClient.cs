@@ -11,17 +11,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Author endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class AuthorsClient : IAuthorsClient
+    internal sealed class AuthorsClient : EndpointClient, IAuthorsClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorsClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public AuthorsClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>An async task returning the desired author information.</returns>
-        public Task<Author> GetByAuthorId(int authorId)
+        Task<Author> IAuthorsClient.GetByAuthorId(int authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -44,7 +42,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorName">The author name to search for.</param>
         /// <returns>A Goodreads author id if found, null otherwise.</returns>
-        public async Task<int?> GetAuthorIdByName(string authorName)
+        async Task<int?> IAuthorsClient.GetAuthorIdByName(string authorName)
         {
             var parameters = new List<Parameter>
             {

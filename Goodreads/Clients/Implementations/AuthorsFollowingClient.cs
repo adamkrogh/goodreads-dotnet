@@ -11,17 +11,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Author_following endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class AuthorsFollowingClient : IAuthorsFollowingClient
+    internal sealed class AuthorsFollowingClient : EndpointClient, IAuthorsFollowingClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorsFollowingClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public AuthorsFollowingClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>A Goodreads author following model.</returns>
-        public async Task<AuthorFollowing> Follow(int authorId)
+        async Task<AuthorFollowing> IAuthorsFollowingClient.Follow(int authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -49,9 +47,9 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>
-        public async Task<bool> Unfollow(int authorFollowingId)
+        async Task<bool> IAuthorsFollowingClient.Unfollow(int authorFollowingId)
         {
-            var endpoint = string.Format(CultureInfo.InvariantCulture, "author_followings/{0}", authorFollowingId);
+            var endpoint = string.Format(CultureInfo.InvariantCulture, @"author_followings/{0}", authorFollowingId);
             var response = await Connection.ExecuteRaw(endpoint, null, Method.DELETE).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.NoContent;
@@ -62,7 +60,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
         /// <returns>A Goodreads author following model.</returns>
-        public async Task<AuthorFollowing> Show(int authorFollowingId)
+        async Task<AuthorFollowing> IAuthorsFollowingClient.Show(int authorFollowingId)
         {
             var endpoint = string.Format(CultureInfo.InvariantCulture, "author_followings/{0}", authorFollowingId);
 

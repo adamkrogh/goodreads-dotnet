@@ -9,17 +9,15 @@ using RestSharp;
 
 namespace Goodreads.Clients
 {
-    internal sealed class CommentClient : ICommentClient
+    internal sealed class CommentClient : EndpointClient, ICommentClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CommentClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public CommentClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="comment">A comment value.</param>
         /// <returns>True if creation is successed. otherwise false.</returns>
-        public async Task<bool> Create(int resourceId, ResourceType type, string comment)
+        async Task<bool> ICommentClient.Create(int resourceId, ResourceType type, string comment)
         {
             var endpoint = @"comment";
 
@@ -52,7 +50,7 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="page">The desired page from the paginated list of friend requests.</param>
         /// <returns>List of comments.</returns>
-        public async Task<PaginatedList<Comment>> GetAll(int resourceId, ResourceType type, int page = 1)
+        async Task<PaginatedList<Comment>> ICommentClient.GetAll(int resourceId, ResourceType type, int page)
         {
             var endpoint = @"comment";
 

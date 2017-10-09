@@ -12,17 +12,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Series endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class SeriesClient : ISeriesClient
+    internal sealed class SeriesClient : EndpointClient, ISeriesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SeriesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public SeriesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -30,7 +28,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The author to fetch the list of series for.</param>
         /// <returns>A list of series written by the author.</returns>
-        public async Task<IReadOnlyList<Series>> GetListByAuthorId(int authorId)
+        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByAuthorId(int authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -79,7 +77,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="workId">The work id to fetch the list of series for.</param>
         /// <returns>A list of series that this work appears in.</returns>
-        public async Task<IReadOnlyList<Series>> GetListByWorkId(int workId)
+        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByWorkId(int workId)
         {
             var parameters = new List<Parameter>
             {
@@ -124,7 +122,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="seriesId">The Goodreads id of the series.</param>
         /// <returns>Information about the series, including a list of works.</returns>
-        public Task<Series> GetById(int seriesId)
+        Task<Series> ISeriesClient.GetById(int seriesId)
         {
             var parameters = new List<Parameter>
             {

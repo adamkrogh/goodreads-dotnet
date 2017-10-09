@@ -10,17 +10,15 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Quotes endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class QuotesClient : IQuotesClient
+    internal sealed class QuotesClient : EndpointClient, IQuotesClient
     {
-        private readonly IConnection Connection;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="QuotesClient"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public QuotesClient(IConnection connection)
+            : base(connection)
         {
-            Connection = connection;
         }
 
         /// <summary>
@@ -33,12 +31,12 @@ namespace Goodreads.Clients
         /// <param name="isbn">ISBN of the book from which the quote was taken.
         /// This will not override the book_id if it was provided.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
-        public async Task<bool> Add(
+        async Task<bool> IQuotesClient.Add(
             int authorId,
             string authorName,
             string quote,
-            int? bookId = null,
-            string isbn = null)
+            int? bookId,
+            string isbn)
         {
             var parameters = new List<Parameter>
             {

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\EndpointClient.cs" />
     <Compile Include="Clients\Implementations\AuthorsClient.cs" />
     <Compile Include="Clients\Implementations\CommentClient.cs" />
     <Compile Include="Clients\Implementations\FollowersClient.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Clients\Implementations\EventsClient.cs" />
     <Compile Include="Clients\Interfaces\ICommentClient.cs" />
     <Compile Include="Clients\Interfaces\IOwnedBookClient.cs" />
+    <Compile Include="Clients\Interfaces\IRatingClient.cs" />
     <Compile Include="Clients\Interfaces\IReadStatusesClient.cs" />
     <Compile Include="Clients\Implementations\OwnedBookClient.cs" />
     <Compile Include="Clients\Implementations\ReadStatusesClient.cs" />

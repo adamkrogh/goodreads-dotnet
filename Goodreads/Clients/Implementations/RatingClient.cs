@@ -18,7 +18,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public RatingClient(IConnection connection)
-            : base(connection, @"rating")
+            : base(connection)
         {
         }
 
@@ -31,7 +31,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "rating[resource_type]",  Value = EnumHelpers.QueryParameterValue(type), Type = ParameterType.QueryString },
             };
 
-            var result = await Connection.ExecuteRaw(Endpoint, parameters, Method.POST);
+            var result = await Connection.ExecuteRaw("rating", parameters, Method.POST);
 
             return result.StatusCode == HttpStatusCode.Created;
         }

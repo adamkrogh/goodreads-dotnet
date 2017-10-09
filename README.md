@@ -133,7 +133,7 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 - User Status **100%** (4 of 4)
 - Works **0%** (0 of 1)
 
-**Overall**: **87%** (61 of 70)
+**Overall**: **89%** (62 of 70)
 
 
 ### Todo

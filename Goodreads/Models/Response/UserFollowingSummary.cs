@@ -11,27 +11,27 @@ namespace Goodreads.Models.Response
     /// summary information about an User following.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserFollowingSummary : ApiResponse
+    public sealed class UserFollowingSummary : ApiResponse
     {
         /// <summary>
         /// The Goodreads User_following Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The following user id.
         /// </summary>
-        public int UserId { get; protected set; }
+        public int UserId { get; private set; }
 
         /// <summary>
         /// The user id who follows user.
         /// </summary>
-        public int FollowerId { get; protected set; }
+        public int FollowerId { get; private set; }
 
         /// <summary>
         /// The user following created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         internal string DebuggerDisplay
         {

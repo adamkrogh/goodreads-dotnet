@@ -12,7 +12,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Group endpoint of the Goodreads API.
     /// </summary>
-    public class GroupClient : IGroupClient
+    internal sealed class GroupClient : IGroupClient
     {
         private readonly IConnection Connection;
 

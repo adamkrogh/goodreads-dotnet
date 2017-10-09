@@ -5,7 +5,7 @@ using System.Xml.Linq;
 namespace Goodreads.Models.Response
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class CompareBookReview : ApiResponse
+    public sealed class CompareBookReview : ApiResponse
     {
         /// <summary>
         /// A compare book.

@@ -10,52 +10,52 @@ namespace Goodreads.Models.Response
     /// very brief information about an Author instead of their entire profile.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class AuthorSummary : ApiResponse
+    public sealed class AuthorSummary : ApiResponse
     {
         /// <summary>
         /// The Goodreads Author Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The name of this author.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The role of this author.
         /// </summary>
-        public string Role { get; protected set; }
+        public string Role { get; private set; }
 
         /// <summary>
         /// The image of this author, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The image of this author, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// The link to the Goodreads page for this author.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The average rating for all of this author's books.
         /// </summary>
-        public decimal? AverageRating { get; protected set; }
+        public decimal? AverageRating { get; private set; }
 
         /// <summary>
         /// The total count of all ratings of this author's books.
         /// </summary>
-        public int? RatingsCount { get; protected set; }
+        public int? RatingsCount { get; private set; }
 
         /// <summary>
         /// The total count of all the text reviews of this author's books.
         /// </summary>
-        public int? TextReviewsCount { get; protected set; }
+        public int? TextReviewsCount { get; private set; }
 
         internal string DebuggerDisplay
         {

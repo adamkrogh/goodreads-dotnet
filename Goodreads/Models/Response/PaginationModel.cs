@@ -9,22 +9,22 @@ namespace Goodreads.Models.Response
     /// Represents pagination information as returned by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class PaginationModel : ApiResponse
+    public sealed class PaginationModel : ApiResponse
     {
         /// <summary>
         /// The item the current page starts on.
         /// </summary>
-        public int Start { get; protected set; }
+        public int Start { get; private set; }
 
         /// <summary>
         /// The item the current page ends on.
         /// </summary>
-        public int End { get; protected set; }
+        public int End { get; private set; }
 
         /// <summary>
         /// The total number of items in the paginated list.
         /// </summary>
-        public int TotalItems { get; protected set; }
+        public int TotalItems { get; private set; }
 
         internal string DebuggerDisplay
         {

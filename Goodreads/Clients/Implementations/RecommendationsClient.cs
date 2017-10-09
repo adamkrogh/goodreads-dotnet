@@ -9,7 +9,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for the recommendation endpoint.
     /// </summary>
-    public class RecommendationsClient : IRecommendationsClient
+    internal sealed class RecommendationsClient : IRecommendationsClient
     {
         private readonly IConnection Connection;
 

@@ -18,6 +18,11 @@ namespace Goodreads.Models.Response
         public int Id { get; set; }
 
         /// <summary>
+        /// The read status header.
+        /// </summary>
+        public string Header { get; private set; }
+
+        /// <summary>
         /// The status/description of this update.
         /// </summary>
         public string Status { get; set; }
@@ -57,26 +62,61 @@ namespace Goodreads.Models.Response
         /// </summary>
         public Review Review { get; private set; }
 
+        /// <summary>
+        /// A count of likes for the current read status.
+        /// </summary>
+        public int LikesCount { get; private set; }
+
+        /// <summary>
+        /// Determine whether the current read status is liked.
+        /// </summary>
+        public bool Liked { get; private set; }
+
+        /// <summary>
+        /// The read status created date.
+        /// </summary>
+        public DateTime? CreatedAt { get; private set; }
+
+        /// <summary>
+        /// The read status book.
+        /// </summary>
+        public BookSummary Book { get; private set; }
+
+        /// <summary>
+        /// The paginated list of comments that have been made on this status.
+        /// </summary>
+        public PaginatedList<Comment> Comments { get; private set; }
+
+        /// <summary>
+        /// An user who create the current read status.
+        /// </summary>
+        public Actor User { get; private set; }
+
         internal string DebuggerDisplay
         {
             get
             {
                 return string.Format(
                     CultureInfo.InvariantCulture,
-                    "ReadStatus: Id: {0}",
-                    Id);
+                    "Id: {0}, Header: {1}",
+                    Id,
+                    Header);
             }
         }
 
         internal override void Parse(XElement element)
         {
             Id = element.ElementAsInt("id");
+            Header = element.ElementAsString("header");
             Status = element.ElementAsString("status");
             UpdatedAt = element.ElementAsDateTime("updated_at");
             RatingsCount = element.ElementAsInt("ratings_count");
             CommentsCount = element.ElementAsInt("comments_count");
             OldStatus = element.ElementAsString("old_status");
             UserId = element.ElementAsNullableInt("user_id");
+            LikesCount = element.ElementAsInt("likes_count");
+            Liked = element.ElementAsBool("liked");
+            CreatedAt = element.ElementAsDateTime("created_at");
             ReviewId = element.ElementAsNullableInt("review_id");
 
             var review = element.Element("review");
@@ -84,6 +124,27 @@ namespace Goodreads.Models.Response
             {
                 Review = new Review();
                 Review.Parse(review);
+            }
+
+            var book = element.Element("book");
+            if (book != null)
+            {
+                Book = new BookSummary();
+                Book.Parse(book);
+            }
+
+            var comments = element.Element("comments");
+            if (comments != null)
+            {
+                Comments = new PaginatedList<Comment>();
+                Comments.Parse(comments);
+            }
+
+            var user = element.Element("user");
+            if (user != null)
+            {
+                User = new Actor();
+                User.Parse(user);
             }
         }
     }

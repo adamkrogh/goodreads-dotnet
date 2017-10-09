@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Goodreads.Http;
+using Goodreads.Models.Response;
 using RestSharp;
 
 namespace Goodreads.Clients
@@ -8,7 +9,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for the read statuses endpoint.
     /// </summary>
-    public class ReadStatusesClient : IReadStatusesClient
+    internal sealed class ReadStatusesClient : IReadStatusesClient
     {
         private readonly IConnection Connection;
 

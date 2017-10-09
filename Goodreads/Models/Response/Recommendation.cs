@@ -10,7 +10,7 @@ namespace Goodreads.Models.Response
     /// This class models a user recommendation as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Recommendation : ApiResponse
+    public sealed class Recommendation : ApiResponse
     {
         /// <summary>
         /// The recommendation unique identifier.

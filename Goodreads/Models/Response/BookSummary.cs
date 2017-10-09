@@ -13,72 +13,72 @@ namespace Goodreads.Models.Response
     /// very brief information about a Book instead of their entire object.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class BookSummary : ApiResponse
+    public sealed class BookSummary : ApiResponse
     {
         /// <summary>
         /// The Id of this book.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The title of this book.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The title of this book without series information in it.
         /// </summary>
-        public string TitleWithoutSeries { get; protected set; }
+        public string TitleWithoutSeries { get; private set; }
 
         /// <summary>
         /// The link to the Goodreads page for this book.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The cover image of this book, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The cover image of this book, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// The work id of this book.
         /// </summary>
-        public int? WorkId { get; protected set; }
+        public int? WorkId { get; private set; }
 
         /// <summary>
         /// The ISBN of this book.
         /// </summary>
-        public string Isbn { get; protected set; }
+        public string Isbn { get; private set; }
 
         /// <summary>
         /// The ISBN13 of this book.
         /// </summary>
-        public string Isbn13 { get; protected set; }
+        public string Isbn13 { get; private set; }
 
         /// <summary>
         /// The average rating of the book.
         /// </summary>
-        public decimal? AverageRating { get; protected set; }
+        public decimal? AverageRating { get; private set; }
 
         /// <summary>
         /// The count of all ratings for the book.
         /// </summary>
-        public int? RatingsCount { get; protected set; }
+        public int? RatingsCount { get; private set; }
 
         /// <summary>
         /// The date this book was published.
         /// </summary>
-        public DateTime? PublicationDate { get; protected set; }
+        public DateTime? PublicationDate { get; private set; }
 
         /// <summary>
         /// Summary information about the authors of this book.
         /// </summary>
-        public IReadOnlyList<AuthorSummary> Authors { get; protected set; }
+        public IReadOnlyList<AuthorSummary> Authors { get; private set; }
 
         /// <summary>
         /// The edition information about book.

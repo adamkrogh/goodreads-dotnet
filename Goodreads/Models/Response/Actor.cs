@@ -10,47 +10,47 @@ namespace Goodreads.Models.Response
     /// information about actor who made notification.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Actor : ApiResponse
+    public sealed class Actor : ApiResponse
     {
         /// <summary>
         /// An actor Goodreads id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// An actor name.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         ///  An actor display name.
         /// </summary>
-        public string DisplayName { get; protected set; }
+        public string DisplayName { get; private set; }
 
         /// <summary>
         /// An actor location.
         /// </summary>
-        public string Location { get; protected set; }
+        public string Location { get; private set; }
 
         /// <summary>
         /// An actor link to Goodreads profile.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The profile image for the actor, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The profile image for the actor, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// Determine whether actor has profile image.
         /// </summary>
-        public bool HasImage { get; protected set; }
+        public bool HasImage { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -11,27 +11,27 @@ namespace Goodreads.Models.Response
     /// information about a friend request.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class FriendRequest : ApiResponse
+    public sealed class FriendRequest : ApiResponse
     {
         /// <summary>
         /// The friend request id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The resource created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// The friend message.
         /// </summary>
-        public string Message { get; protected set; }
+        public string Message { get; private set; }
 
         /// <summary>
         /// The user who give a friend request.
         /// </summary>
-        public Actor User { get; protected set; }
+        public Actor User { get; private set; }
 
         internal string DebuggerDisplay
         {

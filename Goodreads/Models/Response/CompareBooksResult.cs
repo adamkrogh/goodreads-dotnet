@@ -10,7 +10,7 @@ namespace Goodreads.Models.Response
     /// Represents a compare books as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class CompareBooksResult : ApiResponse
+    public sealed class CompareBooksResult : ApiResponse
     {
         /// <summary>
         /// Count of books are not a common.

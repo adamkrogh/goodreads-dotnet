@@ -12,58 +12,58 @@ namespace Goodreads.Models.Response
     /// This is one of the few Goodreads endpoints that return JSON for some reason.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class ReviewStats : ApiResponse
+    public sealed class ReviewStats : ApiResponse
     {
         /// <summary>
         /// The Goodreads Book Id.
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public int BookId { get; protected set; }
+        public int BookId { get; private set; }
 
         /// <summary>
         /// The ISBN of this book.
         /// </summary>
-        public string Isbn { get; protected set; }
+        public string Isbn { get; private set; }
 
         /// <summary>
         /// The ISBN13 of this book.
         /// </summary>
-        public string Isbn13 { get; protected set; }
+        public string Isbn13 { get; private set; }
 
         /// <summary>
         /// The number of ratings for this book.
         /// </summary>
-        public int RatingsCount { get; protected set; }
+        public int RatingsCount { get; private set; }
 
         /// <summary>
         /// The number of reviews for this book.
         /// </summary>
-        public int ReviewsCount { get; protected set; }
+        public int ReviewsCount { get; private set; }
 
         /// <summary>
         /// The number of text reviews for this book.
         /// </summary>
-        public int TextReviewsCount { get; protected set; }
+        public int TextReviewsCount { get; private set; }
 
         /// <summary>
         /// The number of ratings across all editions of this book.
         /// </summary>
-        public int WorkRatingsCount { get; protected set; }
+        public int WorkRatingsCount { get; private set; }
 
         /// <summary>
         /// The number of reviews across all editions of this book.
         /// </summary>
-        public int WorkReviewsCount { get; protected set; }
+        public int WorkReviewsCount { get; private set; }
 
         /// <summary>
         /// The number of text reviews across all editions of this book.
         /// </summary>
-        public int WorkTextReviewsCount { get; protected set; }
+        public int WorkTextReviewsCount { get; private set; }
 
         /// <summary>
         /// The average rating of this book.
         /// </summary>
-        public decimal AverageRating { get; protected set; }
+        public decimal AverageRating { get; private set; }
 
         internal string DebuggerDisplay
         {

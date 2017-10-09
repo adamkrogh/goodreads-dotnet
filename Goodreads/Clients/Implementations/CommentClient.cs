@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace Goodreads.Clients
 {
-    public sealed class CommentClient : ICommentClient
+    internal sealed class CommentClient : ICommentClient
     {
         private readonly IConnection Connection;
 

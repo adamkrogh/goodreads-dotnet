@@ -10,24 +10,24 @@ namespace Goodreads.Models.Response
     /// This is usually a link to a third-party site to purchase the book.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class BookLink : ApiResponse
+    public sealed class BookLink : ApiResponse
     {
         /// <summary>
         /// The Id of this book link.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The name of this book link provider.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The link to this book on the provider's site.
         /// Be sure to append book_id as a query parameter
         /// to actually be redirected to the correct page.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         internal string DebuggerDisplay
         {

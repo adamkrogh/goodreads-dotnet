@@ -10,73 +10,73 @@ namespace Goodreads.Models.Response
     /// Represents a user's shelf on their Goodreads profile.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserShelf : ApiResponse
+    public sealed class UserShelf : ApiResponse
     {
         /// <summary>
         /// The Id of this user shelf.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The name of this user shelf.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The number of books on this user shelf.
         /// </summary>
-        public int BookCount { get; protected set; }
+        public int BookCount { get; private set; }
 
         /// <summary>
         /// Determines if this shelf is exclusive or not.
         /// A single book can only be on one exclusive shelf.
         /// </summary>
-        public bool IsExclusive { get; protected set; }
+        public bool IsExclusive { get; private set; }
 
         /// <summary>
         /// The description of this user shelf.
         /// </summary>
-        public string Description { get; protected set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// Determines the default sort column of this user shelf.
         /// </summary>
-        public string Sort { get; protected set; }
+        public string Sort { get; private set; }
 
         /// <summary>
         /// Determines the default sort order of this user shelf.
         /// </summary>
-        public Order? Order { get; protected set; }
+        public Order? Order { get; private set; }
 
         /// <summary>
         /// Determines if this shelf will be featured on the user's profile.
         /// </summary>
-        public bool IsFeatured { get; protected set; }
+        public bool IsFeatured { get; private set; }
 
         /// <summary>
         /// Determines if this user shelf is used in recommendations.
         /// </summary>
-        public bool IsRecommendedFor { get; protected set; }
+        public bool IsRecommendedFor { get; private set; }
 
         /// <summary>
         /// Determines if this user shelf is sticky.
         /// </summary>
-        public bool Sticky { get; protected set; }
+        public bool Sticky { get; private set; }
 
         /// <summary>
         /// Determines if this user shelf is editable.
         /// </summary>
-        public bool IsEditable { get; protected set; }
+        public bool IsEditable { get; private set; }
 
         /// <summary>
         /// The shelf created date.
         /// </summary>
-        public DateTime? CreatedAt { get; protected set; }
+        public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// The shelf updated date.
         /// </summary>
-        public DateTime? UpdatedAt { get; protected set; }
+        public DateTime? UpdatedAt { get; private set; }
 
         internal string DebuggerDisplay
         {

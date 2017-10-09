@@ -10,37 +10,37 @@ namespace Goodreads.Models.Response
     /// This class models an Group folder as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class GroupFolder : ApiResponse
+    public sealed class GroupFolder : ApiResponse
     {
         /// <summary>
         /// The Goodreads Group folder Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The group folder name.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The count of group items.
         /// </summary>
-        public int ItemsCount { get; protected set; }
+        public int ItemsCount { get; private set; }
 
         /// <summary>
         /// The group folder link.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The count of group sub items.
         /// </summary>
-        public int SubItemsCount { get; protected set; }
+        public int SubItemsCount { get; private set; }
 
         /// <summary>
         /// The group folder updated date.
         /// </summary>
-        public DateTime? UpdatedDate { get; protected set; }
+        public DateTime? UpdatedDate { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -11,7 +11,7 @@ namespace Goodreads.Http
     /// <summary>
     /// A common connection class to the Goodreads API.
     /// </summary>
-    public class Connection : IConnection
+    internal sealed class Connection : IConnection
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Connection"/> class.

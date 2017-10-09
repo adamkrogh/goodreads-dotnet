@@ -15,80 +15,80 @@ namespace Goodreads.Models.Response
     /// are aggregate information over all the editions of a work.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Work : ApiResponse
+    public sealed class Work : ApiResponse
     {
         /// <summary>
         /// The Goodreads Id for this work.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The number of books for this work.
         /// </summary>
-        public int BooksCount { get; protected set; }
+        public int BooksCount { get; private set; }
 
         /// <summary>
         /// The Goodreads Book Id that is considered the best version of this work.
         /// Might not be populated. See the <see cref="BestBook"/> property for details, if provided.
         /// </summary>
-        public int? BestBookId { get; protected set; }
+        public int? BestBookId { get; private set; }
 
         /// <summary>
         /// The details for the best book of this work. Only populated
         /// if Goodreads provides it as part of the response.
         /// </summary>
-        public BestBook BestBook { get; protected set; }
+        public BestBook BestBook { get; private set; }
 
         /// <summary>
         /// If included in a list, this defines this work's position.
         /// </summary>
-        public string UserPosition { get; protected set; }
+        public string UserPosition { get; private set; }
 
         /// <summary>
         /// The number of reviews of this work.
         /// </summary>
-        public int ReviewsCount { get; protected set; }
+        public int ReviewsCount { get; private set; }
 
         /// <summary>
         /// The sum of all ratings of this work.
         /// </summary>
-        public int RatingsSum { get; protected set; }
+        public int RatingsSum { get; private set; }
 
         /// <summary>
         /// The number of ratings of this work.
         /// </summary>
-        public int RatingsCount { get; protected set; }
+        public int RatingsCount { get; private set; }
 
         /// <summary>
         /// The number of text reviews of this work.
         /// </summary>
-        public int TextReviewsCount { get; protected set; }
+        public int TextReviewsCount { get; private set; }
 
         /// <summary>
         /// The original publication date of this work.
         /// </summary>
-        public DateTime? OriginalPublicationDate { get; protected set; }
+        public DateTime? OriginalPublicationDate { get; private set; }
 
         /// <summary>
         /// The original title of this work.
         /// </summary>
-        public string OriginalTitle { get; protected set; }
+        public string OriginalTitle { get; private set; }
 
         /// <summary>
         /// The original language of this work.
         /// </summary>
-        public int? OriginalLanguageId { get; protected set; }
+        public int? OriginalLanguageId { get; private set; }
 
         /// <summary>
         /// The type of media for this work.
         /// </summary>
-        public string MediaType { get; protected set; }
+        public string MediaType { get; private set; }
 
         /// <summary>
         /// The distribution of all the ratings for this work.
         /// A dictionary of star rating -> number of ratings.
         /// </summary>
-        public IReadOnlyDictionary<int, int> RatingDistribution { get; protected set; }
+        public IReadOnlyDictionary<int, int> RatingDistribution { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -11,47 +11,47 @@ namespace Goodreads.Models.Response
     /// very brief information about an Author instead of their entire profile.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class GroupSummary : ApiResponse
+    public sealed class GroupSummary : ApiResponse
     {
         /// <summary>
         /// The Goodreads Group Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The Goodreads group title.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The Goodreads group access.
         /// </summary>
-        public string Access { get; protected set; }
+        public string Access { get; private set; }
 
         /// <summary>
         /// The Goodreads group users count.
         /// </summary>
-        public int UsersCount { get; protected set; }
+        public int UsersCount { get; private set; }
 
         /// <summary>
         /// The group image, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The group image, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// The group link.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The last activity of group.
         /// </summary>
-        public DateTime? LastActivity { get; protected set; }
+        public DateTime? LastActivity { get; private set; }
 
         internal string DebuggerDisplay
         {

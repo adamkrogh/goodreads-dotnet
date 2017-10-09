@@ -10,22 +10,22 @@ namespace Goodreads.Models.Response
     /// This class models an Author as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Author : ApiResponse
+    public sealed class Author : ApiResponse
     {
         /// <summary>
         /// The Goodreads Author Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The full name of the author.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The Url to the Goodreads author page.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The number of fans for this author.
@@ -33,73 +33,73 @@ namespace Goodreads.Models.Response
         /// For this property, use FollowersCount instead.
         /// </summary>
         [Obsolete("Fans API has been deprecated by Goodreads. Use Followers instead.")]
-        public int FansCount { get; protected set; }
+        public int FansCount { get; private set; }
 
         /// <summary>
         /// The number of Goodreads users that are following this author.
         /// </summary>
-        public int FollowersCount { get; protected set; }
+        public int FollowersCount { get; private set; }
 
         /// <summary>
         /// The Url to the author's image, large size.
         /// </summary>
-        public string LargeImageUrl { get; protected set; }
+        public string LargeImageUrl { get; private set; }
 
         /// <summary>
         /// The Url to the author's image.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The Url to the author's image, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// A brief description about this author. This field may contain HTML.
         /// </summary>
-        public string About { get; protected set; }
+        public string About { get; private set; }
 
         /// <summary>
         /// People that may have influenced this author. This field may contain HTML.
         /// </summary>
-        public string Influences { get; protected set; }
+        public string Influences { get; private set; }
 
         /// <summary>
         /// The total number of items the author has worked on and are listed within Goodreads.
         /// </summary>
-        public int WorksCount { get; protected set; }
+        public int WorksCount { get; private set; }
 
         /// <summary>
         /// The gender of the author. This field might be limited to only "male" and "female"
         /// but is left as a string in case any other options are possible through the Goodreads API.
         /// </summary>
-        public string Gender { get; protected set; }
+        public string Gender { get; private set; }
 
         /// <summary>
         /// The hometown the author grew up in.
         /// </summary>
-        public string Hometown { get; protected set; }
+        public string Hometown { get; private set; }
 
         /// <summary>
         /// The author's birthdate.
         /// </summary>
-        public DateTime? BornOnDate { get; protected set; }
+        public DateTime? BornOnDate { get; private set; }
 
         /// <summary>
         /// The date on which the author died.
         /// </summary>
-        public DateTime? DiedOnDate { get; protected set; }
+        public DateTime? DiedOnDate { get; private set; }
 
         /// <summary>
         /// Determines whether this author is also a regular Goodreads user or not.
         /// </summary>
-        public bool IsGoodreadsAuthor { get; protected set; }
+        public bool IsGoodreadsAuthor { get; private set; }
 
         /// <summary>
         /// If <see cref="IsGoodreadsAuthor"/> is true, this property is set to the author's Goodreads user Id.
         /// </summary>
-        public int? GoodreadsUserId { get; protected set; }
+        public int? GoodreadsUserId { get; private set; }
 
         internal string DebuggerDisplay
         {

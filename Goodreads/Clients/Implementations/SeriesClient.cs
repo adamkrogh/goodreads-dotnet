@@ -12,7 +12,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Series endpoint of the Goodreads API.
     /// </summary>
-    public class SeriesClient : ISeriesClient
+    internal sealed class SeriesClient : ISeriesClient
     {
         private readonly IConnection Connection;
 

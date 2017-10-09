@@ -12,160 +12,160 @@ namespace Goodreads.Models.Response
     /// This class models a single book as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Book : ApiResponse
+    public sealed class Book : ApiResponse
     {
         /// <summary>
         /// The Goodreads Id for this book.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The title of this book.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The description of this book.
         /// </summary>
-        public string Description { get; protected set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// The ISBN of this book.
         /// </summary>
-        public string Isbn { get; protected set; }
+        public string Isbn { get; private set; }
 
         /// <summary>
         /// The ISBN13 of this book.
         /// </summary>
-        public string Isbn13 { get; protected set; }
+        public string Isbn13 { get; private set; }
 
         /// <summary>
         /// The ASIN of this book.
         /// </summary>
-        public string Asin { get; protected set; }
+        public string Asin { get; private set; }
 
         /// <summary>
         /// The Kindle ASIN of this book.
         /// </summary>
-        public string KindleAsin { get; protected set; }
+        public string KindleAsin { get; private set; }
 
         /// <summary>
         /// The marketplace Id of this book.
         /// </summary>
-        public string MarketplaceId { get; protected set; }
+        public string MarketplaceId { get; private set; }
 
         /// <summary>
         /// The country code of this book.
         /// </summary>
-        public string CountryCode { get; protected set; }
+        public string CountryCode { get; private set; }
 
         /// <summary>
         /// The cover image for this book.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The small cover image for this book.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// The date this book was published.
         /// </summary>
-        public DateTime? PublicationDate { get; protected set; }
+        public DateTime? PublicationDate { get; private set; }
 
         /// <summary>
         /// The publisher of this book.
         /// </summary>
-        public string Publisher { get; protected set; }
+        public string Publisher { get; private set; }
 
         /// <summary>
         /// The language code of this book.
         /// </summary>
-        public string LanguageCode { get; protected set; }
+        public string LanguageCode { get; private set; }
 
         /// <summary>
         /// Signifies if this is an eBook or not.
         /// </summary>
-        public bool IsEbook { get; protected set; }
+        public bool IsEbook { get; private set; }
 
         /// <summary>
         /// The average rating of this book by Goodreads users.
         /// </summary>
-        public decimal AverageRating { get; protected set; }
+        public decimal AverageRating { get; private set; }
 
         /// <summary>
         /// The number of pages in this book.
         /// </summary>
-        public int Pages { get; protected set; }
+        public int Pages { get; private set; }
 
         /// <summary>
         /// The format of this book.
         /// </summary>
-        public string Format { get; protected set; }
+        public string Format { get; private set; }
 
         /// <summary>
         /// Brief information about this edition of the book.
         /// </summary>
-        public string EditionInformation { get; protected set; }
+        public string EditionInformation { get; private set; }
 
         /// <summary>
         /// The count of all Goodreads ratings for this book.
         /// </summary>
-        public int RatingsCount { get; protected set; }
+        public int RatingsCount { get; private set; }
 
         /// <summary>
         /// The count of all reviews that contain text for this book.
         /// </summary>
-        public int TextReviewsCount { get; protected set; }
+        public int TextReviewsCount { get; private set; }
 
         /// <summary>
         /// The Goodreads Url for this book.
         /// </summary>
-        public string Url { get; protected set; }
+        public string Url { get; private set; }
 
         /// <summary>
         /// The aggregate information for this work across all editions of the book.
         /// </summary>
-        public Work Work { get; protected set; }
+        public Work Work { get; private set; }
 
         /// <summary>
         /// The list of authors that worked on this book.
         /// </summary>
-        public IReadOnlyList<AuthorSummary> Authors { get; protected set; }
+        public IReadOnlyList<AuthorSummary> Authors { get; private set; }
 
         /// <summary>
         /// HTML and CSS for the Goodreads iFrame. Used to display the reviews for this book.
         /// </summary>
-        public string ReviewsWidget { get; protected set; }
+        public string ReviewsWidget { get; private set; }
 
         /// <summary>
         /// The most popular shelf names this book appears on. This is a
         /// dictionary of shelf name -> count.
         /// </summary>
-        public IReadOnlyDictionary<string, int> PopularShelves { get; protected set; }
+        public IReadOnlyDictionary<string, int> PopularShelves { get; private set; }
 
         /// <summary>
         /// The list of book links tracked by Goodreads.
         /// This is usually a list of libraries that the user can borrow the book from.
         /// </summary>
-        public IReadOnlyList<BookLink> BookLinks { get; protected set; }
+        public IReadOnlyList<BookLink> BookLinks { get; private set; }
 
         /// <summary>
         /// The list of buy links tracked by Goodreads.
         /// This is usually a list of third-party sites that the
         /// user can purchase the book from.
         /// </summary>
-        public IReadOnlyList<BookLink> BuyLinks { get; protected set; }
+        public IReadOnlyList<BookLink> BuyLinks { get; private set; }
 
         /// <summary>
         /// Summary information about similar books to this one.
         /// </summary>
-        public IReadOnlyList<BookSummary> SimilarBooks { get; protected set; }
+        public IReadOnlyList<BookSummary> SimilarBooks { get; private set; }
 
         // TODO: parse series information once I get a better sense
         // of what series are from the other API calls.
-        //// public List<Series> Series { get; protected set; }
+        //// public List<Series> Series { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -11,7 +11,7 @@ namespace Goodreads.Models.Response
         "Microsoft.Performance",
         "CA1812:AvoidUninstantiatedInternalClasses",
         Justification = "Used in deserialization.")]
-    internal class ReviewStatsContainer
+    internal sealed class ReviewStatsContainer
     {
         public List<ReviewStats> Books { get; set; }
     }

@@ -12,7 +12,7 @@ namespace Goodreads.Models.Response
     /// Represents information about an user status.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserStatus : ApiResponse
+    public sealed class UserStatus : ApiResponse
     {
         /// <summary>
         /// The user status id.
@@ -82,7 +82,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The paginated list of comments that have been made on this status.
         /// </summary>
-        public PaginatedList<Comment> Comments { get; protected set; }
+        public PaginatedList<Comment> Comments { get; private set; }
 
         internal string DebuggerDisplay
         {

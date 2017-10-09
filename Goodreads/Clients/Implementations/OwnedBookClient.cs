@@ -8,7 +8,7 @@ using RestSharp;
 
 namespace Goodreads.Clients
 {
-    public sealed class OwnedBookClient : IOwnedBookClient
+    internal sealed class OwnedBookClient : IOwnedBookClient
     {
         private readonly IConnection Connection;
 

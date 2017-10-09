@@ -10,7 +10,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the user statuses endpoint of the Goodreads API.
     /// </summary>
-    public class UserStatusesClient : IUserStatusesClient
+    internal sealed class UserStatusesClient : IUserStatusesClient
     {
         private readonly IConnection Connection;
 

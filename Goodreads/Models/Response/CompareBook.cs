@@ -6,7 +6,7 @@ using Goodreads.Extensions;
 namespace Goodreads.Models.Response
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class CompareBook : ApiResponse
+    public sealed class CompareBook : ApiResponse
     {
         /// <summary>
         /// The book id.

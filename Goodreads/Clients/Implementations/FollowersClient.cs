@@ -10,7 +10,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the user followers endpoint of the Goodreads API.
     /// </summary>
-    public class FollowersClient : IFollowersClient
+    internal sealed class FollowersClient : IFollowersClient
     {
         private readonly IConnection Connection;
 

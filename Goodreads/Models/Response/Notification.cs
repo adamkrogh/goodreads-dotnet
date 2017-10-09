@@ -11,72 +11,72 @@ namespace Goodreads.Models.Response
     /// information about notifications.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Notification : ApiResponse
+    public sealed class Notification : ApiResponse
     {
         /// <summary>
         /// The Goodreads Notification Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// An user who made notification.
         /// </summary>
-        public Actor User { get; protected set; }
+        public Actor User { get; private set; }
 
         /// <summary>
         /// Determine whether notification is new.
         /// </summary>
-        public bool New { get; protected set; }
+        public bool New { get; private set; }
 
         /// <summary>
         /// A notification created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// A notification text.
         /// </summary>
-        public string Text { get; protected set; }
+        public string Text { get; private set; }
 
         /// <summary>
         /// A notification html body.
         /// </summary>
-        public string HtmlBody { get; protected set; }
+        public string HtmlBody { get; private set; }
 
         /// <summary>
         /// A notification URL.
         /// </summary>
-        public string Url { get; protected set; }
+        public string Url { get; private set; }
 
         /// <summary>
         /// A notification resource type.
         /// </summary>
-        public string ResourceType { get; protected set; }
+        public string ResourceType { get; private set; }
 
         /// <summary>
         /// A notification group resource type.
         /// </summary>
-        public string GroupResourceType { get; protected set; }
+        public string GroupResourceType { get; private set; }
 
         /// <summary>
         /// The friend group resource.
         /// </summary>
-        public FriendGroupResource Friend { get; protected set; }
+        public FriendGroupResource Friend { get; private set; }
 
         /// <summary>
         /// The read status group resource.
         /// </summary>
-        public ReadStatus ReadStatus { get; protected set; }
+        public ReadStatus ReadStatus { get; private set; }
 
         /// <summary>
         /// The author following group resource.
         /// </summary>
-        public AuthorFollowingGroupResource AuthorFollowing { get; protected set; }
+        public AuthorFollowingGroupResource AuthorFollowing { get; private set; }
 
         /// <summary>
         /// The recommendation group resource.
         /// </summary>
-        public RecommendationGroupResource Recommendation { get; protected set; }
+        public RecommendationGroupResource Recommendation { get; private set; }
 
         internal string DebuggerDisplay
         {

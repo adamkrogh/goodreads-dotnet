@@ -11,97 +11,97 @@ namespace Goodreads.Models.Response
     /// This class models an Group as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Group : ApiResponse
+    public sealed class Group : ApiResponse
     {
         /// <summary>
         /// The Goodreads Group Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The group title.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The group description.
         /// </summary>
-        public string Description { get; protected set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// The Goodreads group access.
         /// </summary>
-        public string Access { get; protected set; }
+        public string Access { get; private set; }
 
         /// <summary>
         /// The group location.
         /// </summary>
-        public string Location { get; protected set; }
+        public string Location { get; private set; }
 
         /// <summary>
         /// The group last activity.
         /// </summary>
-        public DateTime? LastActivity { get; protected set; }
+        public DateTime? LastActivity { get; private set; }
 
         /// <summary>
         /// Determine whether the current user is member of this group.
         /// </summary>
-        public bool IsMember { get; protected set; }
+        public bool IsMember { get; private set; }
 
         /// <summary>
         /// The count of display folder for group.
         /// </summary>
-        public int DisplayFolderCount { get; protected set; }
+        public int DisplayFolderCount { get; private set; }
 
         /// <summary>
         /// The count of topics per group folder.
         /// </summary>
-        public int DisplayTopicsPerFolder { get; protected set; }
+        public int DisplayTopicsPerFolder { get; private set; }
 
         /// <summary>
         /// Determine whether book shelves are public.
         /// </summary>
-        public bool AreBookshelvesPublic { get; protected set; }
+        public bool AreBookshelvesPublic { get; private set; }
 
         /// <summary>
         /// Determine ability for adding books to group.
         /// </summary>
-        public bool CanAddBooks { get; protected set; }
+        public bool CanAddBooks { get; private set; }
 
         /// <summary>
         /// Determine ability for adding events to group.
         /// </summary>
-        public bool CanAddEvents { get; protected set; }
+        public bool CanAddEvents { get; private set; }
 
         /// <summary>
         /// Determine ability for adding polls to group.
         /// </summary>
-        public bool CanAddPolls { get; protected set; }
+        public bool CanAddPolls { get; private set; }
 
         /// <summary>
         /// Determine publicity of discussions.
         /// </summary>
-        public bool AreDiscussionsPublic { get; protected set; }
+        public bool AreDiscussionsPublic { get; private set; }
 
         /// <summary>
         /// The group real world property.
         /// </summary>
-        public bool IsRealWorld { get; protected set; }
+        public bool IsRealWorld { get; private set; }
 
         /// <summary>
         /// Determine ability for accepting new group members.
         /// </summary>
-        public bool CanAcceptNewMembers { get; protected set; }
+        public bool CanAcceptNewMembers { get; private set; }
 
         /// <summary>
         /// The group category.
         /// </summary>
-        public string Category { get; protected set; }
+        public string Category { get; private set; }
 
         /// <summary>
         /// The group subcategory.
         /// </summary>
-        public string SubCategory { get; protected set; }
+        public string SubCategory { get; private set; }
 
         /// <summary>
         /// The group rules.
@@ -111,37 +111,37 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The group image, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The group link.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The Goodreads group users count.
         /// </summary>
-        public int UsersCount { get; protected set; }
+        public int UsersCount { get; private set; }
 
         /// <summary>
         /// The collection of group folders.
         /// </summary>
-        public IReadOnlyList<GroupFolder> Folders { get; protected set; }
+        public IReadOnlyList<GroupFolder> Folders { get; private set; }
 
         /// <summary>
         /// The collection of group moderators.
         /// </summary>
-        public IReadOnlyList<GroupUser> Moderators { get; protected set; }
+        public IReadOnlyList<GroupUser> Moderators { get; private set; }
 
         /// <summary>
         /// The collection of group members.
         /// </summary>
-        public IReadOnlyList<GroupUser> Members { get; protected set; }
+        public IReadOnlyList<GroupUser> Members { get; private set; }
 
         /// <summary>
         /// The collection of currently reading books.
         /// </summary>
-        public IReadOnlyList<GroupBook> CurrentlyReading { get; protected set; }
+        public IReadOnlyList<GroupBook> CurrentlyReading { get; private set; }
 
         internal string DebuggerDisplay
         {

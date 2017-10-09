@@ -16,32 +16,32 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Author_following Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The author following likes count.
         /// </summary>
-        public int LikesCount { get; protected set; }
+        public int LikesCount { get; private set; }
 
         /// <summary>
         /// The author following comments count.
         /// </summary>
-        public int CommentsCount { get; protected set; }
+        public int CommentsCount { get; private set; }
 
         /// <summary>
         /// True if following was liked, otherwise false.
         /// </summary>
-        public bool Liked { get; protected set; }
+        public bool Liked { get; private set; }
 
         /// <summary>
         /// The author following created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// The author who is followed.
         /// </summary>
-        public AuthorSummary Author { get; protected set; }
+        public AuthorSummary Author { get; private set; }
 
         /// <summary>
         /// The user who follows author.
@@ -51,7 +51,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The paginated list of comments that have been made on this review.
         /// </summary>
-        public PaginatedList<Comment> Comments { get; protected set; }
+        public PaginatedList<Comment> Comments { get; private set; }
 
         internal string DebuggerDisplay
         {

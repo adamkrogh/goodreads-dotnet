@@ -11,72 +11,72 @@ namespace Goodreads.Models.Response
     /// information about an recommendation group resource.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class RecommendationGroupResource : ApiResponse
+    public sealed class RecommendationGroupResource : ApiResponse
     {
         /// <summary>
         /// The recommendation id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The user id whom book is recommended.
         /// </summary>
-        public int ToUserId { get; protected set; }
+        public int ToUserId { get; private set; }
 
         /// <summary>
         /// The user id who recommend book.
         /// </summary>
-        public int FromUserId { get; protected set; }
+        public int FromUserId { get; private set; }
 
         /// <summary>
         /// The book id which is recommended.
         /// </summary>
-        public int BookId { get; protected set; }
+        public int BookId { get; private set; }
 
         /// <summary>
         /// The recommendation status.
         /// </summary>
-        public string Status { get; protected set; }
+        public string Status { get; private set; }
 
         /// <summary>
         /// The resource created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// The resource updated date.
         /// </summary>
-        public DateTime? UpdatedDateTime { get; protected set; }
+        public DateTime? UpdatedDateTime { get; private set; }
 
         /// <summary>
         /// Comments count.
         /// </summary>
-        public int CommentsCount { get; protected set; }
+        public int CommentsCount { get; private set; }
 
         /// <summary>
         /// The recommendation message.
         /// </summary>
-        public string Message { get; protected set; }
+        public string Message { get; private set; }
 
         /// <summary>
         /// The last comment date.
         /// </summary>
-        public DateTime? LastCommentDate { get; protected set; }
+        public DateTime? LastCommentDate { get; private set; }
 
         /// <summary>
         /// The recommendation request id.
         /// </summary>
-        public int? RecommendationRequestId { get; protected set; }
+        public int? RecommendationRequestId { get; private set; }
 
         /// <summary>
         /// The ratings sum.
         /// </summary>
-        public int RatingsSum { get; protected set; }
+        public int RatingsSum { get; private set; }
 
         /// <summary>
         /// The ratings count.
         /// </summary>
-        public int RatingsCount { get; protected set; }
+        public int RatingsCount { get; private set; }
 
         internal string DebuggerDisplay
         {

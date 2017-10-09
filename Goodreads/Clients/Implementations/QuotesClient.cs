@@ -10,7 +10,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Quotes endpoint of the Goodreads API.
     /// </summary>
-    public class QuotesClient : IQuotesClient
+    internal sealed class QuotesClient : IQuotesClient
     {
         private readonly IConnection Connection;
 

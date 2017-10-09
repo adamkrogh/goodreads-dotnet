@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Goodreads.Models.Response;
 
 namespace Goodreads.Clients
 {

@@ -9,42 +9,42 @@ namespace Goodreads.Models.Response
     /// Represents summary information about a user as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserSummary : ApiResponse
+    public sealed class UserSummary : ApiResponse
     {
         /// <summary>
         /// The Id of the user.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The name of the user.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The link to the user's Goodreads profile page.
         /// </summary>
-        public string Link { get; protected set; }
+        public string Link { get; private set; }
 
         /// <summary>
         /// The profile image for the user, regular size.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// THe profile image for the user, small size.
         /// </summary>
-        public string SmallImageUrl { get; protected set; }
+        public string SmallImageUrl { get; private set; }
 
         /// <summary>
         /// The number of friends the user has on Goodreads.
         /// </summary>
-        public int FriendsCount { get; protected set; }
+        public int FriendsCount { get; private set; }
 
         /// <summary>
         /// The number of reviews the user has made on Goodreads.
         /// </summary>
-        public int ReviewsCount { get; protected set; }
+        public int ReviewsCount { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -10,22 +10,22 @@ namespace Goodreads.Models.Response
     /// This class models a Review as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class ReviewDetails : Review
+    public sealed class ReviewDetails : Review
     {
         /// <summary>
         /// The user that made this review.
         /// </summary>
-        public UserSummary User { get; protected set; }
+        public UserSummary User { get; private set; }
 
         /// <summary>
         /// Status updates made while the user was reading this book.
         /// </summary>
-        public IReadOnlyList<ReadStatus> ReadStatuses { get; protected set; }
+        public IReadOnlyList<ReadStatus> ReadStatuses { get; private set; }
 
         /// <summary>
         /// The paginated list of comments that have been made on this review.
         /// </summary>
-        public PaginatedList<Comment> Comments { get; protected set; }
+        public PaginatedList<Comment> Comments { get; private set; }
 
         internal new string DebuggerDisplay
         {

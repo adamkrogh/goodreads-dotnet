@@ -9,7 +9,7 @@ namespace Goodreads.Models.Response
     /// Represents information about an user status.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class UserStatusSummary : ApiResponse
+    public sealed class UserStatusSummary : ApiResponse
     {
         /// <summary>
         /// The user status id.

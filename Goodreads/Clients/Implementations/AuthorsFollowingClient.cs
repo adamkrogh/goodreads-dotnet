@@ -11,7 +11,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Author_following endpoint of the Goodreads API.
     /// </summary>
-    public class AuthorsFollowingClient : IAuthorsFollowingClient
+    internal sealed class AuthorsFollowingClient : IAuthorsFollowingClient
     {
         private readonly IConnection Connection;
 

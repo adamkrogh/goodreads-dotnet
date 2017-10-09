@@ -10,7 +10,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for user friends endpoint.
     /// </summary>
-    public class FriendsClient : IFriendsClient
+    internal sealed class FriendsClient : IFriendsClient
     {
         private readonly IConnection Connection;
 

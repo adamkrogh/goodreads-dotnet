@@ -8,52 +8,52 @@ namespace Goodreads.Models.Response
     /// <summary>
     /// This class models an Group user as defined by the Goodreads API.
     /// </summary>
-    public class GroupUser : ApiResponse
+    public sealed class GroupUser : ApiResponse
     {
         /// <summary>
         /// The Goodreads Group user Id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The group user name.
         /// </summary>
-        public string UserName { get; protected set; }
+        public string UserName { get; private set; }
 
         /// <summary>
         /// The group user first name.
         /// </summary>
-        public string FirstName { get; protected set; }
+        public string FirstName { get; private set; }
 
         /// <summary>
         /// The group user last name.
         /// </summary>
-        public string LastName { get; protected set; }
+        public string LastName { get; private set; }
 
         /// <summary>
         /// The group user image.
         /// </summary>
-        public string ImageUrl { get; protected set; }
+        public string ImageUrl { get; private set; }
 
         /// <summary>
         /// The group user title.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The count of comments.
         /// </summary>
-        public int CommentsCount { get; protected set; }
+        public int CommentsCount { get; private set; }
 
         /// <summary>
         /// The date when a group user was created.
         /// </summary>
-        public DateTime? CreatedAt { get; protected set; }
+        public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// The date when a group user received moderation access.
         /// </summary>
-        public DateTime? ModeratorAt { get; protected set; }
+        public DateTime? ModeratorAt { get; private set; }
 
         internal string DebuggerDisplay
         {

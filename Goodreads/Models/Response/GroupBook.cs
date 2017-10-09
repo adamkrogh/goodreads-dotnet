@@ -10,57 +10,57 @@ namespace Goodreads.Models.Response
     /// This class models an Group book as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class GroupBook : ApiResponse
+    public sealed class GroupBook : ApiResponse
     {
         /// <summary>
         /// The group book id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The group book updated date.
         /// </summary>
-        public DateTime? UpdatedDate { get; protected set; }
+        public DateTime? UpdatedDate { get; private set; }
 
         /// <summary>
         /// The group book start reading date.
         /// </summary>
-        public DateTime? StartReadingDate { get; protected set; }
+        public DateTime? StartReadingDate { get; private set; }
 
         /// <summary>
         /// The group bok finish reading date.
         /// </summary>
-        public DateTime? FinishReadingDate { get; protected set; }
+        public DateTime? FinishReadingDate { get; private set; }
 
         /// <summary>
         /// The book id.
         /// </summary>
-        public int BookId { get; protected set; }
+        public int BookId { get; private set; }
 
         /// <summary>
         /// The book title.
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// The book publication year.
         /// </summary>
-        public int PublicationYear { get; protected set; }
+        public int PublicationYear { get; private set; }
 
         /// <summary>
         /// The Goodreads author id.
         /// </summary>
-        public int AuthorId { get; protected set; }
+        public int AuthorId { get; private set; }
 
         /// <summary>
         /// The Goodreads author name.
         /// </summary>
-        public string AuthorName { get; protected set; }
+        public string AuthorName { get; private set; }
 
         /// <summary>
         /// The Goodreads author id as user.
         /// </summary>
-        public int AuthorUserId { get; protected set; }
+        public int AuthorUserId { get; private set; }
 
         internal string DebuggerDisplay
         {

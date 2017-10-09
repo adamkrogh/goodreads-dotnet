@@ -9,7 +9,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// API client for notification endpoint.
     /// </summary>
-    public class NotificationsClient : INotificationsClient
+    internal sealed class NotificationsClient : INotificationsClient
     {
         private readonly IConnection Connection;
 

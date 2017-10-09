@@ -9,27 +9,27 @@ namespace Goodreads.Models.Response
     /// Represents a shelf that a review is in.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class ReviewShelf : ApiResponse
+    public sealed class ReviewShelf : ApiResponse
     {
         /// <summary>
         /// The Id of this review shelf, optional.
         /// </summary>
-        public int? Id { get; protected set; }
+        public int? Id { get; private set; }
 
         /// <summary>
         /// The name of the shelf.
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Determines if a book can exclusively appear on this shelf only.
         /// </summary>
-        public bool IsExclusive { get; protected set; }
+        public bool IsExclusive { get; private set; }
 
         /// <summary>
         /// Determines if this shelf is sortable.
         /// </summary>
-        public bool IsSortable { get; protected set; }
+        public bool IsSortable { get; private set; }
 
         internal string DebuggerDisplay
         {

@@ -17,7 +17,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Review endpoint of the Goodreads API.
     /// </summary>
-    public class ReviewsClient : IReviewsClient
+    internal sealed class ReviewsClient : IReviewsClient
     {
         private readonly IConnection Connection;
 

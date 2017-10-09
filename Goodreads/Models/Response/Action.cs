@@ -9,7 +9,7 @@ namespace Goodreads.Models.Response
     /// This class models am action as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Action : ApiResponse
+    public sealed class Action : ApiResponse
     {
         /// <summary>
         /// The action rating.

@@ -9,7 +9,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for events endpoint of the Goodreads API.
     /// </summary>
-    public class EventsClient : IEventsClient
+    internal sealed class EventsClient : IEventsClient
     {
         private readonly IConnection Connection;
 

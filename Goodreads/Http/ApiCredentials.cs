@@ -7,19 +7,9 @@ namespace Goodreads.Http
     /// <summary>
     /// Represents credentials used to access the Goodreads API.
     /// </summary>
-    public class ApiCredentials
+    public sealed class ApiCredentials
     {
         private readonly IRestClient Client;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiCredentials"/> class.
-        /// </summary>
-        /// <param name="client">A RestClient connection to the Goodreads API.</param>
-        /// <param name="apiKey">A Goodreads API key.</param>
-        /// <param name="apiSecret">A Goodreads API secret.</param>
-        public ApiCredentials(IRestClient client, string apiKey, string apiSecret) : this(client, apiKey, apiSecret, null, null)
-        {
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiCredentials"/> class.
@@ -41,27 +31,22 @@ namespace Goodreads.Http
         /// <summary>
         /// The client's Goodreads API key.
         /// </summary>
-        public string ApiKey { get; protected set; }
+        public string ApiKey { get; private set; }
 
         /// <summary>
         /// The client's Goodreads API secret.
         /// </summary>
-        public string ApiSecret { get; protected set; }
+        public string ApiSecret { get; private set; }
 
         /// <summary>
         /// The user's OAuth token.
         /// </summary>
-        public string OauthToken { get; protected set; }
+        public string OauthToken { get; private set; }
 
         /// <summary>
         /// The user's OAuth token secret.
         /// </summary>
-        public string OauthTokenSecret { get; protected set; }
-
-        /// <summary>
-        /// The user's Goodreads Id.
-        /// </summary>
-        public int UserId { get; protected set; }
+        public string OauthTokenSecret { get; private set; }
 
         /// <summary>
         /// Gets a request token from Goodreads and builds an authorize

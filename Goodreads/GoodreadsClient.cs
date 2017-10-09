@@ -14,6 +14,11 @@ namespace Goodreads
         private readonly string GoodreadsUrl = "https://www.goodreads.com/";
 
         /// <summary>
+        /// The connection to the Goodreads API.
+        /// </summary>
+        private readonly IConnection connection;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GoodreadsClient"/> class.
         /// This constructor doesn't used OAuth permissions and can be used for public methods.
         /// </summary>
@@ -51,32 +56,27 @@ namespace Goodreads
                     apiKey, apiSecret, accessToken, accessSecret);
             }
 
-            Connection = new Connection(client, apiCredentials);
-            Authors = new AuthorsClient(Connection);
-            Books = new BooksClient(Connection);
-            Shelves = new ShelvesClient(Connection);
-            Users = new UsersClient(Connection);
-            Reviews = new ReviewsClient(Connection);
-            Series = new SeriesClient(Connection);
-            AuthorsFollowing = new AuthorsFollowingClient(Connection);
-            Events = new EventsClient(Connection);
-            Followers = new FollowersClient(Connection);
-            Friends = new FriendsClient(Connection);
-            Notifications = new NotificationsClient(Connection);
-            Groups = new GroupClient(Connection);
-            Quotes = new QuotesClient(Connection);
-            UserStatuses = new UserStatusesClient(Connection);
-            Updates = new UpdatesClient(Connection);
-            Recommendations = new RecommendationsClient(Connection);
-            ReadStatuses = new ReadStatusesClient(Connection);
-            OwnedBooks = new OwnedBookClient(Connection);
-            Comments = new CommentClient(Connection);
+            connection = new Connection(client, apiCredentials);
+            Authors = new AuthorsClient(connection);
+            Books = new BooksClient(connection);
+            Shelves = new ShelvesClient(connection);
+            Users = new UsersClient(connection);
+            Reviews = new ReviewsClient(connection);
+            Series = new SeriesClient(connection);
+            AuthorsFollowing = new AuthorsFollowingClient(connection);
+            Events = new EventsClient(connection);
+            Followers = new FollowersClient(connection);
+            Friends = new FriendsClient(connection);
+            Notifications = new NotificationsClient(connection);
+            Groups = new GroupClient(connection);
+            Quotes = new QuotesClient(connection);
+            UserStatuses = new UserStatusesClient(connection);
+            Updates = new UpdatesClient(connection);
+            Recommendations = new RecommendationsClient(connection);
+            ReadStatuses = new ReadStatusesClient(connection);
+            OwnedBooks = new OwnedBookClient(connection);
+            Comments = new CommentClient(connection);
         }
-
-        /// <summary>
-        /// The connection to the Goodreads API.
-        /// </summary>
-        public IConnection Connection { get; }
 
         /// <summary>
         /// API Client for the Goodreads Authors endpoint.

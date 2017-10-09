@@ -13,17 +13,17 @@ namespace Goodreads.Models.Response
     /// </summary>
     /// <typeparam name="T">The type of the object in the paginated list.</typeparam>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class PaginatedList<T> : ApiResponse where T : ApiResponse, new()
+    public sealed class PaginatedList<T> : ApiResponse where T : ApiResponse, new()
     {
         /// <summary>
         /// The list of objects for the current page.
         /// </summary>
-        public IReadOnlyList<T> List { get; protected set; }
+        public IReadOnlyList<T> List { get; private set; }
 
         /// <summary>
         /// Pagination information about the list and current page.
         /// </summary>
-        public PaginationModel Pagination { get; protected set; }
+        public PaginationModel Pagination { get; private set; }
 
         internal string DebuggerDisplay
         {

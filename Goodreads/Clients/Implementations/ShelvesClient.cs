@@ -10,7 +10,7 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Shelf endpoint of the Goodreads API.
     /// </summary>
-    public class ShelvesClient : IShelvesClient
+    internal sealed class ShelvesClient : IShelvesClient
     {
         private readonly IConnection Connection;
 

@@ -3,7 +3,7 @@
 namespace Goodreads.Models.Request
 {
     /// <summary>
-    /// The update type.
+    /// The update filter.
     /// </summary>
     [QueryParameterKey("update_filter")]
     public enum UpdateFilter

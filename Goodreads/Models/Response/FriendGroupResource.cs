@@ -11,52 +11,52 @@ namespace Goodreads.Models.Response
     /// information about a friend group resource.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class FriendGroupResource : ApiResponse
+    public sealed class FriendGroupResource : ApiResponse
     {
         /// <summary>
         /// The group resource id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The user id.
         /// </summary>
-        public int UserId { get; protected set; }
+        public int UserId { get; private set; }
 
         /// <summary>
         /// The friend user id.
         /// </summary>
-        public int FriendId { get; protected set; }
+        public int FriendId { get; private set; }
 
         /// <summary>
         /// The resource created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// The resource updated date.
         /// </summary>
-        public DateTime? UpdatedDateTime { get; protected set; }
+        public DateTime? UpdatedDateTime { get; private set; }
 
         /// <summary>
         /// The user approved updated date.
         /// </summary>
-        public DateTime? UserApprovedDateTime { get; protected set; }
+        public DateTime? UserApprovedDateTime { get; private set; }
 
         /// <summary>
         /// The friend approved date.
         /// </summary>
-        public DateTime? FriendApprovedDateTime { get; protected set; }
+        public DateTime? FriendApprovedDateTime { get; private set; }
 
         /// <summary>
         /// Updates flag.
         /// </summary>
-        public bool IsUpdated { get; protected set; }
+        public bool IsUpdated { get; private set; }
 
         /// <summary>
         /// The group resource story.
         /// </summary>
-        public string Story { get; protected set; }
+        public string Story { get; private set; }
 
         internal string DebuggerDisplay
         {

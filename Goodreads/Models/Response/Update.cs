@@ -10,7 +10,7 @@ namespace Goodreads.Models.Response
     /// This class models an Update as defined by the Goodreads API.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Update : ApiResponse
+    public sealed class Update : ApiResponse
     {
         /// <summary>
         /// The Goodreads update Id.

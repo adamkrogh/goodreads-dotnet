@@ -11,32 +11,32 @@ namespace Goodreads.Models.Response
     /// information about an Author following group resource.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class AuthorFollowingGroupResource : ApiResponse
+    public sealed class AuthorFollowingGroupResource : ApiResponse
     {
         /// <summary>
         /// The group resource id.
         /// </summary>
-        public int Id { get; protected set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// The user id who followed an author.
         /// </summary>
-        public int UserId { get; protected set; }
+        public int UserId { get; private set; }
 
         /// <summary>
         /// The following author id.
         /// </summary>
-        public int AuthorId { get; protected set; }
+        public int AuthorId { get; private set; }
 
         /// <summary>
         /// The resource created date.
         /// </summary>
-        public DateTime? CreatedDateTime { get; protected set; }
+        public DateTime? CreatedDateTime { get; private set; }
 
         /// <summary>
         /// The resource updated date.
         /// </summary>
-        public DateTime? UpdatedDateTime { get; protected set; }
+        public DateTime? UpdatedDateTime { get; private set; }
 
         internal string DebuggerDisplay
         {

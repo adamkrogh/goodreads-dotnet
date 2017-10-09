@@ -6,7 +6,7 @@ using Goodreads.Extensions;
 namespace Goodreads.Models.Response
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class ShortReview : ApiResponse
+    public sealed class ShortReview : ApiResponse
     {
         /// <summary>
         /// The review id.

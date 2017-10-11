@@ -13,14 +13,6 @@ namespace Goodreads.Tests
             FriendsClient = Helper.GetAuthClient().Friends;
         }
 
-        public class TheAddFriendMethod : FriendsClientTests
-        {
-            [Fact(Skip = "Impossible to test because I can't remove friend using the Goodreads API. So I can't clean up a test suite.")]
-            public void AddFriendMethod()
-            {
-            }
-        }
-
         public class TheGetFriendRequestMethod : FriendsClientTests
         {
             [Fact]
@@ -29,22 +21,6 @@ namespace Goodreads.Tests
                 var requests = await FriendsClient.GetFriendRequests();
 
                 Assert.NotNull(requests);
-            }
-        }
-
-        public class TheConfirmFriendRequestMethod : FriendsClientTests
-        {
-            [Fact(Skip = "Impossible to test because I can't create friend request from another user.")]
-            public void ConfirmFriendRequestMethod()
-            {
-            }
-        }
-
-        public class TheConfirmFriendRecommendationMethod : FriendsClientTests
-        {
-            [Fact(Skip = "Impossible to test because I can't create friend recommendation from another user.")]
-            public void ConfirmRecommendationMethod()
-            {
             }
         }
     }

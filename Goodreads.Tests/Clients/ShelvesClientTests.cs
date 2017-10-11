@@ -87,11 +87,6 @@ namespace Goodreads.Tests
 
         public class TheAddUserShelfMethod : ShelvesClientTests
         {
-            [Fact(Skip = "Impossible to test because I can't remove shelf using the Goodreads API. So I can't clean up a test suite.")]
-            public void AddShelf()
-            {
-            }
-
             [Fact]
             public void AddExistingShelf()
             {

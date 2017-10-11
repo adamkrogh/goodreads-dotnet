@@ -125,13 +125,5 @@ namespace Goodreads.Tests
                 Assert.NotEmpty(followings.List);
             }
         }
-
-        public class TheCompareUsersBooksMethod : UsersClientTests
-        {
-            [Fact(Skip = "Impossible to test without pre set up test profile.")]
-            public void CompareUserBooks()
-            {
-            }
-        }
     }
 }

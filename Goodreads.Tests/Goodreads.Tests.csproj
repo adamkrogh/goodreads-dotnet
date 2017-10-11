@@ -74,7 +74,6 @@
     <Compile Include="Clients\RecommendationsClientTests.cs" />
     <Compile Include="Clients\UpdatesClientTests.cs" />
     <Compile Include="Clients\UserStatusClientTests.cs" />
-    <Compile Include="Clients\QuotesClientTests.cs" />
     <Compile Include="Clients\GroupClientTests.cs" />
     <Compile Include="Clients\NotificationClientTests.cs" />
     <Compile Include="Clients\FriendsClientTests.cs" />

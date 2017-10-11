@@ -103,67 +103,39 @@ var shelves = await client.Shelves.GetListOfUserShelves(userId);
 
 ## Goodreads API Coverage
 
-### Status
-
-- Auth **100%** (1 of 1)
-- Authors **100%** (2 of 2)
-- Author Following **100%** (3 of 3)
-- Books **100%** (6 of 6)
-- Comments **100%** (2 of 2)
-- Events **100%** (1 of 1)
-- Fanship **Deprecated**
-- Followers **100%** (2 of 2)
-- Friends **100%** (4 of 4)
-- Groups **100%** (5 of 5)
-- Lists **0%** (0 of 1)
-- Notifications **100%** (1 of 1)
-- Owned Books **100%** (5 of 5)
-- Quotes **100%** (1 of 1)
-- Ratings **0%** (0 of 2)
-- Read Statuses **100%** (1 of 1)
-- Recommendations **100%** (1 of 1)
-- Reviews **100%** (7 of 7)
-- Search **100%** (2 of 2)
-- Series **100%** (3 of 3)
-- Shelves **100%** (3 of 3)
-- Topics **0%** (0 of 4)
-- Updates **100%** (1 of 1)
-- User Shelves **100%** (2 of 2)
-- Users **100%** (5 of 5)
-- User Status **100%** (4 of 4)
-- Works **0%** (0 of 1)
-
-**Overall**: **89%** (62 of 70)
-
+Library covers all API Goodreads methods except below:
 
 ### Todo
 
 The list of API methods that will (hopefully) be supported soon.
 
-- list.book — Get the listopia lists for a given book.
-- rating.create — Like a resource.
-- rating.destroy — Unlike a resource.
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.
 - topic.show — Get info about a topic by id.
 - topic.unread_group — Get a list of topics with unread comments.
+
+There are methods who can't be called without additional credentials.
+
+- list.book — Get the listopia lists for a given book.
 - work.editions — See all editions by work.
 
 ### Deprecated
 
-API methods that Goodreads has deprecated.
+API methods that Goodreads has deprecated, however library covers them as well.
 
-- fanship.create — Become fan of an author. DEPRECATED.
-- fanship.destroy — Stop being fan of an author. DEPRECATED.
-- fanship.show — Show fanship information. DEPRECATED.
+- fanship.create — Become fan of an author.
+- fanship.destroy — Stop being fan of an author.
+- fanship.show — Show fanship information.
 
 ### Bugs
 
-API methods that Goodreads has bugs.
+Unfortunately, some Goodreads API methods have bugs.
 
-- friend.confirm_recommendation — Confirm or decline a friend recommendation. THERE IS A BUG IN THE GOODREADS API.
-- owned_books.update — Update an owned book. THERE IS A BUG IN THE GOODREADS API.
-- review.destroy — Delete a book review. THERE IS A BUG IN THE GOODREADS API.
+- friend.confirm_recommendation — Confirm or decline a friend recommendation.
+- owned_books.update — Update an owned book.
+- review.destroy — Delete a book review.
+- rating.create — Like a resource.
+- rating.destroy — Unlike a resource.
 
 ## License
 

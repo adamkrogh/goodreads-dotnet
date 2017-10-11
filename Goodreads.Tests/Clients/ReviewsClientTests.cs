@@ -131,16 +131,6 @@ namespace Goodreads.Tests
 
         public class TheCreateAndDeleteMethods : ReviewsClientTests
         {
-            [Fact(Skip = "Possible issue with Goodreads review/destroy endpoint")]
-            public async Task CreateAndDeleteAReview()
-            {
-                var reviewId = await ReviewsClient.Create(10790277);
-                Assert.NotNull(reviewId);
-
-                ////var result = await ReviewsClient.Delete(1700138017);
-                ////Assert.True(result);
-            }
-
             [Fact]
             public async Task ReturnsNullIfCannotCreate()
             {

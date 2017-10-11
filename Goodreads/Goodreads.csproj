@@ -58,7 +58,6 @@
     <Compile Include="Clients\Implementations\EventsClient.cs" />
     <Compile Include="Clients\Interfaces\ICommentClient.cs" />
     <Compile Include="Clients\Interfaces\IOwnedBookClient.cs" />
-    <Compile Include="Clients\Interfaces\IRatingClient.cs" />
     <Compile Include="Clients\Interfaces\IReadStatusesClient.cs" />
     <Compile Include="Clients\Implementations\OwnedBookClient.cs" />
     <Compile Include="Clients\Implementations\ReadStatusesClient.cs" />

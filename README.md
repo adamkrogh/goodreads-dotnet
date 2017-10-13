@@ -111,21 +111,12 @@ The list of API methods that will (hopefully) be supported soon.
 
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.
-- topic.show — Get info about a topic by id.
 - topic.unread_group — Get a list of topics with unread comments.
 
 There are methods who can't be called without additional credentials.
 
 - list.book — Get the listopia lists for a given book.
 - work.editions — See all editions by work.
-
-### Deprecated
-
-API methods that Goodreads has deprecated, however library covers them as well.
-
-- fanship.create — Become fan of an author.
-- fanship.destroy — Stop being fan of an author.
-- fanship.show — Show fanship information.
 
 ### Bugs
 

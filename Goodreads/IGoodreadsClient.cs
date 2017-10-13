@@ -101,5 +101,10 @@ namespace Goodreads
         /// API client for the Goodreads comments endpoint.
         /// </summary>
         ICommentClient Comments { get; }
+
+        /// <summary>
+        /// API client for the Goodreads topics endpoint.
+        /// </summary>
+        ITopicsClient Topics { get; }
     }
 }

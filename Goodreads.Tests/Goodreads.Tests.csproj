@@ -69,6 +69,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Clients\CommentsClientTests.cs" />
+    <Compile Include="Clients\TopicsClientTests.cs" />
     <Compile Include="Clients\OwnedBooksClientTests.cs" />
     <Compile Include="Clients\ReadStatusesClientTests.cs" />
     <Compile Include="Clients\RecommendationsClientTests.cs" />

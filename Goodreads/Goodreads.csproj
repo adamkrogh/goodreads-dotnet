@@ -56,6 +56,7 @@
     <Compile Include="Clients\Implementations\BooksClient.cs" />
     <Compile Include="Clients\Implementations\AuthorsFollowingClient.cs" />
     <Compile Include="Clients\Implementations\EventsClient.cs" />
+    <Compile Include="Clients\Implementations\TopicsClient.cs" />
     <Compile Include="Clients\Interfaces\ICommentClient.cs" />
     <Compile Include="Clients\Interfaces\IOwnedBookClient.cs" />
     <Compile Include="Clients\Interfaces\IReadStatusesClient.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Clients\Interfaces\IGroupClient.cs" />
     <Compile Include="Clients\Implementations\GroupClient.cs" />
     <Compile Include="Clients\Interfaces\INotificationsClient.cs" />
+    <Compile Include="Clients\Interfaces\ITopicsClient.cs" />
     <Compile Include="Clients\Interfaces\IUpdatesClient.cs" />
     <Compile Include="Clients\Implementations\UpdatesClient.cs" />
     <Compile Include="Models\Request\ResourceType.cs" />
@@ -79,6 +81,9 @@
     <Compile Include="Models\Response\OwnedBook.cs" />
     <Compile Include="Models\Response\Recommendation.cs" />
     <Compile Include="Models\Response\ShortReview.cs" />
+    <Compile Include="Models\Response\Topic.cs" />
+    <Compile Include="Models\Response\TopicGroup.cs" />
+    <Compile Include="Models\Response\TopicFolder.cs" />
     <Compile Include="Models\Response\Update.cs" />
     <Compile Include="Models\Response\UserFollowers.cs" />
     <Compile Include="Models\Response\UserFollowing.cs" />

@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
-using RestSharp.Extensions.MonoHttp;
+using System.Web;
 
 namespace Goodreads.Http
 {

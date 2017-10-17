@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Goodreads.Extensions;
 using Goodreads.Models;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Extensions.MonoHttp;
 
 namespace Goodreads.Http
 {

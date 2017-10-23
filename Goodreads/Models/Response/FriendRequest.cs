@@ -16,7 +16,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The friend request id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The resource created date.
@@ -48,7 +48,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             CreatedDateTime = element.ElementAsDateTime("created_at");
             Message = element.ElementAsString("message");
 

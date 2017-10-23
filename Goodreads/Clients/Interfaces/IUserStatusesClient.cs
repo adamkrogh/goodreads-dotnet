@@ -25,7 +25,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userStatusId">The user status id.</param>
         /// <returns>User status info.</returns>
-        Task<UserStatus> GetUserStatus(int userStatusId);
+        Task<UserStatus> GetUserStatus(long userStatusId);
 
         /// <summary>
         /// Create a status updates for members.
@@ -35,13 +35,13 @@ namespace Goodreads.Clients
         /// <param name="percent">Percent complete.</param>
         /// <param name="comment">The status update comment.</param>
         /// <returns>Id of a new user status.</returns>
-        Task<int> Create(int bookId, int? page = null, int? percent = null, string comment = null);
+        Task<long> Create(long bookId, int? page = null, int? percent = null, string comment = null);
 
         /// <summary>
         /// Delete a status update.
         /// </summary>
         /// <param name="userStatusId">The specified user status id.</param>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        Task<bool> Delete(int userStatusId);
+        Task<bool> Delete(long userStatusId);
     }
 }

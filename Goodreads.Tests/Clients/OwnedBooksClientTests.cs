@@ -71,7 +71,7 @@ namespace Goodreads.Tests
             public async Task TheDeleteOwnedBook()
             {
                 // add book for testing purpose.
-                const int bookId = 46091;
+                const long bookId = 46091;
                 var ownedBook = await OwnedBookClient.AddOwnedBook(bookId);
 
                 // test

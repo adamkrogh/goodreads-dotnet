@@ -18,7 +18,7 @@ namespace Goodreads.Models.Response
         /// The Goodreads Book Id.
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public int BookId { get; private set; }
+        public long BookId { get; private set; }
 
         /// <summary>
         /// The ISBN of this book.

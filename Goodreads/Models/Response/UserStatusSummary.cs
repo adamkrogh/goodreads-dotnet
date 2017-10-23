@@ -14,7 +14,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The user status id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The user status action text.
@@ -54,7 +54,7 @@ namespace Goodreads.Models.Response
             ActionText = element.ElementAsString("action_text");
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");
-            Id = element.ElementAsNullableInt("id") ?? ParseId();
+            Id = element.ElementAsNullableLong("id") ?? ParseId();
 
             var actor = element.Element("actor");
             if (actor != null)
@@ -64,13 +64,12 @@ namespace Goodreads.Models.Response
             }
         }
 
-        private int ParseId()
+        private long ParseId()
         {
             var index = Link.LastIndexOf('/');
             if (index > 0 && index != Link.Length - 1)
             {
-                int id;
-                if (int.TryParse(Link.Substring(index + 1), out id))
+                if (long.TryParse(Link.Substring(index + 1), out long id))
                 {
                     return id;
                 }

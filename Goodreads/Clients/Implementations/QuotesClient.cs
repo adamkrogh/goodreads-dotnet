@@ -32,10 +32,10 @@ namespace Goodreads.Clients
         /// This will not override the book_id if it was provided.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
         async Task<bool> IQuotesClient.Add(
-            int authorId,
+            long authorId,
             string authorName,
             string quote,
-            int? bookId,
+            long? bookId,
             string isbn)
         {
             var parameters = new List<Parameter>

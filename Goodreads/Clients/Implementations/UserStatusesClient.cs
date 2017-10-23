@@ -41,7 +41,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userStatusId">The user status id.</param>
         /// <returns>User status info.</returns>
-        async Task<UserStatus> IUserStatusesClient.GetUserStatus(int userStatusId)
+        async Task<UserStatus> IUserStatusesClient.GetUserStatus(long userStatusId)
         {
             var endpoint = $"user_status/show/{userStatusId}";
            return await Connection.ExecuteRequest<UserStatus>(endpoint, new List<Parameter>(), null, "user_status");
@@ -55,7 +55,7 @@ namespace Goodreads.Clients
         /// <param name="percent">Percent complete.</param>
         /// <param name="comment">The status update comment.</param>
         /// <returns>The new user status model.</returns>
-        async Task<int> IUserStatusesClient.Create(int bookId, int? page, int? percent, string comment)
+        async Task<long> IUserStatusesClient.Create(long bookId, int? page, int? percent, string comment)
         {
             var parameters = new List<Parameter>
             {
@@ -87,7 +87,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userStatusId">The specified user status id.</param>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        async Task<bool> IUserStatusesClient.Delete(int userStatusId)
+        async Task<bool> IUserStatusesClient.Delete(long userStatusId)
         {
             var endpoint = $"user_status/destroy/{userStatusId}";
             var response = await Connection.ExecuteRaw(endpoint, new List<Parameter>(), Method.POST);

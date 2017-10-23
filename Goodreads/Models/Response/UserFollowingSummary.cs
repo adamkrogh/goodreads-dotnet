@@ -16,17 +16,17 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads User_following Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The following user id.
         /// </summary>
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
 
         /// <summary>
         /// The user id who follows user.
         /// </summary>
-        public int FollowerId { get; private set; }
+        public long FollowerId { get; private set; }
 
         /// <summary>
         /// The user following created date.
@@ -43,9 +43,9 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            UserId = element.ElementAsInt("user-id");
-            FollowerId = element.ElementAsInt("follower-id");
+            Id = element.ElementAsLong("id");
+            UserId = element.ElementAsLong("user-id");
+            FollowerId = element.ElementAsLong("follower-id");
             CreatedDateTime = element.ElementAsDateTime("created-at");
         }
     }

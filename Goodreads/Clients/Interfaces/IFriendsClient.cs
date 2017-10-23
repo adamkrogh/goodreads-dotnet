@@ -13,7 +13,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
-        Task<bool> AddFriend(int userId);
+        Task<bool> AddFriend(long userId);
 
         /// <summary>
         /// Get the current user's friend requests.
@@ -28,6 +28,6 @@ namespace Goodreads.Clients
         /// <param name="friendRequestId">The friend request id.</param>
         /// <param name="response">The user response.</param>
         /// <returns>True if confirmation succeeded, otherwise - false.</returns>
-        Task<bool> ConfirmRequest(int friendRequestId, bool response);
+        Task<bool> ConfirmRequest(long friendRequestId, bool response);
     }
 }

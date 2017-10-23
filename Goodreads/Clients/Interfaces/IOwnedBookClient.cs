@@ -15,14 +15,14 @@ namespace Goodreads.Clients
         /// <param name="userId">A desire user Goodreads id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A list of owned books for the specified user</returns>
-        Task<PaginatedList<OwnedBook>> GetOwnedBooks(int userId, int page = 1);
+        Task<PaginatedList<OwnedBook>> GetOwnedBooks(long userId, int page = 1);
 
         /// <summary>
         /// Get an owned book, including the current owner's user id.
         /// </summary>
         /// <param name="ownedBookId">A desire owned book id.</param>
         /// <returns>An owned book information.</returns>
-        Task<OwnedBook> GetOwnedBookInfo(int ownedBookId);
+        Task<OwnedBook> GetOwnedBookInfo(long ownedBookId);
 
         /// <summary>
         /// Adds a book to user's list of owned books.
@@ -35,7 +35,7 @@ namespace Goodreads.Clients
         /// <param name="bcid">BookCrossing id (BCID).</param>
         /// <returns>An owned book object.</returns>
         Task<OwnedBookSummary> AddOwnedBook(
-            int bookId,
+            long bookId,
             int code = 10,
             string description = null,
             DateTime? purchaseDate = null,
@@ -47,6 +47,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="ownedBookId">Id of the owned book.</param>
         /// <returns>True if deleting successed, otherwise false.</returns>
-        Task<bool> DeleteOwnedBook(int ownedBookId);
+        Task<bool> DeleteOwnedBook(long ownedBookId);
     }
 }

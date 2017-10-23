@@ -26,7 +26,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire recommendation unique identifier.</param>
         /// <returns>A full information about desire recommendation.</returns>
-        async Task<Recommendation> IRecommendationsClient.GetRecommendation(int id)
+        async Task<Recommendation> IRecommendationsClient.GetRecommendation(long id)
         {
             var endpoint = $"recommendations/{id}";
             var parameters = new List<Parameter>();

@@ -20,7 +20,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Id for this work.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The number of books for this work.
@@ -31,7 +31,7 @@ namespace Goodreads.Models.Response
         /// The Goodreads Book Id that is considered the best version of this work.
         /// Might not be populated. See the <see cref="BestBook"/> property for details, if provided.
         /// </summary>
-        public int? BestBookId { get; private set; }
+        public long? BestBookId { get; private set; }
 
         /// <summary>
         /// The details for the best book of this work. Only populated
@@ -104,7 +104,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
 
             var bestBookElement = element.Element("best_book");
             if (bestBookElement != null)
@@ -113,7 +113,7 @@ namespace Goodreads.Models.Response
                 BestBook.Parse(bestBookElement);
             }
 
-            BestBookId = element.ElementAsNullableInt("best_book_id");
+            BestBookId = element.ElementAsNullableLong("best_book_id");
             BooksCount = element.ElementAsInt("books_count");
             ReviewsCount = element.ElementAsInt("reviews_count");
             RatingsSum = element.ElementAsInt("ratings_sum");

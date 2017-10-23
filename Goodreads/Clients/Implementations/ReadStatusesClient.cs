@@ -25,7 +25,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire read status unique identifier.</param>
         /// <returns>A full information about desire read status.</returns>
-        async Task<ReadStatus> IReadStatusesClient.GetReadStatus(int id)
+        async Task<ReadStatus> IReadStatusesClient.GetReadStatus(long id)
         {
             var endpoint = $"read_statuses/{id}";
             var parameters = new List<Parameter>();

@@ -14,7 +14,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="groupId">The Goodreads Id for the desired group.</param>
         /// <returns>True if joining succeeded, false otherwise.</returns>
-        Task<bool> Join(int groupId);
+        Task<bool> Join(long groupId);
 
         /// <summary>
         /// Get a list of groups the user specified.
@@ -22,7 +22,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <param name="sort">The property to sort the groups on.</param>
         /// <returns>A paginated list of groups for the user.</returns>
-        Task<PaginatedList<GroupSummary>> GetListByUser(int userId, SortGroupList? sort = null);
+        Task<PaginatedList<GroupSummary>> GetListByUser(long userId, SortGroupList? sort = null);
 
         /// <summary>
         /// Search group by specified titles and descriptions.
@@ -39,7 +39,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the group info on.</param>
         /// <param name="order">The property to order the group info on.</param>
         /// <returns>The Goodreads Group model.</returns>
-        Task<Group> GetInfo(int groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null);
+        Task<Group> GetInfo(long groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null);
 
         /// <summary>
         /// Get list of members of the specified group.
@@ -50,7 +50,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the group member on.</param>
         /// <returns>A paginated list of groups members.</returns>
         Task<PaginatedList<GroupUser>> GetMembers(
-            int groupId,
+            long groupId,
             string[] names = null,
             int page = 1,
             SortGroupMember sort = SortGroupMember.FristName);

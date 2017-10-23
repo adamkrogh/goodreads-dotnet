@@ -11,7 +11,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The review id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The review rating.
@@ -38,7 +38,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Rating = element.ElementAsString("rating");
             Text = element.ElementAsString("text");
         }

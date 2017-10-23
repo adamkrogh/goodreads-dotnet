@@ -16,12 +16,12 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Event Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The Goodreads User Id.
         /// </summary>
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
 
         /// <summary>
         /// The event title.
@@ -71,7 +71,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The event resource Id.
         /// </summary>
-        public int ResourceId { get; private set; }
+        public long ResourceId { get; private set; }
 
         /// <summary>
         /// The event resource type.
@@ -167,8 +167,8 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            UserId = element.ElementAsInt("user_id");
+            Id = element.ElementAsLong("id");
+            UserId = element.ElementAsLong("user_id");
             Title = element.ElementAsString("title");
             Address = element.ElementAsString("address");
             City = element.ElementAsString("city");
@@ -178,7 +178,7 @@ namespace Goodreads.Models.Response
             UpdatedDate = element.ElementAsDateTime("updated_at");
             CreatedDate = element.ElementAsDateTime("created_at");
             StateCode = element.ElementAsString("state_code");
-            ResourceId = element.ElementAsInt("resource_id");
+            ResourceId = element.ElementAsLong("resource_id");
             ResourceType = element.ElementAsString("resource_type");
             IsPublic = element.ElementAsInt("public_flag") == 1;
             Venue = element.ElementAsString("venue");

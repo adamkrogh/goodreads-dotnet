@@ -13,13 +13,13 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>A Goodreads user following model.</returns>
-        Task<UserFollowingSummary> Follow(int userId);
+        Task<UserFollowingSummary> Follow(long userId);
 
         /// <summary>
         /// Unfollow an user.
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>
-        Task<bool> Unfollow(int userId);
+        Task<bool> Unfollow(long userId);
     }
 }

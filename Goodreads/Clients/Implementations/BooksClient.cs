@@ -44,7 +44,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookId">The Goodreads book id.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        Task<Book> IBooksClient.GetByBookId(int bookId)
+        Task<Book> IBooksClient.GetByBookId(long bookId)
         {
             var parameters = new List<Parameter>
             {
@@ -78,7 +78,7 @@ namespace Goodreads.Clients
         /// <param name="authorId">The Goodreads author id.</param>
         /// <param name="page">The desired page from the paginated list of books.</param>
         /// <returns>A paginated list of books written by the author.</returns>
-        Task<PaginatedList<Book>> IBooksClient.GetListByAuthorId(int authorId, int page)
+        Task<PaginatedList<Book>> IBooksClient.GetListByAuthorId(long authorId, int page)
         {
             var parameters = new List<Parameter>
             {
@@ -118,7 +118,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbn">The ISBN number to fetch a book it for. Can be ISBN10 or ISBN13.</param>
         /// <returns>A Goodreads book id if found, null otherwise.</returns>
-        async Task<int?> IBooksClient.GetBookIdForIsbn(string isbn)
+        async Task<long?> IBooksClient.GetBookIdForIsbn(string isbn)
         {
             var bookIds = await (this as IBooksClient).GetBookIdsForIsbns(new List<string> { isbn });
             return bookIds == null ? null : bookIds.FirstOrDefault();
@@ -131,7 +131,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">The list of ISBNs to convert.</param>
         /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
-        async Task<IReadOnlyList<int?>> IBooksClient.GetBookIdsForIsbns(IReadOnlyList<string> isbns)
+        async Task<IReadOnlyList<long?>> IBooksClient.GetBookIdsForIsbns(IReadOnlyList<string> isbns)
         {
             var parameters = new List<Parameter>
             {
@@ -149,12 +149,12 @@ namespace Goodreads.Clients
                     var responseIds = content.Split(',');
                     if (responseIds != null && responseIds.Count() > 0)
                     {
-                        var bookIds = new List<int?>();
+                        var bookIds = new List<long?>();
                         foreach (var responseId in responseIds)
                         {
                             if (!string.IsNullOrEmpty(responseId))
                             {
-                                bookIds.Add(int.Parse(responseId));
+                                bookIds.Add(long.Parse(responseId));
                             }
                             else
                             {
@@ -177,7 +177,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
         /// <returns>A list of work ids corresponding to the given book ids.</returns>
-        async Task<IReadOnlyList<int?>> IBooksClient.GetWorkIdsForBookIds(IReadOnlyList<int> bookIds)
+        async Task<IReadOnlyList<long?>> IBooksClient.GetWorkIdsForBookIds(IReadOnlyList<long> bookIds)
         {
             var parameters = new List<Parameter>
             {
@@ -191,14 +191,14 @@ namespace Goodreads.Clients
                 var content = response.Content;
                 if (!string.IsNullOrWhiteSpace(content))
                 {
-                    var workIds = new List<int?>();
+                    var workIds = new List<long?>();
                     var document = XDocument.Parse(content);
                     var items = document.XPathSelectElements("GoodreadsResponse/work-ids/item");
                     foreach (var item in items)
                     {
                         if (!string.IsNullOrWhiteSpace(item.Value))
                         {
-                            workIds.Add(int.Parse(item.Value));
+                            workIds.Add(long.Parse(item.Value));
                         }
                         else
                         {

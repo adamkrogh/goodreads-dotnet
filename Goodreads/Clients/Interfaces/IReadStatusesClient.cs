@@ -13,6 +13,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire read status unique identifier.</param>
         /// <returns>A full information about desire read status.</returns>
-        Task<ReadStatus> GetReadStatus(int id);
+        Task<ReadStatus> GetReadStatus(long id);
     }
 }

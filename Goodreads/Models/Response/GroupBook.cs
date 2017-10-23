@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The group book id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The group book updated date.
@@ -35,7 +35,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The book id.
         /// </summary>
-        public int BookId { get; private set; }
+        public long BookId { get; private set; }
 
         /// <summary>
         /// The book title.
@@ -50,7 +50,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads author id.
         /// </summary>
-        public int AuthorId { get; private set; }
+        public long AuthorId { get; private set; }
 
         /// <summary>
         /// The Goodreads author name.
@@ -60,7 +60,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads author id as user.
         /// </summary>
-        public int AuthorUserId { get; private set; }
+        public long AuthorUserId { get; private set; }
 
         internal string DebuggerDisplay
         {
@@ -77,18 +77,18 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             UpdatedDate = element.ElementAsDateTime("updated_at");
             StartReadingDate = element.ElementAsDateTime("start_reading_at");
             FinishReadingDate = element.ElementAsDateTime("finish_reading_at");
 
             var book = element.Element("book");
-            BookId = book.ElementAsInt("id");
+            BookId = book.ElementAsLong("id");
             Title = book.ElementAsString("title");
             PublicationYear = book.ElementAsInt("publication_year");
 
             var author = book.Element("author");
-            AuthorId = author.ElementAsInt("id");
+            AuthorId = author.ElementAsLong("id");
             AuthorName = author.ElementAsString("name");
             AuthorUserId = author.ElementAsInt("user_id");
         }

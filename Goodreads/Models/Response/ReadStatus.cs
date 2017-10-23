@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The id of this status update.
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// The read status header.
@@ -50,12 +50,12 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The user id who made update.
         /// </summary>
-        public int? UserId { get; set; }
+        public long? UserId { get; set; }
 
         /// <summary>
         ///  The review id.
         /// </summary>
-        public int? ReviewId { get; set; }
+        public long? ReviewId { get; set; }
 
         /// <summary>
         /// The review.
@@ -106,18 +106,18 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Header = element.ElementAsString("header");
             Status = element.ElementAsString("status");
             UpdatedAt = element.ElementAsDateTime("updated_at");
             RatingsCount = element.ElementAsInt("ratings_count");
             CommentsCount = element.ElementAsInt("comments_count");
             OldStatus = element.ElementAsString("old_status");
-            UserId = element.ElementAsNullableInt("user_id");
+            UserId = element.ElementAsNullableLong("user_id");
             LikesCount = element.ElementAsInt("likes_count");
             Liked = element.ElementAsBool("liked");
             CreatedAt = element.ElementAsDateTime("created_at");
-            ReviewId = element.ElementAsNullableInt("review_id");
+            ReviewId = element.ElementAsNullableLong("review_id");
 
             var review = element.Element("review");
             if (review != null)

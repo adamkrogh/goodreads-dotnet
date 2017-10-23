@@ -15,12 +15,12 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The topic identifier.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The topic author id.
         /// </summary>
-        public int AuthorUserId { get; private set; }
+        public long AuthorUserId { get; private set; }
 
         /// <summary>
         /// The topic author name.
@@ -91,8 +91,8 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            AuthorUserId = element.ElementAsInt("author_user_id");
+            Id = element.ElementAsLong("id");
+            AuthorUserId = element.ElementAsLong("author_user_id");
             AuthorUserName = element.ElementAsString("author_user_name");
             Title = element.ElementAsString("title");
             CommentsCount = element.ElementAsInt("comments_count");

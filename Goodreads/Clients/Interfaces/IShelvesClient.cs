@@ -14,7 +14,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
-        Task<PaginatedList<UserShelf>> GetListOfUserShelves(int userId, int page = 1);
+        Task<PaginatedList<UserShelf>> GetListOfUserShelves(long userId, int page = 1);
 
         /// <summary>
         /// Add a book to a shelf. This method can also be used to remove from shelf.
@@ -23,7 +23,7 @@ namespace Goodreads.Clients
         /// <param name="bookId">Id of the book to add to the shelf.</param>
         /// <param name="action">This null unless you're removing from a shelf. If removing, set this to 'remove'.</param>
         /// <returns>True if the add or remove succeeded, false otherwise.</returns>
-        Task<bool> AddBookToShelf(string shelf, int bookId, string action = null);
+        Task<bool> AddBookToShelf(string shelf, long bookId, string action = null);
 
         /// <summary>
         /// Add a list of books to many current user's shelves.
@@ -31,7 +31,7 @@ namespace Goodreads.Clients
         /// <param name="shelves">List of shelf names.</param>
         /// <param name="bookIds">List of book ids.</param>
         /// <returns>True if the add succeeded, false otherwise.</returns>
-        Task<bool> AddBooksToShelves(string[] shelves, int[] bookIds);
+        Task<bool> AddBooksToShelves(string[] shelves, long[] bookIds);
 
         /// <summary>
         /// Add a user book shelf.
@@ -52,6 +52,6 @@ namespace Goodreads.Clients
         /// <param name="sortable">Determine whether shelf is sortable.</param>
         /// <param name="featured">Determine whether shelf is featured.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
-        Task<bool> EditShelf(int shelfId, string shelf, bool exclusive = false, bool sortable = false, bool featured = false);
+        Task<bool> EditShelf(long shelfId, string shelf, bool exclusive = false, bool sortable = false, bool featured = false);
     }
 }

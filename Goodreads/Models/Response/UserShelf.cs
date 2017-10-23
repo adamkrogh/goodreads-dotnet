@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Id of this user shelf.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The name of this user shelf.
@@ -92,7 +92,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             BookCount = element.ElementAsInt("book_count");
             Description = element.ElementAsString("description");

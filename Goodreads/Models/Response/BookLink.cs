@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Id of this book link.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The name of this book link provider.
@@ -43,7 +43,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             Link = element.ElementAsString("link");
         }
@@ -54,7 +54,7 @@ namespace Goodreads.Models.Response
         /// This method fixes up these book links with the given book id.
         /// </summary>
         /// <param name="bookId">The book id to append to the book link.</param>
-        internal void FixBookLink(int bookId)
+        internal void FixBookLink(long bookId)
         {
             if (!string.IsNullOrWhiteSpace(Link))
             {

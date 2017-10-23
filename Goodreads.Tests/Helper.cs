@@ -20,10 +20,10 @@ namespace Goodreads.Tests
                 Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKENSECRET"));
         }
 
-        public static int GetUserId()
+        public static long GetUserId()
         {
             var id = Environment.GetEnvironmentVariable("GOODREADS_USERID");
-            return string.IsNullOrWhiteSpace(id) ? 0 : int.Parse(id);
+            return string.IsNullOrWhiteSpace(id) ? 0 : long.Parse(id);
         }
     }
 }

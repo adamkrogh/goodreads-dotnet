@@ -22,7 +22,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookId">The Goodreads book id.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        Task<Book> GetByBookId(int bookId);
+        Task<Book> GetByBookId(long bookId);
 
         /// <summary>
         /// Get book information by book title.
@@ -39,7 +39,7 @@ namespace Goodreads.Clients
         /// <param name="authorId">The Goodreads author id.</param>
         /// <param name="page">The desired page from the paginated list of books.</param>
         /// <returns>A paginated list of books written by the author.</returns>
-        Task<PaginatedList<Book>> GetListByAuthorId(int authorId, int page = 1);
+        Task<PaginatedList<Book>> GetListByAuthorId(long authorId, int page = 1);
 
         /// <summary>
         /// Search Goodreads for books (returned as <see cref="Work"/> objects).
@@ -55,7 +55,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbn">The ISBN number to fetch a book it for. Can be ISBN10 or ISBN13.</param>
         /// <returns>A Goodreads book id if found, null otherwise.</returns>
-        Task<int?> GetBookIdForIsbn(string isbn);
+        Task<long?> GetBookIdForIsbn(string isbn);
 
         /// <summary>
         /// Converts a list of ISBNs (ISBN10 or ISBN13) to Goodreads book ids.
@@ -64,7 +64,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbns">The list of ISBNs to convert.</param>
         /// <returns>A list of Goodreads book ids (with null elements if an ISBN wasn't found).</returns>
-        Task<IReadOnlyList<int?>> GetBookIdsForIsbns(IReadOnlyList<string> isbns);
+        Task<IReadOnlyList<long?>> GetBookIdsForIsbns(IReadOnlyList<string> isbns);
 
         /// <summary>
         /// Converts a list of Goodreads book ids to work ids.
@@ -73,7 +73,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookIds">The list of Goodreads book ids to convert.</param>
         /// <returns>A list of work ids corresponding to the given book ids.</returns>
-        Task<IReadOnlyList<int?>> GetWorkIdsForBookIds(IReadOnlyList<int> bookIds);
+        Task<IReadOnlyList<long?>> GetWorkIdsForBookIds(IReadOnlyList<long> bookIds);
 
         /// <summary>
         /// Get review statistics for a list of books by ISBN10 or ISBN13.

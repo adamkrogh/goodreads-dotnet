@@ -12,92 +12,55 @@ namespace Goodreads.Extensions
     {
         public static string ElementAsString(this XElement element, XName name, bool trim = false)
         {
-            var stringElement = element.Element(name);
-            if (stringElement != null)
-            {
-                var value = stringElement.Value;
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    return trim ? value.Trim() : value;
-                }
-            }
+            var el = element.Element(name);
 
-            return null;
+            return string.IsNullOrWhiteSpace(el?.Value) 
+                ? null
+                : (trim ? el?.Value.Trim() : el?.Value);
+        }
+
+        public static long ElementAsLong(this XElement element, XName name)
+        {
+            var el = element.Element(name);
+            return long.TryParse(el?.Value, out long value) ? value : default(long);
+        }
+
+        public static long? ElementAsNullableLong(this XElement element, XName name)
+        {
+            var el = element.Element(name);
+            return long.TryParse(el?.Value, out long value) ? new long?(value) : null;
         }
 
         public static int ElementAsInt(this XElement element, XName name)
         {
-            var intElement = element.Element(name);
-            if (intElement != null)
-            {
-                var intValue = 0;
-                if (int.TryParse(intElement.Value, out intValue))
-                {
-                    return intValue;
-                }
-            }
-
-            return 0;
+            var el = element.Element(name);
+            return int.TryParse(el?.Value, out int value) ? value : default(int);
         }
 
         public static int? ElementAsNullableInt(this XElement element, XName name)
         {
-            var intElement = element.Element(name);
-            if (intElement != null)
-            {
-                var intValue = 0;
-                if (int.TryParse(intElement.Value, out intValue))
-                {
-                    return intValue;
-                }
-            }
-
-            return null;
+            var el = element.Element(name);
+            return int.TryParse(el?.Value, out int value) ? new int?(value) : null;
         }
 
         public static decimal ElementAsDecimal(this XElement element, XName name)
         {
-            var decimalElement = element.Element(name);
-            if (decimalElement != null)
-            {
-                var decimalValue = 0m;
-                if (decimal.TryParse(decimalElement.Value, out decimalValue))
-                {
-                    return decimalValue;
-                }
-            }
-
-            return 0m;
+            var el = element.Element(name);
+            return decimal.TryParse(el?.Value, out decimal value) ? value : default(decimal);
         }
 
         public static decimal? ElementAsNullableDecimal(this XElement element, XName name)
         {
-            var decimalElement = element.Element(name);
-            if (decimalElement != null)
-            {
-                var decimalValue = 0m;
-                if (decimal.TryParse(decimalElement.Value, out decimalValue))
-                {
-                    return decimalValue;
-                }
-            }
-
-            return null;
+            var el = element.Element(name);
+            return decimal.TryParse(el?.Value, out decimal value) ? new decimal?(value) : null;
         }
 
         public static DateTime? ElementAsDate(this XElement element, XName name)
         {
-            var dateElement = element.Element(name);
-            if (dateElement != null)
-            {
-                DateTime date;
-                if (DateTime.TryParseExact(dateElement.Value, "yyyy/MM/dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                {
-                    return date;
-                }
-            }
-
-            return null;
+            var el = element.Element(name);
+            return DateTime.TryParseExact(el?.Value, "yyyy/MM/dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)
+                ? new DateTime?(date)
+                : null;
         }
 
         public static DateTime? ElementAsDateTime(this XElement element, XName name)
@@ -137,17 +100,10 @@ namespace Goodreads.Extensions
 
         public static DateTime? ElementAsMonthYear(this XElement element, XName name)
         {
-            var dateElement = element.Element(name);
-            if (dateElement != null)
-            {
-                DateTime date;
-                if (DateTime.TryParseExact(dateElement.Value, "MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                {
-                    return date;
-                }
-            }
-
-            return null;
+            var el = element.Element(name);
+            return DateTime.TryParseExact(el?.Value, "MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)
+                ? new DateTime?(date)
+                : null;            
         }
 
         /// <summary>
@@ -190,17 +146,8 @@ namespace Goodreads.Extensions
 
         public static bool ElementAsBool(this XElement element, XName name)
         {
-            var boolElement = element.Element(name);
-            if (boolElement != null)
-            {
-                var boolValue = false;
-                if (bool.TryParse(boolElement.Value, out boolValue))
-                {
-                    return boolValue;
-                }
-            }
-
-            return false;
+            var el = element.Element(name);
+            return bool.TryParse(el?.Value, out bool value) ? value : false;
         }
 
         public static List<T> ParseChildren<T>(this XElement element, XName parentName, XName childName) where T : ApiResponse, new()
@@ -261,62 +208,26 @@ namespace Goodreads.Extensions
 
         public static string AttributeAsString(this XElement element, XName attributeName)
         {
-            var stringAttribute = element.Attribute(attributeName);
-            if (stringAttribute != null)
-            {
-                var value = stringAttribute.Value;
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    return value;
-                }
-            }
-
-            return null;
+            var attr = element.Attribute(attributeName);
+            return string.IsNullOrWhiteSpace(attr?.Value) ? null : attr?.Value;
         }
 
         public static int AttributeAsInt(this XElement element, XName attributeName)
         {
-            var intAttribute = element.Attribute(attributeName);
-            if (intAttribute != null)
-            {
-                var intValue = 0;
-                if (int.TryParse(intAttribute.Value, out intValue))
-                {
-                    return intValue;
-                }
-            }
-
-            return 0;
+            var attr = element.Attribute(attributeName);
+            return int.TryParse(attr?.Value, out int value) ? value : default(int);
         }
 
-        public static int? AttributeAsNullableInt(this XElement element, XName attributeName)
+        public static long? AttributeAsNullableLong(this XElement element, XName attributeName)
         {
-            var intAttribute = element.Attribute(attributeName);
-            if (intAttribute != null)
-            {
-                var intValue = 0;
-                if (int.TryParse(intAttribute.Value, out intValue))
-                {
-                    return intValue;
-                }
-            }
-
-            return null;
+            var attr = element.Attribute(attributeName);
+            return long.TryParse(attr?.Value, out long value) ? new long?(value) : null;
         }
 
         public static bool AttributeAsBool(this XElement element, XName attributeName)
         {
-            var boolAttribute = element.Attribute(attributeName);
-            if (boolAttribute != null)
-            {
-                var boolValue = false;
-                if (bool.TryParse(boolAttribute.Value, out boolValue))
-                {
-                    return boolValue;
-                }
-            }
-
-            return false;
-        }
+            var attr = element.Attribute(attributeName);
+            return bool.TryParse(attr?.Value, out bool value) ? value : false;
+        }        
     }
 }

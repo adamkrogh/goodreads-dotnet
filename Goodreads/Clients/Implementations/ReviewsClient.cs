@@ -34,7 +34,7 @@ namespace Goodreads.Clients
         /// <param name="reviewId">The id of the review.</param>
         /// <param name="commentsPage">The page of comments to fetch.</param>
         /// <returns>A review with the matching id.</returns>
-        Task<ReviewDetails> IReviewsClient.GetById(int reviewId, int commentsPage)
+        Task<ReviewDetails> IReviewsClient.GetById(long reviewId, int commentsPage)
         {
             var parameters = new List<Parameter>
             {
@@ -54,7 +54,7 @@ namespace Goodreads.Clients
         /// <param name="findReviewOnDifferentEdition">If the review was not found on the
         /// given book id, search all editions of the book for the review.</param>
         /// <returns>A review that matches the given parameters.</returns>
-        Task<ReviewDetails> IReviewsClient.GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition)
+        Task<ReviewDetails> IReviewsClient.GetByUserIdAndBookId(long userId, long bookId, bool findReviewOnDifferentEdition)
         {
             var parameters = new List<Parameter>
             {
@@ -81,7 +81,7 @@ namespace Goodreads.Clients
         /// <param name="pageSize">The number of reviews to return per page (from 1 to 200).</param>
         /// <returns>A paginated list of reviews for the user.</returns>
         Task<PaginatedList<Review>> IReviewsClient.GetListByUser(
-            int userId,
+            long userId,
             string shelfName,
             SortReviewsList? sort,
             string searchQuery,
@@ -160,7 +160,7 @@ namespace Goodreads.Clients
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>If successful, returns the id of the created review, null otherwise.</returns>
         async Task<int?> IReviewsClient.Create(
-            int bookId,
+            long bookId,
             string reviewText,
             int? rating,
             DateTime? dateRead,
@@ -234,7 +234,7 @@ namespace Goodreads.Clients
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
         async Task<bool> IReviewsClient.Edit(
-            int reviewId,
+            long reviewId,
             string reviewText,
             int? rating,
             DateTime? dateRead,

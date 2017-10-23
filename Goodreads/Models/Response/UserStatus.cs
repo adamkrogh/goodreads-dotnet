@@ -17,7 +17,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The user status id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The user status header.
@@ -67,7 +67,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// Work id.
         /// </summary>
-        public int WorkId { get; private set; }
+        public long WorkId { get; private set; }
 
         /// <summary>
         /// The user who is a status author.
@@ -98,7 +98,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Header = element.ElementAsString("header");
             Body = element.ElementAsString("body");
             CreatedAt = element.ElementAsDateTime("created_at");
@@ -108,7 +108,7 @@ namespace Goodreads.Models.Response
             Liked = element.ElementAsBool("liked");
             Page = element.ElementAsInt("page");
             Percent = element.ElementAsInt("percent");
-            WorkId = element.ElementAsInt("work_id");
+            WorkId = element.ElementAsLong("work_id");
 
             var actor = element.Element("user");
             if (actor != null)

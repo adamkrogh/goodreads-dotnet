@@ -28,7 +28,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The author to fetch the list of series for.</param>
         /// <returns>A list of series written by the author.</returns>
-        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByAuthorId(int authorId)
+        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByAuthorId(long authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -77,7 +77,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="workId">The work id to fetch the list of series for.</param>
         /// <returns>A list of series that this work appears in.</returns>
-        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByWorkId(int workId)
+        async Task<IReadOnlyList<Series>> ISeriesClient.GetListByWorkId(long workId)
         {
             var parameters = new List<Parameter>
             {
@@ -122,7 +122,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="seriesId">The Goodreads id of the series.</param>
         /// <returns>Information about the series, including a list of works.</returns>
-        Task<Series> ISeriesClient.GetById(int seriesId)
+        Task<Series> ISeriesClient.GetById(long seriesId)
         {
             var parameters = new List<Parameter>
             {

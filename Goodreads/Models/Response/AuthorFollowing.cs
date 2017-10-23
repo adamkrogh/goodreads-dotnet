@@ -16,7 +16,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Author_following Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The author following likes count.
@@ -63,7 +63,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             LikesCount = element.ElementAsInt("likes_count");
             Liked = element.ElementAsBool("likes_count");
             CreatedDateTime = element.ElementAsDateTime("created_at");

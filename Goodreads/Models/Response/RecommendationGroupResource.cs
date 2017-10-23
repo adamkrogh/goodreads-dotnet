@@ -16,22 +16,22 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The recommendation id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The user id whom book is recommended.
         /// </summary>
-        public int ToUserId { get; private set; }
+        public long ToUserId { get; private set; }
 
         /// <summary>
         /// The user id who recommend book.
         /// </summary>
-        public int FromUserId { get; private set; }
+        public long FromUserId { get; private set; }
 
         /// <summary>
         /// The book id which is recommended.
         /// </summary>
-        public int BookId { get; private set; }
+        public long BookId { get; private set; }
 
         /// <summary>
         /// The recommendation status.
@@ -93,10 +93,10 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            ToUserId = element.ElementAsInt("to_user_id");
-            FromUserId = element.ElementAsInt("from_user_id");
-            BookId = element.ElementAsInt("book_id");
+            Id = element.ElementAsLong("id");
+            ToUserId = element.ElementAsLong("to_user_id");
+            FromUserId = element.ElementAsLong("from_user_id");
+            BookId = element.ElementAsLong("book_id");
             Status = element.ElementAsString("status");
             CreatedDateTime = element.ElementAsDateTime("created_at");
             UpdatedDateTime = element.ElementAsDateTime("updated_at");

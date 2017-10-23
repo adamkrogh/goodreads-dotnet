@@ -14,7 +14,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads user id of the user to fetch.</param>
         /// <returns>Information about the desired user.</returns>
-        Task<User> GetByUserId(int userId);
+        Task<User> GetByUserId(long userId);
 
         /// <summary>
         /// Gets the public information for a Goodreads user by username.
@@ -31,7 +31,7 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="sort">The sort order of the paginated list.</param>
         /// <returns>A paginated list of the user summary information for their friends.</returns>
-        Task<PaginatedList<UserSummary>> GetListOfFriends(int userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName);
+        Task<PaginatedList<UserSummary>> GetListOfFriends(long userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName);
 
         /// <summary>
         /// Gets the Goodreads user id of the authenticated connection.
@@ -42,7 +42,7 @@ namespace Goodreads.Clients
             "Microsoft.Design",
             "CA1024:UsePropertiesWhereAppropriate",
             Justification = "Method makes a network request.")]
-        Task<int?> GetAuthenticatedUserId();
+        Task<long?> GetAuthenticatedUserId();
 
         /// <summary>
         /// Get an people the given user is following.
@@ -50,7 +50,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>People the given user is following.</returns>
-        Task<PaginatedList<UserFollowing>> GetUserFollowing(int userId, int page = 1);
+        Task<PaginatedList<UserFollowing>> GetUserFollowing(long userId, int page = 1);
 
         /// <summary>
         /// Get given user's followers.
@@ -58,13 +58,13 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>The specified user's followers.</returns>
-        Task<PaginatedList<UserFollowers>> GetUsersFollowers(int userId, int page = 1);
+        Task<PaginatedList<UserFollowers>> GetUsersFollowers(long userId, int page = 1);
 
         /// <summary>
         /// Get stats comparing your books to another member's.
         /// </summary>
         /// <param name="userId">A desired user if to ompare.</param>
         /// <returns>A compare books result.</returns>
-        Task<CompareBooksResult> CompareUserBooks(int userId);
+        Task<CompareBooksResult> CompareUserBooks(long userId);
     }
 }

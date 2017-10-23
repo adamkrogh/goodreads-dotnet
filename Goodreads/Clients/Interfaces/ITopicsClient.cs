@@ -10,6 +10,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="topicId">A desire topic id.</param>
         /// <returns>A full information about topic identifier.</returns>
-        Task<Topic> GetInfo(int topicId);
+        Task<Topic> GetInfo(long topicId);
     }
 }

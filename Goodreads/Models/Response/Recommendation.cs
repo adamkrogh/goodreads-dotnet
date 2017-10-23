@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The recommendation unique identifier.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The book which is recommended.
@@ -66,7 +66,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             CreatedAt = element.ElementAsDateTime("created_at");
             Message = element.ElementAsString("message");
             LikesCount = element.ElementAsInt("likes_count");

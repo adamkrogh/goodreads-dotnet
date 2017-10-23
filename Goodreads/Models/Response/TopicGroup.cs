@@ -14,7 +14,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// Folder id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The folder name.
@@ -40,7 +40,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Title = element.ElementAsString("title");
             ImageUrl = element.ElementAsString("p1_image_url");
         }

@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Author Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The full name of the author.
@@ -115,7 +115,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             Link = element.ElementAsString("link");
             FollowersCount = element.ElementAsInt("author_followers_count");

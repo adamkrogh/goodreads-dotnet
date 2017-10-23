@@ -21,7 +21,7 @@ namespace Goodreads.Clients
             Connection = connection;
         }
 
-        async Task<PaginatedList<OwnedBook>> IOwnedBookClient.GetOwnedBooks(int userId, int page)
+        async Task<PaginatedList<OwnedBook>> IOwnedBookClient.GetOwnedBooks(long userId, int page)
         {
             var endpoint = @"owned_books/user";
 
@@ -39,7 +39,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="ownedBookId">A desire owned book id.</param>
         /// <returns>An owned book information.</returns>
-        async Task<OwnedBook> IOwnedBookClient.GetOwnedBookInfo(int ownedBookId)
+        async Task<OwnedBook> IOwnedBookClient.GetOwnedBookInfo(long ownedBookId)
         {
             var endpoint = $"owned_books/show/{ownedBookId}";
 
@@ -57,7 +57,7 @@ namespace Goodreads.Clients
         /// <param name="bcid">BookCrossing id (BCID).</param>
         /// <returns>>An owned book object.</returns>
         async Task<OwnedBookSummary> IOwnedBookClient.AddOwnedBook(
-            int bookId,
+            long bookId,
             int code,
             string description,
             DateTime? purchaseDate,
@@ -100,7 +100,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="ownedBookId">Id of the owned book.</param>
         /// <returns>True if deleting successed, otherwise false.</returns>
-        async Task<bool> IOwnedBookClient.DeleteOwnedBook(int ownedBookId)
+        async Task<bool> IOwnedBookClient.DeleteOwnedBook(long ownedBookId)
         {
             var endpoint = $"owned_books/destroy/{ownedBookId}";
             var response = await Connection.ExecuteRaw(endpoint, new List<Parameter>(), Method.POST);

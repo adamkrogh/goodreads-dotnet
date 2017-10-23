@@ -17,7 +17,7 @@ namespace Goodreads.Clients
         /// <param name="reviewId">The id of the review.</param>
         /// <param name="commentsPage">The page of comments to fetch.</param>
         /// <returns>A review with the matching id.</returns>
-        Task<ReviewDetails> GetById(int reviewId, int commentsPage = 1);
+        Task<ReviewDetails> GetById(long reviewId, int commentsPage = 1);
 
         /// <summary>
         /// Get a review for a user and book, and optionally find the review
@@ -28,7 +28,7 @@ namespace Goodreads.Clients
         /// <param name="findReviewOnDifferentEdition">If the review was not found on the
         /// given book id, search all editions of the book for the review.</param>
         /// <returns>A review that matches the given parameters.</returns>
-        Task<ReviewDetails> GetByUserIdAndBookId(int userId, int bookId, bool findReviewOnDifferentEdition = false);
+        Task<ReviewDetails> GetByUserIdAndBookId(long userId, long bookId, bool findReviewOnDifferentEdition = false);
 
         /// <summary>
         /// Get a list of book reviews on a user's account. Several optional parameters
@@ -45,7 +45,7 @@ namespace Goodreads.Clients
         /// <param name="pageSize">The number of reviews to return per page (from 1 to 200).</param>
         /// <returns>A paginated list of reviews for the user.</returns>
         Task<PaginatedList<Review>> GetListByUser(
-            int userId,
+            long userId,
             string shelfName = null,
             SortReviewsList? sort = null,
             string searchQuery = null,
@@ -73,7 +73,7 @@ namespace Goodreads.Clients
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>If successful, returns the id of the created review, null otherwise.</returns>
         Task<int?> Create(
-            int bookId,
+            long bookId,
             string reviewText = null,
             int? rating = null,
             DateTime? dateRead = null,
@@ -89,7 +89,7 @@ namespace Goodreads.Clients
         /// <param name="shelfName">The shelf name to add the review to.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
         Task<bool> Edit(
-            int reviewId,
+            long reviewId,
             string reviewText = null,
             int? rating = null,
             DateTime? dateRead = null,

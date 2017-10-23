@@ -14,6 +14,6 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="id">A desire recommendation unique identifier.</param>
         /// <returns>A full information about desire recommendation.</returns>
-        Task<Recommendation> GetRecommendation(int id);
+        Task<Recommendation> GetRecommendation(long id);
     }
 }

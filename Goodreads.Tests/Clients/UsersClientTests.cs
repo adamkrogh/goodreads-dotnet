@@ -8,7 +8,7 @@ namespace Goodreads.Tests
     public class UsersClientTests
     {
         private readonly IUsersClient UsersClient;
-        private readonly int UserId;
+        private readonly long UserId;
 
         public UsersClientTests()
         {
@@ -30,7 +30,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var user = await UsersClient.GetByUserId(int.MaxValue);
+                var user = await UsersClient.GetByUserId(long.MaxValue);
 
                 Assert.Null(user);
             }

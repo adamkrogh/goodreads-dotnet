@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Group folder Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The group folder name.
@@ -56,7 +56,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             ItemsCount = element.ElementAsInt("items_count");
             Link = element.ElementAsString("link");

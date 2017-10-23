@@ -29,7 +29,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads user id of the user to fetch.</param>
         /// <returns>Information about the desired user.</returns>
-        Task<User> IUsersClient.GetByUserId(int userId)
+        Task<User> IUsersClient.GetByUserId(long userId)
         {
             var parameters = new List<Parameter>
             {
@@ -62,7 +62,7 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="sort">The sort order of the paginated list.</param>
         /// <returns>A paginated list of the user summary information for their friends.</returns>
-        Task<PaginatedList<UserSummary>> IUsersClient.GetListOfFriends(int userId, int page, SortFriendsList sort)
+        Task<PaginatedList<UserSummary>> IUsersClient.GetListOfFriends(long userId, int page, SortFriendsList sort)
         {
             var parameters = new List<Parameter>
             {
@@ -84,7 +84,7 @@ namespace Goodreads.Clients
         /// If the client isn't using OAuth, this returns null.
         /// </summary>
         /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
-        async Task<int?> IUsersClient.GetAuthenticatedUserId()
+        async Task<long?> IUsersClient.GetAuthenticatedUserId()
         {
             if (!Connection.IsAuthenticated)
             {
@@ -105,7 +105,7 @@ namespace Goodreads.Clients
                         var attribute = userElement.Attribute("id");
                         if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Value))
                         {
-                            return int.Parse(attribute.Value);
+                            return long.Parse(attribute.Value);
                         }
                     }
                 }
@@ -120,7 +120,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>People the given user is following.</returns>
-        async Task<PaginatedList<UserFollowing>> IUsersClient.GetUserFollowing(int userId, int page)
+        async Task<PaginatedList<UserFollowing>> IUsersClient.GetUserFollowing(long userId, int page)
         {
             var endpoint = $"user/{userId}/following";
 
@@ -138,7 +138,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>The specified user's followers.</returns>
-        async Task<PaginatedList<UserFollowers>> IUsersClient.GetUsersFollowers(int userId, int page)
+        async Task<PaginatedList<UserFollowers>> IUsersClient.GetUsersFollowers(long userId, int page)
         {
             var endpoint = $"user/{userId}/followers";
 
@@ -155,7 +155,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">A desired user if to ompare.</param>
         /// <returns>A compare books result.</returns>
-        async Task<CompareBooksResult> IUsersClient.CompareUserBooks(int userId)
+        async Task<CompareBooksResult> IUsersClient.CompareUserBooks(long userId)
         {
             var endpoint = $"user/compare/{userId}";
             return await Connection.ExecuteRequest<CompareBooksResult>(endpoint, new List<Parameter>(), null, "compare");

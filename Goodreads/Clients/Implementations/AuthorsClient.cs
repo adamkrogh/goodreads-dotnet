@@ -27,7 +27,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>An async task returning the desired author information.</returns>
-        Task<Author> IAuthorsClient.GetByAuthorId(int authorId)
+        Task<Author> IAuthorsClient.GetByAuthorId(long authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -42,7 +42,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorName">The author name to search for.</param>
         /// <returns>A Goodreads author id if found, null otherwise.</returns>
-        async Task<int?> IAuthorsClient.GetAuthorIdByName(string authorName)
+        async Task<long?> IAuthorsClient.GetAuthorIdByName(string authorName)
         {
             var parameters = new List<Parameter>
             {
@@ -63,7 +63,7 @@ namespace Goodreads.Clients
                         var attribute = userElement.Attribute("id");
                         if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Value))
                         {
-                            return int.Parse(attribute.Value);
+                            return long.Parse(attribute.Value);
                         }
                     }
                 }

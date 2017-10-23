@@ -13,7 +13,7 @@ namespace Goodreads.Clients
         {
         }
 
-        public async Task<Topic> GetInfo(int topicId)
+        public async Task<Topic> GetInfo(long topicId)
         {
             var endpoint = $"topic/show?id={topicId}";
             return await Connection.ExecuteRequest<Topic>(endpoint, new List<Parameter>(), null, "topic").ConfigureAwait(false);

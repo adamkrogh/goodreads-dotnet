@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The id of this comment.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The body text of this comment.
@@ -50,7 +50,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Body = element.ElementAsString("body");
 
             var userElement = element.Element("user");

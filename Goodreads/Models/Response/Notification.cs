@@ -16,7 +16,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Notification Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// An user who made notification.
@@ -93,7 +93,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
 
             var user = element.Element("actors")?.Element("user");
             if (user != null)

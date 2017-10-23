@@ -16,7 +16,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The follower unique identifier.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The follower name.
@@ -68,7 +68,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");

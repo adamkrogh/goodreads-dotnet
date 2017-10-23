@@ -16,7 +16,7 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="comment">A comment value.</param>
         /// <returns>True if creation is successed. otherwise false.</returns>
-        Task<bool> Create(int resourceId, ResourceType type, string comment);
+        Task<bool> Create(long resourceId, ResourceType type, string comment);
 
         /// <summary>
         /// Get lists comments.
@@ -25,6 +25,6 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="page">The desired page from the paginated list of friend requests.</param>
         /// <returns>List of comments.</returns>
-        Task<PaginatedList<Comment>> GetAll(int resourceId, ResourceType type, int page = 1);
+        Task<PaginatedList<Comment>> GetAll(long resourceId, ResourceType type, int page = 1);
     }
 }

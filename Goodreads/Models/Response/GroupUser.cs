@@ -13,7 +13,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads Group user Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The group user name.
@@ -78,7 +78,7 @@ namespace Goodreads.Models.Response
 
             var user = element.Element("user");
 
-            Id = user.ElementAsInt("id");
+            Id = user.ElementAsLong("id");
             UserName = user.ElementAsString("user_name");
             FirstName = user.ElementAsString("first_name");
             LastName = user.ElementAsString("last_name");

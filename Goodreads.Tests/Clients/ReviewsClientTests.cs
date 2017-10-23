@@ -11,8 +11,8 @@ namespace Goodreads.Tests
     public class ReviewsClientTests
     {
         private readonly IReviewsClient ReviewsClient;
-        private readonly int UserId;
-        private readonly int ReviewsUserId;
+        private readonly long UserId;
+        private readonly long ReviewsUserId;
 
         public ReviewsClientTests()
         {
@@ -26,7 +26,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsAReview()
             {
-                var expectedId = 1700227480;
+                int expectedId = 2153;
                 var review = await ReviewsClient.GetById(expectedId);
 
                 Assert.NotNull(review);

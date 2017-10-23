@@ -26,7 +26,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="userId">The Goodreads Id for the desired user.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
-        async Task<bool> IFriendsClient.AddFriend(int userId)
+        async Task<bool> IFriendsClient.AddFriend(long userId)
         {
             var parameters = new List<Parameter>
             {
@@ -64,7 +64,7 @@ namespace Goodreads.Clients
         /// <param name="friendRequestId">The friend request id.</param>
         /// <param name="response">The user response.</param>
         /// <returns>True if confirmation succeeded, otherwise - false.</returns>
-        async Task<bool> IFriendsClient.ConfirmRequest(int friendRequestId, bool response)
+        async Task<bool> IFriendsClient.ConfirmRequest(long friendRequestId, bool response)
         {
             var parameters = new List<Parameter>
             {

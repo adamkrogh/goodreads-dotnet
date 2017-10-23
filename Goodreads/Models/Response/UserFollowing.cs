@@ -16,7 +16,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The following user id.
         /// </summary>
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
 
         /// <summary>
         /// The following user name.
@@ -68,7 +68,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            UserId = element.ElementAsInt("id");
+            UserId = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");

@@ -78,7 +78,7 @@ namespace Goodreads.Tests
             public async Task AddBooksToShelves()
             {
                 var shelves = new[] { "to-read", "leo" };
-                var bookIds = new[] { 15823480, 656 };
+                var bookIds = new long[] { 15823480, 656 };
                 var result = await ShelvesClient.AddBooksToShelves(shelves, bookIds);
 
                 Assert.True(result);

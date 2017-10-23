@@ -27,7 +27,7 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="comment">A comment value.</param>
         /// <returns>True if creation is successed. otherwise false.</returns>
-        async Task<bool> ICommentClient.Create(int resourceId, ResourceType type, string comment)
+        async Task<bool> ICommentClient.Create(long resourceId, ResourceType type, string comment)
         {
             var endpoint = @"comment";
 
@@ -50,7 +50,7 @@ namespace Goodreads.Clients
         /// <param name="type">A resource type.</param>
         /// <param name="page">The desired page from the paginated list of friend requests.</param>
         /// <returns>List of comments.</returns>
-        async Task<PaginatedList<Comment>> ICommentClient.GetAll(int resourceId, ResourceType type, int page)
+        async Task<PaginatedList<Comment>> ICommentClient.GetAll(long resourceId, ResourceType type, int page)
         {
             var endpoint = @"comment";
 

@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// An actor Goodreads id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// An actor name.
@@ -66,7 +66,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             Name = element.ElementAsString("name");
             DisplayName = element.ElementAsString("display_name");
             Location = element.ElementAsString("location");

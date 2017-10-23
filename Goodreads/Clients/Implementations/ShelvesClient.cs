@@ -27,7 +27,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>A paginated list of the user's shelves.</returns>
-        Task<PaginatedList<UserShelf>> IShelvesClient.GetListOfUserShelves(int userId, int page)
+        Task<PaginatedList<UserShelf>> IShelvesClient.GetListOfUserShelves(long userId, int page)
         {
             var parameters = new List<Parameter>
             {
@@ -45,7 +45,7 @@ namespace Goodreads.Clients
         /// <param name="bookId">Id of the book to add to the shelf.</param>
         /// <param name="action">This null unless you're removing from a shelf. If removing, set this to 'remove'.</param>
         /// <returns>True if the add or remove succeeded, false otherwise.</returns>
-        async Task<bool> IShelvesClient.AddBookToShelf(string shelf, int bookId, string action)
+        async Task<bool> IShelvesClient.AddBookToShelf(string shelf, long bookId, string action)
         {
             var parameters = new List<Parameter>
             {
@@ -65,7 +65,7 @@ namespace Goodreads.Clients
         /// <param name="shelves">List of shelf names.</param>
         /// <param name="bookIds">List of book ids.</param>
         /// <returns>True if the add succeeded, false otherwise.</returns>
-        async Task<bool> IShelvesClient.AddBooksToShelves(string[] shelves, int[] bookIds)
+        async Task<bool> IShelvesClient.AddBooksToShelves(string[] shelves, long[] bookIds)
         {
             var parameters = new List<Parameter>
             {
@@ -134,7 +134,7 @@ namespace Goodreads.Clients
         /// <param name="sortable">Determine whether shelf is sortable.</param>
         /// <param name="featured">Determine whether shelf is featured.</param>
         /// <returns>True if the edit succeeded, false otherwise.</returns>
-        async Task<bool> IShelvesClient.EditShelf(int shelfId, string shelf, bool exclusive, bool sortable, bool featured)
+        async Task<bool> IShelvesClient.EditShelf(long shelfId, string shelf, bool exclusive, bool sortable, bool featured)
         {
             var endpoint = $"user_shelves/{shelfId}";
 

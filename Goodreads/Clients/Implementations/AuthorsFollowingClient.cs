@@ -27,7 +27,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorId">The Goodreads Id for the desired author.</param>
         /// <returns>A Goodreads author following model.</returns>
-        async Task<AuthorFollowing> IAuthorsFollowingClient.Follow(int authorId)
+        async Task<AuthorFollowing> IAuthorsFollowingClient.Follow(long authorId)
         {
             var parameters = new List<Parameter>
             {
@@ -47,7 +47,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
         /// <returns>True if the unfollow succeeded, false otherwise.</returns>
-        async Task<bool> IAuthorsFollowingClient.Unfollow(int authorFollowingId)
+        async Task<bool> IAuthorsFollowingClient.Unfollow(long authorFollowingId)
         {
             var endpoint = string.Format(CultureInfo.InvariantCulture, @"author_followings/{0}", authorFollowingId);
             var response = await Connection.ExecuteRaw(endpoint, null, Method.DELETE).ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="authorFollowingId">The Goodreads Id for the desired author.</param>
         /// <returns>A Goodreads author following model.</returns>
-        async Task<AuthorFollowing> IAuthorsFollowingClient.Show(int authorFollowingId)
+        async Task<AuthorFollowing> IAuthorsFollowingClient.Show(long authorFollowingId)
         {
             var endpoint = string.Format(CultureInfo.InvariantCulture, "author_followings/{0}", authorFollowingId);
 

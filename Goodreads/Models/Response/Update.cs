@@ -15,7 +15,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Goodreads update Id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The update action text.
@@ -83,7 +83,7 @@ namespace Goodreads.Models.Response
         internal override void Parse(XElement element)
         {
             UpdateType = element.AttributeAsString("type");
-            Id = element.ElementAsInt("id");
+            Id = element.ElementAsLong("id");
             ActionText = element.ElementAsString("action_text");
             Link = element.ElementAsString("link");
             ImageUrl = element.ElementAsString("image_url");

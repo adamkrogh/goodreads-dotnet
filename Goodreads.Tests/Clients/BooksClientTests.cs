@@ -210,8 +210,8 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsWorkIds()
             {
-                var bookIds = new List<int> { 7235533, 17332218 };
-                var expectedWorkIds = new List<int> { 8134945, 16482835 };
+                var bookIds = new List<long> { 7235533, 17332218 };
+                var expectedWorkIds = new List<long> { 8134945, 16482835 };
                 var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
 
                 Assert.NotNull(actualWorkIds);
@@ -227,8 +227,8 @@ namespace Goodreads.Tests
             [Fact]
             public async Task HandlesMissingBookIds()
             {
-                var bookIds = new List<int> { 7235533, int.MaxValue, 17332218 };
-                var expectedWorkIds = new List<int?> { 8134945, null, 16482835 };
+                var bookIds = new List<long> { 7235533, int.MaxValue, 17332218 };
+                var expectedWorkIds = new List<long?> { 8134945, null, 16482835 };
                 var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
 
                 Assert.NotNull(actualWorkIds);

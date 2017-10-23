@@ -16,17 +16,17 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The owner book id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The current owner id.
         /// </summary>
-        public int CurrentOwnerId { get; private set; }
+        public long CurrentOwnerId { get; private set; }
 
         /// <summary>
-        /// The current owner id.
+        /// The current owner name.
         /// </summary>
-        public int CurrentOwnerName { get; private set; }
+        public string CurrentOwnerName { get; private set; }
 
         /// <summary>
         /// The original date when owner has bought a book.
@@ -61,7 +61,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The book id.
         /// </summary>
-        public int BookId { get; private set; }
+        public long BookId { get; private set; }
 
         /// <summary>
         /// The updated date of current owned book.
@@ -96,7 +96,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The work id of the current owned book.
         /// </summary>
-        public int WorkId { get; private set; }
+        public long WorkId { get; private set; }
 
         internal string DebuggerDisplay
         {
@@ -112,15 +112,15 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            CurrentOwnerId = element.ElementAsInt("current-owner-id");
-            CurrentOwnerName = element.ElementAsInt("current-owner-name");
+            Id = element.ElementAsLong("id");
+            CurrentOwnerId = element.ElementAsLong("current-owner-id");
+            CurrentOwnerName = element.ElementAsString("current-owner-name");
             OriginalPurchaseDate = element.ElementAsDateTime("original-purchase-date");
             OriginalPurchaseLocation = element.ElementAsString("original-purchase-location");
             ConditionCode = element.ElementAsInt("condition-code");
             ConditionDescription = element.ElementAsString("condition-description");
-            BookId = element.ElementAsInt("book-id");
-            WorkId = element.ElementAsInt("work-id");
+            BookId = element.ElementAsLong("book-id");
+            WorkId = element.ElementAsLong("work-id");
             AvailableForSwap = element.ElementAsBool("available-for-swap");
             IsSwappable = element.ElementAsBool("swappable-flag");
             CommentsCount = element.ElementAsInt("comments-count");

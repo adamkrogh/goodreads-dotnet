@@ -18,10 +18,10 @@ namespace Goodreads.Clients
         /// This will not override the book_id if it was provided.</param>
         /// <returns>True if adding succeeded, false otherwise.</returns>
         Task<bool> Add(
-            int authorId,
+            long authorId,
             string authorName,
             string quote,
-            int? bookId = null,
+            long? bookId = null,
             string isbn = null);
     }
 }

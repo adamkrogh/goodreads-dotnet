@@ -14,7 +14,7 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The Id of this review shelf, optional.
         /// </summary>
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         /// <summary>
         /// The name of the shelf.
@@ -44,7 +44,7 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.AttributeAsNullableInt("review_shelf_id");
+            Id = element.AttributeAsNullableLong("review_shelf_id");
             Name = element.AttributeAsString("name");
             IsExclusive = element.AttributeAsBool("exclusive");
             IsSortable = element.AttributeAsBool("sortable");

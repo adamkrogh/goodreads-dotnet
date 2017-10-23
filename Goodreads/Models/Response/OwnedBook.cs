@@ -16,12 +16,12 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The owner book id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The owner id.
         /// </summary>
-        public int OwnerId { get; private set; }
+        public long OwnerId { get; private set; }
 
         /// <summary>
         /// The original date when owner has bought a book.
@@ -72,8 +72,8 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            OwnerId = element.ElementAsInt("current_owner_id");
+            Id = element.ElementAsLong("id");
+            OwnerId = element.ElementAsLong("current_owner_id");
             OriginalPurchaseDate = element.ElementAsDateTime("original_purchase_date");
             OriginalPurchaseLocation = element.ElementAsString("original_purchase_location");
             Condition = element.ElementAsString("condition");

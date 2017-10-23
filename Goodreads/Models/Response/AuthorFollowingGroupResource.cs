@@ -16,17 +16,17 @@ namespace Goodreads.Models.Response
         /// <summary>
         /// The group resource id.
         /// </summary>
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// The user id who followed an author.
         /// </summary>
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
 
         /// <summary>
         /// The following author id.
         /// </summary>
-        public int AuthorId { get; private set; }
+        public long AuthorId { get; private set; }
 
         /// <summary>
         /// The resource created date.
@@ -53,9 +53,9 @@ namespace Goodreads.Models.Response
 
         internal override void Parse(XElement element)
         {
-            Id = element.ElementAsInt("id");
-            UserId = element.ElementAsInt("user_id");
-            AuthorId = element.ElementAsInt("author_id");
+            Id = element.ElementAsLong("id");
+            UserId = element.ElementAsLong("user_id");
+            AuthorId = element.ElementAsLong("author_id");
             CreatedDateTime = element.ElementAsDateTime("created_at");
             UpdatedDateTime = element.ElementAsDateTime("updated_at");
         }

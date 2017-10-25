@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class CommentsClientTests
     {
-        private readonly ICommentClient CommentClient;
+        private readonly ICommentsEndpoint CommentClient;
 
         public CommentsClientTests()
         {

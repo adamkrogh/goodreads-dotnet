@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class TopicsClientTests
     {
-        private readonly ITopicsClient TopicsClient;
+        private readonly IOAuthTopicsEndpoint TopicsClient;
 
         public TopicsClientTests()
         {

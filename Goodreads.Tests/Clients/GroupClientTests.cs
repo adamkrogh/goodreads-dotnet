@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class GroupClientTests
     {
-        private readonly IGroupClient GroupClient;
+        private readonly IGroupsEndpoint GroupClient;
 
         public GroupClientTests()
         {

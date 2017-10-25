@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class FriendsClientTests
     {
-        private readonly IFriendsClient FriendsClient;
+        private readonly IOAuthFriendsEndpoint FriendsClient;
 
         public FriendsClientTests()
         {

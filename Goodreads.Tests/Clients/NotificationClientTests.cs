@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class NotificationClientTests
     {
-        private readonly INotificationsClient NotificationsClient;
+        private readonly INotificationsEndpoint NotificationsClient;
 
         public NotificationClientTests()
         {

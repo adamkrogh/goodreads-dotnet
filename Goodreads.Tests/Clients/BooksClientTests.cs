@@ -8,7 +8,7 @@ namespace Goodreads.Tests
 {
     public class BooksClientTests
     {
-        private readonly IBooksClient BooksClient;
+        private readonly IBooksEndpoint BooksClient;
 
         public BooksClientTests()
         {

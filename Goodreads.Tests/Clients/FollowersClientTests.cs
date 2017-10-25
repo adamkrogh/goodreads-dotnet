@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class FollowersClientTests
     {
-        private readonly IFollowersClient FollowersClient;
+        private readonly IOAuthFollowersEndpoint FollowersClient;
         private readonly long UserId;
 
         public FollowersClientTests()

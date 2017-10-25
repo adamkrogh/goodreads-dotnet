@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class AuthorsFollowingClientTests
     {
-        private readonly IAuthorsFollowingClient AuthorsFollowingClient;
+        private readonly IOAuthAuthorsFollowingEndpoint AuthorsFollowingClient;
 
         public AuthorsFollowingClientTests()
         {

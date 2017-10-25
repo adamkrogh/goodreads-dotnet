@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class ShelvesClientTests
     {
-        private readonly IShelvesClient ShelvesClient;
+        private readonly IOAuthShelvesEndpoint ShelvesClient;
 
         public ShelvesClientTests()
         {

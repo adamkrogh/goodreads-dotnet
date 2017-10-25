@@ -10,7 +10,7 @@ namespace Goodreads.Tests
 {
     public class ReviewsClientTests
     {
-        private readonly IReviewsClient ReviewsClient;
+        private readonly IOAuthReviewsEndpoint ReviewsClient;
         private readonly long UserId;
         private readonly long ReviewsUserId;
 
@@ -134,7 +134,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfCannotCreate()
             {
-                var reviewId = await ReviewsClient.Create(int.MaxValue);
+                var reviewId = await ReviewsClient.Create(int.MaxValue, string.Empty, null, null, null);
 
                 Assert.Null(reviewId);
             }
@@ -150,7 +150,7 @@ namespace Goodreads.Tests
                 var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
                 var ratingBeforeEdit = reviewBeforeEdit.Rating;
                 var expectedNewRating = ratingBeforeEdit == 5 ? 4 : 5;
-                var result = await ReviewsClient.Edit(EditReviewId, rating: expectedNewRating);
+                var result = await ReviewsClient.Edit(EditReviewId, string.Empty, expectedNewRating, null, null);
 
                 Assert.True(result);
 
@@ -169,7 +169,7 @@ namespace Goodreads.Tests
                 var testNumber = int.Parse(match.Groups[1].Value);
                 var expectedNewText = textBeforeEdit.Replace(testNumber.ToString(), (testNumber + 1).ToString());
 
-                var result = await ReviewsClient.Edit(EditReviewId, reviewText: expectedNewText);
+                var result = await ReviewsClient.Edit(EditReviewId, expectedNewText, null, null, null);
 
                 Assert.True(result);
 
@@ -189,7 +189,7 @@ namespace Goodreads.Tests
                     ? DateTime.UtcNow.Date.AddDays(-7)
                     : DateTime.UtcNow.Date;
 
-                var result = await ReviewsClient.Edit(EditReviewId, dateRead: expectedNewDate);
+                var result = await ReviewsClient.Edit(EditReviewId, string.Empty, null, expectedNewDate, null);
 
                 Assert.True(result);
 

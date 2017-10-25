@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class EventsClientTests
     {
-        private readonly IEventsClient EventsClient;
+        private readonly IEventsEndpoint EventsClient;
 
         public EventsClientTests()
         {

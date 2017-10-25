@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class RecommendationsClientTests
     {
-        private readonly IRecommendationsClient RecommendationsClient;
+        private readonly IOAuthRecommendationsEndpoint RecommendationsClient;
 
         public RecommendationsClientTests()
         {

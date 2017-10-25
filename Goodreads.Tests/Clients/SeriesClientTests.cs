@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class SeriesClientTests
     {
-        private readonly ISeriesClient SeriesClient;
+        private readonly ISeriesEndpoint SeriesClient;
 
         public SeriesClientTests()
         {

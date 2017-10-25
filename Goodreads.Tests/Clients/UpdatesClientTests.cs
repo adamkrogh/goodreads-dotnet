@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class UpdatesClientTests
     {
-        private readonly IUpdatesClient UpdatesClient;
+        private readonly IOAuthUpdatesEndpoint UpdatesClient;
 
         public UpdatesClientTests()
         {

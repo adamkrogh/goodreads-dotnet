@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class ReadStatusesClientTests
     {
-        private readonly IReadStatusesClient ReadStatusesClient;
+        private readonly IReadStatusesEndpoint ReadStatusesClient;
 
         public ReadStatusesClientTests()
         {

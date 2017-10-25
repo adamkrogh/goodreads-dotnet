@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class OwnedBooksClientTests
     {
-        private readonly IOwnedBookClient OwnedBookClient;
+        private readonly IOAuthOwnedBooksEndpoint OwnedBookClient;
 
         public OwnedBooksClientTests()
         {

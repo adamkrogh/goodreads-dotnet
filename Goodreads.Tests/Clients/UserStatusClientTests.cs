@@ -6,7 +6,7 @@ namespace Goodreads.Tests
 {
     public class UserStatusClientTests
     {
-        private readonly IUserStatusesClient UserStatuses;
+        private readonly IOAuthUserStatusesEndpoint UserStatuses;
 
         public UserStatusClientTests()
         {

@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class AuthorsClientTests
     {
-        private readonly IAuthorsClient AuthorsClient;
+        private readonly IAuthorsEndpoint AuthorsClient;
 
         public AuthorsClientTests()
         {

@@ -12,6 +12,9 @@
       <Word>asc</Word>
       <Word>desc</Word>
       <Word>bcid</Word>
+      <Word>Auth</Word>
+      <Word>OAuth</Word>
+      <Word>oAuth</Word>
     </Recognized>
   </Words>
 </Dictionary>

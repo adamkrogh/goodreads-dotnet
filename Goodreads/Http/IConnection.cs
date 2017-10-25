@@ -1,29 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Goodreads.Models;
+﻿using Goodreads.Models;
 using RestSharp;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Goodreads.Http
 {
-    /// <summary>
-    /// The interface for a connection to the Goodreads API.
-    /// </summary>
-    public interface IConnection
+    internal interface IConnection
     {
         /// <summary>
-        /// The RestSharp client for this connection.
-        /// </summary>
-        IRestClient Client { get; }
-
-        /// <summary>
-        /// Credentials for the Goodreads API.
+        /// The Goodreads API credentials.
         /// </summary>
         ApiCredentials Credentials { get; }
-
-        /// <summary>
-        /// Determines if the connection has been authenticated via OAuth, or not.
-        /// </summary>
-        bool IsAuthenticated { get; }
 
         /// <summary>
         /// Execute a raw request to the Goodreads API.
@@ -34,7 +21,7 @@ namespace Goodreads.Http
         /// <returns>An async task with the response from the request.</returns>
         Task<IRestResponse> ExecuteRaw(
             string endpoint,
-            IList<Parameter> parameters,
+            IEnumerable<Parameter> parameters,
             Method method = Method.GET);
 
         /// <summary>
@@ -49,18 +36,33 @@ namespace Goodreads.Http
         /// <returns>An async task with the response from the request.</returns>
         Task<T> ExecuteRequest<T>(
             string endpoint,
-            IList<Parameter> parameters,
+            IEnumerable<Parameter> parameters,
             object data = null,
             string expectedRoot = null,
             Method method = Method.GET)
             where T : ApiResponse, new();
 
         /// <summary>
-        /// Build a rest request to the given endpoint, using the given parameters.
+        /// A specific method for executing json only request on the Goodreads API.
         /// </summary>
-        /// <param name="endpoint">The API endpoint.</param>
-        /// <param name="parameters">The parameters for this request.</param>
-        /// <returns>A RestRequest for this connection.</returns>
-        IRestRequest BuildRequest(string endpoint, IEnumerable<Parameter> parameters);
+        /// <typeparam name="T">Generic type parameter of the data returned in the response.</typeparam>
+        /// <param name="endpoint">The path of the API endpoint.</param>
+        /// <param name="parameters">he RestSharp parameters to include in this request.</param>
+        /// <returns>An async task with the response from the request.</returns>
+        Task<T> ExecuteJsonRequest<T>(string endpoint, IEnumerable<Parameter> parameters);
+
+        /// <summary>
+        /// Gets a request token from Goodreads and builds an authorize URL to redirect the user to.
+        /// </summary>
+        /// <param name="callbackUrl">The callback URL that Goodreads will redirect back to.</param>
+        /// <returns>The request token with authorize URL.</returns>
+        Task<OAuthRequestToken> GetRequestToken(string callbackUrl);
+
+        /// <summary>
+        /// Get an access token from the Goodreads API using the given request token.
+        /// </summary>
+        /// <param name="requestToken">The request token.</param>
+        /// <returns>The access token.</returns>
+        Task<OAuthAccessToken> GetAccessToken(OAuthRequestToken requestToken);
     }
 }

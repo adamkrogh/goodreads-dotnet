@@ -1,77 +1,50 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Goodreads.Extensions;
 using Goodreads.Models;
 using RestSharp;
+using Goodreads.Extensions;
+using System.Linq;
+using RestSharp.Authenticators;
+using System.Web;
+using System;
 
 namespace Goodreads.Http
 {
-    /// <summary>
-    /// A common connection class to the Goodreads API.
-    /// </summary>
-    internal sealed class Connection : IConnection
+    internal class Connection : IConnection
     {
+        private const string GoodreadsUrl = @"https://www.goodreads.com/";
+        private const string GoodreadsUserAgent = @"goodreads-dotnet";
+        private readonly IRestClient _client;
+
+        /// <summary>
+        /// Credentials for the Goodreads API.
+        /// </summary>
+        public ApiCredentials Credentials { get; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Connection"/> class.
         /// </summary>
         /// <param name="client">A RestSharp client to use for this connection.</param>
         /// <param name="credentials">Credentials for use with the Goodreads API.</param>
-        public Connection(IRestClient client, ApiCredentials credentials)
+        public Connection(ApiCredentials credentials)
         {
-            Client = client;
+            _client = CreateClient(credentials);
             Credentials = credentials;
-            IsAuthenticated = credentials != null &&
-                !string.IsNullOrWhiteSpace(credentials.OauthToken) &&
-                !string.IsNullOrWhiteSpace(credentials.OauthTokenSecret);
-        }
+        }        
 
-        #region IConnection Members
-
-        /// <summary>
-        /// The RestSharp client for this connection.
-        /// </summary>
-        public IRestClient Client { get; private set; }
-
-        /// <summary>
-        /// Credentials for the Goodreads API.
-        /// </summary>
-        public ApiCredentials Credentials { get; private set; }
-
-        /// <summary>
-        /// Determines if the connection has been authenticated via OAuth, or not.
-        /// </summary>
-        public bool IsAuthenticated { get; private set; }
-
-        /// <summary>
-        /// Execute a raw request to the Goodreads API.
-        /// </summary>
-        /// <param name="endpoint">The path of the API endpoint.</param>
-        /// <param name="parameters">The RestSharp parameters to include in this request.</param>
-        /// <param name="method">The HTTP method of this request.</param>
-        /// <returns>An async task with the response from the request.</returns>
         public async Task<IRestResponse> ExecuteRaw(
             string endpoint,
-            IList<Parameter> parameters,
+            IEnumerable<Parameter> parameters,
             Method method = Method.GET)
         {
             var request = BuildRequest(endpoint, parameters);
             request.Method = method;
-            return await Client.ExecuteTaskRaw(request).ConfigureAwait(false);
+            return await _client.ExecuteTaskRaw(request).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// A common method for executing any request on the Goodreads API.
-        /// </summary>
-        /// <typeparam name="T">Generic type parameter of the data returned in the response.</typeparam>
-        /// <param name="endpoint">The path of the API endpoint.</param>
-        /// <param name="parameters">The RestSharp parameters to include in this request.</param>
-        /// <param name="data">The data to include in the body of the request.</param>
-        /// <param name="expectedRoot">The root XML node to start parsing from. Can by used to skip container elements if required.</param>
-        /// <param name="method">The HTTP method of this request.</param>
-        /// <returns>An async task with the response from the request.</returns>
         public async Task<T> ExecuteRequest<T>(
             string endpoint,
-            IList<Parameter> parameters,
+            IEnumerable<Parameter> parameters,
             object data = null,
             string expectedRoot = null,
             Method method = Method.GET)
@@ -87,32 +60,97 @@ namespace Goodreads.Http
                 request.AddBody(data);
             }
 
-            return await Client.ExecuteTask<T>(request).ConfigureAwait(false);
+            return await _client.ExecuteTask<T>(request).ConfigureAwait(false);
         }
 
-        #endregion
+        public async Task<T> ExecuteJsonRequest<T>(string endpoint, IEnumerable<Parameter> parameters)
+        {
+            var request = BuildRequest(endpoint, parameters);
+            var response = await _client.ExecuteGetTaskAsync<T>(request).ConfigureAwait(false);
+            return response.Data;
+        }
 
-        /// <summary>
-        /// Build a rest request to the given endpoint, using the given parameters.
-        /// </summary>
-        /// <param name="endpoint">The API endpoint.</param>
-        /// <param name="parameters">The parameters for this request.</param>
-        /// <returns>A RestRequest for this connection.</returns>
-        public IRestRequest BuildRequest(string endpoint, IEnumerable<Parameter> parameters)
+        public async Task<OAuthAccessToken> GetAccessToken(OAuthRequestToken requestToken)
+        {
+            _client.Authenticator = OAuth1Authenticator.ForAccessToken(
+                Credentials.ApiKey,
+                Credentials.ApiSecret,
+                requestToken.Token,
+                requestToken.Secret);
+
+            var request = new RestRequest("oauth/access_token", Method.POST);
+            var response = await _client.ExecuteTaskAsync(request).ConfigureAwait(false);
+
+            var queryString = HttpUtility.ParseQueryString(response.Content);
+
+            var oAuthToken = queryString["oauth_token"];
+            var oAuthTokenSecret = queryString["oauth_token_secret"];
+
+            return new OAuthAccessToken(oAuthToken, oAuthTokenSecret);
+        }
+
+        public async Task<OAuthRequestToken> GetRequestToken(string callbackUrl)
+        {
+            _client.Authenticator = OAuth1Authenticator.ForRequestToken(Credentials.ApiKey, Credentials.ApiSecret);
+
+            var request = new RestRequest("oauth/request_token", Method.GET);
+            var response = await _client.ExecuteTaskAsync(request).ConfigureAwait(false);
+
+            var queryString = HttpUtility.ParseQueryString(response.Content);
+
+            var oAuthToken = queryString["oauth_token"];
+            var oAuthTokenSecret = queryString["oauth_token_secret"];
+            var authorizeUrl = BuildAuthorizeUrl(oAuthToken, oAuthTokenSecret);
+
+            return new OAuthRequestToken(oAuthToken, oAuthTokenSecret, authorizeUrl);
+        }
+
+        private string BuildAuthorizeUrl(string oauthToken, string callbackUrl)
+        {
+            var request = new RestRequest("oauth/authorize");
+            request.AddParameter("oauth_token", oauthToken);
+
+            if (!string.IsNullOrEmpty(callbackUrl))
+            {
+                request.AddParameter("oauth_callback", callbackUrl);
+            }
+
+            return _client.BuildUri(request).ToString();
+        }
+
+        private static IRestRequest BuildRequest(string endpoint, IEnumerable<Parameter> parameters)
         {
             var request = new RestRequest(endpoint);
 
-            if (parameters == null)
-            {
-                return request;
-            }
-
-            foreach (var parameter in parameters)
+            foreach (var parameter in (parameters ?? Enumerable.Empty<Parameter>()))
             {
                 request.AddParameter(parameter);
             }
 
             return request;
-        }
+        }       
+
+        private static IRestClient CreateClient(ApiCredentials credentials)
+        {
+            var client = new RestClient(new Uri(GoodreadsUrl))
+            {
+                UserAgent = GoodreadsUserAgent
+            };
+
+            client.AddDefaultParameter("key", credentials.ApiKey, ParameterType.QueryString);
+            client.AddDefaultParameter("format", "xml", ParameterType.QueryString);
+
+            if (!string.IsNullOrEmpty(credentials.OAuthToken) && !string.IsNullOrEmpty(credentials.OAuthTokenSecret))
+            {
+                client.Authenticator = 
+                    OAuth1Authenticator.ForProtectedResource(
+                    credentials.ApiKey,
+                    credentials.ApiSecret,
+                    credentials.OAuthToken,
+                    credentials.OAuthTokenSecret);
+            }
+
+            return client;
+        }        
     }
 }

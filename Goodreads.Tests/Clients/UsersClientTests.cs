@@ -7,7 +7,7 @@ namespace Goodreads.Tests
 {
     public class UsersClientTests
     {
-        private readonly IUsersClient UsersClient;
+        private readonly IOAuthUsersEndpoint UsersClient;
         private readonly long UserId;
 
         public UsersClientTests()
@@ -87,16 +87,7 @@ namespace Goodreads.Tests
                 var id = await UsersClient.GetAuthenticatedUserId();
 
                 Assert.NotNull(id);
-                Assert.Equal(id.Value, Helper.GetUserId());
-            }
-
-            [Fact]
-            public async Task ReturnsNullWhenNotAuthenticated()
-            {
-                var client = Helper.GetClient();
-                var id = await client.Users.GetAuthenticatedUserId();
-
-                Assert.Null(id);
+                Assert.Equal(id, Helper.GetUserId());
             }
         }
 

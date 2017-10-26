@@ -6,17 +6,23 @@ namespace Goodreads.Tests
     {
         public static IGoodreadsClient GetClient()
         {
-            return GoodreadsClient.Create("dL9yWNsppzRPPCqX6ZK6Wg", "AD4sWTF3fJNoMfWSwoOFBS3bnu9ksxXGT0runU2k");
+            return GoodreadsClient.Create(
+                Environment.GetEnvironmentVariable("GOODREADS_APIKEY"),
+                Environment.GetEnvironmentVariable("GOODREADS_APISECRET"));
         }
 
         public static IOAuthGoodreadsClient GetAuthClient()
         {
-            return GoodreadsClient.Create("dL9yWNsppzRPPCqX6ZK6Wg", "AD4sWTF3fJNoMfWSwoOFBS3bnu9ksxXGT0runU2k", "5NgfM2zlZmp0hcU8xOW5rg", "US29b1rPusqHQ3Ui1MCFEvskEGy3Fzykz260oTJ6SO0");
+            return GoodreadsClient.Create(
+                        Environment.GetEnvironmentVariable("GOODREADS_APIKEY"),
+                        Environment.GetEnvironmentVariable("GOODREADS_APISECRET"),
+                        Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKEN"),
+                        Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKENSECRET"));
         }
 
         public static long GetUserId()
         {
-            var id = "68628513"; // Environment.GetEnvironmentVariable("GOODREADS_USERID");
+            var id = Environment.GetEnvironmentVariable("GOODREADS_USERID");
             return string.IsNullOrWhiteSpace(id) ? 0 : long.Parse(id);
         }
     }

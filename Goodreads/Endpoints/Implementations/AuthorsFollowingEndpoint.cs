@@ -39,7 +39,8 @@ namespace Goodreads.Clients
                     parameters,
                     null,
                     "author_following",
-                    Method.POST).ConfigureAwait(false);
+                    Method.POST)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>

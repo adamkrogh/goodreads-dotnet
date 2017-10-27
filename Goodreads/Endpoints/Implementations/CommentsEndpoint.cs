@@ -38,7 +38,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "comment[body]", Value = comment, Type = ParameterType.QueryString }
             };
 
-            var result = await Connection.ExecuteRaw(endpoint, parameters, Method.POST);
+            var result = await Connection.ExecuteRaw(endpoint, parameters, Method.POST).ConfigureAwait(false);
 
             return result.StatusCode == HttpStatusCode.Created;
         }
@@ -60,10 +60,8 @@ namespace Goodreads.Clients
                 new Parameter { Name = "id", Value = resourceId, Type = ParameterType.QueryString },
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
             };
-
-            var result = await Connection.ExecuteRaw(endpoint, parameters);
-
-            return await Connection.ExecuteRequest<PaginatedList<Comment>>(endpoint, parameters, null, "comments");
+            
+            return await Connection.ExecuteRequest<PaginatedList<Comment>>(endpoint, parameters, null, "comments").ConfigureAwait(false);
         }
     }
 }

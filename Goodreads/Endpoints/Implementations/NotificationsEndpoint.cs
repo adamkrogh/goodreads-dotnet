@@ -25,14 +25,14 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="page">The desired page from the paginated list of notifications.</param>
         /// <returns>A paginated list of notifications.</returns>
-        public Task<PaginatedList<Notification>> GetNotifications(int page)
+        public async Task<PaginatedList<Notification>> GetNotifications(int page)
         {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
             };
 
-            return Connection.ExecuteRequest<PaginatedList<Notification>>("notifications", parameters, null, "notifications", Method.GET);
+            return await Connection.ExecuteRequest<PaginatedList<Notification>>("notifications", parameters, null, "notifications", Method.GET).ConfigureAwait(false);
         }
     }
 }

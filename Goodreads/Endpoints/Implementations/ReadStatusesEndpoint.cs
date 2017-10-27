@@ -28,9 +28,7 @@ namespace Goodreads.Clients
         public async Task<ReadStatus> GetReadStatus(long id)
         {
             var endpoint = $"read_statuses/{id}";
-            var parameters = new List<Parameter>();
-
-            return await Connection.ExecuteRequest<ReadStatus>(endpoint, parameters, null, "read_status");
+            return await Connection.ExecuteRequest<ReadStatus>(endpoint, null, null, "read_status").ConfigureAwait(false);
         }
     }
 }

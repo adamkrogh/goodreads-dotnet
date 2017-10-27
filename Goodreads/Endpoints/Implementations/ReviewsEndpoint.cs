@@ -139,7 +139,7 @@ namespace Goodreads.Clients
         /// <returns>The latest reviews that have been posted to Goodreads.</returns>
         public async Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers()
         {
-            var reviews = await Connection.ExecuteRequest<PaginatedList<Review>>("review/recent_reviews", null, null, "reviews");
+            var reviews = await Connection.ExecuteRequest<PaginatedList<Review>>("review/recent_reviews", null, null, "reviews").ConfigureAwait(false);
             if (reviews != null)
             {
                 return reviews.List;
@@ -196,7 +196,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "shelf", Value = shelfName, Type = ParameterType.GetOrPost });
             }
 
-            var response = await Connection.ExecuteRaw("review.xml", parameters, Method.POST);
+            var response = await Connection.ExecuteRaw("review.xml", parameters, Method.POST).ConfigureAwait(false);
             if (response != null && response.StatusCode == HttpStatusCode.Created)
             {
                 try
@@ -265,7 +265,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "shelf", Value = shelfName, Type = ParameterType.GetOrPost });
             }
 
-            var response = await Connection.ExecuteRaw("review/{id}.xml", parameters, Method.POST);
+            var response = await Connection.ExecuteRaw("review/{id}.xml", parameters, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.OK;
         }

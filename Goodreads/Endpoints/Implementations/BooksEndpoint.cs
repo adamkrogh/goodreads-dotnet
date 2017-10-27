@@ -29,14 +29,15 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="isbn">The ISBN of the desired book.</param>
         /// <returns>An async task returning the desired book information.</returns>
-        public Task<Book> GetByIsbn(string isbn)
+        public async Task<Book> GetByIsbn(string isbn)
         {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "isbn", Value = isbn, Type = ParameterType.UrlSegment }
             };
 
-            return Connection.ExecuteRequest<Book>("book/isbn/{isbn}.xml", parameters, null, "book");
+            return await Connection.ExecuteRequest<Book>("book/isbn/{isbn}.xml", parameters, null, "book")
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -44,14 +45,15 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="bookId">The Goodreads book id.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        public Task<Book> GetByBookId(long bookId)
+        public async Task<Book> GetByBookId(long bookId)
         {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "bookId", Value = bookId, Type = ParameterType.UrlSegment }
             };
 
-            return Connection.ExecuteRequest<Book>("book/show/{bookId}.xml", parameters, null, "book");
+            return await Connection.ExecuteRequest<Book>("book/show/{bookId}.xml", parameters, null, "book")
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace Goodreads.Clients
         /// <param name="title">The book title to find.</param>
         /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        public Task<Book> GetByTitle(string title, string author)
+        public async Task<Book> GetByTitle(string title, string author)
         {
             var parameters = new List<Parameter>
             {
@@ -69,7 +71,8 @@ namespace Goodreads.Clients
                 new Parameter { Name = "author", Value = author, Type = ParameterType.QueryString }
             };
 
-            return Connection.ExecuteRequest<Book>("book/title.xml", parameters, null, "book");
+            return await Connection.ExecuteRequest<Book>("book/title.xml", parameters, null, "book")
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace Goodreads.Clients
         /// <param name="authorId">The Goodreads author id.</param>
         /// <param name="page">The desired page from the paginated list of books.</param>
         /// <returns>A paginated list of books written by the author.</returns>
-        public Task<PaginatedList<Book>> GetListByAuthorId(long authorId, int page)
+        public async Task<PaginatedList<Book>> GetListByAuthorId(long authorId, int page)
         {
             var parameters = new List<Parameter>
             {
@@ -86,7 +89,8 @@ namespace Goodreads.Clients
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
             };
 
-            return Connection.ExecuteRequest<PaginatedList<Book>>("author/list/{authorId}", parameters, null, "author/books");
+            return await Connection.ExecuteRequest<PaginatedList<Book>>("author/list/{authorId}", parameters, null, "author/books")
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -96,7 +100,7 @@ namespace Goodreads.Clients
         /// <param name="page">The current page of the paginated list.</param>
         /// <param name="searchField">The book fields to apply the search term against.</param>
         /// <returns>A paginated list of <see cref="Work"/> object matching the given search criteria.</returns>
-        public Task<PaginatedList<Work>> Search(string searchTerm, int page, BookSearchField searchField)
+        public async Task<PaginatedList<Work>> Search(string searchTerm, int page, BookSearchField searchField)
         {
             var parameters = new List<Parameter>
             {
@@ -110,7 +114,7 @@ namespace Goodreads.Clients
                 }
             };
 
-            return Connection.ExecuteRequest<PaginatedList<Work>>("search", parameters, null, "search");
+            return await Connection.ExecuteRequest<PaginatedList<Work>>("search", parameters, null, "search").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -121,7 +125,7 @@ namespace Goodreads.Clients
         public async Task<long?> GetBookIdForIsbn(string isbn)
         {
             var bookIds = await (this as IBooksEndpoint).GetBookIdsForIsbns(new List<string> { isbn });
-            return bookIds == null ? null : bookIds.FirstOrDefault();
+            return bookIds?.FirstOrDefault();
         }
 
         /// <summary>

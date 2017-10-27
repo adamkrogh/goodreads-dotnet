@@ -35,7 +35,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "id", Value = groupId, Type = ParameterType.QueryString }
             };
 
-            var response = await Connection.ExecuteRaw("group/join", parameters, Method.POST);
+            var response = await Connection.ExecuteRaw("group/join", parameters, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.OK;
         }
@@ -64,7 +64,7 @@ namespace Goodreads.Clients
                 parameters.Add(parameter);
             }
 
-            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list", Method.GET);
+            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list", Method.GET).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
             };
 
-            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>("group/search", parameters, null, "groups/list");
+            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>("group/search", parameters, null, "groups/list").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Goodreads.Clients
                 parameters.Add(parameter);
             }
 
-            return await Connection.ExecuteRequest<Group>(endpoint, parameters, null, "group");
+            return await Connection.ExecuteRequest<Group>(endpoint, parameters, null, "group").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "q", Value = string.Join(" ", names), Type = ParameterType.QueryString });
             }
 
-            return await Connection.ExecuteRequest<PaginatedList<GroupUser>>(endpoint, parameters, null, "group_users");
+            return await Connection.ExecuteRequest<PaginatedList<GroupUser>>(endpoint, parameters, null, "group_users").ConfigureAwait(false);
         }
     }
 }

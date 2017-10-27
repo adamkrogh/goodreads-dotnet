@@ -90,7 +90,7 @@ namespace Goodreads.Clients
         public async Task<bool> Delete(long userStatusId)
         {
             var endpoint = $"user_status/destroy/{userStatusId}";
-            var response = await Connection.ExecuteRaw(endpoint, new List<Parameter>(), Method.POST).ConfigureAwait(false);
+            var response = await Connection.ExecuteRaw(endpoint, null, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.OK;
         }

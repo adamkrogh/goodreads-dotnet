@@ -37,7 +37,7 @@ namespace Goodreads.Clients
 
             try
             {
-                var response = await Connection.ExecuteRaw("series/list", parameters);
+                var response = await Connection.ExecuteRaw("series/list", parameters).ConfigureAwait(false);
                 if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
                 {
                     var content = response.Content;

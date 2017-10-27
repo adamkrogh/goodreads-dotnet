@@ -92,7 +92,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "search[US]", Value = "US", Type = ParameterType.QueryString });
             }
 
-            var result = await Connection.ExecuteRequest<PaginatedList<GoodreadsEvent>>("event", parameters, null, "events", Method.GET);
+            var result = await Connection.ExecuteRequest<PaginatedList<GoodreadsEvent>>("event", parameters, null, "events", Method.GET).ConfigureAwait(false);
             return result?.List;
         }
     }

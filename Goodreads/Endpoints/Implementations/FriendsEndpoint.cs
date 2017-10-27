@@ -33,7 +33,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "id", Value = userId, Type = ParameterType.QueryString }
             };
 
-            var response = await Connection.ExecuteRaw("friend/add_as_friend", parameters, Method.POST);
+            var response = await Connection.ExecuteRaw("friend/add_as_friend", parameters, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.Created;
         }
@@ -55,7 +55,7 @@ namespace Goodreads.Clients
                 parameters,
                 null,
                 "requests/friend_requests",
-                Method.GET);
+                Method.GET).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "response", Value = response ? "Y" : "N", Type = ParameterType.QueryString }
             };
 
-            var result = await Connection.ExecuteRaw("friend/confirm_request", parameters, Method.POST);
+            var result = await Connection.ExecuteRaw("friend/confirm_request", parameters, Method.POST).ConfigureAwait(false);
 
             return result.StatusCode == HttpStatusCode.NoContent;
         }

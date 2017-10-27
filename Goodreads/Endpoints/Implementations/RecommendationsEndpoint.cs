@@ -29,9 +29,7 @@ namespace Goodreads.Clients
         public async Task<Recommendation> GetRecommendation(long id)
         {
             var endpoint = $"recommendations/{id}";
-            var parameters = new List<Parameter>();
-
-            return await Connection.ExecuteRequest<Recommendation>(endpoint, parameters, null, "recommendation");
+            return await Connection.ExecuteRequest<Recommendation>(endpoint, null, null, "recommendation").ConfigureAwait(false);
         }
     }
 }

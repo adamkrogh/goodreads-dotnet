@@ -3,7 +3,7 @@
 namespace Goodreads
 {
     /// <summary>
-    /// The authorized client API class for accessing the Goodreads API.
+    /// The authorized client API class for accessing the OAuth Goodreads API.
     /// </summary>
     public sealed class OAuthGoodreadsClient : GoodreadsClient, IOAuthGoodreadsClient
     {

@@ -60,7 +60,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "isbn", Value = isbn, Type = ParameterType.QueryString });
             }
 
-            var response = await Connection.ExecuteRaw("quotes", parameters, Method.POST);
+            var response = await Connection.ExecuteRaw("quotes", parameters, Method.POST).ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.Created;
         }

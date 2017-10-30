@@ -7,24 +7,39 @@ A Goodreads .NET API Client Library.
 
 ## Usage Examples
 
-### Create a Client
-
+### Unauthorized Goodreads client
 ```csharp
-// Create an API client
-var client = new GoodreadsClient("apiKey", "apiSecret");
+// Define your Goodreads key and secret.
+const string apiKey = "<Your API Key>";
+const string apiSecret = "<Your API Secret>"; 
 
-// Create an authenticated API client
-var authClient = new GoodreadsClient("apiKey", "apiSecret", "oauthToken", "oauthTokenSecret");
+// Create an unauthorized goodreads client.
+var client = GoodreadsClient.Create(apiKey, apiSecret);
+
+// Now you are able to call some Goodreads endpoints that don't require OAuth credentials.
 ```
 
 ### User Authorization (OAuth)
 
 ```csharp
-// Get the Goodreads URL to redirect to for authorization
-var authorizeUrl = client.Connection.Credentials.GetRequestTokenAndBuildAuthorizeUrl(callbackUrl);
+// Define your Goodreads key and secret.
+const string apiKey = "<Your API Key>";
+const string apiSecret = "<Your API Secret>"; 
 
-// Get a user's OAuth access token and secret after they have granted access
-var credentials = client.Connection.Credentials.GetAccessToken(apiKey, apiSecret, requestToken, requestSecret);
+// Create an unauthorized goodreads client.
+var client = GoodreadsClient.Create(apiKey, apiSecret);
+
+// Ask a goodreads request token and build an authorization url.
+const string callbackUrl = "<callback_url>";
+var requestToken = client.AskCredentials(callbackUrl);
+
+// Get a user's OAuth access token and secret after they have granted access.
+var accessToken = client.GetAccessToken(requestToken);
+
+// Create authorized goodreads client.
+var authClient = GoodreadsClient.CreateAuth(apiKey, apiSecret, accessToken.Token, accessToken.Secret);
+
+// Now you are able to call all of Goodreads endpoints.
 ```
 
 ### Authors

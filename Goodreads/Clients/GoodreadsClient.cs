@@ -27,7 +27,7 @@ namespace Goodreads
         /// <param name="apiSecret">Your Goodreads API secret.</param>
         /// <param name="accessToken">The user's OAuth access token.</param>
         /// <param name="accessSecret">The user's OAuth access secret.</param>
-        public static IOAuthGoodreadsClient Create(string apiKey, string apiSecret, string accessToken, string accessSecret)
+        public static IOAuthGoodreadsClient CreateAuth(string apiKey, string apiSecret, string accessToken, string accessSecret)
         {
             return new OAuthGoodreadsClient(apiKey, apiSecret, accessToken, accessSecret);
         }

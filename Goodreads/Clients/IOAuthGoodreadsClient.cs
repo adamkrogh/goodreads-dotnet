@@ -5,7 +5,7 @@ namespace Goodreads
     /// <summary>
     /// The API interface for accessing the OAuth Goodreads API.
     /// </summary>
-    public interface IOAuthGoodreadsClient
+    public interface IOAuthGoodreadsClient : IApiCredentialsInfoManager
     {
         /// <summary>
         /// API OAuth client for the Goodreads Authors endpoint.

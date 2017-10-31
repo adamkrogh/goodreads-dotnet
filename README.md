@@ -5,6 +5,26 @@ Goodreads .NET API Client Library
 
 A Goodreads .NET API Client Library.
 
+## Getting started
+#### Prerequisites
+A Goodreads developer key. 
+This can be obtained from https://www.goodreads.com/api/keys
+You must register your application in Goodreads as well.
+Also you could find more information how obtain your key and register app [here](https://www.goodreads.com/api/documentation).
+
+#### Installation
+*Package manager*
+```
+Install-Package Goodreads
+```
+*.NET CLI*
+```
+dotnet add package Goodreads
+```
+
+#### Docs
+There is a full list of supported methods with examples in our [wiki page]().
+
 ## Usage Examples
 
 ### Unauthorized Goodreads client
@@ -16,7 +36,9 @@ const string apiSecret = "<Your API Secret>";
 // Create an unauthorized goodreads client.
 var client = GoodreadsClient.Create(apiKey, apiSecret);
 
-// Now you are able to call some Goodreads endpoints that don't require OAuth credentials.
+// Now you are able to call some Goodreads endpoints that don't require OAuth credentials. For example:
+var book = await client.Books.GetByBookId(15979976); // get a book by specified id.
+var groups = await client.Groups.GetGroups("Arts"); // get a list of groups by search keyword
 ```
 
 ### User Authorization (OAuth)
@@ -39,81 +61,9 @@ var accessToken = client.GetAccessToken(requestToken);
 // Create authorized goodreads client.
 var authClient = GoodreadsClient.CreateAuth(apiKey, apiSecret, accessToken.Token, accessToken.Secret);
 
-// Now you are able to call all of Goodreads endpoints.
-```
-
-### Authors
-
-```csharp
-// Retrieve an author
-var author = await client.Authors.GetByAuthorId(38550);
-
-// Retrieve an author id
-var authorId = await client.Authors.GetAuthorIdByName("Brandon Sanderson");
-```
-
-### Books
-
-```csharp
-// Search for books
-var results = await client.Books.Search("Dune", page: 1, searchField: BookSearchField.Title);
-
-// Retrieve a book by ISBN
-var book = await client.Books.GetByIsbn("0441172717");
-
-// Retrieve a book by Goodreads book id
-var book = await client.Books.GetByBookId(7235533);
-
-// Retrieve a book by title
-var book = await client.Books.GetByTitle("Dune");
-
-// Retrieve a paginated list of an author's books
-var books = await client.Books.GetListByAuthorId(38550, page: 2);
-```
-
-### Series
-
-```csharp
-// Get detailed information about a series, including all the works that appear in it
-var seriesInfo = await client.Series.GetById(seriesId);
-
-// Get all the series an author has written
-var series = await client.Series.GetListByAuthorId(authorId);
-
-// Get all the series that a work appears in
-var series = await client.Series.GetListByWorkId(workId);
-```
-
-### Reviews
-
-```csharp
-// Get a review
-var review = await client.Reviews.GetById(reviewId);
-
-// Get a review that a user made on a book
-var review = await client.Reviews.GetByUserIdAndBookId(userId, bookId);
-
-// Get a list of a user's highest rated book reviews
-var list = await client.Reviews.GetListByUser(id, sort: SortReviewsList.AverageRating, order: Order.Descending);
-
-// Create a review
-var reviewId = await client.Reviews.Create(bookId, reviewText: "Awesome book!", rating: 5);
-
-// Edit a review
-var success = await client.Reviews.Edit(reviewId, rating: 4);
-```
-
-### Users
-
-```csharp
-// Retrieve user information
-var user = await client.Users.GetByUserId(7284465);
-
-// Retrieve a paginated list of a users's Goodreads friends
-var friends = await authClient.Users.GetListOfFriends(userId, page: 1, sort: SortFriendsList.LastOnline);
-
-// Retrieve a paginated list of a user's shelves
-var shelves = await client.Shelves.GetListOfUserShelves(userId);
+// Now you are able to call all of Goodreads endpoints. For example:
+var book = await client.Friends.AddFriend(1); // add user to friends list
+await client.Shelves.AddBookToShelf("must-read", 15979976); // add book to 'must-read' shelf
 ```
 
 ## Goodreads API Coverage
@@ -122,7 +72,7 @@ Library covers all API Goodreads methods except below:
 
 ### Todo
 
-The list of API methods that will (hopefully) be supported soon.
+The list of API methods that will be supported soon.
 
 - topic.create — Create a new topic via OAuth.
 - topic.group_folder — Get list of topics in a group's folder.

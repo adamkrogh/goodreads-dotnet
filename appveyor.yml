@@ -1,11 +1,18 @@
 version: 0.3.1.{build}
-os: Visual Studio 2017
+image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 
 init:
 - ps: $env:customnugetversion = if ($env:APPVEYOR_REPO_TAG -eq $True) { $env:APPVEYOR_REPO_TAG_NAME -replace 'v', '' } else { $env:APPVEYOR_BUILD_VERSION -replace '(\d\.\d\.\d)\.(\d)', '$1-beta-$2' }
 - ps: Update-AppveyorBuild -Version $env:customnugetversion
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 
 dotnet_csproj:
   patch: true

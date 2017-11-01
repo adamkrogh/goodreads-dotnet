@@ -97,7 +97,7 @@ namespace Goodreads.Tests
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
                 Assert.True(books.Pagination.TotalItems > 0);
-                Assert.True(books.List.First().Authors.Any(x => x.Id == authorId));
+                Assert.Contains(books.List.First().Authors, x => x.Id == authorId);
             }
 
             [Fact]
@@ -155,7 +155,7 @@ namespace Goodreads.Tests
                 var bookId = await BooksClient.GetBookIdForIsbn(isbn);
 
                 Assert.NotNull(bookId);
-                Assert.Equal(bookId, 7235533);
+                Assert.Equal(7235533, bookId);
             }
 
             [Fact]
@@ -261,7 +261,7 @@ namespace Goodreads.Tests
                 var reviewStats = await BooksClient.GetReviewStatsForIsbns(isbns);
 
                 Assert.NotNull(reviewStats);
-                Assert.Equal(reviewStats.Count, 2);
+                Assert.Equal(2, reviewStats.Count);
             }
         }
     }

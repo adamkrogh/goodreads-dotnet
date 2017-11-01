@@ -24,7 +24,7 @@ namespace Goodreads.Tests
                 await AuthorsFollowingClient.Unfollow(authorFollowing.Id); // cleanup following
 
                 Assert.NotNull(authorFollowing);
-                Assert.NotSame(authorFollowing.Id, default(int));
+                Assert.NotEqual(default(long), authorFollowing.Id);
             }
         }
 

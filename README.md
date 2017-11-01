@@ -23,7 +23,7 @@ dotnet add package Goodreads
 ```
 
 #### Docs
-There is a full list of supported methods with examples in our [wiki page]().
+There is a full list of supported methods with examples in our [wiki page](https://github.com/adamkrogh/goodreads-dotnet/wiki/API-methods-documentation).
 
 ## Usage Examples
 

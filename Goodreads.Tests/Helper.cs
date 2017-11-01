@@ -13,7 +13,7 @@ namespace Goodreads.Tests
 
         public static IOAuthGoodreadsClient GetAuthClient()
         {
-            return GoodreadsClient.Create(
+            return GoodreadsClient.CreateAuth(
                         Environment.GetEnvironmentVariable("GOODREADS_APIKEY"),
                         Environment.GetEnvironmentVariable("GOODREADS_APISECRET"),
                         Environment.GetEnvironmentVariable("GOODREADS_OAUTHTOKEN"),

@@ -51,7 +51,7 @@ namespace Goodreads.Tests
                 // clean up status
                 await UserStatuses.Delete(id);
 
-                Assert.NotEqual(id, default(int));
+                Assert.NotEqual(default(long), id);
             }
         }
 

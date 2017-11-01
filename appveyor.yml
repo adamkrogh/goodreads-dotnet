@@ -1,7 +1,6 @@
 version: 0.3.1.{build}
 image: Visual Studio 2017
 configuration: Release
-platform: Any CPU
 
 init:
 - ps: $env:customnugetversion = if ($env:APPVEYOR_REPO_TAG -eq $True) { $env:APPVEYOR_REPO_TAG_NAME -replace 'v', '' } else { $env:APPVEYOR_BUILD_VERSION -replace '(\d\.\d\.\d)\.(\d)', '$1-beta-$2' }

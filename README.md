@@ -8,7 +8,7 @@ A Goodreads .NET API Client Library.
 ## Getting started
 #### Prerequisites
 A Goodreads developer key. 
-This can be obtained from https://www.goodreads.com/api/keys
+This can be obtained from https://www.goodreads.com/api/keys.
 You must register your application in Goodreads as well.
 Also you could find more information how obtain your key and register app [here](https://www.goodreads.com/api/documentation).
 
@@ -37,8 +37,11 @@ const string apiSecret = "<Your API Secret>";
 var client = GoodreadsClient.Create(apiKey, apiSecret);
 
 // Now you are able to call some Goodreads endpoints that don't need the OAuth credentials. For example:
-var book = await client.Books.GetByBookId(15979976); // get a book by specified id.
-var groups = await client.Groups.GetGroups("Arts"); // get a list of groups by search keyword
+// Get a book by specified id.
+var book = await client.Books.GetByBookId(bookId: 15979976); 
+
+// Get a list of groups by search keyword.
+var groups = await client.Groups.GetGroups(search: "Arts"); 
 ```
 
 ### User Authorization (OAuth)
@@ -62,8 +65,11 @@ var accessToken = client.GetAccessToken(requestToken);
 var authClient = GoodreadsClient.CreateAuth(apiKey, apiSecret, accessToken.Token, accessToken.Secret);
 
 // Now you are able to call all of the Goodreads endpoints. For example:
-var book = await client.Friends.AddFriend(1); // add user to friends list
-await client.Shelves.AddBookToShelf("must-read", 15979976); // add book to 'must-read' shelf
+// Add a user to friends list
+var book = await client.Friends.AddFriend(userId: 1); 
+
+// Add a book to a 'must-read' shelf.
+await client.Shelves.AddBookToShelf(shelf: "must-read", bookId: 15979976); 
 ```
 
 ## Goodreads API Coverage

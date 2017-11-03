@@ -27,16 +27,16 @@ There is a full list of supported methods with examples in our [wiki page](https
 
 ## Usage Examples
 
-### Unauthorized Goodreads client
+### Use an unauthorized Goodreads client
 ```csharp
 // Define your Goodreads key and secret.
 const string apiKey = "<Your API Key>";
 const string apiSecret = "<Your API Secret>"; 
 
-// Create an unauthorized goodreads client.
+// Create an unauthorized Goodreads client.
 var client = GoodreadsClient.Create(apiKey, apiSecret);
 
-// Now you are able to call some Goodreads endpoints that don't require OAuth credentials. For example:
+// Now you are able to call some Goodreads endpoints that don't need the OAuth credentials. For example:
 var book = await client.Books.GetByBookId(15979976); // get a book by specified id.
 var groups = await client.Groups.GetGroups("Arts"); // get a list of groups by search keyword
 ```
@@ -48,20 +48,20 @@ var groups = await client.Groups.GetGroups("Arts"); // get a list of groups by s
 const string apiKey = "<Your API Key>";
 const string apiSecret = "<Your API Secret>"; 
 
-// Create an unauthorized goodreads client.
+// Create an unauthorized Goodreads client.
 var client = GoodreadsClient.Create(apiKey, apiSecret);
 
-// Ask a goodreads request token and build an authorization url.
+// Ask a Goodreads request token and build an authorization url.
 const string callbackUrl = "<callback_url>";
 var requestToken = client.AskCredentials(callbackUrl);
 
 // Get a user's OAuth access token and secret after they have granted access.
 var accessToken = client.GetAccessToken(requestToken);
 
-// Create authorized goodreads client.
+// Create an authorized Goodreads client.
 var authClient = GoodreadsClient.CreateAuth(apiKey, apiSecret, accessToken.Token, accessToken.Secret);
 
-// Now you are able to call all of Goodreads endpoints. For example:
+// Now you are able to call all of the Goodreads endpoints. For example:
 var book = await client.Friends.AddFriend(1); // add user to friends list
 await client.Shelves.AddBookToShelf("must-read", 15979976); // add book to 'must-read' shelf
 ```
@@ -92,27 +92,3 @@ Unfortunately, some Goodreads API methods have bugs.
 - review.destroy — Delete a book review.
 - rating.create — Like a resource.
 - rating.destroy — Unlike a resource.
-
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2016 Adam Krogh
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

@@ -19,7 +19,6 @@ namespace Goodreads
             Reviews = new ReviewsEndpoint(_connection);
             Series = new SeriesEndpoint(_connection);            
             Events = new EventsEndpoint(_connection);           
-            Notifications = new NotificationsEndpoint(_connection);
             Groups = new GroupsEndpoint(_connection);
             UserStatuses = new UserStatusesEndpoint(_connection);
             ReadStatuses = new ReadStatusesEndpoint(_connection);
@@ -40,9 +39,7 @@ namespace Goodreads
         public ISeriesEndpoint Series { get; }
 
         public IEventsEndpoint Events { get; }
-
-        public INotificationsEndpoint Notifications { get; }
-
+        
         public IGroupsEndpoint Groups { get; }
 
         public IUserStatusesEndpoint UserStatuses { get; }

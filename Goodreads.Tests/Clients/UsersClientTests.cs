@@ -85,8 +85,6 @@ namespace Goodreads.Tests
             public async Task ReturnsUserIdWhenAuthenticated()
             {
                 var id = await UsersClient.GetAuthenticatedUserId();
-
-                Assert.NotNull(id);
                 Assert.Equal(id, Helper.GetUserId());
             }
         }

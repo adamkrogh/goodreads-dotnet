@@ -142,7 +142,7 @@ namespace Goodreads.Tests
 
         public class TheEditMethod : ReviewsClientTests
         {
-            private readonly int EditReviewId = 1700227480;
+            private readonly long EditReviewId = 2175139156;
 
             [Fact]
             public async Task EditRatingSucceeds()

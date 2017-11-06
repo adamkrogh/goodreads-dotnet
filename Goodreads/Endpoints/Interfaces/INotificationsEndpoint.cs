@@ -2,11 +2,11 @@
 using Goodreads.Models.Response;
 
 namespace Goodreads.Clients
-{
+{    
     /// <summary>
-    /// API client for user notifications endpoint.
+    /// API OAuth client for user notifications endpoint.
     /// </summary>
-    public interface INotificationsEndpoint
+    public interface IOAuthNotificationsEndpoint
     {
         /// <summary>
         /// Get any new notifications.
@@ -14,12 +14,5 @@ namespace Goodreads.Clients
         /// <param name="page">The desired page from the paginated list of notifications.</param>
         /// <returns>A paginated list of notifications.</returns>
         Task<PaginatedList<Notification>> GetNotifications(int page = 1);
-    }
-
-    /// <summary>
-    /// API OAuth client for user notifications endpoint.
-    /// </summary>
-    public interface IOAuthNotificationsEndpoint : INotificationsEndpoint
-    {
     }
 }

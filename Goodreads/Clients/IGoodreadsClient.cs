@@ -43,11 +43,6 @@ namespace Goodreads
         IEventsEndpoint Events { get; }
                 
         /// <summary>
-        /// API client for the Goodreads notifications endpoint.
-        /// </summary>
-        INotificationsEndpoint Notifications { get; }
-
-        /// <summary>
         /// API client for the Goodreads group endpoint.
         /// </summary>
         IGroupsEndpoint Groups { get; }

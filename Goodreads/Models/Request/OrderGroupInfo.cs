@@ -3,10 +3,10 @@
 namespace Goodreads.Models.Request
 {
     /// <summary>
-    /// The options for sorting the Goodreads group info.
+    /// The options for sorting the Goodreads info
     /// </summary>
     [QueryParameterKey("order")]
-    public enum OrderGroupInfo
+    public enum OrderInfo
     {
         /// <summary>
         /// Order by ascending.

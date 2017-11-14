@@ -32,7 +32,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the group info on.</param>
         /// <param name="order">The property to order the group info on.</param>
         /// <returns>The Goodreads Group model.</returns>
-        Task<Group> GetInfo(long groupId, SortGroupInfo? sort = null, OrderGroupInfo? order = null);
+        Task<Group> GetInfo(long groupId, SortGroupInfo? sort = null, OrderInfo? order = null);
 
         /// <summary>
         /// Get list of members of the specified group.

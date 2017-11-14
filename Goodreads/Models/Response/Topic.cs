@@ -48,6 +48,11 @@ namespace Goodreads.Models.Response
         public int CommentsPerPage { get; private set; }
 
         /// <summary>
+        /// Unread comments count per page
+        /// </summary>
+        public int UnreadCommentsCount { get; private set; }
+
+        /// <summary>
         /// Updated date.
         /// </summary>
         public DateTime? UpdatedAt { get; private set; }
@@ -66,6 +71,21 @@ namespace Goodreads.Models.Response
         /// The topic subject type.
         /// </summary>
         public string SubjectType { get; private set; }
+
+        /// <summary>
+        /// The topic subject id.
+        /// </summary>
+        public long? SubjectId { get; private set; }
+
+        /// <summary>
+        /// The topic context type.
+        /// </summary>
+        public string ContextType { get; private set; }
+
+        /// <summary>
+        /// The topic context id.
+        /// </summary>
+        public long? ContextId { get; private set; }
 
         /// <summary>
         /// Topic folder.
@@ -98,9 +118,21 @@ namespace Goodreads.Models.Response
             CommentsCount = element.ElementAsInt("comments_count");
             NewCommentsCount = element.ElementAsInt("new_comments_count");
             CommentsPerPage = element.ElementAsInt("comments_per_page");
+            UnreadCommentsCount = element.ElementAsInt("unread_count");
             UpdatedAt = element.ElementAsDateTime("updated_at");
             LastCommentAt = element.ElementAsDateTime("last_comment_at");
             SubjectType = element.ElementAsString("subject_type");
+            SubjectId = element.ElementAsNullableLong("subject_id");
+            ContextType = element.ElementAsString("context_type");
+            ContextId = element.ElementAsNullableLong("context_id");
+
+            var authorUser = element.Element("author_user");
+            if (authorUser != null)
+            {
+                AuthorUserId = authorUser.ElementAsLong("id");
+                AuthorUserName = element.ElementAsString("user_name") 
+                    ?? (element.ElementAsString("first_name") + " " + element.ElementAsString("last_name"));
+            }
 
             var folder = element.Element("folder");
             if (folder != null)

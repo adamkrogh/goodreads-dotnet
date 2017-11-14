@@ -91,7 +91,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The property to sort the group info on.</param>
         /// <param name="order">The property to order the group info on.</param>
         /// <returns>The Goodreads Group model.</returns>
-        public async Task<Group> GetInfo(long groupId, SortGroupInfo? sort, OrderGroupInfo? order)
+        public async Task<Group> GetInfo(long groupId, SortGroupInfo? sort, OrderInfo? order)
         {
             var endpoint = $"group/show/{groupId}";
 
@@ -112,7 +112,7 @@ namespace Goodreads.Clients
             {
                 var parameter = new Parameter
                 {
-                    Name = EnumHelpers.QueryParameterKey<OrderGroupInfo>(),
+                    Name = EnumHelpers.QueryParameterKey<OrderInfo>(),
                     Value = EnumHelpers.QueryParameterValue(order.Value),
                     Type = ParameterType.QueryString
                 };

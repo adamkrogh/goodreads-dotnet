@@ -6,23 +6,23 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class BooksClientTests
+    public class BooksEndpointTests
     {
-        private readonly IBooksEndpoint BooksClient;
+        private readonly IBooksEndpoint BooksEndpoint;
 
-        public BooksClientTests()
+        public BooksEndpointTests()
         {
-            BooksClient = Helper.GetClient().Books;
+            BooksEndpoint = Helper.GetClient().Books;
         }
 
-        public class TheGetByIsbnMethod : BooksClientTests
+        public class TheGetByIsbnMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsABook()
             {
                 var isbn = "0765326353";
                 var bookId = 7235533;
-                var book = await BooksClient.GetByIsbn(isbn);
+                var book = await BooksEndpoint.GetByIsbn(isbn);
 
                 Assert.NotNull(book);
                 Assert.Equal(book.Isbn, isbn);
@@ -32,20 +32,20 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var book = await BooksClient.GetByIsbn("test");
+                var book = await BooksEndpoint.GetByIsbn("test");
 
                 Assert.Null(book);
             }
         }
 
-        public class TheGetByBookIdMethod : BooksClientTests
+        public class TheGetByBookIdMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsABook()
             {
                 var bookId = 7235533;
                 var isbn = "0765326353";
-                var book = await BooksClient.GetByBookId(bookId);
+                var book = await BooksEndpoint.GetByBookId(bookId);
 
                 Assert.NotNull(book);
                 Assert.Equal(book.Id, bookId);
@@ -55,13 +55,13 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var book = await BooksClient.GetByBookId(int.MaxValue);
+                var book = await BooksEndpoint.GetByBookId(int.MaxValue);
 
                 Assert.Null(book);
             }
         }
 
-        public class TheGetByTitleMethod : BooksClientTests
+        public class TheGetByTitleMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsABook()
@@ -69,7 +69,7 @@ namespace Goodreads.Tests
                 var title = "The Way of Kings";
                 var bookId = 7235533;
                 var isbn = "0765326353";
-                var book = await BooksClient.GetByTitle(title);
+                var book = await BooksEndpoint.GetByTitle(title);
 
                 Assert.NotNull(book);
                 Assert.Equal(book.Id, bookId);
@@ -80,19 +80,19 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 // Hopefully no one will write a book with this title in the future...
-                var book = await BooksClient.GetByTitle("asasdasd123123123");
+                var book = await BooksEndpoint.GetByTitle("asasdasd123123123");
 
                 Assert.Null(book);
             }
         }
 
-        public class TheGetListByAuthorIdMethod : BooksClientTests
+        public class TheGetListByAuthorIdMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsBooks()
             {
                 var authorId = 38550;
-                var books = await BooksClient.GetListByAuthorId(authorId);
+                var books = await BooksEndpoint.GetListByAuthorId(authorId);
 
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
@@ -104,7 +104,7 @@ namespace Goodreads.Tests
             public async Task ReturnsASecondPage()
             {
                 var authorId = 38550;
-                var books = await BooksClient.GetListByAuthorId(authorId, page: 2);
+                var books = await BooksEndpoint.GetListByAuthorId(authorId, page: 2);
 
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
@@ -116,18 +116,18 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var authorId = -1;
-                var books = await BooksClient.GetListByAuthorId(authorId);
+                var books = await BooksEndpoint.GetListByAuthorId(authorId);
 
                 Assert.Null(books);
             }
         }
 
-        public class TheSearchMethod : BooksClientTests
+        public class TheSearchMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsResults()
             {
-                var books = await BooksClient.Search("stormlight");
+                var books = await BooksEndpoint.Search("stormlight");
 
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
@@ -137,7 +137,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsASecondPage()
             {
-                var books = await BooksClient.Search("stormlight", page: 2);
+                var books = await BooksEndpoint.Search("stormlight", page: 2);
 
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
@@ -146,13 +146,13 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetBookIdForIsbnMethod : BooksClientTests
+        public class TheGetBookIdForIsbnMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsABookId()
             {
                 var isbn = "0765326353";
-                var bookId = await BooksClient.GetBookIdForIsbn(isbn);
+                var bookId = await BooksEndpoint.GetBookIdForIsbn(isbn);
 
                 Assert.NotNull(bookId);
                 Assert.Equal(7235533, bookId);
@@ -162,20 +162,20 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var isbn = "test";
-                var bookId = await BooksClient.GetBookIdForIsbn(isbn);
+                var bookId = await BooksEndpoint.GetBookIdForIsbn(isbn);
 
                 Assert.Null(bookId);
             }
         }
 
-        public class TheGetBookIdsForIsbnsMethod : BooksClientTests
+        public class TheGetBookIdsForIsbnsMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsBookIds()
             {
                 var isbns = new List<string> { "0765326353", "9780765326362" };
                 var expectedBookIds = new List<int?> { 7235533, 17332218 };
-                var actualBookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+                var actualBookIds = await BooksEndpoint.GetBookIdsForIsbns(isbns);
 
                 Assert.NotNull(actualBookIds);
                 Assert.Equal(actualBookIds.Count, isbns.Count);
@@ -192,7 +192,7 @@ namespace Goodreads.Tests
             {
                 var isbns = new List<string> { "0765326353", "missing", "9780765326362" };
                 var expectedBookIds = new List<int?> { 7235533, null, 17332218 };
-                var actualBookIds = await BooksClient.GetBookIdsForIsbns(isbns);
+                var actualBookIds = await BooksEndpoint.GetBookIdsForIsbns(isbns);
 
                 Assert.NotNull(actualBookIds);
                 Assert.Equal(actualBookIds.Count, isbns.Count);
@@ -205,14 +205,14 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetWorkIdsForBookIdsMethod : BooksClientTests
+        public class TheGetWorkIdsForBookIdsMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsWorkIds()
             {
                 var bookIds = new List<long> { 7235533, 17332218 };
                 var expectedWorkIds = new List<long> { 8134945, 16482835 };
-                var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
+                var actualWorkIds = await BooksEndpoint.GetWorkIdsForBookIds(bookIds);
 
                 Assert.NotNull(actualWorkIds);
                 Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
@@ -229,7 +229,7 @@ namespace Goodreads.Tests
             {
                 var bookIds = new List<long> { 7235533, int.MaxValue, 17332218 };
                 var expectedWorkIds = new List<long?> { 8134945, null, 16482835 };
-                var actualWorkIds = await BooksClient.GetWorkIdsForBookIds(bookIds);
+                var actualWorkIds = await BooksEndpoint.GetWorkIdsForBookIds(bookIds);
 
                 Assert.NotNull(actualWorkIds);
                 Assert.Equal(actualWorkIds.Count, expectedWorkIds.Count);
@@ -242,13 +242,13 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetReviewStatsForIsbnsMethod : BooksClientTests
+        public class TheGetReviewStatsForIsbnsMethod : BooksEndpointTests
         {
             [Fact]
             public async Task ReturnsStats()
             {
                 var isbns = new List<string> { "0765326353", "9780765326362" };
-                var reviewStats = await BooksClient.GetReviewStatsForIsbns(isbns);
+                var reviewStats = await BooksEndpoint.GetReviewStatsForIsbns(isbns);
 
                 Assert.NotNull(reviewStats);
                 Assert.Equal(reviewStats.Count, isbns.Count);
@@ -258,7 +258,7 @@ namespace Goodreads.Tests
             public async Task OnlyReturnsStatsForFoundIsbns()
             {
                 var isbns = new List<string> { "0765326353", "missing", "9780765326362" };
-                var reviewStats = await BooksClient.GetReviewStatsForIsbns(isbns);
+                var reviewStats = await BooksEndpoint.GetReviewStatsForIsbns(isbns);
 
                 Assert.NotNull(reviewStats);
                 Assert.Equal(2, reviewStats.Count);

@@ -5,16 +5,16 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class CommentsClientTests
+    public class CommentsEndpointTests
     {
-        private readonly ICommentsEndpoint CommentClient;
+        private readonly ICommentsEndpoint CommentsEndpoint;
 
-        public CommentsClientTests()
+        public CommentsEndpointTests()
         {
-            CommentClient = Helper.GetAuthClient().Comments;
+            CommentsEndpoint = Helper.GetAuthClient().Comments;
         }
 
-        public class TheGetAllCommentsMethod : CommentsClientTests
+        public class TheGetAllCommentsMethod : CommentsEndpointTests
         {
             [Fact]
             public async Task GetAll()
@@ -22,7 +22,7 @@ namespace Goodreads.Tests
                 const int resourceId = 48510472;
                 var type = ResourceType.OwnedBook;
 
-                var comments = await CommentClient.GetAll(resourceId, type);
+                var comments = await CommentsEndpoint.GetAll(resourceId, type);
 
                 Assert.NotNull(comments);
                 Assert.NotEmpty(comments.List);

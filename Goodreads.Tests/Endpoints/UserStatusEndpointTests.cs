@@ -4,34 +4,34 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class UserStatusClientTests
+    public class UserStatusEndpointTests
     {
-        private readonly IOAuthUserStatusesEndpoint UserStatuses;
+        private readonly IOAuthUserStatusesEndpoint UserStatusesEndpoint;
 
-        public UserStatusClientTests()
+        public UserStatusEndpointTests()
         {
-            UserStatuses = Helper.GetAuthClient().UserStatuses;
+            UserStatusesEndpoint = Helper.GetAuthClient().UserStatuses;
         }
 
-        public class TheGetRecentStatusesMethod : UserStatusClientTests
+        public class TheGetRecentStatusesMethod : UserStatusEndpointTests
         {
             [Fact]
             public async Task GetRecentUsersStatuses()
             {
-                var statuses = await UserStatuses.GetRecentUsersStatuses();
+                var statuses = await UserStatusesEndpoint.GetRecentUsersStatuses();
 
                 Assert.NotNull(statuses);
                 Assert.NotEmpty(statuses);
             }
         }
 
-        public class TheGetUserStatusMethod : UserStatusClientTests
+        public class TheGetUserStatusMethod : UserStatusEndpointTests
         {
             [Fact]
             public async Task GetUserStatus()
             {
                 const int id = 138141943;
-                var status = await UserStatuses.GetUserStatus(id);
+                var status = await UserStatusesEndpoint.GetUserStatus(id);
 
                 Assert.NotNull(status);
                 Assert.Equal(status.Id, id);
@@ -40,30 +40,30 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheCreateUserStatusMethod : UserStatusClientTests
+        public class TheCreateUserStatusMethod : UserStatusEndpointTests
         {
             [Fact]
             public async Task Create()
             {
                 const int bookId = 186;
-                var id = await UserStatuses.Create(bookId, percent: 42, comment: "Really cool!");
+                var id = await UserStatusesEndpoint.Create(bookId, percent: 42, comment: "Really cool!");
 
                 // clean up status
-                await UserStatuses.Delete(id);
+                await UserStatusesEndpoint.Delete(id);
 
                 Assert.NotEqual(default(long), id);
             }
         }
 
-        public class TheDeleteUserStatusMethod : UserStatusClientTests
+        public class TheDeleteUserStatusMethod : UserStatusEndpointTests
         {
             [Fact]
             public async Task Delete()
             {
                 // arrange status
-                var id = await UserStatuses.Create(18667945, percent: 1, comment: "Not bad");
+                var id = await UserStatusesEndpoint.Create(18667945, percent: 1, comment: "Not bad");
 
-                var result = await UserStatuses.Delete(id);
+                var result = await UserStatusesEndpoint.Delete(id);
 
                 Assert.True(result);
             }

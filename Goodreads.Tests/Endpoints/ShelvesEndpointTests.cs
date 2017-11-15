@@ -5,22 +5,22 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class ShelvesClientTests
+    public class ShelvesEndpointTests
     {
-        private readonly IOAuthShelvesEndpoint ShelvesClient;
+        private readonly IOAuthShelvesEndpoint ShelvesEndpoint;
 
-        public ShelvesClientTests()
+        public ShelvesEndpointTests()
         {
-            ShelvesClient = Helper.GetAuthClient().Shelves;
+            ShelvesEndpoint = Helper.GetAuthClient().Shelves;
         }
 
-        public class TheGetListOfUserShelvesMethod : ShelvesClientTests
+        public class TheGetListOfUserShelvesMethod : ShelvesEndpointTests
         {
             [Fact]
             public async Task ReturnsShelves()
             {
                 var userId = 7284465;
-                var shelves = await ShelvesClient.GetListOfUserShelves(userId);
+                var shelves = await ShelvesEndpoint.GetListOfUserShelves(userId);
 
                 Assert.NotNull(shelves);
                 Assert.NotEmpty(shelves.List);
@@ -31,20 +31,20 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var userId = -1;
-                var shelves = await ShelvesClient.GetListOfUserShelves(userId);
+                var shelves = await ShelvesEndpoint.GetListOfUserShelves(userId);
 
                 Assert.Null(shelves);
             }
         }
 
-        public class TheAddBookToShelfMethod : ShelvesClientTests
+        public class TheAddBookToShelfMethod : ShelvesEndpointTests
         {
             [Fact]
             public async Task AddBookToShelf()
             {
                 var shelf = "to-read";
                 var bookId = 7235533;
-                var result = await ShelvesClient.AddBookToShelf(shelf, bookId);
+                var result = await ShelvesEndpoint.AddBookToShelf(shelf, bookId);
 
                 Assert.True(result);
             }
@@ -54,9 +54,9 @@ namespace Goodreads.Tests
             {
                 var shelf = "to-read";
                 var bookId = 7235533;
-                await ShelvesClient.AddBookToShelf(shelf, bookId);
+                await ShelvesEndpoint.AddBookToShelf(shelf, bookId);
 
-                var result = await ShelvesClient.AddBookToShelf(shelf, bookId, "remove");
+                var result = await ShelvesEndpoint.AddBookToShelf(shelf, bookId, "remove");
 
                 Assert.True(result);
             }
@@ -66,32 +66,32 @@ namespace Goodreads.Tests
             {
                 var shelf = "read";
                 var bookId = 1;
-                var result = await ShelvesClient.AddBookToShelf(shelf, bookId, "remove");
+                var result = await ShelvesEndpoint.AddBookToShelf(shelf, bookId, "remove");
 
                 Assert.False(result);
             }
         }
 
-        public class TheAddBooksToShelvesMethod : ShelvesClientTests
+        public class TheAddBooksToShelvesMethod : ShelvesEndpointTests
         {
             [Fact]
             public async Task AddBooksToShelves()
             {
                 var shelves = new[] { "to-read", "leo" };
                 var bookIds = new long[] { 15823480, 656 };
-                var result = await ShelvesClient.AddBooksToShelves(shelves, bookIds);
+                var result = await ShelvesEndpoint.AddBooksToShelves(shelves, bookIds);
 
                 Assert.True(result);
             }
         }
 
-        public class TheAddUserShelfMethod : ShelvesClientTests
+        public class TheAddUserShelfMethod : ShelvesEndpointTests
         {
             [Fact]
             public void AddExistingShelf()
             {
                 const string name = "to-read";
-                Assert.ThrowsAsync<ApiException>(() => ShelvesClient.AddShelf(name));
+                Assert.ThrowsAsync<ApiException>(() => ShelvesEndpoint.AddShelf(name));
             }
         }
     }

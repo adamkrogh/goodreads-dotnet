@@ -8,39 +8,39 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class ReviewsClientTests
+    public class ReviewsEndpointTests
     {
-        private readonly IOAuthReviewsEndpoint ReviewsClient;
+        private readonly IOAuthReviewsEndpoint ReviewsEndpoint;
         private readonly long UserId;
         private readonly long ReviewsUserId;
 
-        public ReviewsClientTests()
+        public ReviewsEndpointTests()
         {
-            ReviewsClient = Helper.GetAuthClient().Reviews;
+            ReviewsEndpoint = Helper.GetAuthClient().Reviews;
             UserId = Helper.GetUserId();
             ReviewsUserId = 7284465;
         }
 
-        public class TheGetByIdMethod : ReviewsClientTests
+        public class TheGetByIdMethod : ReviewsEndpointTests
         {
             [Fact]
             public async Task ReturnsAReview()
             {
                 int expectedId = 2153;
-                var review = await ReviewsClient.GetById(expectedId);
+                var review = await ReviewsEndpoint.GetById(expectedId);
 
                 Assert.NotNull(review);
                 Assert.Equal(review.Id, expectedId);
             }
         }
 
-        public class TheGetByUserIdAndBookIdMethod : ReviewsClientTests
+        public class TheGetByUserIdAndBookIdMethod : ReviewsEndpointTests
         {
             [Fact]
             public async Task ReturnsAReview()
             {
                 var expectedBookId = 68428;
-                var review = await ReviewsClient.GetByUserIdAndBookId(UserId, expectedBookId);
+                var review = await ReviewsEndpoint.GetByUserIdAndBookId(UserId, expectedBookId);
 
                 Assert.NotNull(review);
                 Assert.NotNull(review.Book);
@@ -54,7 +54,7 @@ namespace Goodreads.Tests
             {
                 var expectedBookId = 68428;
                 var differentEditionBookId = 243272;
-                var review = await ReviewsClient.GetByUserIdAndBookId(
+                var review = await ReviewsEndpoint.GetByUserIdAndBookId(
                     UserId,
                     differentEditionBookId,
                     findReviewOnDifferentEdition: true);
@@ -67,12 +67,12 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetListByUserMethod : ReviewsClientTests
+        public class TheGetListByUserMethod : ReviewsEndpointTests
         {
             [Fact]
             public async Task ReturnsReviews()
             {
-                var reviews = await ReviewsClient.GetListByUser(ReviewsUserId);
+                var reviews = await ReviewsEndpoint.GetListByUser(ReviewsUserId);
 
                 Assert.NotNull(reviews);
             }
@@ -81,7 +81,7 @@ namespace Goodreads.Tests
             public async Task ReturnsCorrectPageSize()
             {
                 var expectedPageSize = 42;
-                var reviews = await ReviewsClient.GetListByUser(ReviewsUserId, pageSize: expectedPageSize);
+                var reviews = await ReviewsEndpoint.GetListByUser(ReviewsUserId, pageSize: expectedPageSize);
 
                 Assert.NotNull(reviews);
                 Assert.Equal(reviews.Pagination.End, expectedPageSize);
@@ -91,7 +91,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsSortedList()
             {
-                var reviews = await ReviewsClient.GetListByUser(
+                var reviews = await ReviewsEndpoint.GetListByUser(
                     ReviewsUserId,
                     sort: SortReviewsList.AverageRating,
                     order: Order.Descending);
@@ -117,44 +117,44 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetRecentReviewsForAllMembersMethod : ReviewsClientTests
+        public class TheGetRecentReviewsForAllMembersMethod : ReviewsEndpointTests
         {
             [Fact]
             public async Task ReturnsReviews()
             {
-                var reviews = await ReviewsClient.GetRecentReviewsForAllMembers();
+                var reviews = await ReviewsEndpoint.GetRecentReviewsForAllMembers();
 
                 Assert.NotNull(reviews);
                 Assert.True(reviews.Count > 0);
             }
         }
 
-        public class TheCreateAndDeleteMethods : ReviewsClientTests
+        public class TheCreateAndDeleteMethods : ReviewsEndpointTests
         {
             [Fact]
             public async Task ReturnsNullIfCannotCreate()
             {
-                var reviewId = await ReviewsClient.Create(int.MaxValue, string.Empty, null, null, null);
+                var reviewId = await ReviewsEndpoint.Create(int.MaxValue, string.Empty, null, null, null);
 
                 Assert.Null(reviewId);
             }
         }
 
-        public class TheEditMethod : ReviewsClientTests
+        public class TheEditMethod : ReviewsEndpointTests
         {
             private readonly long EditReviewId = 2175139156;
 
             [Fact]
             public async Task EditRatingSucceeds()
             {
-                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var ratingBeforeEdit = reviewBeforeEdit.Rating;
                 var expectedNewRating = ratingBeforeEdit == 5 ? 4 : 5;
-                var result = await ReviewsClient.Edit(EditReviewId, string.Empty, expectedNewRating, null, null);
+                var result = await ReviewsEndpoint.Edit(EditReviewId, string.Empty, expectedNewRating, null, null);
 
                 Assert.True(result);
 
-                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewAfterEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var actualRatingAfterEdit = reviewAfterEdit.Rating;
 
                 Assert.Equal(expectedNewRating, actualRatingAfterEdit);
@@ -163,17 +163,17 @@ namespace Goodreads.Tests
             [Fact]
             public async Task EditReviewTextSucceeds()
             {
-                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var textBeforeEdit = reviewBeforeEdit.Body.Trim();
                 var match = Regex.Match(textBeforeEdit, @".*(\d+)");
                 var testNumber = int.Parse(match.Groups[1].Value);
                 var expectedNewText = textBeforeEdit.Replace(testNumber.ToString(), (testNumber + 1).ToString());
 
-                var result = await ReviewsClient.Edit(EditReviewId, expectedNewText, null, null, null);
+                var result = await ReviewsEndpoint.Edit(EditReviewId, expectedNewText, null, null, null);
 
                 Assert.True(result);
 
-                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewAfterEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var actualNewText = reviewAfterEdit.Body.Trim();
 
                 Assert.Equal(expectedNewText, actualNewText);
@@ -182,18 +182,18 @@ namespace Goodreads.Tests
             [Fact]
             public async Task EditReadDateSucceeds()
             {
-                var reviewBeforeEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var dateBeforeEdit = reviewBeforeEdit.DateRead;
                 var expectedNewDate =
                     dateBeforeEdit.Value.Date >= DateTime.UtcNow.Date
                     ? DateTime.UtcNow.Date.AddDays(-7)
                     : DateTime.UtcNow.Date;
 
-                var result = await ReviewsClient.Edit(EditReviewId, string.Empty, null, expectedNewDate, null);
+                var result = await ReviewsEndpoint.Edit(EditReviewId, string.Empty, null, expectedNewDate, null);
 
                 Assert.True(result);
 
-                var reviewAfterEdit = await ReviewsClient.GetById(EditReviewId);
+                var reviewAfterEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var actualNewDate = reviewAfterEdit.DateRead;
 
                 Assert.NotNull(actualNewDate);

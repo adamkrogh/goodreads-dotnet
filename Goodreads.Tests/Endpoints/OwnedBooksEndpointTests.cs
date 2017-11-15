@@ -5,42 +5,42 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class OwnedBooksClientTests
+    public class OwnedBooksEndpointTests
     {
-        private readonly IOAuthOwnedBooksEndpoint OwnedBookClient;
+        private readonly IOAuthOwnedBooksEndpoint OwnedBookEndpoint;
 
-        public OwnedBooksClientTests()
+        public OwnedBooksEndpointTests()
         {
-            OwnedBookClient = Helper.GetAuthClient().OwnedBooks;
+            OwnedBookEndpoint = Helper.GetAuthClient().OwnedBooks;
         }
 
-        public class TheGetAllOwnedBooksForUser : OwnedBooksClientTests
+        public class TheGetAllOwnedBooksForUser : OwnedBooksEndpointTests
         {
             [Fact]
             public async Task TheGetAllOwnedBooks()
             {
                 const int userId = 68628513;
-                var books = await OwnedBookClient.GetOwnedBooks(userId);
+                var books = await OwnedBookEndpoint.GetOwnedBooks(userId);
 
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
             }
         }
 
-        public class TheGetOwnedBooksInfo : OwnedBooksClientTests
+        public class TheGetOwnedBooksInfo : OwnedBooksEndpointTests
         {
             [Fact]
             public async Task TheGetOwnedBookInfo()
             {
                 const int ownedBookId = 48510472;
-                var book = await OwnedBookClient.GetOwnedBookInfo(ownedBookId);
+                var book = await OwnedBookEndpoint.GetOwnedBookInfo(ownedBookId);
 
                 Assert.NotNull(book);
                 Assert.Equal(ownedBookId, book.Id);
             }
         }
 
-        public class TheAddOwnedBooks : OwnedBooksClientTests
+        public class TheAddOwnedBooks : OwnedBooksEndpointTests
         {
             [Fact]
             public async Task TheAddOwnedBook()
@@ -51,7 +51,7 @@ namespace Goodreads.Tests
                 var date = DateTime.UtcNow;
                 const string location = @"Springfield";
 
-                var ownedBook = await OwnedBookClient.AddOwnedBook(bookId, code, description, date, location);
+                var ownedBook = await OwnedBookEndpoint.AddOwnedBook(bookId, code, description, date, location);
 
                 Assert.NotNull(ownedBook);
                 Assert.Equal(bookId, ownedBook.BookId);
@@ -61,21 +61,21 @@ namespace Goodreads.Tests
                 Assert.Equal(location, ownedBook.OriginalPurchaseLocation);
 
                 // remove just added book.
-                await OwnedBookClient.DeleteOwnedBook(ownedBook.Id);
+                await OwnedBookEndpoint.DeleteOwnedBook(ownedBook.Id);
             }
         }
 
-        public class TheDeleteOwnedBooks : OwnedBooksClientTests
+        public class TheDeleteOwnedBooks : OwnedBooksEndpointTests
         {
             [Fact]
             public async Task TheDeleteOwnedBook()
             {
                 // add book for testing purpose.
                 const long bookId = 46091;
-                var ownedBook = await OwnedBookClient.AddOwnedBook(bookId);
+                var ownedBook = await OwnedBookEndpoint.AddOwnedBook(bookId);
 
                 // test
-                var result = await OwnedBookClient.DeleteOwnedBook(ownedBook.Id);
+                var result = await OwnedBookEndpoint.DeleteOwnedBook(ownedBook.Id);
 
                 Assert.True(result);
             }

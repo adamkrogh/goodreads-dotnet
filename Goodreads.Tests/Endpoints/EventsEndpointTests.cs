@@ -4,21 +4,21 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class EventsClientTests
+    public class EventsEndpointTests
     {
-        private readonly IEventsEndpoint EventsClient;
+        private readonly IEventsEndpoint EventsEndpoint;
 
-        public EventsClientTests()
+        public EventsEndpointTests()
         {
-            EventsClient = Helper.GetAuthClient().Events;
+            EventsEndpoint = Helper.GetAuthClient().Events;
         }
 
-        public class TheGetEventsMethod : EventsClientTests
+        public class TheGetEventsMethod : EventsEndpointTests
         {
             [Fact]
             public async Task GetNearest()
             {
-                var events = await EventsClient.GetEvents();
+                var events = await EventsEndpoint.GetEvents();
 
                 Assert.NotNull(events);
             }
@@ -26,7 +26,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task GetByCriteria()
             {
-                var events = await EventsClient.GetEvents(countryCode: "US", postalCode: 8540);
+                var events = await EventsEndpoint.GetEvents(countryCode: "US", postalCode: 8540);
 
                 Assert.NotNull(events);
             }

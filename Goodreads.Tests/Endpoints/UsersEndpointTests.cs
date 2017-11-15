@@ -5,23 +5,23 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class UsersClientTests
+    public class UsersEndpointTests
     {
-        private readonly IOAuthUsersEndpoint UsersClient;
+        private readonly IOAuthUsersEndpoint UsersEndpoint;
         private readonly long UserId;
 
-        public UsersClientTests()
+        public UsersEndpointTests()
         {
-            UsersClient = Helper.GetAuthClient().Users;
+            UsersEndpoint = Helper.GetAuthClient().Users;
             UserId = Helper.GetUserId();
         }
 
-        public class TheGetByUserIdMethod : UsersClientTests
+        public class TheGetByUserIdMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnsAUser()
             {
-                var user = await UsersClient.GetByUserId(UserId);
+                var user = await UsersEndpoint.GetByUserId(UserId);
 
                 Assert.NotNull(user);
                 Assert.Equal(user.Id, UserId);
@@ -30,19 +30,19 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var user = await UsersClient.GetByUserId(long.MaxValue);
+                var user = await UsersEndpoint.GetByUserId(long.MaxValue);
 
                 Assert.Null(user);
             }
         }
 
-        public class TheGetByUsernameMethod : UsersClientTests
+        public class TheGetByUsernameMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnsAUser()
             {
                 var username = "adamkrogh";
-                var user = await UsersClient.GetByUsername(username);
+                var user = await UsersEndpoint.GetByUsername(username);
 
                 Assert.NotNull(user);
                 Assert.Equal(user.Username, username);
@@ -52,18 +52,18 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var username = Guid.NewGuid().ToString().Replace("-", string.Empty);
-                var user = await UsersClient.GetByUsername(username);
+                var user = await UsersEndpoint.GetByUsername(username);
 
                 Assert.Null(user);
             }
         }
 
-        public class TheGetListOfFriendsMethod : UsersClientTests
+        public class TheGetListOfFriendsMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnsFriends()
             {
-                var friends = await UsersClient.GetListOfFriends(UserId);
+                var friends = await UsersEndpoint.GetListOfFriends(UserId);
 
                 Assert.NotNull(friends);
                 Assert.NotEmpty(friends.List);
@@ -73,42 +73,42 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullIfNotFound()
             {
-                var friends = await UsersClient.GetListOfFriends(userId: -1);
+                var friends = await UsersEndpoint.GetListOfFriends(userId: -1);
 
                 Assert.Null(friends);
             }
         }
 
-        public class TheGetAuthenticatedUserIdMethod : UsersClientTests
+        public class TheGetAuthenticatedUserIdMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnsUserIdWhenAuthenticated()
             {
-                var id = await UsersClient.GetAuthenticatedUserId();
+                var id = await UsersEndpoint.GetAuthenticatedUserId();
                 Assert.Equal(id, Helper.GetUserId());
             }
         }
 
-        public class TheGetUserFollowingMethod : UsersClientTests
+        public class TheGetUserFollowingMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnUserFollowing()
             {
                 const int userId = 68628513;
-                var followings = await UsersClient.GetUserFollowing(userId);
+                var followings = await UsersEndpoint.GetUserFollowing(userId);
 
                 Assert.NotNull(followings);
                 Assert.NotEmpty(followings.List);
             }
         }
 
-        public class TheGetUsersFollowersMethod : UsersClientTests
+        public class TheGetUsersFollowersMethod : UsersEndpointTests
         {
             [Fact]
             public async Task ReturnUsersFollowers()
             {
                 const int userId = 68628513;
-                var followings = await UsersClient.GetUsersFollowers(userId);
+                var followings = await UsersEndpoint.GetUsersFollowers(userId);
 
                 Assert.NotNull(followings);
                 Assert.NotEmpty(followings.List);

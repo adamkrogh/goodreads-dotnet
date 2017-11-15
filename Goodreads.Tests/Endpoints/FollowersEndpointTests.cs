@@ -4,26 +4,26 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class FollowersClientTests
+    public class FollowersEndpointTests
     {
-        private readonly IOAuthFollowersEndpoint FollowersClient;
+        private readonly IOAuthFollowersEndpoint FollowersEndpoint;
         private readonly long UserId;
 
-        public FollowersClientTests()
+        public FollowersEndpointTests()
         {
-            FollowersClient = Helper.GetAuthClient().Followers;
+            FollowersEndpoint = Helper.GetAuthClient().Followers;
             UserId = Helper.GetUserId();
         }
 
-        public class TheFollowMethod : FollowersClientTests
+        public class TheFollowMethod : FollowersEndpointTests
         {
             [Fact]
             public async Task FollowUser()
             {
                 var userId = 690273;
-                var userFollowing = await FollowersClient.Follow(userId);
+                var userFollowing = await FollowersEndpoint.Follow(userId);
 
-                await FollowersClient.Unfollow(userId); // cleanup following
+                await FollowersEndpoint.Unfollow(userId); // cleanup following
 
                 Assert.NotNull(userFollowing);
                 Assert.Equal(userFollowing.UserId, userId);
@@ -31,15 +31,15 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheUnfollowMethod : FollowersClientTests
+        public class TheUnfollowMethod : FollowersEndpointTests
         {
             [Fact]
             public async Task UnfollowUser()
             {
                 var userId = 700809;
-                await FollowersClient.Follow(userId); // arrange following
+                await FollowersEndpoint.Follow(userId); // arrange following
 
-                var result = await FollowersClient.Unfollow(userId); // cleanup following
+                var result = await FollowersEndpoint.Unfollow(userId); // cleanup following
 
                 Assert.True(result);
             }

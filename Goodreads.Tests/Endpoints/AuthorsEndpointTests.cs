@@ -5,22 +5,22 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class AuthorsClientTests
+    public class AuthorsEndpointTests
     {
-        private readonly IAuthorsEndpoint AuthorsClient;
+        private readonly IAuthorsEndpoint AuthorsEndpoint;
 
-        public AuthorsClientTests()
+        public AuthorsEndpointTests()
         {
-            AuthorsClient = Helper.GetClient().Authors;
+            AuthorsEndpoint = Helper.GetClient().Authors;
         }
 
-        public class TheGetByAuthorIdMethod : AuthorsClientTests
+        public class TheGetByAuthorIdMethod : AuthorsEndpointTests
         {
             [Fact]
             public async Task ReturnsAnAuthor()
             {
                 var authorId = 38550;
-                var author = await AuthorsClient.GetByAuthorId(authorId);
+                var author = await AuthorsEndpoint.GetByAuthorId(authorId);
 
                 Assert.NotNull(author);
                 Assert.Equal(author.Id, authorId);
@@ -30,20 +30,20 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var authorId = -1;
-                var author = await AuthorsClient.GetByAuthorId(authorId);
+                var author = await AuthorsEndpoint.GetByAuthorId(authorId);
 
                 Assert.Null(author);
             }
         }
 
-        public class TheGetAuthorIdByNameMethod : AuthorsClientTests
+        public class TheGetAuthorIdByNameMethod : AuthorsEndpointTests
         {
             [Fact]
             public async Task ReturnsAnAuthorId()
             {
                 var authorName = "Brandon Sanderson";
                 var expectedAuthorId = 38550;
-                var actualAuthorId = await AuthorsClient.GetAuthorIdByName(authorName);
+                var actualAuthorId = await AuthorsEndpoint.GetAuthorIdByName(authorName);
 
                 Assert.NotNull(actualAuthorId);
                 Assert.Equal(actualAuthorId, expectedAuthorId);
@@ -53,7 +53,7 @@ namespace Goodreads.Tests
             public async Task ReturnsNullIfNotFound()
             {
                 var authorName = Guid.NewGuid().ToString().Replace("-", string.Empty);
-                var actualAuthorId = await AuthorsClient.GetAuthorIdByName(authorName);
+                var actualAuthorId = await AuthorsEndpoint.GetAuthorIdByName(authorName);
 
                 Assert.Null(actualAuthorId);
             }

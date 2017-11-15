@@ -4,21 +4,21 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class SeriesClientTests
+    public class SeriesEndpointTests
     {
-        private readonly ISeriesEndpoint SeriesClient;
+        private readonly ISeriesEndpoint SeriesEndpoint;
 
-        public SeriesClientTests()
+        public SeriesEndpointTests()
         {
-            SeriesClient = Helper.GetAuthClient().Series;
+            SeriesEndpoint = Helper.GetAuthClient().Series;
         }
 
-        public class TheGetListByAuthorIdMethod : SeriesClientTests
+        public class TheGetListByAuthorIdMethod : SeriesEndpointTests
         {
             [Fact]
             public async Task ReturnsSeries()
             {
-                var series = await SeriesClient.GetListByAuthorId(38550);
+                var series = await SeriesEndpoint.GetListByAuthorId(38550);
 
                 Assert.NotNull(series);
                 Assert.True(series.Count > 0);
@@ -27,18 +27,18 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullWhenIncorrectAuthor()
             {
-                var series = await SeriesClient.GetListByAuthorId(int.MaxValue);
+                var series = await SeriesEndpoint.GetListByAuthorId(int.MaxValue);
 
                 Assert.Null(series);
             }
         }
 
-        public class TheGetListByWorkIdMethod : SeriesClientTests
+        public class TheGetListByWorkIdMethod : SeriesEndpointTests
         {
             [Fact]
             public async Task ReturnsSeries()
             {
-                var series = await SeriesClient.GetListByWorkId(8134945);
+                var series = await SeriesEndpoint.GetListByWorkId(8134945);
 
                 Assert.NotNull(series);
                 Assert.True(series.Count > 0);
@@ -47,19 +47,19 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullWhenIncorrectWork()
             {
-                var series = await SeriesClient.GetListByWorkId(int.MaxValue);
+                var series = await SeriesEndpoint.GetListByWorkId(int.MaxValue);
 
                 Assert.Null(series);
             }
         }
 
-        public class TheGetByIdMethod : SeriesClientTests
+        public class TheGetByIdMethod : SeriesEndpointTests
         {
             [Fact]
             public async Task ReturnsSeriesInformation()
             {
                 var expectedSeriesId = 49075;
-                var series = await SeriesClient.GetById(expectedSeriesId);
+                var series = await SeriesEndpoint.GetById(expectedSeriesId);
 
                 Assert.NotNull(series);
                 Assert.Equal(expectedSeriesId, series.Id);
@@ -70,7 +70,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task ReturnsNullWhenIncorrectSeriesId()
             {
-                var series = await SeriesClient.GetById(int.MaxValue);
+                var series = await SeriesEndpoint.GetById(int.MaxValue);
 
                 Assert.Null(series);
             }

@@ -4,32 +4,32 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class GroupClientTests
+    public class GroupEndpointTests
     {
-        private readonly IGroupsEndpoint GroupClient;
+        private readonly IGroupsEndpoint GroupEndpoint;
 
-        public GroupClientTests()
+        public GroupEndpointTests()
         {
-            GroupClient = Helper.GetAuthClient().Groups;
+            GroupEndpoint = Helper.GetAuthClient().Groups;
         }
 
-        public class TheGetListByUserMethod : GroupClientTests
+        public class TheGetListByUserMethod : GroupEndpointTests
         {
             [Fact]
             public async Task GetListByUserToGroup()
             {
-                var list = await GroupClient.GetListByUser(690273);
+                var list = await GroupEndpoint.GetListByUser(690273);
 
                 Assert.NotNull(list);
             }
         }
 
-        public class TheGetGroupsMethod : GroupClientTests
+        public class TheGetGroupsMethod : GroupEndpointTests
         {
             [Fact]
             public async Task GetGroups()
             {
-                var groups = await GroupClient.GetGroups("English");
+                var groups = await GroupEndpoint.GetGroups("English");
 
                 Assert.NotNull(groups);
                 Assert.NotNull(groups.List);
@@ -37,26 +37,26 @@ namespace Goodreads.Tests
             }
         }
 
-        public class TheGetInfoMethod : GroupClientTests
+        public class TheGetInfoMethod : GroupEndpointTests
         {
             [Fact]
             public async Task GetInfo()
             {
                 const int id = 99123;
-                var group = await GroupClient.GetInfo(id);
+                var group = await GroupEndpoint.GetInfo(id);
 
                 Assert.NotNull(group);
                 Assert.Equal(group.Id, id);
             }
         }
 
-        public class TheGetMemberMethod : GroupClientTests
+        public class TheGetMemberMethod : GroupEndpointTests
         {
             [Fact]
             public async Task GetMember()
             {
                 const int id = 99123;
-                var members = await GroupClient.GetMembers(id);
+                var members = await GroupEndpoint.GetMembers(id);
 
                 Assert.NotNull(members);
                 Assert.NotEmpty(members.List);

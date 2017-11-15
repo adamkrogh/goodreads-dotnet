@@ -4,22 +4,22 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class ReadStatusesClientTests
+    public class ReadStatusesEndpointTests
     {
-        private readonly IReadStatusesEndpoint ReadStatusesClient;
+        private readonly IReadStatusesEndpoint ReadStatusesEndpoint;
 
-        public ReadStatusesClientTests()
+        public ReadStatusesEndpointTests()
         {
-            ReadStatusesClient = Helper.GetAuthClient().ReadStatuses;
+            ReadStatusesEndpoint = Helper.GetAuthClient().ReadStatuses;
         }
 
-        public class TheGetFriensUpdateMethod : ReadStatusesClientTests
+        public class TheGetFriensUpdateMethod : ReadStatusesEndpointTests
         {
             [Fact]
             public async Task GetReadStatus()
             {
                 const int id = 1894518811;
-                var status = await ReadStatusesClient.GetReadStatus(id);
+                var status = await ReadStatusesEndpoint.GetReadStatus(id);
                 Assert.NotNull(status);
                 Assert.Equal(status.Id, id);
             }

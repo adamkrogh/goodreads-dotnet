@@ -4,21 +4,21 @@ using Xunit;
 
 namespace Goodreads.Tests
 {
-    public class NotificationClientTests
+    public class NotificationEndpointTests
     {
-        private readonly IOAuthNotificationsEndpoint NotificationsClient;
+        private readonly IOAuthNotificationsEndpoint NotificationsEndpoint;
 
-        public NotificationClientTests()
+        public NotificationEndpointTests()
         {
-            NotificationsClient = Helper.GetAuthClient().Notifications;
+            NotificationsEndpoint = Helper.GetAuthClient().Notifications;
         }
 
-        public class TheAddFriendMethod : NotificationClientTests
+        public class TheAddFriendMethod : NotificationEndpointTests
         {
             [Fact]
             public async Task GetNotificationsMethod()
             {
-                var notifications = await NotificationsClient.GetNotifications();
+                var notifications = await NotificationsEndpoint.GetNotifications();
 
                 Assert.NotNull(notifications);
                 Assert.NotNull(notifications.List);

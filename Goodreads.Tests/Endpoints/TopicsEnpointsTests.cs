@@ -38,6 +38,16 @@ namespace Goodreads.Tests
                 Assert.NotEmpty(topics.List);
                 Assert.All(topics.List, t => Assert.Equal(folderId, t.Folder.Id));
             }
+
+            [Fact]
+            public async Task GetUnreadGroupTopics()
+            {
+                const long groupId = 189072;
+                var topics = await TopicsEndpoint.GetUnreadTopics(groupId);
+
+                Assert.NotNull(topics);
+                Assert.NotEmpty(topics.List);
+            }
         }
     }
 }

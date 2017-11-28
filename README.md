@@ -81,7 +81,6 @@ Library covers all API Goodreads methods except below:
 The list of API methods that will be supported soon.
 
 - topic.create — Create a new topic via OAuth.
-- topic.unread_group — Get a list of topics with unread comments.
 
 There are methods which can't be called without additional credentials.
 

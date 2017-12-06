@@ -14,7 +14,7 @@ namespace Goodreads.Clients
             : base(connection)
         {
         }
-
+                
         public async Task<Topic> GetInfo(long topicId)
         {
             var endpoint = $"topic/show?id={topicId}";
@@ -81,10 +81,72 @@ namespace Goodreads.Clients
             {
                 parameters.Add(new Parameter { Name = "viewed", Value = viewed, Type = ParameterType.QueryString });
             }
-
-            var q = await Connection.ExecuteRaw(endpoint, parameters);
-
+            
             return await Connection.ExecuteRequest<PaginatedList<Topic>>(endpoint, parameters, null, "group_folder/topics").ConfigureAwait(false);
+        }
+
+        public async Task<Topic> CreateTopic(
+            TopicSubjectType type,
+            long subjectId,
+            long? folderId,
+            string title,
+            bool isQuestion,
+            string comment,
+            bool addToUpdateFeed,
+            bool needDigest)
+        {
+            var endpoint = $"topic";
+
+            var parameters = new List<Parameter>
+            {
+                 new Parameter
+                 {
+                     Name = EnumHelpers.QueryParameterKey<TopicSubjectType>(),
+                     Value = EnumHelpers.QueryParameterValue(type),
+                     Type = ParameterType.QueryString
+                 },
+                 new Parameter
+                 {
+                     Name = "topic[subject_id]",
+                     Value = subjectId,
+                     Type = ParameterType.QueryString
+                 },
+                 new Parameter
+                 {
+                     Name = "topic[title]",
+                     Value = title,
+                     Type = ParameterType.QueryString
+                 },
+                 new Parameter
+                 {
+                     Name = "topic[question_flag]",
+                     Value = isQuestion ? "1" : "0",
+                     Type = ParameterType.QueryString
+                 },
+                 new Parameter
+                 {
+                     Name = "comment[body_usertext]",
+                     Value = comment,
+                     Type = ParameterType.QueryString
+                 }
+            };
+
+            if (folderId.HasValue)
+            {
+                parameters.Add(new Parameter { Name = "topic[folder_id]", Value = folderId.Value, Type = ParameterType.QueryString });
+            }
+
+            if (addToUpdateFeed)
+            {
+                parameters.Add(new Parameter { Name = "update_feed", Value = "on", Type = ParameterType.QueryString });
+            }
+
+            if (needDigest)
+            {
+                parameters.Add(new Parameter { Name = "digest", Value = "on", Type = ParameterType.QueryString });
+            }
+
+            return await Connection.ExecuteRequest<Topic>(endpoint, parameters, null, "topic", Method.POST);
         }
     }
 }

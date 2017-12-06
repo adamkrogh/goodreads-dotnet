@@ -76,13 +76,7 @@ await client.Shelves.AddBookToShelf(shelf: "must-read", bookId: 15979976);
 
 Library covers all API Goodreads methods except below:
 
-### Todo
-
-The list of API methods that will be supported soon.
-
-- topic.create — Create a new topic via OAuth.
-
-There are methods which can't be called without additional credentials.
+### Need some additional credentials
 
 - list.book — Get the listopia lists for a given book.
 - work.editions — See all editions by work.

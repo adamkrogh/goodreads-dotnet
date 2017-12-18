@@ -58,6 +58,8 @@ var client = GoodreadsClient.Create(apiKey, apiSecret);
 const string callbackUrl = "<callback_url>";
 var requestToken = await client.AskCredentials(callbackUrl);
 
+// Then app has to redirect a user to 'requestToken.AuthorizeUrl' and user must grant access to your application.
+
 // Get a user's OAuth access token and secret after they have granted access.
 var accessToken = await client.GetAccessToken(requestToken);
 

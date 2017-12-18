@@ -142,11 +142,10 @@ namespace Goodreads.Tests
 
         public class TheEditMethod : ReviewsEndpointTests
         {
-            private readonly long EditReviewId = 2175139156;
-
             [Fact]
             public async Task EditRatingSucceeds()
             {
+                const long EditReviewId = 1700138017;
                 var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var ratingBeforeEdit = reviewBeforeEdit.Rating;
                 var expectedNewRating = ratingBeforeEdit == 5 ? 4 : 5;
@@ -163,6 +162,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task EditReviewTextSucceeds()
             {
+                const long EditReviewId = 2175139156;
                 var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var textBeforeEdit = reviewBeforeEdit.Body.Trim();
                 var match = Regex.Match(textBeforeEdit, @".*(\d+)");
@@ -182,6 +182,7 @@ namespace Goodreads.Tests
             [Fact]
             public async Task EditReadDateSucceeds()
             {
+                const long EditReviewId = 2034600714;
                 var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
                 var dateBeforeEdit = reviewBeforeEdit.DateRead;
                 var expectedNewDate =

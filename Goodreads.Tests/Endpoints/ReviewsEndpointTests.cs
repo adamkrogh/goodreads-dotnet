@@ -13,6 +13,7 @@ namespace Goodreads.Tests
         private readonly IOAuthReviewsEndpoint ReviewsEndpoint;
         private readonly long UserId;
         private readonly long ReviewsUserId;
+        private readonly Random _rand = new Random();
 
         public ReviewsEndpointTests()
         {
@@ -163,18 +164,14 @@ namespace Goodreads.Tests
             public async Task EditReviewTextSucceeds()
             {
                 const long EditReviewId = 2175139156;
-                var reviewBeforeEdit = await ReviewsEndpoint.GetById(EditReviewId);
-                var textBeforeEdit = reviewBeforeEdit.Body.Trim();
-                var match = Regex.Match(textBeforeEdit, @".*(\d+)");
-                var testNumber = int.Parse(match.Groups[1].Value);
-                var expectedNewText = textBeforeEdit.Replace(testNumber.ToString(), (testNumber + 1).ToString());
+                var expectedNewText = "test_" + _rand.Next(); 
 
                 var result = await ReviewsEndpoint.Edit(EditReviewId, expectedNewText, null, null, null);
 
                 Assert.True(result);
 
                 var reviewAfterEdit = await ReviewsEndpoint.GetById(EditReviewId);
-                var actualNewText = reviewAfterEdit.Body.Trim();
+                var actualNewText = reviewAfterEdit.Body;
 
                 Assert.Equal(expectedNewText, actualNewText);
             }

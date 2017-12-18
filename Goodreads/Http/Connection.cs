@@ -100,7 +100,7 @@ namespace Goodreads.Http
 
             var oAuthToken = queryString["oauth_token"];
             var oAuthTokenSecret = queryString["oauth_token_secret"];
-            var authorizeUrl = BuildAuthorizeUrl(oAuthToken, oAuthTokenSecret);
+            var authorizeUrl = BuildAuthorizeUrl(oAuthToken, callbackUrl);
 
             return new OAuthRequestToken(oAuthToken, oAuthTokenSecret, authorizeUrl);
         }

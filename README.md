@@ -56,10 +56,10 @@ var client = GoodreadsClient.Create(apiKey, apiSecret);
 
 // Ask a Goodreads request token and build an authorization url.
 const string callbackUrl = "<callback_url>";
-var requestToken = client.AskCredentials(callbackUrl);
+var requestToken = await client.AskCredentials(callbackUrl);
 
 // Get a user's OAuth access token and secret after they have granted access.
-var accessToken = client.GetAccessToken(requestToken);
+var accessToken = await client.GetAccessToken(requestToken);
 
 // Create an authorized Goodreads client.
 var authClient = GoodreadsClient.CreateAuth(apiKey, apiSecret, accessToken.Token, accessToken.Secret);

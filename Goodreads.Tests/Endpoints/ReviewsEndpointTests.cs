@@ -171,7 +171,7 @@ namespace Goodreads.Tests
                 Assert.True(result);
 
                 var reviewAfterEdit = await ReviewsEndpoint.GetById(EditReviewId);
-                var actualNewText = reviewAfterEdit.Body;
+                var actualNewText = reviewAfterEdit.Body.Trim();
 
                 Assert.Equal(expectedNewText, actualNewText);
             }

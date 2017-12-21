@@ -6,8 +6,8 @@ namespace Goodreads.Demo
     {
         // Define your Goodreads key and secret.
         // This can be obtained from https://www.goodreads.com/api/keys.
-        public const string ApiKey = "dL9yWNsppzRPPCqX6ZK6Wg";
-        public const string ApiSecret = "AD4sWTF3fJNoMfWSwoOFBS3bnu9ksxXGT0runU2k";
+        public const string ApiKey = "<Your API Key>";
+        public const string ApiSecret = "<Your API Secret>";
 
         private static Dictionary<string, string> _tokens = new Dictionary<string, string>();
 

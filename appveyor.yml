@@ -1,4 +1,4 @@
-version: 0.3.1.{build}
+version: 1.0.0.{build}
 image: Visual Studio 2017
 configuration: Release
 
@@ -15,6 +15,7 @@ before_build:
   - nuget restore
 
 build:
+  project: Goodreads.sln
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal

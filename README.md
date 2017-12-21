@@ -24,6 +24,7 @@ dotnet add package Goodreads
 
 #### Docs
 There is a full list of supported methods with examples in our [wiki page](https://github.com/adamkrogh/goodreads-dotnet/wiki/API-methods).
+Also please have a look at [Demo application](https://github.com/adamkrogh/goodreads-dotnet/tree/master/Goodreads.Demo).
 
 ## Usage Examples
 

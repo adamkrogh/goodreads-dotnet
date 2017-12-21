@@ -9,5 +9,10 @@
         {
             AuthorizeUrl = authorizeUrl;
         }
+
+        public OAuthRequestToken(string token, string secret)
+            : this(token, secret, string.Empty)
+        {
+        }
     }
 }

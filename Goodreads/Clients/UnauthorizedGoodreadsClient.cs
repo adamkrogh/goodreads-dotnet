@@ -59,5 +59,11 @@ namespace Goodreads
         {
             return await _connection.GetAccessToken(token).ConfigureAwait(false);
         }
+
+        public async Task<OAuthAccessToken> GetAccessToken(string token, string secret)
+        {
+            var oAuthRequestToken = new OAuthRequestToken(token, secret);
+            return await GetAccessToken(oAuthRequestToken).ConfigureAwait(false);
+        }
     }
 }

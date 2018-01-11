@@ -34,14 +34,6 @@ namespace Goodreads.Clients
         Task<Book> GetByTitle(string title, string author = null);
 
         /// <summary>
-        /// Gets a paginated list of books written by the given author.
-        /// </summary>
-        /// <param name="authorId">The Goodreads author id.</param>
-        /// <param name="page">The desired page from the paginated list of books.</param>
-        /// <returns>A paginated list of books written by the author.</returns>
-        Task<PaginatedList<Book>> GetListByAuthorId(long authorId, int page = 1);
-
-        /// <summary>
         /// Search Goodreads for books (returned as <see cref="Work"/> objects).
         /// </summary>
         /// <param name="searchTerm">The search term to search Goodreads with.</param>
@@ -88,5 +80,12 @@ namespace Goodreads.Clients
     /// </summary>
     public interface IOAuthBooksEndpoint : IBooksEndpoint
     {
+        /// <summary>
+        /// Gets a paginated list of books written by the given author.
+        /// </summary>
+        /// <param name="authorId">The Goodreads author id.</param>
+        /// <param name="page">The desired page from the paginated list of books.</param>
+        /// <returns>A paginated list of books written by the author.</returns>
+        Task<PaginatedList<Book>> GetListByAuthorId(long authorId, int page = 1);
     }
 }

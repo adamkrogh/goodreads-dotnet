@@ -8,11 +8,11 @@ namespace Goodreads.Tests
 {
     public class BooksEndpointTests
     {
-        private readonly IBooksEndpoint BooksEndpoint;
+        private readonly IOAuthBooksEndpoint BooksEndpoint;
 
         public BooksEndpointTests()
         {
-            BooksEndpoint = Helper.GetClient().Books;
+            BooksEndpoint = Helper.GetAuthClient().Books;
         }
 
         public class TheGetByIsbnMethod : BooksEndpointTests

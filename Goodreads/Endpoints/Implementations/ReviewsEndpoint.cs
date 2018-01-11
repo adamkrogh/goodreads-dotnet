@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Goodreads.Exceptions;
-using Goodreads.Extensions;
+﻿using Goodreads.Extensions;
 using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Goodreads.Clients
 {
@@ -165,7 +164,7 @@ namespace Goodreads.Clients
             int? rating,
             DateTime? dateRead,
             string shelfName)
-        {            
+        {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "book_id", Value = bookId, Type = ParameterType.GetOrPost }
@@ -234,7 +233,7 @@ namespace Goodreads.Clients
             int? rating,
             DateTime? dateRead,
             string shelfName)
-        {           
+        {
             var parameters = new List<Parameter>
             {
                 new Parameter { Name = "id", Value = reviewId, Type = ParameterType.UrlSegment }

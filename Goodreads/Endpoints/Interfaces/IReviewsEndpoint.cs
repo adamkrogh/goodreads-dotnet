@@ -56,8 +56,8 @@ namespace Goodreads.Clients
         /// <summary>
         /// Get the most recent reviews that have been posted to Goodreads, for all users.
         /// </summary>
-        /// <returns>The latest reviews that have been posted to Goodreads.</returns>        
-        Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers();        
+        /// <returns>The latest reviews that have been posted to Goodreads.</returns>
+        Task<IReadOnlyList<Review>> GetRecentReviewsForAllMembers();
     }
 
     public interface IOAuthReviewsEndpoint : IReviewsEndpoint

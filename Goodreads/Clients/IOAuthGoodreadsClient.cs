@@ -52,7 +52,7 @@ namespace Goodreads
         /// </summary>
         IOAuthNotificationsEndpoint Notifications { get; }
 
-        // <summary>
+        /// <summary>
         /// API OAuth client for the Goodreads owned books endpoint.
         /// </summary>
         IOAuthOwnedBooksEndpoint OwnedBooks { get; }
@@ -91,7 +91,7 @@ namespace Goodreads
         /// API OAuth client for the Goodreads topics endpoint.
         /// </summary>
         IOAuthTopicsEndpoint Topics { get; }
-        
+
         /// <summary>
         /// API OAuth client for the Goodreads updates endpoint.
         /// </summary>
@@ -101,10 +101,10 @@ namespace Goodreads
         /// API OAuth client for the Goodreads Users endpoint.
         /// </summary>
         IOAuthUsersEndpoint Users { get; }
-        
+
         /// <summary>
         /// API OAuth client for the Goodreads user statuses endpoint.
         /// </summary>
-        IOAuthUserStatusesEndpoint UserStatuses { get; }        
+        IOAuthUserStatusesEndpoint UserStatuses { get; }
     }
 }

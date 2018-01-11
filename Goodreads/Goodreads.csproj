@@ -14,6 +14,7 @@
     <PackageProjectUrl>https://github.com/adamkrogh/goodreads-dotnet</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/adamkrogh/goodreads-dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>goodreads api netstandard2</PackageTags>
+    <CodeAnalysisRuleSet>..\Goodreads.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,6 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.2.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
-
 </Project>

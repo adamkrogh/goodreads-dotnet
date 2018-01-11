@@ -13,6 +13,6 @@ namespace Goodreads.Clients
         protected Endpoint(IConnection connection)
         {
             Connection = connection;
-        }        
+        }
     }
 }

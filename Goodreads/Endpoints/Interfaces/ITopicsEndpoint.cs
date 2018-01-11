@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using Goodreads.Models.Request;
 using Goodreads.Models.Response;
-using Goodreads.Models.Request;
+using System.Threading.Tasks;
 
 namespace Goodreads.Clients
 {
-	/// <summary>
+    /// <summary>
     /// API client for the Topic endpoint.
     /// </summary>
     public interface ITopicsEndpoint
@@ -26,12 +26,12 @@ namespace Goodreads.Clients
             OrderInfo order = OrderInfo.Asc);
     }
 
-	// <summary>
+    /// <summary>
     /// API OAuth client for the Shelves endpoint.
     /// </summary>
     public interface IOAuthTopicsEndpoint : ITopicsEndpoint
     {
-		/// <summary>
+        /// <summary>
         /// Get info about specified topic.
         /// </summary>
         /// <param name="topicId">A desire topic id.</param>
@@ -52,7 +52,8 @@ namespace Goodreads.Clients
         Task<PaginatedList<Topic>> GetUnreadTopics(
             long groupId,
             bool viewed = false,
-            int page = 1, GroupFolderSort sort = GroupFolderSort.Title,
+            int page = 1,
+            GroupFolderSort sort = GroupFolderSort.Title,
             OrderInfo order = OrderInfo.Asc);
 
         /// <summary>
@@ -76,5 +77,5 @@ namespace Goodreads.Clients
             string comment,
             bool addToUpdateFeed,
             bool needDigest);
-    }    
+    }
 }

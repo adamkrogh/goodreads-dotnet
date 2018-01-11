@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Goodreads.Helpers;
+﻿using Goodreads.Helpers;
 using Goodreads.Http;
 using Goodreads.Models.Request;
 using Goodreads.Models.Response;
 using RestSharp;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Goodreads.Clients
 {
@@ -86,7 +86,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
         public async Task<long> GetAuthenticatedUserId()
-        {            
+        {
             // This response is simple enough that we just parse it here without creating another model
             var response = await Connection.ExecuteRaw("api/auth_user", null).ConfigureAwait(false);
             if (response != null && (int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
@@ -107,7 +107,7 @@ namespace Goodreads.Clients
                 }
             }
 
-            throw new Exception("");
+            throw new Exception();
         }
 
         /// <summary>

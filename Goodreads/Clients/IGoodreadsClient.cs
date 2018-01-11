@@ -36,27 +36,27 @@ namespace Goodreads
         /// API client for the Goodreads Series endpoint.
         /// </summary>
         ISeriesEndpoint Series { get; }
-                
+
         /// <summary>
         /// API client for the Goodreads Events endpoint.
         /// </summary>
         IEventsEndpoint Events { get; }
-                
+
         /// <summary>
         /// API client for the Goodreads group endpoint.
         /// </summary>
         IGroupsEndpoint Groups { get; }
-        
+
         /// <summary>
         /// API client for the Goodreads user statuses endpoint.
         /// </summary>
         IUserStatusesEndpoint UserStatuses { get; }
-                
+
         /// <summary>
         /// API client for the Goodreads read status endpoint.
         /// </summary>
         IReadStatusesEndpoint ReadStatuses { get; }
-                
+
         /// <summary>
         /// API client for the Goodreads comments endpoint.
         /// </summary>

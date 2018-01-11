@@ -28,8 +28,8 @@ namespace Goodreads
             Shelves = new ShelvesEndpoint(_connection);
             Topics = new TopicsEndpoint(_connection);
             Updates = new UpdatesEndpoint(_connection);
-            Users = new UsersEndpoint(_connection);            
-            UserStatuses = new UserStatusesEndpoint(_connection);           
+            Users = new UsersEndpoint(_connection);
+            UserStatuses = new UserStatusesEndpoint(_connection);
         }
 
         public IOAuthAuthorsEndpoint Authors { get; }

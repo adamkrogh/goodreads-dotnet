@@ -8,7 +8,7 @@ namespace Goodreads.Clients
     /// The client class for the Group endpoint of the Goodreads API.
     /// </summary>
     public interface IGroupsEndpoint
-    {        
+    {
         /// <summary>
         /// Get a list of groups the user specified.
         /// </summary>

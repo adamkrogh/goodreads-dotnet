@@ -130,7 +130,7 @@ namespace Goodreads.Models.Response
             if (authorUser != null)
             {
                 AuthorUserId = authorUser.ElementAsLong("id");
-                AuthorUserName = element.ElementAsString("user_name") 
+                AuthorUserName = element.ElementAsString("user_name")
                     ?? (element.ElementAsString("first_name") + " " + element.ElementAsString("last_name"));
             }
 

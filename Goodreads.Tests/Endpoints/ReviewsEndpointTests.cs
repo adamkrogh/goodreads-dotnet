@@ -164,7 +164,7 @@ namespace Goodreads.Tests
             public async Task EditReviewTextSucceeds()
             {
                 const long EditReviewId = 2175139156;
-                var expectedNewText = "test_" + _rand.Next(); 
+                var expectedNewText = "test_" + _rand.Next();
 
                 var result = await ReviewsEndpoint.Edit(EditReviewId, expectedNewText, null, null, null);
 

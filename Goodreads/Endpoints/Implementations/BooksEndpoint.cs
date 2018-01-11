@@ -231,7 +231,6 @@ namespace Goodreads.Clients
 
             // This endpoint only supports JSON for some reason...
             var response = await Connection.ExecuteJsonRequest<ReviewStatsContainer>("book/review_counts.json", parameters).ConfigureAwait(false);
-                
             return response?.Books;
         }
     }

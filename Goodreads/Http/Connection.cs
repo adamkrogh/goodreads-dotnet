@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Goodreads.Extensions;
 using Goodreads.Models;
 using RestSharp;
-using Goodreads.Extensions;
-using System.Linq;
 using RestSharp.Authenticators;
-using System.Web;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace Goodreads.Http
 {
@@ -30,7 +30,7 @@ namespace Goodreads.Http
         {
             _client = CreateClient(credentials);
             Credentials = credentials;
-        }        
+        }
 
         public async Task<IRestResponse> ExecuteRaw(
             string endpoint,
@@ -122,13 +122,13 @@ namespace Goodreads.Http
         {
             var request = new RestRequest(endpoint);
 
-            foreach (var parameter in (parameters ?? Enumerable.Empty<Parameter>()))
+            foreach (var parameter in parameters ?? Enumerable.Empty<Parameter>())
             {
                 request.AddParameter(parameter);
             }
 
             return request;
-        }       
+        }
 
         private static IRestClient CreateClient(ApiCredentials credentials)
         {
@@ -142,7 +142,7 @@ namespace Goodreads.Http
 
             if (!string.IsNullOrEmpty(credentials.OAuthToken) && !string.IsNullOrEmpty(credentials.OAuthTokenSecret))
             {
-                client.Authenticator = 
+                client.Authenticator =
                     OAuth1Authenticator.ForProtectedResource(
                     credentials.ApiKey,
                     credentials.ApiSecret,
@@ -151,6 +151,6 @@ namespace Goodreads.Http
             }
 
             return client;
-        }        
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Goodreads
 {
     /// <summary>
-    /// Define behavior for OAuth authorization and getting the Goodreads access token. 
+    /// Define behavior for OAuth authorization and getting the Goodreads access token.
     /// </summary>
     public interface IAuthManager : IApiCredentialsInfoManager
     {
@@ -26,7 +26,7 @@ namespace Goodreads
         /// Get the Goodreads access token using OAuth request token and OAuth secret.
         /// </summary>
         /// <param name="token">A specified request token.</param>
-        ///  /// <param name="secret">A specified secret.</param>
+        /// <param name="secret">A specified secret.</param>
         /// <returns>OAuth access token.</returns>
         Task<OAuthAccessToken> GetAccessToken(string token, string secret);
     }

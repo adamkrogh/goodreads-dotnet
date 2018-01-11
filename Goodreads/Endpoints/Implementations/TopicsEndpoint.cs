@@ -14,7 +14,7 @@ namespace Goodreads.Clients
             : base(connection)
         {
         }
-                
+
         public async Task<Topic> GetInfo(long topicId)
         {
             var endpoint = $"topic/show?id={topicId}";
@@ -61,7 +61,7 @@ namespace Goodreads.Clients
             var endpoint = $"topic/unread_group/{groupId}";
 
             var parameters = new List<Parameter>
-            {                 
+            {
                  new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString },
                  new Parameter
                  {
@@ -81,7 +81,7 @@ namespace Goodreads.Clients
             {
                 parameters.Add(new Parameter { Name = "viewed", Value = viewed, Type = ParameterType.QueryString });
             }
-            
+
             return await Connection.ExecuteRequest<PaginatedList<Topic>>(endpoint, parameters, null, "group_folder/topics").ConfigureAwait(false);
         }
 

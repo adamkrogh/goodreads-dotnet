@@ -32,7 +32,7 @@ namespace Goodreads.Clients
         /// <param name="sort">The sort order of the paginated list.</param>
         /// <returns>A paginated list of the user summary information for their friends.</returns>
         Task<PaginatedList<UserSummary>> GetListOfFriends(long userId, int page = 1, SortFriendsList sort = SortFriendsList.FirstName);
-        
+
         /// <summary>
         /// Get an people the given user is following.
         /// </summary>
@@ -47,7 +47,7 @@ namespace Goodreads.Clients
         /// <param name="userId">The Goodreads user id.</param>
         /// <param name="page">The current page of the paginated list.</param>
         /// <returns>The specified user's followers.</returns>
-        Task<PaginatedList<UserFollowers>> GetUsersFollowers(long userId, int page = 1);        
+        Task<PaginatedList<UserFollowers>> GetUsersFollowers(long userId, int page = 1);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ namespace Goodreads.Clients
         /// Gets the Goodreads user id of the authenticated connection.
         /// If the client isn't using OAuth, this returns null.
         /// </summary>
-        /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>        
+        /// <returns>The user id of the authenticated user. Null if just using the public API.</returns>
         Task<long> GetAuthenticatedUserId();
 
         /// <summary>

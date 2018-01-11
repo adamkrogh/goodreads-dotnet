@@ -60,7 +60,7 @@ namespace Goodreads.Clients
                 new Parameter { Name = "id", Value = resourceId, Type = ParameterType.QueryString },
                 new Parameter { Name = "page", Value = page, Type = ParameterType.QueryString }
             };
-            
+
             return await Connection.ExecuteRequest<PaginatedList<Comment>>(endpoint, parameters, null, "comments").ConfigureAwait(false);
         }
     }

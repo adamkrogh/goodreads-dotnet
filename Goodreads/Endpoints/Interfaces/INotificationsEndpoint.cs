@@ -2,7 +2,7 @@
 using Goodreads.Models.Response;
 
 namespace Goodreads.Clients
-{    
+{
     /// <summary>
     /// API OAuth client for user notifications endpoint.
     /// </summary>

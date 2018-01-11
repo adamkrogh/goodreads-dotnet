@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Goodreads.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Goodreads.Models;
 
 namespace Goodreads.Extensions
 {
@@ -14,7 +14,7 @@ namespace Goodreads.Extensions
         {
             var el = element.Element(name);
 
-            return string.IsNullOrWhiteSpace(el?.Value) 
+            return string.IsNullOrWhiteSpace(el?.Value)
                 ? null
                 : (trim ? el?.Value.Trim() : el?.Value);
         }
@@ -103,7 +103,7 @@ namespace Goodreads.Extensions
             var el = element.Element(name);
             return DateTime.TryParseExact(el?.Value, "MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)
                 ? new DateTime?(date)
-                : null;            
+                : null;
         }
 
         /// <summary>
@@ -228,6 +228,6 @@ namespace Goodreads.Extensions
         {
             var attr = element.Attribute(attributeName);
             return bool.TryParse(attr?.Value, out bool value) ? value : false;
-        }        
+        }
     }
 }

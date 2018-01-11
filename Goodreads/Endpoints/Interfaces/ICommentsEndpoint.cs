@@ -8,7 +8,7 @@ namespace Goodreads.Clients
     /// The client class for the comment endpoint of the Goodreads API.
     /// </summary>
     public interface ICommentsEndpoint
-    {        
+    {
         /// <summary>
         /// Get lists comments.
         /// </summary>

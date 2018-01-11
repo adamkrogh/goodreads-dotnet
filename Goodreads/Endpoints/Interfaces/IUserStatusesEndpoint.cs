@@ -12,7 +12,7 @@ namespace Goodreads.Clients
         /// <summary>
         /// Get most recent user statuses on the site.
         /// </summary>
-        /// <returns>A list of the user statuses.</returns>  
+        /// <returns>A list of the user statuses.</returns>
         Task<IReadOnlyList<UserStatusSummary>> GetRecentUsersStatuses();
 
         /// <summary>

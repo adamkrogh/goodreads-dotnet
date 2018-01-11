@@ -11,9 +11,9 @@ namespace Goodreads.Clients
     /// The client class for the user followers endpoint of the Goodreads API.
     /// </summary>
     internal sealed class FollowersEndpoint : Endpoint, IOAuthFollowersEndpoint
-    {       
+    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FollowersClient"/> class.
+        /// Initializes a new instance of the <see cref="FollowersEndpoint"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public FollowersEndpoint(IConnection connection)

@@ -11,10 +11,10 @@ namespace Goodreads.Clients
     /// <summary>
     /// The client class for the Update endpoint of the Goodreads API.
     /// </summary>
-    internal sealed class UpdatesEndpoint: Endpoint, IOAuthUpdatesEndpoint
+    internal sealed class UpdatesEndpoint : Endpoint, IOAuthUpdatesEndpoint
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdatesClient"/> class.
+        /// Initializes a new instance of the <see cref="UpdatesEndpoint"/> class.
         /// </summary>
         /// <param name="connection">A RestClient connection to the Goodreads API.</param>
         public UpdatesEndpoint(IConnection connection)

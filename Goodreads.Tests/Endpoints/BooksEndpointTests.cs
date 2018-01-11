@@ -142,7 +142,7 @@ namespace Goodreads.Tests
                 Assert.NotNull(books);
                 Assert.NotEmpty(books.List);
                 Assert.True(books.Pagination.TotalItems > 0);
-                Assert.True(books.Pagination.Start == 21);
+                Assert.True(books.Pagination.Start > 1);
             }
         }
 

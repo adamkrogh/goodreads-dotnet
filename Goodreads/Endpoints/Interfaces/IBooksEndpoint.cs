@@ -30,8 +30,9 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="title">The book title to find.</param>
         /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
+        /// <param name="rating">Show only reviews with a particular rating.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        Task<Book> GetByTitle(string title, string author = null);
+        Task<Book> GetByTitle(string title, string author = null, int? rating = null);
 
         /// <summary>
         /// Search Goodreads for books (returned as <see cref="Work"/> objects).

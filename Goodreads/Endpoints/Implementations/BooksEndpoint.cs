@@ -63,13 +63,22 @@ namespace Goodreads.Clients
         /// <param name="title">The book title to find.</param>
         /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
-        public async Task<Book> GetByTitle(string title, string author)
+        public async Task<Book> GetByTitle(string title, string author, int? rating)
         {
             var parameters = new List<Parameter>
             {
-                new Parameter { Name = "title", Value = title, Type = ParameterType.QueryString },
-                new Parameter { Name = "author", Value = author, Type = ParameterType.QueryString }
+                new Parameter { Name = "title", Value = title, Type = ParameterType.QueryString }
             };
+
+            if (!string.IsNullOrEmpty(author))
+            {
+                parameters.Add(new Parameter { Name = "author", Value = author, Type = ParameterType.QueryString });
+            }
+
+            if (rating.HasValue)
+            {
+                parameters.Add(new Parameter { Name = "rating", Value = rating.Value, Type = ParameterType.QueryString });
+            }
 
             return await Connection.ExecuteRequest<Book>("book/title.xml", parameters, null, "book")
                 .ConfigureAwait(false);

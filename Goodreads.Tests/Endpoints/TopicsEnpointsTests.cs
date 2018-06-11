@@ -23,8 +23,6 @@ namespace Goodreads.Tests
 
                 Assert.Equal(topicId, topic.Id);
                 Assert.NotEmpty(topic.Title);
-                Assert.NotNull(topic.Group);
-                Assert.NotNull(topic.Folder);
             }
 
             [Fact]

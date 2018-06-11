@@ -244,7 +244,7 @@ namespace Goodreads.Models.Response
 
             if (shelves != null)
             {
-                PopularShelves = shelves.ToDictionary(x => x.Key, x => x.Value);
+                PopularShelves = shelves.GroupBy(obj => obj.Key).ToDictionary(shelf => shelf.Key, shelf => shelf.Sum(x => x.Value));
             }
         }
     }

@@ -81,6 +81,14 @@ namespace Goodreads.Models.Response
             {
                 ParseSeriesWorks(seriesWorksElement);
             }
+            else
+            {
+                seriesWorksElement = element.Parent.Parent;
+                if (seriesWorksElement != null)
+                {
+                    ParseSeriesWorks(seriesWorksElement);
+                }
+            }
         }
 
         /// <summary>
@@ -97,16 +105,18 @@ namespace Goodreads.Models.Response
                 var works = new List<Work>();
                 foreach (var seriesWorkElement in seriesWorkElements)
                 {
+                    var work = new Work();
+
                     var userPosition = seriesWorkElement.ElementAsString("user_position");
+                    work.SetUserPosition(userPosition);
 
                     var workElement = seriesWorkElement.Element("work");
                     if (workElement != null)
                     {
-                        var work = new Work();
                         work.Parse(workElement);
-                        work.SetUserPosition(userPosition);
-                        works.Add(work);
                     }
+
+                    works.Add(work);
                 }
 
                 Works = works;

@@ -2,18 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Goodreads</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>Goodreads .NET API Client Library</title>
         <authors>Adam Krogh; Vladimir Rybalko</authors>
         <owners>Adam Krogh; Vladimir Rybalko</owners>
         <licenseUrl>https://github.com/adamkrogh/goodreads-dotnet/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/adamkrogh/goodreads-dotnet</projectUrl>
-        <iconUrl>http://i.imgur.com/BNsaKtA.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Goodreads .NET API Client Library</description>
-        <releaseNotes>Supporting all Goodreads API methods
-Supporting netstandard 2.0
-Breaking a backward compatibility. App was redesigned and redeveloped. See https://github.com/adamkrogh/goodreads-dotnet/wiki for more details.</releaseNotes>
+        <releaseNotes>Fixed issue with invalid publication dates.
+		Fixed bugs with duplicates shelves and user position.</releaseNotes>
         <copyright>Copyright 2018</copyright>
         <tags>goodreads api netstandard2.0</tags>
         <dependencies>
@@ -23,7 +21,7 @@ Breaking a backward compatibility. App was redesigned and redeveloped. See https
         </dependencies>
     </metadata>
     <files>
-        <file src="Goodreads\bin\Release\netstandard2.0\Goodreads.deps.json" target="lib\netstandard2.0\Goodreads.deps.json" />
-        <file src="Goodreads\bin\Release\netstandard2.0\Goodreads.dll" target="lib\netstandard2.0\Goodreads.dll" />
+        <file src="lib\netstandard2.0\Goodreads.deps.json" target="lib\netstandard2.0\Goodreads.deps.json" />
+        <file src="lib\netstandard2.0\Goodreads.dll" target="lib\netstandard2.0\Goodreads.dll" />
     </files>
 </package>

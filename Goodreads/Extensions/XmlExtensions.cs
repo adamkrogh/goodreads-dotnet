@@ -141,7 +141,14 @@ namespace Goodreads.Extensions
                 publicationMonth = 1;
             }
 
-            return new DateTime(publicationYear.Value, publicationMonth.Value, publicationDay.Value);
+            try
+            {
+                return new DateTime(publicationYear.Value, publicationMonth.Value, publicationDay.Value);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static bool ElementAsBool(this XElement element, XName name)

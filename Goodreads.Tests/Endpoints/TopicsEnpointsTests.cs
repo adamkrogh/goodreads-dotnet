@@ -13,12 +13,12 @@ namespace Goodreads.Tests
             TopicsEndpoint = Helper.GetAuthClient().Topics;
         }
 
-        public class TheGetInfoMethod : TopicsEndpointsTests
+        public class TheGetInfoMethods : TopicsEndpointsTests
         {
             [Fact]
             public async Task GetInfo()
             {
-                const long topicId = 18915208;
+                const long topicId = 1;
                 var topic = await TopicsEndpoint.GetInfo(topicId);
 
                 Assert.Equal(topicId, topic.Id);

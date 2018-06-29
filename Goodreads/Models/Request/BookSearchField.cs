@@ -25,5 +25,10 @@ namespace Goodreads.Models.Request
         /// </summary>
         [QueryParameterValue("author")]
         Author
+        /// <summary>
+        /// Search by the genre of the book.
+        /// </summary>
+        [QueryParameterValue("genre")]
+        Genre
     }
 }

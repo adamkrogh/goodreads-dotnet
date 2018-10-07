@@ -2,7 +2,7 @@
 
 namespace Goodreads.Http
 {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field)]
     internal sealed class QueryParameterValueAttribute : Attribute
     {
         public QueryParameterValueAttribute(string queryParameterValue)
@@ -10,6 +10,6 @@ namespace Goodreads.Http
             QueryParameterValue = queryParameterValue;
         }
 
-        public string QueryParameterValue { get; private set; }
+        public string QueryParameterValue { get; }
     }
 }

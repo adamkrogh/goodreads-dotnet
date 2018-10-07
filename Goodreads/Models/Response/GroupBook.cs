@@ -87,7 +87,7 @@ namespace Goodreads.Models.Response
             Title = book.ElementAsString("title");
             PublicationYear = book.ElementAsInt("publication_year");
 
-            var author = book.Element("author");
+            var author = book?.Element("author");
             AuthorId = author.ElementAsLong("id");
             AuthorName = author.ElementAsString("name");
             AuthorUserId = author.ElementAsInt("user_id");

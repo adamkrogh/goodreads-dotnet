@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Goodreads.Clients;
 using Goodreads.Models.Request;

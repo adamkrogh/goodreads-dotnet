@@ -45,22 +45,19 @@ namespace Goodreads.Clients
                     {
                         var document = XDocument.Parse(content);
                         var series = document.XPathSelectElements("GoodreadsResponse/series_works/series_work/series");
-                        if (series != null && series.Count() > 0)
+                        var seriesModels = new List<Series>();
+                        foreach (var seriesElement in series)
                         {
-                            var seriesModels = new List<Series>();
-                            foreach (var seriesElement in series)
-                            {
-                                var seriesModel = new Series();
-                                seriesModel.Parse(seriesElement);
-                                seriesModels.Add(seriesModel);
-                            }
-
-                            // Goodreads returns way too many duplicates, group by them by id first.
-                            var grouped = seriesModels.GroupBy(x => x.Id);
-                            var uniqueSeries = grouped.Select(x => x.First()).ToList();
-
-                            return uniqueSeries;
+                            var seriesModel = new Series();
+                            seriesModel.Parse(seriesElement);
+                            seriesModels.Add(seriesModel);
                         }
+
+                        // Goodreads returns way too many duplicates, group by them by id first.
+                        var grouped = seriesModels.GroupBy(x => x.Id);
+                        var uniqueSeries = grouped.Select(x => x.First()).ToList();
+
+                        return uniqueSeries;
                     }
                 }
             }
@@ -94,18 +91,15 @@ namespace Goodreads.Clients
                     {
                         var document = XDocument.Parse(content);
                         var series = document.XPathSelectElements("GoodreadsResponse/series_works/series_work/series");
-                        if (series != null && series.Count() > 0)
+                        var seriesModels = new List<Series>();
+                        foreach (var seriesElement in series)
                         {
-                            var seriesModels = new List<Series>();
-                            foreach (var seriesElement in series)
-                            {
-                                var seriesModel = new Series();
-                                seriesModel.Parse(seriesElement);
-                                seriesModels.Add(seriesModel);
-                            }
-
-                            return seriesModels;
+                            var seriesModel = new Series();
+                            seriesModel.Parse(seriesElement);
+                            seriesModels.Add(seriesModel);
                         }
+
+                        return seriesModels;
                     }
                 }
             }

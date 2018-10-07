@@ -114,7 +114,7 @@ namespace Goodreads.Models.Response
 
             var groupResource = element.Element("group_resource");
 
-            var readStatus = groupResource.Element("read_status");
+            var readStatus = groupResource?.Element("read_status");
             if (readStatus != null)
             {
                 ReadStatus = new ReadStatus();

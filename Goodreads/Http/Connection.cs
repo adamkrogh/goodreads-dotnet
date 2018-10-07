@@ -24,7 +24,6 @@ namespace Goodreads.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="Connection"/> class.
         /// </summary>
-        /// <param name="client">A RestSharp client to use for this connection.</param>
         /// <param name="credentials">Credentials for use with the Goodreads API.</param>
         public Connection(ApiCredentials credentials)
         {

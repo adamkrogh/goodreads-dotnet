@@ -54,8 +54,7 @@ namespace Goodreads.Clients
                 "friend/requests",
                 parameters,
                 null,
-                "requests/friend_requests",
-                Method.GET).ConfigureAwait(false);
+                "requests/friend_requests").ConfigureAwait(false);
         }
 
         /// <summary>

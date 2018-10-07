@@ -46,7 +46,7 @@ namespace Goodreads.Models.Response
             if (element.Name == "search")
             {
                 var results = element.Descendants("results");
-                if (results != null && results.Count() == 1)
+                if (results.Count() == 1)
                 {
                     List = results.First().ParseChildren<T>();
                 }

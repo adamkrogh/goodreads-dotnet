@@ -161,20 +161,23 @@ namespace Goodreads.Clients
                 if (!string.IsNullOrWhiteSpace(content))
                 {
                     var responseIds = content.Split(',');
-                    var bookIds = new List<long?>();
-                    foreach (var responseId in responseIds)
+                    if (responseIds.Any())
                     {
-                        if (!string.IsNullOrEmpty(responseId))
+                        var bookIds = new List<long?>();
+                        foreach (var responseId in responseIds)
                         {
-                            bookIds.Add(long.Parse(responseId));
+                            if (!string.IsNullOrEmpty(responseId))
+                            {
+                                bookIds.Add(long.Parse(responseId));
+                            }
+                            else
+                            {
+                                bookIds.Add(null);
+                            }
                         }
-                        else
-                        {
-                            bookIds.Add(null);
-                        }
-                    }
 
-                    return bookIds;
+                        return bookIds;
+                    }
                 }
             }
 

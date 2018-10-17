@@ -75,7 +75,7 @@ namespace Goodreads.Clients
                 parameters.Add(parameter);
             }
 
-            var res = await Connection.ExecuteRaw(endpoint, parameters);
+            await Connection.ExecuteRaw(endpoint, parameters);
 
             var paginated = await Connection.ExecuteRequest<PaginatedList<Update>>(endpoint, parameters, null, "updates").ConfigureAwait(false);
 

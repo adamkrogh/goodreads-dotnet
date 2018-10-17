@@ -234,8 +234,8 @@ namespace Goodreads.Models.Response
                 "shelf",
                 (shelfElement) =>
             {
-                var shelfName = shelfElement.Attribute("name").Value;
-                var shelfCountValue = shelfElement.Attribute("count").Value;
+                var shelfName = shelfElement?.Attribute("name")?.Value;
+                var shelfCountValue = shelfElement?.Attribute("count")?.Value;
 
                 int shelfCount = 0;
                 int.TryParse(shelfCountValue, out shelfCount);

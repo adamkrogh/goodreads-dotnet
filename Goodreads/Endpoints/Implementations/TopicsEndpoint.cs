@@ -95,7 +95,7 @@ namespace Goodreads.Clients
             bool addToUpdateFeed,
             bool needDigest)
         {
-            var endpoint = $"topic";
+            var endpoint = "topic";
 
             var parameters = new List<Parameter>
             {

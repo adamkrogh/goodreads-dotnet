@@ -43,7 +43,7 @@ namespace Goodreads.Clients
                     new Parameter
                     {
                         Name = "lat",
-                        Value = latitude?.ToString() ?? string.Empty,
+                        Value = latitude.ToString(),
                         Type = ParameterType.QueryString
                     });
             }
@@ -54,7 +54,7 @@ namespace Goodreads.Clients
                     new Parameter
                     {
                         Name = "lng",
-                        Value = longitude?.ToString() ?? string.Empty,
+                        Value = longitude.ToString(),
                         Type = ParameterType.QueryString
                     });
             }
@@ -65,7 +65,7 @@ namespace Goodreads.Clients
                     new Parameter
                     {
                         Name = "search[postal_code]",
-                        Value = postalCode?.ToString() ?? string.Empty,
+                        Value = postalCode.ToString(),
                         Type = ParameterType.QueryString
                     });
             }
@@ -76,7 +76,7 @@ namespace Goodreads.Clients
                     new Parameter
                     {
                         Name = "search[country_code]",
-                        Value = countryCode ?? string.Empty,
+                        Value = countryCode,
                         Type = ParameterType.QueryString
                     });
             }
@@ -92,7 +92,7 @@ namespace Goodreads.Clients
                 parameters.Add(new Parameter { Name = "search[US]", Value = "US", Type = ParameterType.QueryString });
             }
 
-            var result = await Connection.ExecuteRequest<PaginatedList<GoodreadsEvent>>("event", parameters, null, "events", Method.GET).ConfigureAwait(false);
+            var result = await Connection.ExecuteRequest<PaginatedList<GoodreadsEvent>>("event", parameters, null, "events").ConfigureAwait(false);
             return result?.List;
         }
     }

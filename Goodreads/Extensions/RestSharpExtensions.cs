@@ -42,8 +42,7 @@ namespace Goodreads.Extensions
             try
             {
                 var document = XDocument.Parse(response.Content);
-                if (document == null ||
-                    document.Root == null ||
+                if (document.Root == null ||
                     document.Root.Name == "error")
                 {
                     return null;
@@ -92,7 +91,7 @@ namespace Goodreads.Extensions
                 var document = XDocument.Parse(response.Content);
 
                 // Goodreads returns several different types of errors...
-                if (document != null && document.Root != null)
+                if (document.Root != null)
                 {
                     if (document.Root.Name == "error")
                     {
@@ -107,8 +106,8 @@ namespace Goodreads.Extensions
                     {
                         // Another one is a list of XML error nodes
                         var element = document.Element("errors");
-                        var children = element.Descendants("error");
-                        if (children != null && children.Count() > 0)
+                        var children = element?.Descendants("error");
+                        if (children.Any())
                         {
                             error = string.Join(Environment.NewLine, children.Select(x => x.Value));
                         }

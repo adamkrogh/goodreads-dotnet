@@ -138,7 +138,7 @@ namespace Goodreads.Models.Response
             if (ratingDistributionElement != null)
             {
                 var parts = ratingDistributionElement.Split('|');
-                if (parts != null && parts.Length > 0)
+                if (parts.Length > 0)
                 {
                     var ratingDistribution = new Dictionary<int, int>();
 

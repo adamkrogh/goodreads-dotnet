@@ -2,7 +2,7 @@
 
 namespace Goodreads.Http
 {
-    [AttributeUsage(AttributeTargets.Enum, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Enum)]
     internal sealed class QueryParameterKeyAttribute : Attribute
     {
         public QueryParameterKeyAttribute(string queryParameterKey)
@@ -10,6 +10,6 @@ namespace Goodreads.Http
             QueryParameterKey = queryParameterKey;
         }
 
-        public string QueryParameterKey { get; private set; }
+        public string QueryParameterKey { get; }
     }
 }

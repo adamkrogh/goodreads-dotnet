@@ -64,7 +64,7 @@ namespace Goodreads.Clients
                 parameters.Add(parameter);
             }
 
-            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list", Method.GET).ConfigureAwait(false);
+            return await Connection.ExecuteRequest<PaginatedList<GroupSummary>>(endpoint, parameters, null, "groups/list").ConfigureAwait(false);
         }
 
         /// <summary>

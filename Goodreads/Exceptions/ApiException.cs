@@ -58,18 +58,13 @@ namespace Goodreads.Exceptions
         protected ApiException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            if (info == null)
-            {
-                return;
-            }
-
             StatusCode = (HttpStatusCode)info.GetInt32("StatusCode");
         }
 
         /// <summary>
         /// The status code of the Goodreads response.
         /// </summary>
-        public HttpStatusCode StatusCode { get; private set; }
+        public HttpStatusCode StatusCode { get; }
 
         /// <summary>
         /// Gets serializable information about the exception.

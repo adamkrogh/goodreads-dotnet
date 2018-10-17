@@ -45,7 +45,7 @@ namespace Goodreads.Clients
                     {
                         var document = XDocument.Parse(content);
                         var series = document.XPathSelectElements("GoodreadsResponse/series_works/series_work/series");
-                        if (series != null && series.Count() > 0)
+                        if (series.Any())
                         {
                             var seriesModels = new List<Series>();
                             foreach (var seriesElement in series)
@@ -94,7 +94,7 @@ namespace Goodreads.Clients
                     {
                         var document = XDocument.Parse(content);
                         var series = document.XPathSelectElements("GoodreadsResponse/series_works/series_work/series");
-                        if (series != null && series.Count() > 0)
+                        if (series.Any())
                         {
                             var seriesModels = new List<Series>();
                             foreach (var seriesElement in series)

@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
 using Goodreads.Extensions;
-using Goodreads.Models;
-using Goodreads.Models.Response;
 
 namespace Goodreads.Models.Response
 {

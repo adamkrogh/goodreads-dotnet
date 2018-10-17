@@ -83,7 +83,7 @@ namespace Goodreads.Models.Response
             }
             else
             {
-                seriesWorksElement = element.Parent.Parent;
+                seriesWorksElement = element.Parent?.Parent;
                 if (seriesWorksElement != null)
                 {
                     ParseSeriesWorks(seriesWorksElement);
@@ -100,7 +100,7 @@ namespace Goodreads.Models.Response
         private void ParseSeriesWorks(XElement seriesWorksRootElement)
         {
             var seriesWorkElements = seriesWorksRootElement.Descendants("series_work");
-            if (seriesWorkElements != null && seriesWorkElements.Count() > 0)
+            if (seriesWorkElements.Any())
             {
                 var works = new List<Work>();
                 foreach (var seriesWorkElement in seriesWorkElements)

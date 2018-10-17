@@ -16,7 +16,7 @@ namespace Goodreads.Extensions
 
             return string.IsNullOrWhiteSpace(el?.Value)
                 ? null
-                : (trim ? el?.Value.Trim() : el?.Value);
+                : (trim ? el.Value.Trim() : el.Value);
         }
 
         public static long ElementAsLong(this XElement element, XName name)
@@ -177,7 +177,7 @@ namespace Goodreads.Extensions
             if (parentElement != null)
             {
                 var childElements = parentElement.Descendants(childName);
-                if (childElements != null && childElements.Count() > 0)
+                if (childElements.Any())
                 {
                     var children = new List<T>();
 
@@ -196,7 +196,7 @@ namespace Goodreads.Extensions
         public static List<T> ParseChildren<T>(this XElement element) where T : ApiResponse, new()
         {
             var childElements = element.Elements();
-            if (childElements != null && childElements.Count() > 0)
+            if (childElements.Any())
             {
                 var children = new List<T>();
 
@@ -216,7 +216,7 @@ namespace Goodreads.Extensions
         public static string AttributeAsString(this XElement element, XName attributeName)
         {
             var attr = element.Attribute(attributeName);
-            return string.IsNullOrWhiteSpace(attr?.Value) ? null : attr?.Value;
+            return string.IsNullOrWhiteSpace(attr?.Value) ? null : attr.Value;
         }
 
         public static int AttributeAsInt(this XElement element, XName attributeName)

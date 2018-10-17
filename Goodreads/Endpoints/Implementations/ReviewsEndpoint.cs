@@ -201,13 +201,10 @@ namespace Goodreads.Clients
                 try
                 {
                     var document = XDocument.Parse(response.Content);
-                    if (document != null)
+                    var reviewElement = document.Element("review");
+                    if (reviewElement != null)
                     {
-                        var reviewElement = document.Element("review");
-                        if (reviewElement != null)
-                        {
-                            return reviewElement.ElementAsNullableLong("id");
-                        }
+                        return reviewElement.ElementAsNullableLong("id");
                     }
                 }
                 catch

@@ -88,10 +88,10 @@ namespace Goodreads.Tests
         public class TheAddUserShelfMethod : ShelvesEndpointTests
         {
             [Fact]
-            public void AddExistingShelf()
+            public async void AddExistingShelf()
             {
                 const string name = "to-read";
-                Assert.ThrowsAsync<ApiException>(() => ShelvesEndpoint.AddShelf(name));
+                await Assert.ThrowsAsync<ApiException>(() => ShelvesEndpoint.AddShelf(name));
             }
         }
     }

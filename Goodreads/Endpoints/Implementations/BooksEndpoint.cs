@@ -62,6 +62,7 @@ namespace Goodreads.Clients
         /// </summary>
         /// <param name="title">The book title to find.</param>
         /// <param name="author">The author of the book, optional but include it for increased accuracy.</param>
+        /// <param name="rating">Show only reviews with a particular rating (optional)</param>
         /// <returns>Information about the Goodreads book, null if not found.</returns>
         public async Task<Book> GetByTitle(string title, string author, int? rating)
         {
@@ -133,7 +134,7 @@ namespace Goodreads.Clients
         /// <returns>A Goodreads book id if found, null otherwise.</returns>
         public async Task<long?> GetBookIdForIsbn(string isbn)
         {
-            var bookIds = await (this as IBooksEndpoint).GetBookIdsForIsbns(new List<string> { isbn });
+            var bookIds = await this.GetBookIdsForIsbns(new List<string> { isbn });
             return bookIds?.FirstOrDefault();
         }
 
@@ -160,7 +161,7 @@ namespace Goodreads.Clients
                 if (!string.IsNullOrWhiteSpace(content))
                 {
                     var responseIds = content.Split(',');
-                    if (responseIds != null && responseIds.Count() > 0)
+                    if (responseIds.Any())
                     {
                         var bookIds = new List<long?>();
                         foreach (var responseId in responseIds)

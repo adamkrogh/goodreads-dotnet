@@ -60,6 +60,11 @@ namespace Goodreads.Models.Response
         public int RatingsCount { get; private set; }
 
         /// <summary>
+        /// The average rating of this work.
+        /// </summary>
+        public int AverageRating { get; private set; }
+
+        /// <summary>
         /// The number of text reviews of this work.
         /// </summary>
         public int TextReviewsCount { get; private set; }
@@ -118,6 +123,7 @@ namespace Goodreads.Models.Response
             ReviewsCount = element.ElementAsInt("reviews_count");
             RatingsSum = element.ElementAsInt("ratings_sum");
             RatingsCount = element.ElementAsInt("ratings_count");
+            AverageRating = element.ElementAsInt("average_rating");
             TextReviewsCount = element.ElementAsInt("text_reviews_count");
 
             // Merge the Goodreads publication fields into one date property
